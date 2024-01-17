@@ -525,7 +525,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   topDownViewActive: 0
-  cycleLength: 0.5
+  cycleLength: 2
 --- !u!1 &672671727
 GameObject:
   m_ObjectHideFlags: 0
