@@ -4,117 +4,88 @@ using UnityEngine.Rendering;
 public class TowerSpawner : MonoBehaviour
 {
     public Camera mainCam;
+
     private const string GroundTag = "Ground";
     private const string TowerTag = "Tower";
+
     public GameObject towerPrefab;
+    private const int MouseButtonLeft = 0;
+    private const float GridSize = 2.0f;
 
+    private GameObject currentTransparentTower = null;
     public GameObject transparentTowerPrefab;
-    //[SerializeField] private GameObject cellIndicator;
     private Grid grid;
-    
     private bool mouseIsHeldDown = false;
-    
-    void Update()
-    {
-       
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        if (Input.GetMouseButtonUp(0))
-        {
-            mouseIsHeldDown = false;
-            Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit))
-            {
-                CheckAndInstantiateTower(hit);
-                
-            }
-        }
-        
-        if (Input.GetMouseButton(0) && !mouseIsHeldDown)
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(MouseButtonLeft) && !mouseIsHeldDown && TryGetHitFromMousePosition(out RaycastHit hit))
         {
             mouseIsHeldDown = true;
-            Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit))
-            {
-                CheckAndInstantiateTransparentTower(hit);
-            }
+            CheckAndInstantiateTransparentTower(hit);
         }
 
-        if (Input.GetMouseButtonDown(1))
+        else if (Input.GetMouseButton(MouseButtonLeft) && mouseIsHeldDown && currentTransparentTower != null && TryGetHitFromMousePosition(out hit))
+        {
+            var gridPos = SnapToGrid(hit.point, GridSize);
+            currentTransparentTower.transform.position = gridPos;
+        }
+
+        else if (Input.GetMouseButtonUp(MouseButtonLeft))
+        {
+            mouseIsHeldDown = false;
+            
+            currentTransparentTower = null;
+        }
+        else if (Input.GetMouseButtonDown(1))
         {
             DestroyTower();
         }
+        
     }
 
     private void CheckAndInstantiateTransparentTower(RaycastHit hit)
     {
-        if (towerPrefab == null) 
-        {
-            Debug.LogError("Tower Prefab is not assigned.");
-            return;
-        }
-    
-        if (IsGround(hit.collider))
-        {
-            float gridSize = 2.0f; // Replace with your actual grid size
-            Vector3 gridPos = SnapToGrid(hit.point, gridSize);
-            Instantiate(transparentTowerPrefab, gridPos, Quaternion.identity);
-            
-        }
+        CheckAndInstantiateTower(hit, true);
     }
-    
+
+
     private void CheckAndInstantiateTower(RaycastHit hit)
     {
+        CheckAndInstantiateTower(hit, false);
+    }
+
+    private void CheckAndInstantiateTower(RaycastHit hit, bool transparent)
+    {
         if (towerPrefab == null) 
         {
             Debug.LogError("Tower Prefab is not assigned.");
             return;
         }
-    
+
         if (IsGround(hit.collider))
         {
-            float gridSize = 2.0f; // Replace with your actual grid size
-            Vector3 gridPos = SnapToGrid(hit.point, gridSize);
-            Instantiate(towerPrefab, gridPos, Quaternion.identity);
+            var gridPos = SnapToGrid(hit.point, GridSize);
+            var prefab = transparent ? transparentTowerPrefab : towerPrefab;
+            currentTransparentTower = Instantiate(prefab, gridPos, Quaternion.identity);
         }
     }
-    
-    
 
-    private bool IsGround(Collider groundCollider)
+    private bool TryGetHitFromMousePosition(out RaycastHit hit)
     {
-        return groundCollider.tag == GroundTag;
+        Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
+        return Physics.Raycast(ray, out hit);
     }
-    private bool IsTower(Collider towerCollider)
-    {
-        return towerCollider.tag == TowerTag;
-    }
+
+    private bool IsGround(Collider groundCollider) => groundCollider.tag == GroundTag;
+    private bool IsTower(Collider towerCollider) => towerCollider.tag == TowerTag;
 
     private void DestroyTower()
     {
-        Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
-        {
-            if (IsTower(hit.collider))
-            {
-                Destroy(hit.collider.gameObject);
-            }
-        }
+        if(TryGetHitFromMousePosition(out RaycastHit hit) && IsTower(hit.collider))
+            Destroy(hit.collider.gameObject);        
     }
-    
+
     private Vector3 SnapToGrid(Vector3 rawWorldPos, float gridSize)
     {
         int x = Mathf.RoundToInt(rawWorldPos.x / gridSize);
@@ -123,11 +94,6 @@ public class TowerSpawner : MonoBehaviour
 
         return new Vector3(x * gridSize, y * gridSize, z * gridSize);
     }
-    
-    
-    
-    
-    
 }
             
         
