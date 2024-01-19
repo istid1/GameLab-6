@@ -11,12 +11,15 @@ public class EnemyMovement : MonoBehaviour
     void Start()
     {
         
-        enemyAgent.SetDestination(new Vector3(0,0,-18));
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            enemyAgent.SetDestination(new Vector3(0,0,-18));
+        }   
     }
 }
