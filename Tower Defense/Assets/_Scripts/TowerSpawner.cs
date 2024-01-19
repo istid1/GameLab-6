@@ -8,27 +8,27 @@ public class TowerSpawner : MonoBehaviour
     public GameObject towerPrefab;
     private const int MouseButtonLeft = 0;
     private const float GridSize = 2.0f;
-    private GameObject currentTransparentTower = null;
+    private GameObject _currentTransparentTower;
     public GameObject transparentTowerPrefab;
-    private Grid grid;
-    private bool mouseIsHeldDown = false;
+    private Grid _grid;
+    private bool _mouseIsHeldDown;
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(MouseButtonLeft) && !mouseIsHeldDown && TryGetHitFromMousePosition(out RaycastHit hit))
+        if (Input.GetMouseButtonDown(MouseButtonLeft) && !_mouseIsHeldDown && TryGetHitFromMousePosition(out RaycastHit hit))
         {
-            mouseIsHeldDown = true;
+            _mouseIsHeldDown = true;
             CheckAndInstantiateTower(hit, true);
         }
-        else if (Input.GetMouseButton(MouseButtonLeft) && mouseIsHeldDown && currentTransparentTower != null && TryGetHitFromMousePosition(out hit))
+        else if (Input.GetMouseButton(MouseButtonLeft) && _mouseIsHeldDown && _currentTransparentTower != null && TryGetHitFromMousePosition(out hit))
         {
             var gridPos = SnapToGrid(hit.point, GridSize);
-            currentTransparentTower.transform.position = gridPos;
+            _currentTransparentTower.transform.position = gridPos;
         }
         else if (Input.GetMouseButtonUp(MouseButtonLeft))
         {
-            mouseIsHeldDown = false;
-            currentTransparentTower = null;
+            _mouseIsHeldDown = false;
+            _currentTransparentTower = null;
         }
         else if (Input.GetMouseButtonDown(1))
         {
@@ -47,19 +47,19 @@ public class TowerSpawner : MonoBehaviour
         {
             var gridPos = SnapToGrid(hit.point, GridSize);
             var prefab = transparent ? transparentTowerPrefab : towerPrefab;
-            currentTransparentTower = Instantiate(prefab, gridPos, Quaternion.identity);
+            _currentTransparentTower = Instantiate(prefab, gridPos, Quaternion.identity);
         }
     }
     
     private bool TryGetHitFromMousePosition(out RaycastHit hit)
     {
-        Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
+        var ray = mainCam.ScreenPointToRay(Input.mousePosition);
         return Physics.Raycast(ray, out hit);
     }
     
-    private bool IsGround(Collider groundCollider) => groundCollider.tag == GroundTag;
+    private bool IsGround(Collider groundCollider) => groundCollider.CompareTag(GroundTag);
     
-    private bool IsTower(Collider towerCollider) => towerCollider.tag == TowerTag;
+    private bool IsTower(Collider towerCollider) => towerCollider.CompareTag(TowerTag);
     
     private void DestroyTower()
     {
