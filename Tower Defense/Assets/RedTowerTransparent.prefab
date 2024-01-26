@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6769584488126438968}
   - component: {fileID: 8800689072349482312}
   m_Layer: 0
-  m_Name: TowerTransparent
+  m_Name: RedTowerTransparent
   m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c4ba124a8148d9b4880b008ad43db0eb, type: 2}
+  - {fileID: 2100000, guid: 65a8e17855382264f86a409e9c62aaf4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

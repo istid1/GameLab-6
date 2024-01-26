@@ -1,4 +1,7 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+
 
 public class TowerSpawner : MonoBehaviour
 {
@@ -12,44 +15,125 @@ public class TowerSpawner : MonoBehaviour
     public GameObject transparentTowerPrefab;
     private Grid _grid;
     private bool _mouseIsHeldDown;
-
+    private bool archerButtonIsPressed = false;
+    
+    private bool currentColor;
+    
     private void Update()
     {
-        if (Input.GetMouseButtonDown(MouseButtonLeft) && !_mouseIsHeldDown && TryGetHitFromMousePosition(out RaycastHit hit))
+
+        if (archerButtonIsPressed)
+        {
+            
+            
+        if (!_mouseIsHeldDown && TryGetHitFromMousePosition(out RaycastHit hit))
         {
             _mouseIsHeldDown = true;
-            CheckAndInstantiateTower(hit, true);
+            
+            if (CheckConditions(hit, false))
+            {
+                InstantiateTower(hit, true);
+            }
         }
-        else if (Input.GetMouseButton(MouseButtonLeft) && _mouseIsHeldDown && _currentTransparentTower != null && TryGetHitFromMousePosition(out hit))
+        else if (_mouseIsHeldDown && _currentTransparentTower != null && TryGetHitFromMousePosition(out hit))
         {
             var gridPos = SnapToGrid(hit.point, GridSize);
             _currentTransparentTower.transform.position = gridPos;
+            
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+    
+            if (Physics.Raycast(ray, out hit))
+            {
+                GameObject tower = hit.transform.gameObject;
+                if (tower.CompareTag("Tower"))
+                {
+                    ChangeColor(_currentTransparentTower, Color.red);
+                    currentColor = false;
+                }
+                else if (tower.CompareTag("Ground"))
+                {
+                    ChangeColor(_currentTransparentTower, Color.green);
+                    currentColor = true;
+                }
+            }
         }
-        else if (Input.GetMouseButtonUp(MouseButtonLeft))
+        else if (Input.GetMouseButtonDown(MouseButtonLeft))
         {
-            _mouseIsHeldDown = false;
-            _currentTransparentTower = null;
+            if (TryGetHitFromMousePosition(out hit))
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                
+                _mouseIsHeldDown = false;
+                DestroyAllTransparentTowers();
+
+                if (currentColor)
+                {
+                    Debug.Log("Ground hit detected. Instantiating tower...");
+                    InstantiateTower(hit, false); 
+                }
+            }
         }
-        else if (Input.GetMouseButtonDown(1))
-        {
-            DestroyTower();
+            else if (Input.GetMouseButtonDown(1))
+            { 
+                DestroyTower();
+            }
         }
+        
+        
+        
     }
 
-    private void CheckAndInstantiateTower(RaycastHit hit, bool transparent)
+
+    private void DestroyAllTransparentTowers()
     {
-        if (towerPrefab == null) 
+        foreach (var transparentTower in GameObject.FindGameObjectsWithTag("TransparentTower"))
         {
-            Debug.LogError("Tower Prefab is not assigned.");
-            return;
-        }
-        if (IsGround(hit.collider))
-        {
-            var gridPos = SnapToGrid(hit.point, GridSize);
-            var prefab = transparent ? transparentTowerPrefab : towerPrefab;
-            _currentTransparentTower = Instantiate(prefab, gridPos, Quaternion.identity);
+            Destroy(transparentTower);
         }
     }
+    
+    
+    private bool CheckConditions(RaycastHit hit, bool onlyGroundCheck)
+    {
+    if (towerPrefab == null) 
+    {
+        Debug.LogError("Tower Prefab is not assigned.");
+        return false;
+    }
+    if (!IsGround(hit.collider)) return false;
+    if (!onlyGroundCheck && HitDetectsTower(hit.point))
+    {
+        return false;
+    }
+    return true;
+    }
+
+private bool HitDetectsTower(Vector3 point)
+{
+    if (Physics.Raycast(point, Vector3.up, out RaycastHit hitTower))
+    {
+        return hitTower.transform.CompareTag("Tower");
+    }
+    return false;
+}
+    
+  
+
+
+    private void InstantiateTower(RaycastHit hit, bool transparent)
+    {
+        var gridPos = SnapToGrid(hit.point, GridSize);
+        var prefab = transparent ? transparentTowerPrefab : towerPrefab;
+        _currentTransparentTower = Instantiate(prefab, gridPos, Quaternion.identity);
+    }
+    
+    
+    void ChangeColor(GameObject obj, Color newColor)
+    {
+        obj.GetComponent<Renderer>().material.color = newColor;
+    }
+    
+    
     
     private bool TryGetHitFromMousePosition(out RaycastHit hit)
     {
@@ -74,6 +158,20 @@ public class TowerSpawner : MonoBehaviour
         int z = Mathf.RoundToInt(rawWorldPos.z / gridSize);
         return new Vector3(x * gridSize, y * gridSize, z * gridSize);
     }
+
+
+    public void ButtonSelect()
+    {
+        archerButtonIsPressed = true;
+       
+    }
+    
+    
+    
+    
+    
+    
+    
 }
             
         

@@ -12,6 +12,7 @@ public class EnemyMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             enemyAgent.SetDestination(new Vector3(0,0,-18));
+            
         }   
     }
 }
