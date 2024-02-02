@@ -24,7 +24,9 @@ public class EnemyMovement : MonoBehaviour
     {
         if (!_pathHasBeenMade)
         {
+            //Find a way to rename the object when it spawns
             GameObject targetObject = new GameObject();
+            
             targetObject.transform.position = new Vector3(0, 0, -18);
             _target = targetObject.transform;
             _pathHasBeenMade = true;
