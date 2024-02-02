@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2163.6272, g: 2271.0432, b: 3305.817, a: 1}
+  m_IndirectSpecularColor: {r: 2163.6272, g: 2271.0432, b: 3305.6997, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -18883,9 +18883,9 @@ GameObject:
   - component: {fileID: 1453652766}
   - component: {fileID: 1453652770}
   - component: {fileID: 1453652771}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy
-  m_TagString: Player
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18990,7 +18990,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 1
-  m_Speed: 3.5
+  m_Speed: 1
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -19015,6 +19015,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyAgent: {fileID: 1453652770}
+  canReachDestination: 0
 --- !u!1 &1479766997
 GameObject:
   m_ObjectHideFlags: 0
@@ -22695,6 +22696,8 @@ MonoBehaviour:
   towerPrefab: {fileID: 5603472128371696670, guid: 5b38f16182c817d4b8a3992d8f5e9569,
     type: 3}
   archerButton: {fileID: 215321424}
+  currentColor: 0
+  _enemyMovement: {fileID: 1453652771}
 --- !u!1 &1715751315
 GameObject:
   m_ObjectHideFlags: 0

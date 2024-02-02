@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using Unity.Mathematics;
+using UnityEngine.AI;
 using UnityEngine.UIElements;
 using Button = UnityEngine.UI.Button;
 
@@ -14,10 +15,17 @@ public class TowerController : MonoBehaviour
     private GameObject currentTransparentTowerInstance;
     private GameObject instantiatedTransparentTower;
     private bool transparentTowerIsActive;
-    private bool currentColor;
-    
-    
-    
+    public bool currentColor;
+
+    private Renderer _rendererTransparentTower;
+
+    [SerializeField] private EnemyMovement _enemyMovement;
+
+
+    private void Awake()
+    {
+        
+    }
 
     public void ArcherButtonIsPressed()
     {
@@ -25,11 +33,16 @@ public class TowerController : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    private void Start() {}
+    private void Start()
+    {
+        
+    }
 
     // Update is called once per frame
     private void Update()
     {
+        
+        
         RaycastHit hit;
         var mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(mouseRay, out hit)) 
@@ -56,15 +69,18 @@ public class TowerController : MonoBehaviour
                     
                     
                     GameObject tower = hit.transform.gameObject;
-                    if (tower.CompareTag("Tower"))
+                    if (tower.CompareTag("Tower") || tower.CompareTag("Enemy") || _enemyMovement.canReachDestination == false )
                     {
                         ChangeColor(instantiatedTransparentTower, Color.red);
                         currentColor = false;
+                        
+
                     }
-                    else if (tower.CompareTag("Ground"))
+                    else if (tower.CompareTag("Ground") && _enemyMovement.canReachDestination == true)
                     {
                         ChangeColor(instantiatedTransparentTower, Color.green);
                         currentColor = true;
+                        
                     }
                 } 
             }
@@ -80,10 +96,13 @@ public class TowerController : MonoBehaviour
     private GameObject InstantiateTransparentTower(GameObject transparentTower, RaycastHit hit)
     {
         transparentTowerIsActive = true;
+       
         var gridPos = SnapToGrid(hit.point, GridSize);
         // Make sure to return the instantiated object
         GameObject towerInstance = Instantiate(transparentTower, gridPos, Quaternion.identity);
+        _rendererTransparentTower = towerInstance.GetComponent<Renderer>();
         return towerInstance;
+        
     }
 
     private Vector3 SnapToGrid(Vector3 rawWorldPos, float gridSize)
@@ -107,10 +126,10 @@ public class TowerController : MonoBehaviour
     {
         if (obj != null)
         {
-            var renderer = obj.GetComponent<Renderer>();
-            if (renderer != null && renderer.sharedMaterial != null)
+            
+            if (_rendererTransparentTower != null && _rendererTransparentTower.sharedMaterial != null)
             {
-                renderer.sharedMaterial.color = newColor;
+                _rendererTransparentTower.sharedMaterial.color = newColor;
             }
         }
     }
