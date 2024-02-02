@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 6769584488126438968}
   - component: {fileID: 8800689072349482312}
   m_Layer: 0
-  m_Name: RedTowerTransparent
-  m_TagString: Tower
+  m_Name: GreenTowerTransparent
+  m_TagString: TransparentTower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5603472128371696670}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.879891, y: -3.1322606e-16, z: 15.324599}
+  m_LocalPosition: {x: 4, y: 0, z: 16}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 65a8e17855382264f86a409e9c62aaf4, type: 2}
+  - {fileID: 2100000, guid: 18f3f2660f52c2b4e8ed6be8735c48e9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
