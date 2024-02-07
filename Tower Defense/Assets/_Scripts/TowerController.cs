@@ -1,41 +1,30 @@
-using System;
+
+using _Scripts;
 using UnityEngine;
-using Unity.Mathematics;
-using UnityEngine.AI;
-using UnityEngine.UIElements;
+
 using Button = UnityEngine.UI.Button;
 
 public class TowerController : MonoBehaviour
 {
-    [SerializeField] private GameObject transparentTower, towerPrefab;
+    [SerializeField] private GameObject transparentTowerPrefab, towerPrefab, towerDummyPrefab;
     [SerializeField] private Button archerButton;
 
     private const float GridSize = 2.0f;
-    private bool archerButtonIsPressed;
-    private GameObject currentTransparentTowerInstance;
+    private bool _archerButtonIsPressed;
+    private GameObject currentTransparentTowerInstance, currentTransparentTowerInstaceDummy;
     private GameObject instantiatedTransparentTower;
+    private GameObject instantiatedTransparentTowerDummy;
     private bool transparentTowerIsActive;
     public bool currentColor;
 
     private Renderer _rendererTransparentTower;
 
     [SerializeField] private EnemyMovement _enemyMovement;
-
-
-    private void Awake()
-    {
-        
-    }
-
+    [SerializeField] private DummyEnemy _dummyEnemy;
+    
     public void ArcherButtonIsPressed()
     {
-        archerButtonIsPressed = true;
-    }
-
-    // Start is called before the first frame update
-    private void Start()
-    {
-        
+        _archerButtonIsPressed = true;
     }
 
     // Update is called once per frame
@@ -47,18 +36,23 @@ public class TowerController : MonoBehaviour
         var mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(mouseRay, out hit)) 
         {
-            if (archerButtonIsPressed)
+            if (_archerButtonIsPressed)
             {
+                GameObject tower1 = hit.transform.gameObject;
                 if (Input.GetKeyDown(KeyCode.Mouse0) && currentColor)
                 {
+                   
                     InstantiateTower(towerPrefab, hit);
+                   // InstantiateTower(towerDummyPrefab, hit);
                     Destroy(instantiatedTransparentTower); // Remove the transparent tower once a real one is placed
+                    Destroy(instantiatedTransparentTowerDummy); // Remove the transparent tower dummy once a real one is placed
                     transparentTowerIsActive = false;
                 }
                 else if (!transparentTowerIsActive)
                 {
                     transparentTowerIsActive = true;
-                    instantiatedTransparentTower = InstantiateTransparentTower(transparentTower ,hit); // Only create it once when the player pressed a button
+                    instantiatedTransparentTower = InstantiateTransparentTower(transparentTowerPrefab ,hit); // Only create it once when the player pressed a button
+                    instantiatedTransparentTowerDummy = InstantiateDummy(towerDummyPrefab, hit);
                 }
 
                 if(instantiatedTransparentTower != null && transparentTowerIsActive)
@@ -66,20 +60,20 @@ public class TowerController : MonoBehaviour
                     // Move your transparent tower towards your mouse
                     var gridPos = SnapToGrid(hit.point, GridSize);
                     instantiatedTransparentTower.transform.position = gridPos;
+                    instantiatedTransparentTowerDummy.transform.position = gridPos;
                     
                     
                     GameObject tower = hit.transform.gameObject;
-                    if (tower.CompareTag("Tower") || tower.CompareTag("Enemy") || _enemyMovement.canReachDestination == false )
+                    if (tower.CompareTag("Tower") || tower.CompareTag("Enemy") || _dummyEnemy.canReachDestinationDummy == false )
                     {
-                        ChangeColor(instantiatedTransparentTower, Color.red);
                         currentColor = false;
+                        ChangeColor(instantiatedTransparentTower, Color.red);
                         
-
                     }
-                    else if (tower.CompareTag("Ground") && _enemyMovement.canReachDestination == true)
+                    else if (tower.CompareTag("Ground") && _dummyEnemy.canReachDestinationDummy)
                     {
-                        ChangeColor(instantiatedTransparentTower, Color.green);
                         currentColor = true;
+                        ChangeColor(instantiatedTransparentTower, Color.green);
                         
                     }
                 } 
@@ -87,10 +81,11 @@ public class TowerController : MonoBehaviour
         }
     }
 
+    
     private void InstantiateTower(GameObject tower, RaycastHit hit)
     {
         var gridPos = SnapToGrid(hit.point, GridSize);
-        tower = Instantiate(tower, gridPos, Quaternion.identity);
+        Instantiate(tower, gridPos, Quaternion.identity);
     }
 
     private GameObject InstantiateTransparentTower(GameObject transparentTower, RaycastHit hit)
@@ -102,6 +97,16 @@ public class TowerController : MonoBehaviour
         GameObject towerInstance = Instantiate(transparentTower, gridPos, Quaternion.identity);
         _rendererTransparentTower = towerInstance.GetComponent<Renderer>();
         return towerInstance;
+        
+    }
+    private GameObject InstantiateDummy(GameObject DummyTower, RaycastHit hit)
+    {
+        transparentTowerIsActive = true;
+       
+        var gridPos = SnapToGrid(hit.point, GridSize);
+        // Make sure to return the instantiated object
+        GameObject dummyTowerInstance = Instantiate(DummyTower, gridPos, Quaternion.identity);
+        return dummyTowerInstance;
         
     }
 
@@ -117,7 +122,7 @@ public class TowerController : MonoBehaviour
 
     public void PlayerButtonInputArcher()
     {
-        archerButtonIsPressed = true;
+        _archerButtonIsPressed = true;
     }
     
     
