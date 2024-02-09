@@ -29,20 +29,18 @@ namespace _Scripts
                 //Find a way to rename the object when it spawns
                 GameObject targetObject = new GameObject();
             
-                targetObject.transform.position = new Vector3(0, 0, -18);
+                targetObject.transform.position = new Vector3(0, 0, -24);
                 _targetDummy = targetObject.transform;
                 _pathHasBeenMade = true;
             }
             enemyAgentDummy.SetDestination(_targetDummy.position);
             
-            if (_targetDummy == null)
-                return;
-
+            
             ValidatePath();
         
         }
 
-        void ValidatePath()
+        public void ValidatePath()
         {
         
             agent.CalculatePath(_targetDummy.position, _pathDummy);
