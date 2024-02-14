@@ -1,8 +1,6 @@
-using System;
-using System.Collections;
 using Unity.AI.Navigation;
 using UnityEngine;
-using UnityEngine.AI;
+
 
 namespace _Scripts
 {
@@ -24,54 +22,46 @@ namespace _Scripts
         public LayerMask enemyLayer;
 
         private Vector3 _transparentTowerLastPos;
-        
-        [SerializeField] private EnemyMovement _enemyMovement;
 
 
         private void Awake()
         {
             BuildNavMeshSurfaces();
+            
+            
+            
         }
+        
+        
+        
+        
 
         private void BuildNavMeshSurfaces()
         {
             for (int i = 0; i < navMeshSurfaces.Length; i++)
             {
              navMeshSurfaces[i].BuildNavMesh();
+             Debug.Log("NavMesh Rebuilt");
             }
         }
         
-        private bool HasTransparentTowerMoved(bool hasMoved)
-        {
-            if (_instantiatedTransparentTower == null)
-            {
-                
-                return false;
-            }
-    
-            if (_transparentTowerLastPos != _instantiatedTransparentTower.transform.position)
-            {
-                _transparentTowerLastPos = _instantiatedTransparentTower.transform.position;
-                
-                return true;
-            }
-    
-            return false;
-        }
 
         // Update is called once per frame
         private void Update()
         {
-
-            if (HasTransparentTowerMoved(true))
-            {
-                BuildNavMeshSurfaces();
-            }
+            Debug.Log(currentColor);
             
-            var mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (RaycastHitsLayer(mouseRay, groundLayer + towerLayer, out var hit))
+            FindEnemies();
+            
+          
+
+            if (Camera.main != null)
             {
-                HandleArcherTowerSelection(hit, mouseRay);
+                var mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (RaycastHitsLayer(mouseRay, groundLayer + towerLayer, out var hit))
+                {
+                    HandleArcherTowerSelection(hit);
+                }
             }
         }
 
@@ -80,7 +70,7 @@ namespace _Scripts
             return Physics.Raycast(ray, out hit, Mathf.Infinity, layer);
         }
 
-        private void HandleArcherTowerSelection(RaycastHit hit, Ray mouseRay)
+        private void HandleArcherTowerSelection(RaycastHit hit)
         {
             if (_archerButtonIsPressed)
             {
@@ -94,13 +84,14 @@ namespace _Scripts
                 }
                 if(_transparentTowerIsActive)
                 {
-                    HandleTransparentTower(hit, mouseRay);
+                    HandleTransparentTower(hit);
                 }
             }
         }
 
         private void PlaceTower(RaycastHit hit)
         {
+            
             InstantiateTower(towerPrefab, hit);
             Destroy(_instantiatedTransparentTower);
             
@@ -114,11 +105,11 @@ namespace _Scripts
             _transparentTowerIsActive = true;
         }
 
-        private void HandleTransparentTower(RaycastHit hit, Ray mouseRay)
+        private void HandleTransparentTower(RaycastHit hit)
         {
             var gridPos = SnapToGrid(hit.point, GridSize);
             UpdateTransparentTowerPosition(gridPos);
-            CheckAndHandleObstacles(hit, mouseRay);
+            CheckAndHandleObstacles(hit);
         }
 
         private void UpdateTransparentTowerPosition(Vector3 gridPos)
@@ -127,35 +118,32 @@ namespace _Scripts
            
         }
 
-        private void CheckAndHandleObstacles(RaycastHit hit, Ray mouseRay)
+        private void CheckAndHandleObstacles(RaycastHit hit)
         {
+            //Debug.DrawRay(hit.point, -mouseRay.direction * 10, Color.yellow);
+            Debug.Log("Raycast hit: " + hit.collider.gameObject.tag);
+            
             GameObject tower = hit.transform.gameObject;
-            if (Obstructed(tower))
+            if (tower.CompareTag("Tower"))
             {
-                HandleObstruction(tower, mouseRay, hit);
+                HandleObstruction();
             }
-            else if (tower.CompareTag("Ground") && _enemyMovement.canReachDestination)
+            if (tower.CompareTag("Ground"))
             {
                 Debug.Log("Change Color Function Called"); // Debug Statement
                 ChangeColor(_instantiatedTransparentTower, Color.green);
                 currentColor = true;
                 
             }
-            else
-            {
-                Debug.Log("Failed to meet conditions"); // Debug Statement
-            }
         }
 
-        private bool Obstructed(GameObject tower)
-        {
-            return tower.CompareTag("Tower") || tower.CompareTag("Enemy") || !_enemyMovement.canReachDestination;
-        }
+     
 
-        private void HandleObstruction(GameObject tower, Ray mouseRay, RaycastHit hit)
+        private void HandleObstruction()
         {
-            currentColor = false;
+            
             ChangeColor(_instantiatedTransparentTower, Color.red);
+            currentColor = false;
         }
 
         private void InstantiateTower(GameObject tower, RaycastHit hit)
@@ -196,6 +184,33 @@ namespace _Scripts
                 if (_rendererTransparentTower != null && _rendererTransparentTower.sharedMaterial != null)
                 {
                     _rendererTransparentTower.sharedMaterial.color = newColor;
+                }
+            }
+        }
+
+
+        private void FindEnemies()
+        {
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+            foreach(GameObject enemy in enemies)
+            {
+                if(enemy != null)
+                {
+                    EnemyMovement enemyMovement = enemy.GetComponent<EnemyMovement>();
+        
+                    if(enemyMovement != null)
+                    {
+                        // You can now access the `canReachDestination` property for each enemy
+                    }
+                    else
+                    {
+                        //Debug.LogWarning("EnemyMovement component missing on enemy object");
+                    }
+                }
+                else 
+                {
+                    //Debug.LogWarning("No enemy objects found with the 'Enemy' tag");
                 }
             }
         }
