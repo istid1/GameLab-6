@@ -1,12 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class TowerID : MonoBehaviour
+namespace _Scripts
 {
-    public int ID { get; private set; }  // Changed public property name to 'ID'
-    public TowerID(int id)
+    public class TowerID : MonoBehaviour
     {
-        ID = id;
+        public int ID { get; private set; } 
+        public TowerID(int id)
+        {
+            ID = id;
+        }
     }
 }

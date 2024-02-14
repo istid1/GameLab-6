@@ -19,7 +19,7 @@ namespace _Scripts
             if (IsValidPosition(cellPosition) && _grid[cellPosition.x, cellPosition.y] == null)
             {
                 _grid[cellPosition.x, cellPosition.y] = tower;
-                // You can then position your tower object on the scene based on the cell position
+               
                 _towersCount++;
             }
             else
@@ -38,7 +38,7 @@ namespace _Scripts
             return _towersCount == GridSizeX * GridSizeY;
         }
 
-        // Draw grid gizmo
+       
         void OnDrawGizmos()
         {
             Gizmos.color = Color.blue;

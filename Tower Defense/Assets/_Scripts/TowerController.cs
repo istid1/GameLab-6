@@ -51,7 +51,7 @@ namespace _Scripts
         {
             Debug.Log(currentColor);
             
-            FindEnemies();
+            
             
           
 
@@ -130,7 +130,7 @@ namespace _Scripts
             }
             if (tower.CompareTag("Ground"))
             {
-                Debug.Log("Change Color Function Called"); // Debug Statement
+                Debug.Log("Change Color Function Called"); 
                 ChangeColor(_instantiatedTransparentTower, Color.green);
                 currentColor = true;
                 
@@ -184,33 +184,6 @@ namespace _Scripts
                 if (_rendererTransparentTower != null && _rendererTransparentTower.sharedMaterial != null)
                 {
                     _rendererTransparentTower.sharedMaterial.color = newColor;
-                }
-            }
-        }
-
-
-        private void FindEnemies()
-        {
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-            foreach(GameObject enemy in enemies)
-            {
-                if(enemy != null)
-                {
-                    EnemyMovement enemyMovement = enemy.GetComponent<EnemyMovement>();
-        
-                    if(enemyMovement != null)
-                    {
-                        // You can now access the `canReachDestination` property for each enemy
-                    }
-                    else
-                    {
-                        //Debug.LogWarning("EnemyMovement component missing on enemy object");
-                    }
-                }
-                else 
-                {
-                    //Debug.LogWarning("No enemy objects found with the 'Enemy' tag");
                 }
             }
         }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2158.1575, g: 2263.2268, b: 3288.5317, a: 1}
+  m_IndirectSpecularColor: {r: 2166.3928, g: 2276.6858, b: 3321.977, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8545,6 +8545,8 @@ MonoBehaviour:
   - {fileID: 2725473023229696548, guid: 55cd9e545fd297c42b344398e18ee7ab, type: 3}
   - {fileID: 2725473023229696548, guid: 55cd9e545fd297c42b344398e18ee7ab, type: 3}
   enemiesSpawnAmount: 5
+  waitTimeMin: 0.1
+  waitTimeMax: 1.5
 --- !u!1 &607465249
 GameObject:
   m_ObjectHideFlags: 0
@@ -23105,8 +23107,6 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
-  _enemyMovement: {fileID: 3970501615753189176, guid: 55cd9e545fd297c42b344398e18ee7ab,
-    type: 3}
 --- !u!1 &1715751315
 GameObject:
   m_ObjectHideFlags: 0
