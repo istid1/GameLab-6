@@ -11,7 +11,8 @@ namespace _Scripts
         private bool _pathHasBeenMade;
         public NavMeshAgent agent;
         private NavMeshPath _path;
-        [SerializeField] private float MovementSpeedAfterWall;
+        [SerializeField] private float _movementSpeedAfterWall;
+        private GameObject _targetObject;
         
 
 
@@ -27,13 +28,13 @@ namespace _Scripts
         {
             if (!_pathHasBeenMade)
             {
-                //Find a way to rename the object when it spawns
                 
-                GameObject targetObject = new GameObject();
-                targetObject.name = "Enemy Target Position";
+                
+                _targetObject = new GameObject();
+                _targetObject.name = "Enemy Target Position";
             
-                targetObject.transform.position = new Vector3(0, 0, -24);
-                _target = targetObject.transform;
+                _targetObject.transform.position = new Vector3(0, 0, -24);
+                _target = _targetObject.transform;
                 _pathHasBeenMade = true;
             }
             enemyAgent.SetDestination(_target.position);
@@ -72,7 +73,13 @@ namespace _Scripts
             if (other.gameObject.CompareTag("SlowDownWall"))
             {
                 Debug.Log("I hit a SlowDownWall");
-                agent.speed = MovementSpeedAfterWall;
+                agent.speed = _movementSpeedAfterWall;
+            }
+
+            if (other.gameObject.CompareTag("EndZone"))
+            {
+                Destroy(this.gameObject);
+                Destroy(_targetObject);
             }
         }
 

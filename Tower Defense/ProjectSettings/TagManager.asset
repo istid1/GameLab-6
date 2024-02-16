@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - Dummy Tower
   - SlowDownWall
+  - EndZone
   layers:
   - Default
   - TransparentFX

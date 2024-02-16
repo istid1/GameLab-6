@@ -150,7 +150,7 @@ MonoBehaviour:
   enemyAgent: {fileID: 4367070520369334059}
   canReachDestination: 0
   agent: {fileID: 4367070520369334059}
-  MovementSpeedAfterWall: 6
+  _movementSpeedAfterWall: 6
 --- !u!114 &2246515104921913727
 MonoBehaviour:
   m_ObjectHideFlags: 0
