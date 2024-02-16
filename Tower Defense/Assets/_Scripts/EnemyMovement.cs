@@ -11,6 +11,7 @@ namespace _Scripts
         private bool _pathHasBeenMade;
         public NavMeshAgent agent;
         private NavMeshPath _path;
+        [SerializeField] private float MovementSpeedAfterWall;
         
 
 
@@ -65,6 +66,16 @@ namespace _Scripts
             }
         }
 
-      
+        private void OnCollisionEnter(Collision other)
+        {
+            Debug.Log("Collision detected with " + other.gameObject.name);
+            if (other.gameObject.CompareTag("SlowDownWall"))
+            {
+                Debug.Log("I hit a SlowDownWall");
+                agent.speed = MovementSpeedAfterWall;
+            }
+        }
+
+
     }
 }

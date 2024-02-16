@@ -35,7 +35,7 @@ namespace _Scripts
         
             GameObject enemyToInstantiate = enemyPrefab[enemyIndex];
             // Provide a position and rotation for the instantiated enemy
-            Instantiate(enemyToInstantiate, new Vector3(Random.Range(-10f, 10f), 0f, Random.Range(150f, 250f)), Quaternion.identity);
+            Instantiate(enemyToInstantiate, new Vector3(Random.Range(-10f, 10f), 0f, Random.Range(150f, 350f)), Quaternion.identity);
         }
 
         private void SpawnEnemies()

@@ -9,6 +9,7 @@ TagManager:
   - TransparentTower
   - Enemy
   - Dummy Tower
+  - SlowDownWall
   layers:
   - Default
   - TransparentFX
