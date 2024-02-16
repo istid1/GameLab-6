@@ -3,21 +3,21 @@ using UnityEngine.AI;
 
 namespace _Scripts
 {
-    public class EnemyMovement : MonoBehaviour
+    public class DummyEnemy : MonoBehaviour
     {
-        public NavMeshAgent enemyAgent;
-        private Transform _target;
-        public bool canReachDestination;
+        public NavMeshAgent enemyAgentDummy;
+        private Transform _targetDummy;
+        public bool canReachDestinationDummy;
         private bool _pathHasBeenMade;
         public NavMeshAgent agent;
-        private NavMeshPath _path;
+        private NavMeshPath _pathDummy;
         
 
 
         private void Start()
         {
             agent = GetComponent<NavMeshAgent>();
-            _path = new NavMeshPath();
+            _pathDummy = new NavMeshPath();
 
             //_navMeshAgentQuality = GetComponent<NavMeshAgent>();
         }
@@ -27,15 +27,13 @@ namespace _Scripts
             if (!_pathHasBeenMade)
             {
                 //Find a way to rename the object when it spawns
-                
                 GameObject targetObject = new GameObject();
-                targetObject.name = "Enemy Target Position";
             
                 targetObject.transform.position = new Vector3(0, 0, -24);
-                _target = targetObject.transform;
+                _targetDummy = targetObject.transform;
                 _pathHasBeenMade = true;
             }
-            enemyAgent.SetDestination(_target.position);
+            enemyAgentDummy.SetDestination(_targetDummy.position);
             
             
             ValidatePath();
@@ -45,26 +43,24 @@ namespace _Scripts
         public void ValidatePath()
         {
         
-            agent.CalculatePath(_target.position, _path);
-            switch (_path.status)
+            agent.CalculatePath(_targetDummy.position, _pathDummy);
+            switch (_pathDummy.status)
             {
                 case NavMeshPathStatus.PathComplete:
-                   // Debug.Log("Can complete route");
-                    canReachDestination = true;
+                    Debug.Log("Can complete route");
+                    canReachDestinationDummy = true;
                     break;
                 case NavMeshPathStatus.PathPartial:
-                   // Debug.Log("Can complete halfway");
-                    canReachDestination = false;
+                    Debug.Log("Can complete halfway");
+                    canReachDestinationDummy = false;
                 
                 
                     break;
                 default:
-                   // Debug.Log("Cannot reach destination");
-                    canReachDestination = false;
+                    Debug.Log("Cannot reach destination");
+                    canReachDestinationDummy = false;
                     break;
             }
         }
-
-      
     }
 }

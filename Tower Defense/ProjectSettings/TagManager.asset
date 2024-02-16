@@ -7,6 +7,8 @@ TagManager:
   - Ground
   - Tower
   - TransparentTower
+  - Enemy
+  - Dummy Tower
   layers:
   - Default
   - TransparentFX
@@ -14,11 +16,11 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Transparent Tower
+  - Enemy
+  - DummyLayer
+  - Ground
+  - Tower
   - 
   - 
   - 

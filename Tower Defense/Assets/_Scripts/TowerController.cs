@@ -1,117 +1,310 @@
 using System;
+using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
-using Unity.Mathematics;
-using UnityEngine.UIElements;
-using Button = UnityEngine.UI.Button;
 
-public class TowerController : MonoBehaviour
+
+namespace _Scripts
 {
-    [SerializeField] private GameObject transparentTower, towerPrefab;
-    [SerializeField] private Button archerButton;
-
-    private const float GridSize = 2.0f;
-    private bool archerButtonIsPressed;
-    private GameObject currentTransparentTowerInstance;
-    private GameObject instantiatedTransparentTower;
-    private bool transparentTowerIsActive;
-    private bool currentColor;
-    
-    
-    
-
-    public void ArcherButtonIsPressed()
+    public class TowerController : MonoBehaviour
     {
-        archerButtonIsPressed = true;
-    }
+        [SerializeField] private GameObject transparentTowerPrefab, towerPrefab;
+        private const float GridSize = 2.0f;
+        private bool _archerButtonIsPressed;
+        private GameObject _currentTransparentTowerInstance;
+        private GameObject _instantiatedTransparentTower;
+        private GameObject[] _allEnemies;
+        private GameObject _blockingTower;
+        private bool _willBlockAgent;
+        private List<EnemyMovement> _enemyMovements;
+        private bool _runOnce;
+        
+        
+        
+        private bool _transparentTowerIsActive;
+        public bool currentColor;
+        private Renderer _rendererTransparentTower;
+        [SerializeField] private NavMeshSurface[] navMeshSurfaces;
+        
+        public LayerMask groundLayer;
+        public LayerMask towerLayer;
+        public LayerMask enemyLayer;
 
-    // Start is called before the first frame update
-    private void Start() {}
+        private Vector3 _transparentTowerLastPos;
+        private Vector3 _mouseLastPosition;
+        [SerializeField] private List<GameObject> placedTower = new List<GameObject>();
+        private EnemyMovement _enemyMovement;
+        [SerializeField]private EnemySpawner _enemySpawner;
 
-    // Update is called once per frame
-    private void Update()
-    {
-        RaycastHit hit;
-        var mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(mouseRay, out hit)) 
+
+        private void Awake()
         {
-            if (archerButtonIsPressed)
+           BuildNavMeshSurfaces();
+           
+        }
+        
+        private void BuildNavMeshSurfaces()
+        {
+            for (int i = 0; i < navMeshSurfaces.Length; i++)
+            {
+             navMeshSurfaces[i].BuildNavMesh();
+             
+            }
+        }
+        
+
+        // Update is called once per frame
+        private void Update()
+        {
+
+            if (_enemySpawner.allEnemiesIsSpawned && !_runOnce)
+            {
+                GetEnemyMovementComponents();
+                _runOnce = true;
+
+            }
+            
+            Debug.Log("Will it block: " + _willBlockAgent);
+            HasMoved();
+            
+            _allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+            
+          
+
+            if (Camera.main != null)
+            {
+                var mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (RaycastHitsLayer(mouseRay, groundLayer + towerLayer, out var hit))
+                {
+                    HandleArcherTowerSelection(hit);
+                }
+            }
+            EnemiesCantFinishPath();
+            
+        }
+
+        private bool RaycastHitsLayer(Ray ray, LayerMask layer, out RaycastHit hit)
+        {
+            return Physics.Raycast(ray, out hit, Mathf.Infinity, layer);
+        }
+
+        private void HandleArcherTowerSelection(RaycastHit hit)
+        {
+            if (_archerButtonIsPressed)
             {
                 if (Input.GetKeyDown(KeyCode.Mouse0) && currentColor)
                 {
-                    InstantiateTower(towerPrefab, hit);
-                    Destroy(instantiatedTransparentTower); // Remove the transparent tower once a real one is placed
-                    transparentTowerIsActive = false;
-                }
-                else if (!transparentTowerIsActive)
-                {
-                    transparentTowerIsActive = true;
-                    instantiatedTransparentTower = InstantiateTransparentTower(transparentTower ,hit); // Only create it once when the player pressed a button
-                }
-
-                if(instantiatedTransparentTower != null && transparentTowerIsActive)
-                {
-                    // Move your transparent tower towards your mouse
-                    var gridPos = SnapToGrid(hit.point, GridSize);
-                    instantiatedTransparentTower.transform.position = gridPos;
+                    PlaceTower(hit);
                     
-                    
-                    GameObject tower = hit.transform.gameObject;
-                    if (tower.CompareTag("Tower"))
-                    {
-                        ChangeColor(instantiatedTransparentTower, Color.red);
-                        currentColor = false;
-                    }
-                    else if (tower.CompareTag("Ground"))
-                    {
-                        ChangeColor(instantiatedTransparentTower, Color.green);
-                        currentColor = true;
-                    }
-                } 
+                }
+                else if (!_transparentTowerIsActive)
+                {
+                    SpawnTransparentTower(hit);
+                }
+                if(_transparentTowerIsActive)
+                {
+                    HandleTransparentTower(hit);
+                }
             }
         }
-    }
 
-    private void InstantiateTower(GameObject tower, RaycastHit hit)
-    {
-        var gridPos = SnapToGrid(hit.point, GridSize);
-        tower = Instantiate(tower, gridPos, Quaternion.identity);
-    }
-
-    private GameObject InstantiateTransparentTower(GameObject transparentTower, RaycastHit hit)
-    {
-        transparentTowerIsActive = true;
-        var gridPos = SnapToGrid(hit.point, GridSize);
-        // Make sure to return the instantiated object
-        GameObject towerInstance = Instantiate(transparentTower, gridPos, Quaternion.identity);
-        return towerInstance;
-    }
-
-    private Vector3 SnapToGrid(Vector3 rawWorldPos, float gridSize)
-    {
-        int x = Mathf.RoundToInt(rawWorldPos.x / gridSize);
-        int y = Mathf.RoundToInt(rawWorldPos.y / gridSize);
-        int z = Mathf.RoundToInt(rawWorldPos.z / gridSize);
-        
-        return new Vector3(x * gridSize, y * gridSize, z * gridSize);
-    }
-
-
-    public void PlayerButtonInputArcher()
-    {
-        archerButtonIsPressed = true;
-    }
-    
-    
-    
-    void ChangeColor(GameObject obj, Color newColor)
-    {
-        if (obj != null)
+        private void PlaceTower(RaycastHit hit)
         {
-            var renderer = obj.GetComponent<Renderer>();
-            if (renderer != null && renderer.sharedMaterial != null)
+            
+            if (towerPrefab == null)
             {
-                renderer.sharedMaterial.color = newColor;
+                
+                return;
+            }
+            
+            GameObject newTower = InstantiateTower(towerPrefab, hit);
+            if (newTower == null)
+            {
+                return;
+            }
+            placedTower.Add(newTower);
+    
+            if (_instantiatedTransparentTower != null)
+            {
+                Destroy(_instantiatedTransparentTower);
+                _instantiatedTransparentTower = null; // Avoid memory leak
+            }
+    
+            _transparentTowerIsActive = false;
+            
+            _blockingTower = newTower;     // Store the reference to the newly placed Tower which might block the path
+        }
+
+        private void SpawnTransparentTower(RaycastHit hit)
+        {
+            _instantiatedTransparentTower = InstantiateTransparentTower(transparentTowerPrefab, hit);
+            _rendererTransparentTower = _instantiatedTransparentTower.GetComponent<Renderer>();
+            _transparentTowerIsActive = true;
+        }
+
+        private void HandleTransparentTower(RaycastHit hit)
+        {
+            var gridPos = SnapToGrid(hit.point, GridSize);
+            UpdateTransparentTowerPosition(gridPos);
+            CheckAndHandleObstacles(hit);
+        }
+
+        private void UpdateTransparentTowerPosition(Vector3 gridPos)
+        {
+            _instantiatedTransparentTower.transform.position = gridPos;
+           
+        }
+
+        private void CheckAndHandleObstacles(RaycastHit hit)
+        {
+            //Debug.DrawRay(hit.point, -mouseRay.direction * 10, Color.yellow);
+           
+            
+            GameObject tower = hit.transform.gameObject;
+            if (tower.CompareTag("Tower"))
+            {
+                HandleObstruction();
+            }
+            if (tower.CompareTag("Ground") && !_willBlockAgent)
+            {
+               
+                ChangeColor(_instantiatedTransparentTower, Color.green);
+                currentColor = true;
+                
             }
         }
-    }
+
+     
+
+        private void HandleObstruction()
+        {
+            
+            ChangeColor(_instantiatedTransparentTower, Color.red);
+            currentColor = false;
+        }
+
+        private GameObject InstantiateTower(GameObject tower, RaycastHit hit)
+        {
+            var gridPos = SnapToGrid(hit.point, GridSize);
+            GameObject newTower = Instantiate(tower, gridPos, Quaternion.identity);
+            return newTower;
+        }
+        private GameObject InstantiateTransparentTower(GameObject transparentTower, RaycastHit hit)
+        {
+            _transparentTowerIsActive = true;
+
+            var gridPos = SnapToGrid(hit.point, GridSize);
+            GameObject towerInstance = Instantiate(transparentTower, gridPos, Quaternion.identity);
+            _rendererTransparentTower = towerInstance.GetComponent<Renderer>();
+            
+            return towerInstance;
+
+        }
+   
+        private Vector3 SnapToGrid(Vector3 rawWorldPos, float gridSize)
+        {
+            int x = Mathf.RoundToInt(rawWorldPos.x / gridSize);
+            int y = Mathf.RoundToInt(rawWorldPos.y / gridSize);
+            int z = Mathf.RoundToInt(rawWorldPos.z / gridSize);
+
+            return new Vector3(x * gridSize, y * gridSize, z * gridSize);
+        }
+
+        public void PlayerButtonInputArcher()
+        {
+            _archerButtonIsPressed = true;
+        }
+
+        void ChangeColor(GameObject obj, Color newColor)
+        {
+            if (obj != null)
+            {
+                if (_rendererTransparentTower != null && _rendererTransparentTower.sharedMaterial != null)
+                {
+                    _rendererTransparentTower.sharedMaterial.color = newColor;
+                }
+            }
+        }
+
+      
+
+       
+        
+        private List<EnemyMovement> GetEnemyMovementComponents()
+        {
+            // Find all active enemy objects in the scene.
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+    
+            // List to store all the EnemyMovement components.
+            List<EnemyMovement> enemyMovements = new List<EnemyMovement>();
+
+            foreach (GameObject enemy in enemies)
+            {
+                // Get the EnemyMovement component and add to the list.
+                EnemyMovement enemyMovement = enemy.GetComponent<EnemyMovement>();
+        
+                if (enemyMovement != null)
+                {
+                    enemyMovements.Add(enemyMovement);
+                }
+            }
+
+            // Return the list of enemy movements.
+            return enemyMovements;
+        }
+        
+        
+        private void EnemiesCantFinishPath()
+        {
+            // Get the enemyMovements.
+            _enemyMovements = GetEnemyMovementComponents();
+            if (_enemyMovements == null) 
+            {
+                Debug.Log("No enemyMovements");
+                return;
+            }
+
+            foreach(var enemyMovements in _enemyMovements)
+            {
+                if(!enemyMovements.canReachDestination)
+                {
+                    Debug.Log("Enemy can't reach destination");   
+                    DestroyBlockTower();
+                    _willBlockAgent = true;
+                    return;
+                }
+            }
+        }
+        
+        
+        private void DestroyBlockTower()
+        {
+            if (_blockingTower != null)
+            {
+                placedTower.Remove(_blockingTower);    // remove from the list
+                Destroy(_blockingTower);              // destroy the tower object
+                _blockingTower = null;                // Nullify the reference to avoid deleting the same tower multiple times
+            }
+        }
+        
+        
+        private bool HasMoved() //Checks if the mouse has moved position to another grid space
+        {
+            if (_instantiatedTransparentTower == null)
+            {
+                Debug.Log("Tower is null");
+                return false;
+            }
+            if (_mouseLastPosition != _instantiatedTransparentTower.transform.position)
+            {
+                _mouseLastPosition = _instantiatedTransparentTower.transform.position;
+                Debug.Log("Tower Moved");
+                _willBlockAgent = false;
+                return true;
+            }
+            return false;
+        }
+        
+        
+    } 
 }
