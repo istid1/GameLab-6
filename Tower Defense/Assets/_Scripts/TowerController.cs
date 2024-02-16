@@ -9,8 +9,34 @@ namespace _Scripts
     public class TowerController : MonoBehaviour
     {
         [SerializeField] private GameObject transparentTowerPrefab, towerPrefab;
+        
+        
+        
+        [Header("Ballista Tower")] 
+        [SerializeField] private GameObject transparentBallistaTower;
+        [SerializeField] private GameObject ballistaTowerPrefab;
+
+        [Header("Fire Tower")] 
+        [SerializeField] private GameObject transparentFireTower; 
+        [SerializeField] private GameObject fireTowerPrefab;
+
+        [Header("Ice Tower")] 
+        [SerializeField] private GameObject transparentIceTower; 
+        [SerializeField] private GameObject iceTowerPrefab;
+
+        [Header("Lightning Tower")] 
+        [SerializeField] private GameObject transparentLightningTower;
+        [SerializeField] private GameObject lightningTowerPrefab;
+
+        [Header("Bomb Tower")] 
+        [SerializeField] private GameObject transparentBombTower;
+        [SerializeField] private GameObject bombTowerPrefab;
+        
+        
+        
+        
         private const float GridSize = 2.0f;
-        private bool _archerButtonIsPressed;
+        private bool _archerButtonIsPressed, _fireButtonIsPressed, _iceButtonIsPressed, _lightningButtonIsPressed, _bombButtonIsPressed;
         private GameObject _currentTransparentTowerInstance;
         private GameObject _instantiatedTransparentTower;
         private GameObject[] _allEnemies;
@@ -35,6 +61,7 @@ namespace _Scripts
         [SerializeField] private List<GameObject> placedTower = new List<GameObject>();
         private EnemyMovement _enemyMovement;
         [SerializeField]private EnemySpawner _enemySpawner;
+        
 
 
         private void Awake()
@@ -90,7 +117,7 @@ namespace _Scripts
 
         private void HandleArcherTowerSelection(RaycastHit hit)
         {
-            if (_archerButtonIsPressed)
+            if (_archerButtonIsPressed || _fireButtonIsPressed || _iceButtonIsPressed || _lightningButtonIsPressed || _bombButtonIsPressed)
             {
                 if (Input.GetKeyDown(KeyCode.Mouse0) && currentColor)
                 {
@@ -210,10 +237,10 @@ namespace _Scripts
             return new Vector3(x * gridSize, y * gridSize, z * gridSize);
         }
 
-        public void PlayerButtonInputArcher()
-        {
-            _archerButtonIsPressed = true;
-        }
+        // public void PlayerButtonInputArcher()
+        // {
+        //     _archerButtonIsPressed = true;
+        // }
 
         void ChangeColor(GameObject obj, Color newColor)
         {
@@ -225,6 +252,65 @@ namespace _Scripts
                 }
             }
         }
+        
+        
+        private void ResetButtonStates()
+        {
+            //noButtonIsPressed = false;
+
+            _archerButtonIsPressed = false;
+            _fireButtonIsPressed = false;
+            _iceButtonIsPressed = false;
+            _lightningButtonIsPressed = false;
+            _bombButtonIsPressed = false;
+        }
+
+        public void ArcherButton()
+        {
+            ResetButtonStates();
+            _archerButtonIsPressed = true;
+
+            transparentTowerPrefab = transparentBallistaTower;
+            towerPrefab = ballistaTowerPrefab;
+        }
+
+        public void FireButton()
+        {
+            ResetButtonStates();
+            _fireButtonIsPressed = true;
+        
+            transparentTowerPrefab = transparentFireTower;
+            towerPrefab = fireTowerPrefab;
+        }
+
+        public void IceButton()
+        {
+            ResetButtonStates();
+           _iceButtonIsPressed = true;
+        
+            transparentTowerPrefab = transparentIceTower;
+            towerPrefab = iceTowerPrefab;
+        }
+
+        public void LightningButton()
+        {
+            ResetButtonStates();
+            _lightningButtonIsPressed = true;
+        
+            transparentTowerPrefab = transparentLightningTower;
+            towerPrefab = lightningTowerPrefab;
+        }
+
+        public void BombButton()
+        {
+            ResetButtonStates();
+            _bombButtonIsPressed = true;
+        
+            transparentTowerPrefab = transparentBombTower;
+            towerPrefab = bombTowerPrefab;
+        }
+        
+        
 
       
 
