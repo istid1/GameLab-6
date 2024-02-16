@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2166.3928, g: 2276.6858, b: 3321.977, a: 1}
+  m_IndirectSpecularColor: {r: 2163.6272, g: 2271.0432, b: 3305.817, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -23107,6 +23107,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
+  placedTower: []
 --- !u!1 &1715751315
 GameObject:
   m_ObjectHideFlags: 0

@@ -47,17 +47,17 @@ namespace _Scripts
             switch (_path.status)
             {
                 case NavMeshPathStatus.PathComplete:
-                    Debug.Log("Can complete route");
+                   // Debug.Log("Can complete route");
                     canReachDestination = true;
                     break;
                 case NavMeshPathStatus.PathPartial:
-                    Debug.Log("Can complete halfway");
-                    canReachDestination = true;
+                   // Debug.Log("Can complete halfway");
+                    canReachDestination = false;
                 
                 
                     break;
                 default:
-                    Debug.Log("Cannot reach destination");
+                   // Debug.Log("Cannot reach destination");
                     canReachDestination = false;
                     break;
             }

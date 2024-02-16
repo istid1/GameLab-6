@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
 
@@ -11,6 +12,9 @@ namespace _Scripts
         private bool _archerButtonIsPressed;
         private GameObject _currentTransparentTowerInstance;
         private GameObject _instantiatedTransparentTower;
+        private GameObject[] allEnemies;
+        private GameObject blockingTower = null;
+        
         
         private bool _transparentTowerIsActive;
         public bool currentColor;
@@ -22,14 +26,13 @@ namespace _Scripts
         public LayerMask enemyLayer;
 
         private Vector3 _transparentTowerLastPos;
+        [SerializeField] private List<GameObject> placedTower = new List<GameObject>();
+        private EnemyMovement _enemyMovement;
 
 
         private void Awake()
         {
             BuildNavMeshSurfaces();
-            
-            
-            
         }
         
         
@@ -41,7 +44,7 @@ namespace _Scripts
             for (int i = 0; i < navMeshSurfaces.Length; i++)
             {
              navMeshSurfaces[i].BuildNavMesh();
-             Debug.Log("NavMesh Rebuilt");
+             
             }
         }
         
@@ -49,10 +52,15 @@ namespace _Scripts
         // Update is called once per frame
         private void Update()
         {
-            Debug.Log(currentColor);
             
             
+            allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
             
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                DestroyLastTowerInList();
+            }
           
 
             if (Camera.main != null)
@@ -63,6 +71,8 @@ namespace _Scripts
                     HandleArcherTowerSelection(hit);
                 }
             }
+            
+            EnemiesCantFinishPath();
         }
 
         private bool RaycastHitsLayer(Ray ray, LayerMask layer, out RaycastHit hit)
@@ -92,10 +102,28 @@ namespace _Scripts
         private void PlaceTower(RaycastHit hit)
         {
             
-            InstantiateTower(towerPrefab, hit);
-            Destroy(_instantiatedTransparentTower);
+            if (towerPrefab == null)
+            {
+                
+                return;
+            }
             
+            GameObject newTower = InstantiateTower(towerPrefab, hit);
+            if (newTower == null)
+            {
+                return;
+            }
+            placedTower.Add(newTower);
+    
+            if (_instantiatedTransparentTower != null)
+            {
+                Destroy(_instantiatedTransparentTower);
+                _instantiatedTransparentTower = null; // Avoid memory leak
+            }
+    
             _transparentTowerIsActive = false;
+            
+            blockingTower = newTower;     // Store the reference to the newly placed Tower which might block the path
         }
 
         private void SpawnTransparentTower(RaycastHit hit)
@@ -121,7 +149,7 @@ namespace _Scripts
         private void CheckAndHandleObstacles(RaycastHit hit)
         {
             //Debug.DrawRay(hit.point, -mouseRay.direction * 10, Color.yellow);
-            Debug.Log("Raycast hit: " + hit.collider.gameObject.tag);
+           
             
             GameObject tower = hit.transform.gameObject;
             if (tower.CompareTag("Tower"))
@@ -130,7 +158,7 @@ namespace _Scripts
             }
             if (tower.CompareTag("Ground"))
             {
-                Debug.Log("Change Color Function Called"); 
+               
                 ChangeColor(_instantiatedTransparentTower, Color.green);
                 currentColor = true;
                 
@@ -146,10 +174,11 @@ namespace _Scripts
             currentColor = false;
         }
 
-        private void InstantiateTower(GameObject tower, RaycastHit hit)
+        private GameObject InstantiateTower(GameObject tower, RaycastHit hit)
         {
             var gridPos = SnapToGrid(hit.point, GridSize);
-            Instantiate(tower, gridPos, Quaternion.identity);
+            GameObject newTower = Instantiate(tower, gridPos, Quaternion.identity);
+            return newTower;
         }
         private GameObject InstantiateTransparentTower(GameObject transparentTower, RaycastHit hit)
         {
@@ -187,5 +216,74 @@ namespace _Scripts
                 }
             }
         }
+
+        private void DestroyLastTowerInList()
+        {
+            if (placedTower.Count > 0)
+            {
+                // get the last tower
+                var lastTower = placedTower[placedTower.Count - 1];
+        
+                // remove it from the list
+                placedTower.Remove(lastTower);
+        
+                // destroy the tower object
+                Destroy(lastTower);
+            }
+            else
+            {
+                // handle the case where there are no towers
+                
+            }
+            
+        }
+
+        private void EnemiesCantFinishPath()
+        {
+            Debug.Log("Invoked EnemiesCantFinishPath()");
+
+            if (allEnemies == null) 
+            {
+                Debug.Log("allEnemies is null");
+                return;
+            }
+    
+            foreach(var enemy in allEnemies)
+            {
+                Debug.Log("Checking enemy");
+                var enemyMovement = enemy.GetComponent<EnemyMovement>();
+
+                if(enemy == null)
+                {
+                    Debug.Log("Enemy is null");
+                    continue;
+                }
+                
+                if( !enemyMovement.canReachDestination)
+                {
+                    Debug.Log("Enemy can't reach destination");   
+                    DestroyBlockTower();
+                    return;
+                    
+                }
+            }
+            
+        }
+        
+        private void DestroyBlockTower()
+        {
+            if (blockingTower != null)
+            {
+                placedTower.Remove(blockingTower);    // remove from the list
+                Destroy(blockingTower);              // destroy the tower object
+                blockingTower = null;                // Nullify the reference to avoid deleting the same tower multiple times
+            }
+            else
+            {
+                // Handle the case where there's no blocking tower
+            }
+        }
+        
+        
     } 
 }

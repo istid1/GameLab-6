@@ -7,7 +7,7 @@ namespace _Scripts
     public class EnemySpawner : MonoBehaviour
     {
 
-        [SerializeField] private GameObject[] enemyPrefab;
+        [SerializeField] public GameObject[] enemyPrefab;
         
         [SerializeField] private int enemiesSpawnAmount;
 
