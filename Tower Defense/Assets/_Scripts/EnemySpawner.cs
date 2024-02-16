@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -6,19 +7,22 @@ namespace _Scripts
 {
     public class EnemySpawner : MonoBehaviour
     {
-
         [SerializeField] public GameObject[] enemyPrefab;
         
         [SerializeField] private int enemiesSpawnAmount;
-
-        [SerializeField] private float waitTimeMin;
-        [SerializeField] private float waitTimeMax;
-
+        public bool allEnemiesIsSpawned;
+      
         private void Start()
         {
-            StartCoroutine(SpawnDelay());
+            SpawnEnemies();
         }
-    
+        private void Update()
+        {
+            if (enemiesSpawnAmount == enemyPrefab.Length)
+            {
+                allEnemiesIsSpawned = true;
+            }
+        }
 
         private void InstantiateEnemy(int enemyIndex)
         {
@@ -30,21 +34,16 @@ namespace _Scripts
             }
         
             GameObject enemyToInstantiate = enemyPrefab[enemyIndex];
-
             // Provide a position and rotation for the instantiated enemy
-            Instantiate(enemyToInstantiate, new Vector3(0f, 0f, Random.Range(125f, 150f)), Quaternion.identity);
+            Instantiate(enemyToInstantiate, new Vector3(Random.Range(-10f, 10f), 0f, Random.Range(150f, 250f)), Quaternion.identity);
         }
 
-        private IEnumerator SpawnDelay()
+        private void SpawnEnemies()
         {
             for (int i = 0; i < enemiesSpawnAmount; i++)
             {
                 InstantiateEnemy(1);
-                yield return new WaitForSeconds(Random.Range(waitTimeMin, waitTimeMax)); //Spawns enemies at random between max and min wait time
             }
         }
-    
-    
     }
 }
-

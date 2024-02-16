@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2163.6272, g: 2271.0432, b: 3305.817, a: 1}
+  m_IndirectSpecularColor: {r: 2171.9045, g: 2286.9202, b: 3350.0981, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3851,7 +3851,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AgentTypeID: 0
   m_StartPoint: {x: 0, y: 0, z: -2.5}
-  m_EndPoint: {x: 0, y: 0, z: 2.5}
+  m_EndPoint: {x: 0, y: 0, z: 5.5}
   m_StartTransform: {fileID: 261513850}
   m_EndTransform: {fileID: 261513850}
   m_Activated: 1
@@ -3956,7 +3956,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 261513845}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
   m_Name: 
@@ -3978,7 +3978,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 87a32da902242a345a20b43d8d7efaee, type: 2}
+  m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0
 --- !u!1 &273825635
 GameObject:
@@ -8545,8 +8545,7 @@ MonoBehaviour:
   - {fileID: 2725473023229696548, guid: 55cd9e545fd297c42b344398e18ee7ab, type: 3}
   - {fileID: 2725473023229696548, guid: 55cd9e545fd297c42b344398e18ee7ab, type: 3}
   enemiesSpawnAmount: 50
-  waitTimeMin: 0
-  waitTimeMax: 0
+  allEnemiesIsSpawned: 0
 --- !u!1 &607465249
 GameObject:
   m_ObjectHideFlags: 0
@@ -16355,12 +16354,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AgentTypeID: 0
-  m_CollectObjects: 3
+  m_CollectObjects: 2
   m_Size: {x: 10, y: 10, z: 10}
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 247
+    m_Bits: 759
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_GenerateLinks: 1
@@ -16371,7 +16370,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 408a5c2899c22ff41b44ff08acee33b1, type: 2}
+  m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0
 --- !u!1 &1187410624
 GameObject:
@@ -19293,8 +19292,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AgentTypeID: 0
-  m_StartPoint: {x: 0, y: 0, z: -2.5}
-  m_EndPoint: {x: 0, y: 0, z: 2.5}
+  m_StartPoint: {x: 0, y: 0, z: -61.5}
+  m_EndPoint: {x: 0, y: 0, z: -53.5}
   m_StartTransform: {fileID: 1487735402}
   m_EndTransform: {fileID: 1487735402}
   m_Activated: 1
@@ -23108,6 +23107,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   placedTower: []
+  _enemySpawner: {fileID: 598816198}
 --- !u!1 &1715751315
 GameObject:
   m_ObjectHideFlags: 0

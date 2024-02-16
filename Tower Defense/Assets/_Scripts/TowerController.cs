@@ -16,6 +16,9 @@ namespace _Scripts
         private GameObject[] _allEnemies;
         private GameObject _blockingTower;
         private bool _willBlockAgent;
+        private List<EnemyMovement> _enemyMovements;
+        private bool _runOnce;
+        
         
         
         private bool _transparentTowerIsActive;
@@ -31,6 +34,7 @@ namespace _Scripts
         private Vector3 _mouseLastPosition;
         [SerializeField] private List<GameObject> placedTower = new List<GameObject>();
         private EnemyMovement _enemyMovement;
+        [SerializeField]private EnemySpawner _enemySpawner;
 
 
         private void Awake()
@@ -41,16 +45,7 @@ namespace _Scripts
 
         private void Start()
         {
-            foreach(var enemy in _allEnemies)
-            {
-                Debug.Log("getting Component: EnemyMovement");
-                var enemyMovement = enemy.GetComponent<EnemyMovement>();
-
-                if(enemy == null)
-                {
-                    continue;
-                }
-            }
+           
         }
 
 
@@ -67,6 +62,14 @@ namespace _Scripts
         // Update is called once per frame
         private void Update()
         {
+
+            if (_enemySpawner.allEnemiesIsSpawned && !_runOnce)
+            {
+                GetEnemyMovementComponents();
+                _runOnce = true;
+
+            }
+            
             Debug.Log("Will it block: " + _willBlockAgent);
             HasMoved();
             
@@ -231,25 +234,45 @@ namespace _Scripts
 
       
 
+       
+        
+        private List<EnemyMovement> GetEnemyMovementComponents()
+        {
+            // Find all active enemy objects in the scene.
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+    
+            // List to store all the EnemyMovement components.
+            List<EnemyMovement> enemyMovements = new List<EnemyMovement>();
+
+            foreach (GameObject enemy in enemies)
+            {
+                // Get the EnemyMovement component and add to the list.
+                EnemyMovement enemyMovement = enemy.GetComponent<EnemyMovement>();
+        
+                if (enemyMovement != null)
+                {
+                    enemyMovements.Add(enemyMovement);
+                }
+            }
+
+            // Return the list of enemy movements.
+            return enemyMovements;
+        }
+        
+        
         private void EnemiesCantFinishPath()
         {
-            if (_allEnemies == null) 
+            // Get the enemyMovements.
+            _enemyMovements = GetEnemyMovementComponents();
+            if (_enemyMovements == null) 
             {
-                Debug.Log("allEnemies is null");
+                Debug.Log("No enemyMovements");
                 return;
             }
-    
-            foreach(var enemy in _allEnemies)
-            {
-                Debug.Log("getting Component: EnemyMovement");
-                var enemyMovement = enemy.GetComponent<EnemyMovement>();
 
-                if(enemy == null)
-                {
-                    continue;
-                }
-                
-                if(!enemyMovement.canReachDestination)
+            foreach(var enemyMovements in _enemyMovements)
+            {
+                if(!enemyMovements.canReachDestination)
                 {
                     Debug.Log("Enemy can't reach destination");   
                     DestroyBlockTower();
@@ -259,6 +282,7 @@ namespace _Scripts
             }
         }
         
+        
         private void DestroyBlockTower()
         {
             if (_blockingTower != null)
@@ -266,10 +290,6 @@ namespace _Scripts
                 placedTower.Remove(_blockingTower);    // remove from the list
                 Destroy(_blockingTower);              // destroy the tower object
                 _blockingTower = null;                // Nullify the reference to avoid deleting the same tower multiple times
-            }
-            else
-            {
-                
             }
         }
         
