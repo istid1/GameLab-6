@@ -42,13 +42,7 @@ namespace _Scripts
            BuildNavMeshSurfaces();
            
         }
-
-        private void Start()
-        {
-           
-        }
-
-
+        
         private void BuildNavMeshSurfaces()
         {
             for (int i = 0; i < navMeshSurfaces.Length; i++)
