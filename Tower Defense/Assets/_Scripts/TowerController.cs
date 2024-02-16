@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
@@ -12,8 +13,9 @@ namespace _Scripts
         private bool _archerButtonIsPressed;
         private GameObject _currentTransparentTowerInstance;
         private GameObject _instantiatedTransparentTower;
-        private GameObject[] allEnemies;
-        private GameObject blockingTower = null;
+        private GameObject[] _allEnemies;
+        private GameObject _blockingTower;
+        private bool _willBlockAgent;
         
         
         private bool _transparentTowerIsActive;
@@ -26,18 +28,31 @@ namespace _Scripts
         public LayerMask enemyLayer;
 
         private Vector3 _transparentTowerLastPos;
+        private Vector3 _mouseLastPosition;
         [SerializeField] private List<GameObject> placedTower = new List<GameObject>();
         private EnemyMovement _enemyMovement;
 
 
         private void Awake()
         {
-            BuildNavMeshSurfaces();
+           BuildNavMeshSurfaces();
+           
         }
-        
-        
-        
-        
+
+        private void Start()
+        {
+            foreach(var enemy in _allEnemies)
+            {
+                Debug.Log("getting Component: EnemyMovement");
+                var enemyMovement = enemy.GetComponent<EnemyMovement>();
+
+                if(enemy == null)
+                {
+                    continue;
+                }
+            }
+        }
+
 
         private void BuildNavMeshSurfaces()
         {
@@ -52,15 +67,11 @@ namespace _Scripts
         // Update is called once per frame
         private void Update()
         {
+            Debug.Log("Will it block: " + _willBlockAgent);
+            HasMoved();
             
+            _allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
             
-            allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
-            
-
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                DestroyLastTowerInList();
-            }
           
 
             if (Camera.main != null)
@@ -71,8 +82,8 @@ namespace _Scripts
                     HandleArcherTowerSelection(hit);
                 }
             }
-            
             EnemiesCantFinishPath();
+            
         }
 
         private bool RaycastHitsLayer(Ray ray, LayerMask layer, out RaycastHit hit)
@@ -87,6 +98,7 @@ namespace _Scripts
                 if (Input.GetKeyDown(KeyCode.Mouse0) && currentColor)
                 {
                     PlaceTower(hit);
+                    
                 }
                 else if (!_transparentTowerIsActive)
                 {
@@ -123,7 +135,7 @@ namespace _Scripts
     
             _transparentTowerIsActive = false;
             
-            blockingTower = newTower;     // Store the reference to the newly placed Tower which might block the path
+            _blockingTower = newTower;     // Store the reference to the newly placed Tower which might block the path
         }
 
         private void SpawnTransparentTower(RaycastHit hit)
@@ -156,7 +168,7 @@ namespace _Scripts
             {
                 HandleObstruction();
             }
-            if (tower.CompareTag("Ground"))
+            if (tower.CompareTag("Ground") && !_willBlockAgent)
             {
                
                 ChangeColor(_instantiatedTransparentTower, Color.green);
@@ -217,71 +229,66 @@ namespace _Scripts
             }
         }
 
-        private void DestroyLastTowerInList()
-        {
-            if (placedTower.Count > 0)
-            {
-                // get the last tower
-                var lastTower = placedTower[placedTower.Count - 1];
-        
-                // remove it from the list
-                placedTower.Remove(lastTower);
-        
-                // destroy the tower object
-                Destroy(lastTower);
-            }
-            else
-            {
-                // handle the case where there are no towers
-                
-            }
-            
-        }
+      
 
         private void EnemiesCantFinishPath()
         {
-            Debug.Log("Invoked EnemiesCantFinishPath()");
-
-            if (allEnemies == null) 
+            if (_allEnemies == null) 
             {
                 Debug.Log("allEnemies is null");
                 return;
             }
     
-            foreach(var enemy in allEnemies)
+            foreach(var enemy in _allEnemies)
             {
-                Debug.Log("Checking enemy");
+                Debug.Log("getting Component: EnemyMovement");
                 var enemyMovement = enemy.GetComponent<EnemyMovement>();
 
                 if(enemy == null)
                 {
-                    Debug.Log("Enemy is null");
                     continue;
                 }
                 
-                if( !enemyMovement.canReachDestination)
+                if(!enemyMovement.canReachDestination)
                 {
                     Debug.Log("Enemy can't reach destination");   
                     DestroyBlockTower();
+                    _willBlockAgent = true;
                     return;
-                    
                 }
             }
-            
         }
         
         private void DestroyBlockTower()
         {
-            if (blockingTower != null)
+            if (_blockingTower != null)
             {
-                placedTower.Remove(blockingTower);    // remove from the list
-                Destroy(blockingTower);              // destroy the tower object
-                blockingTower = null;                // Nullify the reference to avoid deleting the same tower multiple times
+                placedTower.Remove(_blockingTower);    // remove from the list
+                Destroy(_blockingTower);              // destroy the tower object
+                _blockingTower = null;                // Nullify the reference to avoid deleting the same tower multiple times
             }
             else
             {
-                // Handle the case where there's no blocking tower
+                
             }
+        }
+        
+        
+        private bool HasMoved() //Checks if the mouse has moved position to another grid space
+        {
+            if (_instantiatedTransparentTower == null)
+            {
+                Debug.Log("Tower is null");
+                return false;
+            }
+            if (_mouseLastPosition != _instantiatedTransparentTower.transform.position)
+            {
+                _mouseLastPosition = _instantiatedTransparentTower.transform.position;
+                Debug.Log("Tower Moved");
+                _willBlockAgent = false;
+                return true;
+            }
+            return false;
         }
         
         

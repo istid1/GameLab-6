@@ -27,7 +27,9 @@ namespace _Scripts
             if (!_pathHasBeenMade)
             {
                 //Find a way to rename the object when it spawns
+                
                 GameObject targetObject = new GameObject();
+                targetObject.name = "Enemy Target Position";
             
                 targetObject.transform.position = new Vector3(0, 0, -24);
                 _target = targetObject.transform;
