@@ -32,11 +32,11 @@ namespace _Scripts
         [Header("Bomb Tower")] 
         [SerializeField] private GameObject transparentBombTower;
         [SerializeField] private GameObject bombTowerPrefab;
-        
-     
-        
-        
-        
+
+
+
+
+        private bool _userInputActive;
         private const float GridSize = 2.0f;
         private bool _archerButtonIsPressed, _fireButtonIsPressed, _iceButtonIsPressed, _lightningButtonIsPressed, _bombButtonIsPressed;
         private GameObject _currentTransparentTowerInstance;
@@ -86,6 +86,10 @@ namespace _Scripts
         private void Update()
         {
 
+            if (_userInputActive)
+            {
+                return;
+            }
             if (_enemySpawner.allEnemiesIsSpawned && !_runOnce)
             {
                 GetEnemyMovementComponents();
@@ -97,7 +101,7 @@ namespace _Scripts
             HasMoved();
             
            
-            UserInputRotate();
+            UserInputRotateTower();
           
 
             if (Camera.main != null)
@@ -318,10 +322,10 @@ namespace _Scripts
 
 
 
-        private void UserInputRotate()
+        private void UserInputRotateTower()
         {
             
-            if (Input.GetKeyDown(KeyCode.R))
+            if (Input.GetKeyDown(KeyCode.R) && !_userInputActive)
             {
                 RotateTower(new Vector3(0, 90, 0));
             }
@@ -329,9 +333,10 @@ namespace _Scripts
 
         private void RotateTower(Vector3 rotationAngle)
         {
-            
+            _userInputActive = true;
             _currentRotation += rotationAngle;
-            _instantiatedTransparentTower.transform.DOLocalRotate(rotationAngle, 0.5f, RotateMode.LocalAxisAdd);
+            _instantiatedTransparentTower.transform.DOLocalRotate(rotationAngle, 0.15f, RotateMode.LocalAxisAdd)
+                .OnComplete(() => _userInputActive = false);
 
         }
         
