@@ -4,13 +4,14 @@ using Unity.AI.Navigation;
 using UnityEngine;
 
 
+
 namespace _Scripts
 {
     public class TowerController : MonoBehaviour
     {
         [SerializeField] private GameObject transparentTowerPrefab, towerPrefab;
         
-        
+       
         
         [Header("Ballista Tower")] 
         [SerializeField] private GameObject transparentBallistaTower;
@@ -32,6 +33,7 @@ namespace _Scripts
         [SerializeField] private GameObject transparentBombTower;
         [SerializeField] private GameObject bombTowerPrefab;
         
+     
         
         
         
@@ -39,7 +41,7 @@ namespace _Scripts
         private bool _archerButtonIsPressed, _fireButtonIsPressed, _iceButtonIsPressed, _lightningButtonIsPressed, _bombButtonIsPressed;
         private GameObject _currentTransparentTowerInstance;
         private GameObject _instantiatedTransparentTower;
-        private GameObject[] _allEnemies;
+       
         private GameObject _blockingTower;
         private bool _willBlockAgent;
         private List<EnemyMovement> _enemyMovements;
@@ -94,7 +96,7 @@ namespace _Scripts
             Debug.Log("Will it block: " + _willBlockAgent);
             HasMoved();
             
-            _allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+           
             
           
 
@@ -308,12 +310,16 @@ namespace _Scripts
         
             transparentTowerPrefab = transparentBombTower;
             towerPrefab = bombTowerPrefab;
-        }
+        }      
         
-        
-
       
 
+        
+     
+        
+        
+        
+        
        
         
         private List<EnemyMovement> GetEnemyMovementComponents()

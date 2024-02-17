@@ -69,10 +69,10 @@ namespace _Scripts
 
         private void OnCollisionEnter(Collision other)
         {
-            Debug.Log("Collision detected with " + other.gameObject.name);
+           // Debug.Log("Collision detected with " + other.gameObject.name);
             if (other.gameObject.CompareTag("SlowDownWall"))
             {
-                Debug.Log("I hit a SlowDownWall");
+               // Debug.Log("I hit a SlowDownWall");
                 agent.speed = _movementSpeedAfterWall;
             }
 
