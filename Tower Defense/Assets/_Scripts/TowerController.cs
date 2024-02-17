@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
-
+using DG.Tweening;
 
 
 namespace _Scripts
@@ -46,7 +46,7 @@ namespace _Scripts
         private bool _willBlockAgent;
         private List<EnemyMovement> _enemyMovements;
         private bool _runOnce;
-        
+        private Vector3 _currentRotation = Vector3.zero;
         
         
         private bool _transparentTowerIsActive;
@@ -97,7 +97,7 @@ namespace _Scripts
             HasMoved();
             
            
-            
+            UserInputRotate();
           
 
             if (Camera.main != null)
@@ -151,6 +151,7 @@ namespace _Scripts
             {
                 return;
             }
+            newTower.transform.localRotation = Quaternion.Euler(_currentRotation);
             placedTower.Add(newTower);
     
             if (_instantiatedTransparentTower != null)
@@ -166,7 +167,9 @@ namespace _Scripts
 
         private void SpawnTransparentTower(RaycastHit hit)
         {
+            
             _instantiatedTransparentTower = InstantiateTransparentTower(transparentTowerPrefab, hit);
+            _instantiatedTransparentTower.transform.localRotation = Quaternion.Euler(_currentRotation);
             _rendererTransparentTower = _instantiatedTransparentTower.GetComponent<Renderer>();
             _transparentTowerIsActive = true;
         }
@@ -310,14 +313,27 @@ namespace _Scripts
         
             transparentTowerPrefab = transparentBombTower;
             towerPrefab = bombTowerPrefab;
-        }      
-        
-      
+        }
 
-        
-     
-        
-        
+
+
+
+        private void UserInputRotate()
+        {
+            
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                RotateTower(new Vector3(0, 90, 0));
+            }
+        }
+
+        private void RotateTower(Vector3 rotationAngle)
+        {
+            
+            _currentRotation += rotationAngle;
+            _instantiatedTransparentTower.transform.DOLocalRotate(rotationAngle, 0.5f, RotateMode.LocalAxisAdd);
+
+        }
         
         
        

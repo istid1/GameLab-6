@@ -8,7 +8,7 @@ namespace _Scripts
 
         private bool _playerInput;
         [SerializeField] private bool topDownViewActive;
-        [SerializeField] private float cycleLength = 1;
+        [SerializeField] private float cycleLength = 0.5f;
     
         // Start is called before the first frame update
 

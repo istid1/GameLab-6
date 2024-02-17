@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2168.515, g: 2280.551, b: 3332.4849, a: 1}
+  m_IndirectSpecularColor: {r: 2168.299, g: 2280.1057, b: 3331.3872, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9355,7 +9355,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   topDownViewActive: 0
-  cycleLength: 2
+  cycleLength: 0.5
 --- !u!4 &620674076
 Transform:
   m_ObjectHideFlags: 0
