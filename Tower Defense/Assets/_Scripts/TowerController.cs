@@ -482,6 +482,9 @@ namespace _Scripts
                 placedTower.Remove(_blockingTower);    // remove from the list
                 Destroy(_blockingTower);              // destroy the tower object
                 _blockingTower = null;                // Nullify the reference to avoid deleting the same tower multiple times
+                ResetButtonStates();
+                Destroy(_instantiatedTransparentTower);
+                
             }
         }
         
