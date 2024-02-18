@@ -412,7 +412,11 @@ namespace _Scripts
             
             if (Input.GetKeyDown(KeyCode.R) && !_userInputActive)
             {
-                RotateTower(new Vector3(0, 90, 0));
+                if (_instantiatedTransparentTower != null)
+                {
+                    RotateTower(new Vector3(0, 90, 0));
+                }
+                
             }
         }
 
