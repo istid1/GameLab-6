@@ -187,7 +187,10 @@ namespace _Scripts
 
         private void UpdateTransparentTowerPosition(Vector3 gridPos)
         {
-            _instantiatedTransparentTower.transform.position = gridPos;
+            if (_instantiatedTransparentTower != null)
+            {
+                _instantiatedTransparentTower.transform.position = gridPos;
+            }
            
         }
 
@@ -225,6 +228,9 @@ namespace _Scripts
             GameObject newTower = Instantiate(tower, gridPos, Quaternion.identity);
             return newTower;
         }
+        
+        
+        //This function seem "REDUNDANT" xD  //Look for ways to remove
         private GameObject InstantiateTransparentTower(GameObject transparentTower, RaycastHit hit)
         {
             _transparentTowerIsActive = true;
@@ -272,51 +278,130 @@ namespace _Scripts
             _iceButtonIsPressed = false;
             _lightningButtonIsPressed = false;
             _bombButtonIsPressed = false;
+            _transparentTowerIsActive = false;
         }
 
         public void ArcherButton()
         {
             ResetButtonStates();
             _archerButtonIsPressed = true;
+            
+    
+            // destroy the old tower if exists
+            if (_instantiatedTransparentTower != null)
+            {
+                Destroy(_instantiatedTransparentTower);
+            }
 
+            // reset transparentTowerPrefab for spawning new one on click
             transparentTowerPrefab = transparentBallistaTower;
             towerPrefab = ballistaTowerPrefab;
+
+            // spawn the new transparent tower immediately
+            if (Camera.main != null)
+            {
+                var mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (RaycastHitsLayer(mouseRay, groundLayer + towerLayer, out var hit))
+                {
+                    SpawnTransparentTower(hit);
+                }
+            }
         }
 
         public void FireButton()
         {
             ResetButtonStates();
             _fireButtonIsPressed = true;
-        
+
+            // destroy the old tower if exists
+            if (_instantiatedTransparentTower != null)
+            {
+                Destroy(_instantiatedTransparentTower);
+            }
+            // reset transparentTowerPrefab for spawning new one on click
             transparentTowerPrefab = transparentFireTower;
             towerPrefab = fireTowerPrefab;
+            // spawn the new transparent tower immediately
+            if (Camera.main != null)
+            {
+                var mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (RaycastHitsLayer(mouseRay, groundLayer + towerLayer, out var hit))
+                {
+                    SpawnTransparentTower(hit);
+                }
+            }
         }
 
         public void IceButton()
         {
             ResetButtonStates();
-           _iceButtonIsPressed = true;
-        
+            _iceButtonIsPressed = true;
+
+            // destroy the old tower if exists
+            if (_instantiatedTransparentTower != null)
+            {
+                Destroy(_instantiatedTransparentTower);
+            }
+            // reset transparentTowerPrefab for spawning new one on click
             transparentTowerPrefab = transparentIceTower;
             towerPrefab = iceTowerPrefab;
+            // spawn the new transparent tower immediately
+            if (Camera.main != null)
+            {
+                var mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (RaycastHitsLayer(mouseRay, groundLayer + towerLayer, out var hit))
+                {
+                    SpawnTransparentTower(hit);
+                }
+            }
         }
 
         public void LightningButton()
         {
             ResetButtonStates();
             _lightningButtonIsPressed = true;
-        
+
+            // destroy the old tower if exists
+            if (_instantiatedTransparentTower != null)
+            {
+                Destroy(_instantiatedTransparentTower);
+            }
+            // reset transparentTowerPrefab for spawning new one on click
             transparentTowerPrefab = transparentLightningTower;
             towerPrefab = lightningTowerPrefab;
+            // spawn the new transparent tower immediately
+            if (Camera.main != null)
+            {
+                var mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (RaycastHitsLayer(mouseRay, groundLayer + towerLayer, out var hit))
+                {
+                    SpawnTransparentTower(hit);
+                }
+            }
         }
 
         public void BombButton()
         {
             ResetButtonStates();
             _bombButtonIsPressed = true;
-        
+
+            // destroy the old tower if exists
+            if (_instantiatedTransparentTower != null)
+            {
+                Destroy(_instantiatedTransparentTower);
+            }
+            // reset transparentTowerPrefab for spawning new one on click
             transparentTowerPrefab = transparentBombTower;
             towerPrefab = bombTowerPrefab;
+            // spawn the new transparent tower immediately
+            if (Camera.main != null)
+            {
+                var mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (RaycastHitsLayer(mouseRay, groundLayer + towerLayer, out var hit))
+                {
+                    SpawnTransparentTower(hit);
+                }
+            }
         }
 
 
