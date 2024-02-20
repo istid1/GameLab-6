@@ -11,6 +11,7 @@ TagManager:
   - Dummy Tower
   - SlowDownWall
   - EndZone
+  - ChildTower
   layers:
   - Default
   - TransparentFX

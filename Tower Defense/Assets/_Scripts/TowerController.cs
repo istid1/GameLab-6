@@ -35,7 +35,8 @@ namespace _Scripts
 
 
 
-
+        [SerializeField] private CollisionDetection _collisionDetection;
+        
         private bool _userInputActive;
         private const float GridSize = 2.0f;
         private bool _archerButtonIsPressed, _fireButtonIsPressed, _iceButtonIsPressed, _lightningButtonIsPressed, _bombButtonIsPressed;
@@ -85,7 +86,8 @@ namespace _Scripts
         // Update is called once per frame
         private void Update()
         {
-
+            
+            CheckColor();
             if (_userInputActive)
             {
                 return;
@@ -97,7 +99,7 @@ namespace _Scripts
 
             }
             
-            Debug.Log("Will it block: " + _willBlockAgent);
+           // Debug.Log("Will it block: " + _willBlockAgent);
             HasMoved();
             
            
@@ -116,6 +118,32 @@ namespace _Scripts
             
         }
 
+
+
+        private void CheckColor()
+        {
+            if (_instantiatedTransparentTower == null)
+            {
+                Debug.Log("No tower has been instantiated, aborting color check.");
+                return;
+            }
+
+            var childTowers = _instantiatedTransparentTower.GetComponentsInChildren<Renderer>();
+            foreach (var childTower in childTowers)
+            {
+                if (childTower != null)
+                {
+                    Renderer rend = childTower.GetComponentInChildren<Renderer>();
+                    if (rend != null && rend.material != null && rend.material.color == Color.red)
+                    {
+                        Debug.Log("ITS WORKING!!!!!!!!!!!");
+                        currentColor = false;
+                    }
+                }
+            } 
+            
+        }
+
         private bool RaycastHitsLayer(Ray ray, LayerMask layer, out RaycastHit hit)
         {
             return Physics.Raycast(ray, out hit, Mathf.Infinity, layer);
@@ -125,9 +153,13 @@ namespace _Scripts
         {
             if (_archerButtonIsPressed || _fireButtonIsPressed || _iceButtonIsPressed || _lightningButtonIsPressed || _bombButtonIsPressed)
             {
-                if (Input.GetKeyDown(KeyCode.Mouse0) && currentColor)
+                if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
-                    PlaceTower(hit);
+                    if (currentColor)
+                    {
+                        PlaceTower(hit);
+                    }
+                    
                     
                 }
                 else if (!_transparentTowerIsActive)
@@ -206,10 +238,7 @@ namespace _Scripts
             }
             if (tower.CompareTag("Ground") && !_willBlockAgent)
             {
-               
-                ChangeColor(_instantiatedTransparentTower, Color.green);
                 currentColor = true;
-                
             }
         }
 
@@ -217,8 +246,6 @@ namespace _Scripts
 
         private void HandleObstruction()
         {
-            
-            ChangeColor(_instantiatedTransparentTower, Color.red);
             currentColor = false;
         }
 
@@ -257,16 +284,7 @@ namespace _Scripts
         //     _archerButtonIsPressed = true;
         // }
 
-        void ChangeColor(GameObject obj, Color newColor)
-        {
-            if (obj != null)
-            {
-                if (_rendererTransparentTower != null && _rendererTransparentTower.sharedMaterial != null)
-                {
-                    _rendererTransparentTower.sharedMaterial.color = newColor;
-                }
-            }
-        }
+       
         
         
         private void ResetButtonStates()
@@ -462,7 +480,7 @@ namespace _Scripts
             _enemyMovements = GetEnemyMovementComponents();
             if (_enemyMovements == null) 
             {
-                Debug.Log("No enemyMovements");
+              //  Debug.Log("No enemyMovements");
                 return;
             }
 
@@ -470,7 +488,7 @@ namespace _Scripts
             {
                 if(!enemyMovements.canReachDestination)
                 {
-                    Debug.Log("Enemy can't reach destination");   
+                    //Debug.Log("Enemy can't reach destination");   
                     DestroyBlockTower();
                     _willBlockAgent = true;
                     return;
@@ -497,13 +515,13 @@ namespace _Scripts
         {
             if (_instantiatedTransparentTower == null)
             {
-                Debug.Log("Tower is null");
+                //Debug.Log("Tower is null");
                 return false;
             }
             if (_mouseLastPosition != _instantiatedTransparentTower.transform.position)
             {
                 _mouseLastPosition = _instantiatedTransparentTower.transform.position;
-                Debug.Log("Tower Moved");
+               // Debug.Log("Tower Moved");
                 _willBlockAgent = false;
                 return true;
             }

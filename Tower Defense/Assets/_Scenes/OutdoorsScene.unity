@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2175.7786, g: 2295.174, b: 3374.0513, a: 1}
+  m_IndirectSpecularColor: {r: 2163.6038, g: 2271.0432, b: 3305.7153, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8813,7 +8813,7 @@ MonoBehaviour:
   - {fileID: 2725473023229696548, guid: 55cd9e545fd297c42b344398e18ee7ab, type: 3}
   - {fileID: 2725473023229696548, guid: 55cd9e545fd297c42b344398e18ee7ab, type: 3}
   - {fileID: 2725473023229696548, guid: 55cd9e545fd297c42b344398e18ee7ab, type: 3}
-  enemiesSpawnAmount: 50
+  enemiesSpawnAmount: 200
   allEnemiesIsSpawned: 0
 --- !u!1 &607465249
 GameObject:
@@ -23840,11 +23840,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb6d8e131a3dd324eb3af2999eb009cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transparentTowerPrefab: {fileID: 5603472128371696670, guid: dbfc3e756f0ed82438a6fed164615b0e,
+  transparentTowerPrefab: {fileID: 5380279323207597598, guid: 0b5b5a995bda0404bb29b1420084b086,
     type: 3}
   towerPrefab: {fileID: 5603472128371696670, guid: 5b38f16182c817d4b8a3992d8f5e9569,
     type: 3}
-  transparentBallistaTower: {fileID: 5603472128371696670, guid: dbfc3e756f0ed82438a6fed164615b0e,
+  transparentBallistaTower: {fileID: 5380279323207597598, guid: 0b5b5a995bda0404bb29b1420084b086,
     type: 3}
   ballistaTowerPrefab: {fileID: 4257651530166487788, guid: 42400733b9a16fe458f371fe3e18126a,
     type: 3}
@@ -23863,6 +23863,8 @@ MonoBehaviour:
   transparentBombTower: {fileID: 7307352912609277476, guid: 9718f3e47902fd24b9e2608ddc7a9bfe,
     type: 3}
   bombTowerPrefab: {fileID: 3795589574941512052, guid: f7f69332d5bd3e84384776eb51da3a78,
+    type: 3}
+  _collisionDetection: {fileID: 8240745128227335734, guid: dbfc3e756f0ed82438a6fed164615b0e,
     type: 3}
   currentColor: 0
   navMeshSurfaces:

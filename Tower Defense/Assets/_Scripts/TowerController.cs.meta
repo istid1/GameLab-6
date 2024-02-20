@@ -1,2 +1,26 @@
 fileFormatVersion: 2
 guid: fb6d8e131a3dd324eb3af2999eb009cb
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - transparentTowerPrefab: {instanceID: 0}
+  - towerPrefab: {instanceID: 0}
+  - transparentBallistaTower: {instanceID: 0}
+  - ballistaTowerPrefab: {instanceID: 0}
+  - transparentFireTower: {instanceID: 0}
+  - fireTowerPrefab: {instanceID: 0}
+  - transparentIceTower: {instanceID: 0}
+  - iceTowerPrefab: {instanceID: 0}
+  - transparentLightningTower: {instanceID: 0}
+  - lightningTowerPrefab: {instanceID: 0}
+  - transparentBombTower: {instanceID: 0}
+  - bombTowerPrefab: {instanceID: 0}
+  - _collisionDetection: {fileID: 8240745128227335734, guid: dbfc3e756f0ed82438a6fed164615b0e,
+      type: 3}
+  - _enemySpawner: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
