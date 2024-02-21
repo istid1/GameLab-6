@@ -22,7 +22,7 @@ namespace _Scripts
             //_navMeshAgentQuality = GetComponent<NavMeshAgent>();
         }
 
-        void Update()
+        void FixedUpdate()
         {
             if (!_pathHasBeenMade)
             {
@@ -40,7 +40,7 @@ namespace _Scripts
             }
             enemyAgent.SetDestination(_target.position);
             
-            ValidatePath();
+            ValidatePath(); // try to limit the amount the function gets called to 10frames
         }
 
         private void ValidatePath()
