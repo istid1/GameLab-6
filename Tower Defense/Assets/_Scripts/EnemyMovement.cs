@@ -14,8 +14,6 @@ namespace _Scripts
         [SerializeField] private float _movementSpeedAfterWall;
         private GameObject _targetObject;
         
-
-
         private void Start()
         {
             agent = GetComponent<NavMeshAgent>();
@@ -28,23 +26,24 @@ namespace _Scripts
         {
             if (!_pathHasBeenMade)
             {
-                
-                
-                _targetObject = new GameObject();
-                _targetObject.name = "Enemy Target Position";
-            
-                _targetObject.transform.position = new Vector3(0, 0, -24);
+                _targetObject = new GameObject
+                {
+                    name = "Enemy Target Position",
+                    transform =
+                    {
+                        position = new Vector3(0, 0, -24)
+                    }
+                };
+
                 _target = _targetObject.transform;
                 _pathHasBeenMade = true;
             }
             enemyAgent.SetDestination(_target.position);
             
-            
             ValidatePath();
-        
         }
 
-        public void ValidatePath()
+        private void ValidatePath()
         {
         
             agent.CalculatePath(_target.position, _path);
@@ -54,14 +53,15 @@ namespace _Scripts
                    // Debug.Log("Can complete route");
                     canReachDestination = true;
                     break;
+                
                 case NavMeshPathStatus.PathPartial:
                    // Debug.Log("Can complete halfway");
                     canReachDestination = false;
-                
-                
                     break;
+                
+                case NavMeshPathStatus.PathInvalid:
                 default:
-                   // Debug.Log("Cannot reach destination");
+                   
                     canReachDestination = false;
                     break;
             }
@@ -69,20 +69,15 @@ namespace _Scripts
 
         private void OnCollisionEnter(Collision other)
         {
-           // Debug.Log("Collision detected with " + other.gameObject.name);
             if (other.gameObject.CompareTag("SlowDownWall"))
             {
-               // Debug.Log("I hit a SlowDownWall");
                 agent.speed = _movementSpeedAfterWall;
             }
-
             if (other.gameObject.CompareTag("EndZone"))
             {
                 Destroy(this.gameObject);
                 Destroy(_targetObject);
             }
         }
-
-
     }
 }

@@ -22,6 +22,11 @@ namespace _Scripts
             {
                 allEnemiesIsSpawned = true;
             }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                SpawnEnemies();
+            }
         }
 
         private void InstantiateEnemy(int enemyIndex)
@@ -40,9 +45,9 @@ namespace _Scripts
 
         private void SpawnEnemies()
         {
-            for (int i = 0; i < enemiesSpawnAmount; i++)
+            for (var i = 0; i < enemiesSpawnAmount; i++)
             {
-                InstantiateEnemy(1);
+                InstantiateEnemy(0);
             }
         }
     }
