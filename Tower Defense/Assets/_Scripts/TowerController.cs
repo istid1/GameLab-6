@@ -43,12 +43,15 @@ namespace _Scripts
         private Vector3 _transparentTowerLastPos;
         private Vector3 _mouseLastPosition;
 
+        [SerializeField] private DummyEnemy _dummyEnemy;
+
         private bool _archerButtonIsPressed, _fireButtonIsPressed, _iceButtonIsPressed, _lightningButtonIsPressed, _bombButtonIsPressed;
         private bool _transparentTowerIsActive;
         private bool _willBlockAgent;
         private bool _runOnce;
         private bool _currentColor;
 
+        [SerializeField ]private GameObject _dummyEnemyEnabler;
         private GameObject _currentTransparentTowerInstance;
         private GameObject _instantiatedTransparentTower;
         private GameObject _blockingTower;
@@ -66,6 +69,7 @@ namespace _Scripts
         {
            BuildNavMeshSurfaces();
            _mainCamera = Camera.main;
+           _dummyEnemyEnabler.SetActive(true);
         }
         
         // Update is called once per frame
@@ -75,6 +79,8 @@ namespace _Scripts
             HasMoved();
             UserInputRotateTower();
             EnemiesCantFinishPath();
+            DummyCantFinishPath();
+            
             
             if (_userInputActive)
             {
@@ -208,10 +214,16 @@ namespace _Scripts
             {
                 HandleObstruction();
             }
-            if (tower.CompareTag("Ground") && !_willBlockAgent)
+            if (tower.CompareTag("Ground") && !_willBlockAgent && _dummyEnemy.canReachDestinationDummy)
             {
                 _currentColor = true;
             }
+            if (!_dummyEnemy.canReachDestinationDummy)
+            {
+                _currentColor = false;
+            }
+
+            
         }
         
         private void HandleObstruction()
@@ -418,6 +430,14 @@ namespace _Scripts
             DestroyBlockTower();
             _willBlockAgent = true;
         }
+        
+        private void DummyCantFinishPath()
+        {
+            if (_dummyEnemy.canReachDestinationDummy) return;
+            DestroyBlockTower();
+            _willBlockAgent = true;
+        }
+        
         
         
         private void DestroyBlockTower()

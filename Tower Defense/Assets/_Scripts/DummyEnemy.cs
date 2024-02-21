@@ -11,6 +11,8 @@ namespace _Scripts
         private bool _pathHasBeenMade;
         public NavMeshAgent agent;
         private NavMeshPath _pathDummy;
+        private GameObject _targetObjectDummy;
+        private Transform _target;
         
 
 
@@ -26,24 +28,28 @@ namespace _Scripts
         {
             if (!_pathHasBeenMade)
             {
-                //Find a way to rename the object when it spawns
-                GameObject targetObject = new GameObject();
-            
-                targetObject.transform.position = new Vector3(0, 0, -24);
-                _targetDummy = targetObject.transform;
+                _targetObjectDummy = new GameObject
+                {
+                    name = "Enemy Target Position",
+                    transform =
+                    {
+                        position = new Vector3(0, 0, -24)
+                    }
+                };
+
+                _target = _targetObjectDummy.transform;
                 _pathHasBeenMade = true;
             }
-            enemyAgentDummy.SetDestination(_targetDummy.position);
-            
+            enemyAgentDummy.SetDestination(_target.position);
             
             ValidatePath();
         
         }
 
-        public void ValidatePath()
+        private void ValidatePath()
         {
         
-            agent.CalculatePath(_targetDummy.position, _pathDummy);
+            agent.CalculatePath(_target.position, _pathDummy);
             switch (_pathDummy.status)
             {
                 case NavMeshPathStatus.PathComplete:
@@ -53,8 +59,6 @@ namespace _Scripts
                 case NavMeshPathStatus.PathPartial:
                     Debug.Log("Can complete halfway");
                     canReachDestinationDummy = false;
-                
-                
                     break;
                 default:
                     Debug.Log("Cannot reach destination");
