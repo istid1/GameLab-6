@@ -14,6 +14,8 @@ namespace _Scripts
         [SerializeField] private float _movementSpeedAfterWall;
         private GameObject _targetObject;
         
+        private int _frameCount = 0;
+        
         private void Start()
         {
             agent = GetComponent<NavMeshAgent>();
@@ -22,8 +24,9 @@ namespace _Scripts
             //_navMeshAgentQuality = GetComponent<NavMeshAgent>();
         }
 
-        void FixedUpdate()
+        private void FixedUpdate()
         {
+            
             if (!_pathHasBeenMade)
             {
                 _targetObject = new GameObject
@@ -40,7 +43,7 @@ namespace _Scripts
             }
             enemyAgent.SetDestination(_target.position);
             
-            ValidatePath(); // try to limit the amount the function gets called to 10frames
+                ValidatePath();
         }
 
         private void ValidatePath()

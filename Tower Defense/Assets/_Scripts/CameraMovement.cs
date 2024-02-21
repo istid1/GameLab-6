@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 
@@ -5,19 +7,63 @@ namespace _Scripts
 {
     public class CameraMovement : MonoBehaviour
     {
-
-        private bool _playerInput;
+        public bool zoomIsActive;
+        public bool _playerInput;
         [SerializeField] private bool topDownViewActive;
-        [SerializeField] private float cycleLength = 0.5f;
-    
-        // Start is called before the first frame update
+        public float cycleLength = 0.5f;
+        private float _targetFOV;
+        private IEnumerator fovCoroutine;
+        [SerializeField] private Camera _cameraFOV;
+        private const float zoomSpeed = 0.25f;
 
         // Update is called once per frame
         void FixedUpdate()
         {
             CameraRotationInput();
+
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                if (fovCoroutine != null)
+                {
+                    StopCoroutine(fovCoroutine);
+                }
+
+                if (!zoomIsActive)
+                {
+                    _targetFOV = 50f;
+                    zoomIsActive = true;
+                }
+                else
+                {
+                    _targetFOV = 75;
+                    zoomIsActive = false;
+                }
+      
+                fovCoroutine = LerpFieldOfView(_cameraFOV, _targetFOV, zoomSpeed);
+                StartCoroutine(fovCoroutine);
+            }
         }
-    
+        
+        IEnumerator LerpFieldOfView(Camera camera, float target, float duration)
+        {
+            float elapsedTime = 0;
+            float startFOV = camera.fieldOfView;
+
+            while (elapsedTime < duration)
+            {
+                elapsedTime += Time.deltaTime;
+                camera.fieldOfView = Mathf.Lerp(startFOV, target, elapsedTime / duration);
+                yield return null;
+            }
+            camera.fieldOfView = target;
+        }
+
+        private void Start()
+        {
+            zoomIsActive = false;
+            _cameraFOV = GetComponentInChildren<Camera>();
+        }
+
 
         private void CameraRotationInput()
         {
@@ -44,6 +90,7 @@ namespace _Scripts
                 topDownViewActive = false;
                 RotateCamera(new Vector3(-45, 0, 0));
             }
+           
         }
 
 
@@ -54,6 +101,5 @@ namespace _Scripts
                 .OnComplete(() => _playerInput = false);
     
         }
-   
     }
 }
