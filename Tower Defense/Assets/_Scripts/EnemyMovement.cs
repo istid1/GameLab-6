@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,11 +16,19 @@ namespace _Scripts
         private GameObject _targetObject;
         
         private int _frameCount = 0;
-        
+
+
+        private void Awake()
+        {
+            
+        }
+
         private void Start()
         {
             agent = GetComponent<NavMeshAgent>();
             _path = new NavMeshPath();
+            
+            
 
             //_navMeshAgentQuality = GetComponent<NavMeshAgent>();
         }
@@ -43,7 +52,7 @@ namespace _Scripts
             }
             enemyAgent.SetDestination(_target.position);
             
-                ValidatePath();
+            ValidatePath();
         }
 
         private void ValidatePath()

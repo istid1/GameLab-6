@@ -132,6 +132,7 @@ namespace _Scripts
                 if (_currentColor)
                 {
                     PlaceTower(hit);
+                    
                 }
             }
             else if (!_transparentTowerIsActive)
@@ -398,7 +399,6 @@ namespace _Scripts
                     enemyMovements.Add(enemyMovement);
                 }
             }
-
             // Return the list of enemy movements.
             return enemyMovements;
         }
