@@ -88,8 +88,14 @@ namespace _Scripts
             if (other.gameObject.CompareTag("EndZone"))
             {
                 Destroy(this.gameObject);
-                Destroy(_targetObject);
+                DeleteTarget();
             }
+        }
+
+        public void DeleteTarget()
+        {
+            Destroy(_targetObject);
+
         }
     }
 }

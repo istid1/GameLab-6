@@ -12,6 +12,7 @@ TagManager:
   - SlowDownWall
   - EndZone
   - ChildTower
+  - EnemyParent
   layers:
   - Default
   - TransparentFX
@@ -24,8 +25,8 @@ TagManager:
   - DummyLayer
   - Ground
   - Tower
-  - 
-  - 
+  - EnemyParent
+  - Projectile
   - 
   - 
   - 
