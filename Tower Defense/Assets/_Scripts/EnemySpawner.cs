@@ -48,6 +48,8 @@ namespace _Scripts
             for (var i = 0; i < enemiesSpawnAmount; i++)
             {
                 InstantiateEnemy(0);
+                InstantiateEnemy(1);
+                InstantiateEnemy(2);
             }
         }
     }
