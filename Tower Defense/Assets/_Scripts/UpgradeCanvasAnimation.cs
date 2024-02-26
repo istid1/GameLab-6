@@ -14,24 +14,24 @@ namespace _Scripts
 
         public void MoveCanvasActive()
         {
-            _towerName.DOAnchorPos(new Vector2(0, 500), 1f);
-            _damageButton.DOAnchorPos(new Vector2(0, 400), 1f);
-            _fireRateButton.DOAnchorPos(new Vector2(0, 300), 1f);
+            _towerName.DOAnchorPos(new Vector2(100, 350), 1f);
+            _damageButton.DOAnchorPos(new Vector2(0, 300), 1f);
+            _fireRateButton.DOAnchorPos(new Vector2(0, 250), 1f);
             _rangeButton.DOAnchorPos(new Vector2(0, 200), 1f);
-            _xButton.DOAnchorPos(new Vector2(0, 600), 1f);
+            _xButton.DOAnchorPos(new Vector2(300, 400), 1f);
         }
         public void MoveCanvasDisabled()
         {
-            _towerName.DOAnchorPos(new Vector2(555, 0), 1f);
+            _towerName.DOAnchorPos(new Vector2(700, 0), 1f);
                 
-            _damageButton.DOAnchorPos(new Vector2(555, 0), 1f);
+            _damageButton.DOAnchorPos(new Vector2(700, 0), 1f);
 
-            _fireRateButton.DOAnchorPos(new Vector2(555, 0), 1f);
+            _fireRateButton.DOAnchorPos(new Vector2(700, 0), 1f);
             
-            _xButton.DOAnchorPos(new Vector2(555, 0), 1f);
+            _xButton.DOAnchorPos(new Vector2(700, 0), 1f);
 
-            _rangeButton.DOAnchorPos(new Vector2(555, 0), 1f)
-                .OnComplete(() => _towerController._upgradeCanvas.SetActive(false));
+           _rangeButton.DOAnchorPos(new Vector2(700, 0), 1f);
+                
 
         }
 
