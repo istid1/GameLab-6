@@ -20,7 +20,8 @@ public class TowerFSM : FSM
 
     private TowerVariables _towerVariables;
 
-    public bool canShoot;
+    public bool canShoot, hasAnimation;
+    public Animator _anim;
 
     public List<GameObject> enemyLocList;
     public GameObject enemyParent;
@@ -40,6 +41,13 @@ public class TowerFSM : FSM
         currState = FSMState.DontShoot;
         enemyParent = GameObject.FindGameObjectWithTag("EnemyParent");
         enemyParentScript = enemyParent.GetComponent<EnemyParent>();
+
+        if (hasAnimation)
+        {
+            _anim = GetComponent<Animator>();
+
+        }
+
     }
 
     protected override void FSMUpdate()
@@ -139,6 +147,12 @@ public class TowerFSM : FSM
     {
         if (closestEnemy != null)
         {
+            if (hasAnimation)
+            {
+                _anim.SetTrigger("PlayTrigger");
+
+            }
+            
             GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
 
             bullet.GetComponent<Projectile>().bulletDamage = bulletDamage;

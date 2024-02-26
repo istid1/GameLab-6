@@ -51,15 +51,19 @@ namespace _Scripts
 
         private void SpawnEnemies()
         {
-            for (var i = 0; i < enemiesSpawnAmount; i++)
+            if (enemyParent.allEnemies.Count <= 41)
             {
-                InstantiateEnemy(0);
-                InstantiateEnemy(1);
-                InstantiateEnemy(2);
-                InstantiateEnemy(3);
-                InstantiateEnemy(4);
+                for (var i = 0; i < enemiesSpawnAmount; i++)
+                {
+                    InstantiateEnemy(0);
+                    InstantiateEnemy(1);
+                    InstantiateEnemy(2);
+                    InstantiateEnemy(3);
+                    InstantiateEnemy(4);
+                }
+                enemyParent.AddChildren();
             }
-            enemyParent.AddChildren();
+            
         }
     }
 }
