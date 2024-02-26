@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4517528165816526815}
   - component: {fileID: -1713998911271867932}
   m_Layer: 12
-  m_Name: Projectile
+  m_Name: FireProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4ded4748d2f6de74aa1279c91a3e6f49, type: 2}
+  - {fileID: 2100000, guid: daa098ac67f93504cab24578d24899dd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -149,3 +149,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletDamage: 1
+  stone: 0
+  fire: 0
+  ice: 1
+  lightning: 0
+  bomb: 0

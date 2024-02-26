@@ -279,7 +279,7 @@ MonoBehaviour:
   enemyParent: {fileID: 0}
   closestEnemy: {fileID: 0}
   distanceToClosestEnemy: 0
-  bulletPrefab: {fileID: 2323418215457351779, guid: 92e39445efb1dc044ae3e1348cc436b5,
+  bulletPrefab: {fileID: 2323418215457351779, guid: d3fcd146fafc48d4ebab2e8d926c6a89,
     type: 3}
   bulletDamage: 2
 --- !u!4 &8748812668235856996 stripped

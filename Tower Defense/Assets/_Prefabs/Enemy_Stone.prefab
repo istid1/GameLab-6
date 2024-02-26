@@ -263,6 +263,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
+  enemyType: 
+  stone: 1
+  fire: 0
+  ice: 0
+  lightning: 0
+  bomb: 0
 --- !u!136 &8924835885572170244
 CapsuleCollider:
   m_ObjectHideFlags: 0

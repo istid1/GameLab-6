@@ -68,6 +68,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_Ice
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 94e7968e7c79baa45a8b16db9f4a6887,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 94e7968e7c79baa45a8b16db9f4a6887,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -96,6 +106,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: -8388164480318108732}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 94e7968e7c79baa45a8b16db9f4a6887,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -6285266456460589891}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 94e7968e7c79baa45a8b16db9f4a6887,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1042346018723526297}
   m_SourcePrefab: {fileID: 100100000, guid: 94e7968e7c79baa45a8b16db9f4a6887, type: 3}
 --- !u!1 &1109750593947887635 stripped
 GameObject:
@@ -232,3 +250,45 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-6285266456460589891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1109750593947887635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18b929aca66b0754f81d4702cc83af9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 3
+  enemyType: 
+  stone: 0
+  fire: 0
+  ice: 1
+  lightning: 0
+  bomb: 0
+--- !u!136 &1042346018723526297
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1109750593947887635}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.9
+  m_Height: 2.96
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.71, z: 0}
