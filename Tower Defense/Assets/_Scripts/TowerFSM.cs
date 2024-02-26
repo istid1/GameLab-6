@@ -16,9 +16,11 @@ public class TowerFSM : FSM
     public float weaponRange = 10f;
     public float shootRate;
     private float shootTimer;
+    
+    
 
 
-    private TowerVariables _towerVariables;
+    [SerializeField] private TowerVariables _towerVariables;
 
     public bool canShoot;
 
@@ -44,12 +46,14 @@ public class TowerFSM : FSM
 
     protected override void FSMUpdate()
     {
+        shootRate = _towerVariables.shootRate;
         switch (currState)
         {
             case FSMState.Shoot: UpdateShootState(); break;
             case FSMState.DontShoot: UpdateDontShootState(); break;
         }
 
+        
         if (enemyParentScript.allEnemies != null)
         {
             FindClosestEnemy();

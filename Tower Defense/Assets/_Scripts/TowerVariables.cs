@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace _Scripts
@@ -9,9 +10,15 @@ namespace _Scripts
         public bool rangeIsUpgraded;
         public bool fireRateIsUpgraded;
 
+        public float shootRate =2f;
+
         private TowerFSM _towerFsm;
         
 
+        private void Start()
+        {
+           
+        }
 
         public void UpgradeDamage()
         {
@@ -25,7 +32,7 @@ namespace _Scripts
         }
         public void UpgradeFireRate()
         {
-            //_towerFsm.shootRate = _towerFsm.shootRate / 10;
+            shootRate = 0.1f;
             fireRateIsUpgraded = true;
         }
 

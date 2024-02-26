@@ -269,7 +269,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 311afad169169f748bb22a989e5964f2,
         type: 3}
       propertyPath: m_TagString
-      value: Tower
+      value: UpgradeTag
       objectReference: {fileID: 0}
     - target: {fileID: 999123872393062927, guid: 311afad169169f748bb22a989e5964f2,
         type: 3}
@@ -344,6 +344,7 @@ MonoBehaviour:
   currState: 0
   weaponRange: 10
   shootRate: 4
+  _towerVariables: {fileID: -3585210849808423747}
   canShoot: 0
   enemyLocList: []
   enemyParent: {fileID: 0}
@@ -367,6 +368,7 @@ MonoBehaviour:
   damageIsUpgraded: 0
   rangeIsUpgraded: 0
   fireRateIsUpgraded: 0
+  shootRate: 2
 --- !u!65 &1244855555115855666
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -386,7 +388,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 2, z: 2}
+  m_Size: {x: 2, y: 6, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &4291733414547668431
 BoxCollider:
@@ -407,7 +409,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 2, z: 2}
+  m_Size: {x: 2, y: 5, z: 2}
   m_Center: {x: 2, y: 0, z: -2}
 --- !u!65 &2310102172197631758
 BoxCollider:
@@ -428,7 +430,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 2, z: 2}
+  m_Size: {x: 2, y: 5, z: 2}
   m_Center: {x: -2, y: 0, z: 2}
 --- !u!4 &7741622744552291222 stripped
 Transform:

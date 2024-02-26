@@ -3,6 +3,7 @@ using System.Linq;
 using Unity.AI.Navigation;
 using UnityEngine;
 using DG.Tweening;
+using TMPro;
 using UnityEngine.Serialization;
 
 
@@ -50,14 +51,16 @@ namespace _Scripts
         private bool _willBlockAgent;
         private bool _runOnce;
         private bool _currentColor;
+        [SerializeField] private TMP_Text _currTowerText;
 
         private TowerVariables _towerVariables;
+        [SerializeField] private UpgradeCanvasAnimation _upgradeCanvasAnimation;
         
         [SerializeField ]private GameObject _dummyEnemyEnabler;
         private GameObject _currentTransparentTowerInstance;
         private GameObject _instantiatedTransparentTower;
         private GameObject _blockingTower;
-        [SerializeField] private GameObject _upgradeCanvas;
+        [SerializeField] public GameObject _upgradeCanvas;
 
         private Renderer _rendererTransparentTower;
         private EnemyMovement _enemyMovement;
@@ -491,7 +494,8 @@ namespace _Scripts
             
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                _upgradeCanvas.SetActive(false);
+                _upgradeCanvasAnimation.MoveCanvasDisabled();
+                
                 _currentSelectedTower = null;
             }
             if (Input.GetMouseButtonDown(0))
@@ -502,18 +506,22 @@ namespace _Scripts
                 if (Physics.Raycast(ray, out hit))
                 {
                     // If you have specific tag for your tower
-                    if(hit.transform.gameObject.tag == "Tower")
+                    if(hit.transform.gameObject.tag == "UpgradeTag")
                     {
 
                         _currentSelectedTower = hit.transform.gameObject;
+                        _currTowerText.text = _currentSelectedTower.ToString();
                         _upgradeCanvas.SetActive(true);
+                        _upgradeCanvasAnimation.MoveCanvasActive();
+                        
                         Debug.Log("Tower clicked!");
                     }
 
                     if (hit.transform.gameObject.tag == "Ground" || hit.transform.gameObject.tag == "Enemy")
                     {
                         _currentSelectedTower = null;
-                        _upgradeCanvas.SetActive(false);
+                        _upgradeCanvasAnimation.MoveCanvasDisabled();
+                        
                     }
                 }
             }
@@ -523,7 +531,8 @@ namespace _Scripts
         {
             if (_instantiatedTransparentTower == null)
             {
-                _upgradeCanvas.SetActive(false);
+                
+                _upgradeCanvasAnimation.MoveCanvasDisabled();
                 _currentSelectedTower = null;
             }
         }

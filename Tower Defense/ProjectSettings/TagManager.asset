@@ -13,6 +13,7 @@ TagManager:
   - EndZone
   - ChildTower
   - EnemyParent
+  - UpgradeTag
   layers:
   - Default
   - TransparentFX

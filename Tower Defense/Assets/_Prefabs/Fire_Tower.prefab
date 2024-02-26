@@ -234,7 +234,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 372b9a5970311d7449b26df8e81acc68,
         type: 3}
       propertyPath: m_TagString
-      value: Tower
+      value: UpgradeTag
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -256,6 +256,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: -4078027590017202433}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 372b9a5970311d7449b26df8e81acc68,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 540330611889973762}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 372b9a5970311d7449b26df8e81acc68,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1171279099561008876}
   m_SourcePrefab: {fileID: 100100000, guid: 372b9a5970311d7449b26df8e81acc68, type: 3}
 --- !u!1 &8224090138231367390 stripped
 GameObject:
@@ -278,9 +286,7 @@ MonoBehaviour:
   currState: 0
   weaponRange: 10
   shootRate: 2
-  damageIsUpgraded: 0
-  rangeIsUpgraded: 0
-  fireRateIsUpgraded: 0
+  _towerVariables: {fileID: -4078027590017202433}
   canShoot: 0
   enemyLocList: []
   enemyParent: {fileID: 0}
@@ -301,6 +307,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7c7b80eb36b2674ca343de7b9a1f6f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageIsUpgraded: 0
+  rangeIsUpgraded: 0
+  fireRateIsUpgraded: 0
+  shootRate: 2
+--- !u!65 &540330611889973762
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8224090138231367390}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 4, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &1171279099561008876
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8224090138231367390}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 4, z: 2}
+  m_Center: {x: -2, y: 0, z: 0}
 --- !u!4 &8748812668235856996 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 372b9a5970311d7449b26df8e81acc68,
