@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using _Scripts;
 using UnityEngine;
 
 public class TowerFSM : FSM
@@ -15,6 +16,9 @@ public class TowerFSM : FSM
     public float weaponRange = 10f;
     public float shootRate;
     private float shootTimer;
+
+
+    private TowerVariables _towerVariables;
 
     public bool canShoot;
 
@@ -150,5 +154,8 @@ public class TowerFSM : FSM
             Destroy(bullet, weaponRange / bulletSpeed);
         }
     }
+
+   
+    
 }
 

@@ -385,6 +385,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8204049855780602447}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9e9c72bebeaa3cb4ca5ab3bc736c56db,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -236367552170528870}
   m_SourcePrefab: {fileID: 100100000, guid: 9e9c72bebeaa3cb4ca5ab3bc736c56db, type: 3}
 --- !u!1 &3795589574941512052 stripped
 GameObject:
@@ -407,6 +411,9 @@ MonoBehaviour:
   currState: 0
   weaponRange: 10
   shootRate: 5
+  damageIsUpgraded: 0
+  rangeIsUpgraded: 0
+  fireRateIsUpgraded: 0
   canShoot: 0
   enemyLocList: []
   enemyParent: {fileID: 0}
@@ -415,6 +422,18 @@ MonoBehaviour:
   bulletPrefab: {fileID: 2323418215457351779, guid: 92e39445efb1dc044ae3e1348cc436b5,
     type: 3}
   bulletDamage: 3
+--- !u!114 &-236367552170528870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3795589574941512052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7c7b80eb36b2674ca343de7b9a1f6f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &4604776925144075214 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9e9c72bebeaa3cb4ca5ab3bc736c56db,
