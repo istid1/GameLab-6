@@ -18,7 +18,7 @@ namespace _Scripts
         private void OnCollisionStay(Collision other)
         {
             // Debug.Log("Collision detected with " + other.gameObject.name);
-            if (other.gameObject.CompareTag("Tower"))
+            if (other.gameObject.CompareTag("Tower") || other.gameObject.CompareTag("UpgradeTag"))
             {
                 ChangeColor(this.gameObject, Color.red);
             }
@@ -26,7 +26,7 @@ namespace _Scripts
         
         private void OnCollisionExit(Collision other)
         {
-            if (other.gameObject.CompareTag("Tower"))
+            if (other.gameObject.CompareTag("Tower") || other.gameObject.CompareTag("UpgradeTag"))
             {
                 ChangeColor(this.gameObject, Color.green);
             }

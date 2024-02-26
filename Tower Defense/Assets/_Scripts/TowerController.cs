@@ -5,6 +5,7 @@ using UnityEngine;
 using DG.Tweening;
 using TMPro;
 using UnityEngine.Serialization;
+using UnityEngine.UIElements;
 
 
 namespace _Scripts
@@ -56,7 +57,7 @@ namespace _Scripts
         private TowerVariables _towerVariables;
         [SerializeField] private UpgradeCanvasAnimation _upgradeCanvasAnimation;
         
-        [SerializeField ]private GameObject _dummyEnemyEnabler;
+        [SerializeField ] private GameObject _dummyEnemyEnabler;
         private GameObject _currentTransparentTowerInstance;
         private GameObject _instantiatedTransparentTower;
         private GameObject _blockingTower;
@@ -87,12 +88,6 @@ namespace _Scripts
             EnemiesCantFinishPath();
             DummyCantFinishPath();
 
-            if (_currentSelectedTower != null)
-            {
-                Debug.Log(_currentSelectedTower.name);
-            }
-         
-            
             
             if (_instantiatedTransparentTower == null)
             {
@@ -115,7 +110,7 @@ namespace _Scripts
                 HandleArcherTowerSelection(hit);
             }
 
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Mouse1))
             {
                 ResetButtonStates();
                 Destroy(_instantiatedTransparentTower);
@@ -235,7 +230,7 @@ namespace _Scripts
         private void CheckAndHandleObstacles(RaycastHit hit)
         {
             var tower = hit.transform.gameObject;
-            if (tower.CompareTag("Tower"))
+            if (tower.CompareTag("Tower") || tower.CompareTag("UpgradeTag"))
             {
                 HandleObstruction();
             }
@@ -588,6 +583,10 @@ namespace _Scripts
         {
             UpgradeSelectedTowerFireRate();
         }
+       
+        
+        
+        
         
     } 
 }
