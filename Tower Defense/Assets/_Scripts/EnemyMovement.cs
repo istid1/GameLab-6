@@ -17,6 +17,8 @@ namespace _Scripts
         
         private int _frameCount = 0;
 
+        private EnemyParent enemyParent;
+
 
         private void Awake()
         {
@@ -27,8 +29,10 @@ namespace _Scripts
         {
             agent = GetComponent<NavMeshAgent>();
             _path = new NavMeshPath();
-            
-            
+
+            enemyParent = gameObject.GetComponentInParent<EnemyParent>();
+
+
 
             //_navMeshAgentQuality = GetComponent<NavMeshAgent>();
         }
@@ -87,8 +91,10 @@ namespace _Scripts
             }
             if (other.gameObject.CompareTag("EndZone"))
             {
-                Destroy(this.gameObject);
+                enemyParent.allEnemies.Remove(this.gameObject);
                 DeleteTarget();
+                Destroy(this.gameObject);
+
             }
         }
 

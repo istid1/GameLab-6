@@ -9,33 +9,25 @@ public class EnemyParent : MonoBehaviour
     public List<GameObject> allEnemies;
 
 
-    private float timerDelay = 2f;
-    private bool startDelay = true;
+    public void AddChildren()
+    {
+        StartCoroutine(DelayAddChildrenCoroutine());
+    }
     
-    // Start is called before the first frame update
-    void Start()
+
+
+    
+
+    private IEnumerator DelayAddChildrenCoroutine()
     {
-        startDelay = true;
+        yield return new WaitForSeconds(2f);
+        AddMyChildren();
     }
-
-    private void Update()
+    
+    void AddMyChildren()
     {
-        if (startDelay)
-        {
-            timerDelay -= Time.deltaTime;
-            
-            if (timerDelay <= 0)
-            {
-                AddChildren();
-
-                startDelay = false;
-            }
-        }
-    }
-
-
-    void AddChildren()
-    {
+        allEnemies.Clear();
+        
         foreach (Transform child in transform)
         {
             allEnemies.Add(child.gameObject);
