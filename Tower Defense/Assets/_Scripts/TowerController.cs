@@ -51,15 +51,18 @@ namespace _Scripts
         private bool _runOnce;
         private bool _currentColor;
 
+        private TowerVariables _towerVariables;
+        
         [SerializeField ]private GameObject _dummyEnemyEnabler;
         private GameObject _currentTransparentTowerInstance;
         private GameObject _instantiatedTransparentTower;
         private GameObject _blockingTower;
+        [SerializeField] private GameObject _upgradeCanvas;
 
         private Renderer _rendererTransparentTower;
         private EnemyMovement _enemyMovement;
         private List<EnemyMovement> _enemyMovements;
-
+        private GameObject _currentSelectedTower;
         public LayerMask groundLayer;
         public LayerMask towerLayer;
         public LayerMask enemyLayer;
@@ -80,7 +83,18 @@ namespace _Scripts
             UserInputRotateTower();
             EnemiesCantFinishPath();
             DummyCantFinishPath();
+
+            if (_currentSelectedTower != null)
+            {
+                Debug.Log(_currentSelectedTower.name);
+            }
+         
             
+            
+            if (_instantiatedTransparentTower == null)
+            {
+                RayCastSelectTower();
+            }
             
             if (_userInputActive)
             {
@@ -97,6 +111,14 @@ namespace _Scripts
             {
                 HandleArcherTowerSelection(hit);
             }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                ResetButtonStates();
+                Destroy(_instantiatedTransparentTower);
+                
+            }
+            
         }
         
         private void BuildNavMeshSurfaces()
@@ -464,6 +486,99 @@ namespace _Scripts
             _willBlockAgent = false;
         }
         
+        private void RayCastSelectTower()
+        {
+            
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                _upgradeCanvas.SetActive(false);
+                _currentSelectedTower = null;
+            }
+            if (Input.GetMouseButtonDown(0))
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                
+                if (Physics.Raycast(ray, out hit))
+                {
+                    // If you have specific tag for your tower
+                    if(hit.transform.gameObject.tag == "Tower")
+                    {
+
+                        _currentSelectedTower = hit.transform.gameObject;
+                        _upgradeCanvas.SetActive(true);
+                        Debug.Log("Tower clicked!");
+                    }
+
+                    if (hit.transform.gameObject.tag == "Ground" || hit.transform.gameObject.tag == "Enemy")
+                    {
+                        _currentSelectedTower = null;
+                        _upgradeCanvas.SetActive(false);
+                    }
+                }
+            }
+        }
+
+        public void DeSelect()
+        {
+            if (_instantiatedTransparentTower == null)
+            {
+                _upgradeCanvas.SetActive(false);
+                _currentSelectedTower = null;
+            }
+        }
+
+        private void UpgradeSelectedTowerDamage()
+        {
+            if (_currentSelectedTower != null)
+            {
+                var towerVariables = _currentSelectedTower.GetComponent<TowerVariables>();
+                towerVariables.UpgradeDamage();
+                towerVariables.damageIsUpgraded = true;
+                
+            }
+        }
+        private void UpgradeSelectedTowerRange()
+        {
+            if (_currentSelectedTower != null)
+            {
+                var towerVariables = _currentSelectedTower.GetComponent<TowerVariables>();
+                towerVariables.UpgradeRange();
+                towerVariables.rangeIsUpgraded = true;
+                
+            }
+        }
+        private void UpgradeSelectedTowerFireRate()
+        {
+            if (_currentSelectedTower != null)
+            {
+                var towerVariables = _currentSelectedTower.GetComponent<TowerVariables>();
+        
+                if (towerVariables == null)
+                {
+                    Debug.LogError("_currentSelectedTower does not have a TowerVariables component");
+                    return;
+                }
+
+                towerVariables.UpgradeFireRate();
+                towerVariables.fireRateIsUpgraded = true;
+            }
+        }
+
+        public void DamageUpgradeButton()
+        {
+            UpgradeSelectedTowerDamage();
+        }
+
+        public void RangeUpgradeButton()
+        {
+            UpgradeSelectedTowerRange();
+        }
+
+        public void FireRateUpgradeButton()
+        {
+            UpgradeSelectedTowerFireRate();
+        }
         
     } 
 }
