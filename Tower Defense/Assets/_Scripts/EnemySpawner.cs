@@ -58,8 +58,6 @@ namespace _Scripts
                     InstantiateEnemy(0);
                     InstantiateEnemy(1);
                     InstantiateEnemy(2);
-                    InstantiateEnemy(3);
-                    InstantiateEnemy(4);
                 }
                 enemyParent.AddChildren();
             }
