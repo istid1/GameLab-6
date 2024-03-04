@@ -6,6 +6,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine.Serialization;
 using UnityEngine.UIElements;
+using UnityEngine.VFX;
 
 
 namespace _Scripts
@@ -70,7 +71,8 @@ namespace _Scripts
         public LayerMask groundLayer;
         public LayerMask towerLayer;
         public LayerMask enemyLayer;
-        
+
+        public VisualEffect _moneyVFX;
 
         private void Awake()
         {
@@ -487,7 +489,7 @@ namespace _Scripts
         private void RayCastSelectTower()
         {
             
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Mouse1))
             {
                 _upgradeCanvasAnimation.MoveCanvasDisabled();
                 
@@ -505,6 +507,7 @@ namespace _Scripts
                     {
 
                         _currentSelectedTower = hit.transform.gameObject;
+                        
                         _currTowerText.text = _currentSelectedTower.ToString();
                         _upgradeCanvas.SetActive(true);
                         _upgradeCanvasAnimation.MoveCanvasActive();
@@ -538,7 +541,6 @@ namespace _Scripts
             {
                 var towerVariables = _currentSelectedTower.GetComponent<TowerVariables>();
                 towerVariables.UpgradeDamage();
-                towerVariables.damageIsUpgraded = true;
                 
             }
         }
@@ -548,7 +550,7 @@ namespace _Scripts
             {
                 var towerVariables = _currentSelectedTower.GetComponent<TowerVariables>();
                 towerVariables.UpgradeRange();
-                towerVariables.rangeIsUpgraded = true;
+                
                 
             }
         }
@@ -557,32 +559,52 @@ namespace _Scripts
             if (_currentSelectedTower != null)
             {
                 var towerVariables = _currentSelectedTower.GetComponent<TowerVariables>();
-        
-                if (towerVariables == null)
-                {
-                    Debug.LogError("_currentSelectedTower does not have a TowerVariables component");
-                    return;
-                }
-
                 towerVariables.UpgradeFireRate();
-                towerVariables.fireRateIsUpgraded = true;
+                
             }
         }
 
         public void DamageUpgradeButton()
         {
+            var towerVariables = _currentSelectedTower.GetComponent<TowerVariables>();
             UpgradeSelectedTowerDamage();
+            if (towerVariables.damageIsUpgraded == false)
+            {
+                PlayMoneyVFX();
+            }
         }
 
         public void RangeUpgradeButton()
         {
+            var towerVariables = _currentSelectedTower.GetComponent<TowerVariables>();
             UpgradeSelectedTowerRange();
+            if (towerVariables.rangeIsUpgraded == false)
+            {
+                PlayMoneyVFX();
+            }
         }
 
         public void FireRateUpgradeButton()
         {
+            var towerVariables = _currentSelectedTower.GetComponent<TowerVariables>();
             UpgradeSelectedTowerFireRate();
+            if (towerVariables.fireRateIsUpgraded == false)
+            {
+                PlayMoneyVFX();
+            }
         }
+
+
+        private void PlayMoneyVFX()
+        {
+            
+            var vfxs = _currentSelectedTower.GetComponentsInChildren<VisualEffect>();
+            foreach (var vfx in vfxs)
+            {
+                vfx.Play();
+            }
+        }
+        
        
         
         

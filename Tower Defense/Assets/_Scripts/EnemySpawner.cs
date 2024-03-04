@@ -12,11 +12,11 @@ namespace _Scripts
         [SerializeField] private int enemiesSpawnAmount;
         public bool allEnemiesIsSpawned;
 
-        private EnemyParent enemyParent;
+        private EnemyParent _enemyParent;
       
         private void Start()
         {
-            enemyParent = GameObject.FindGameObjectWithTag("EnemyParent").GetComponent<EnemyParent>();
+            _enemyParent = GameObject.FindGameObjectWithTag("EnemyParent").GetComponent<EnemyParent>();
             SpawnEnemies();
             
         }
@@ -57,7 +57,7 @@ namespace _Scripts
                 InstantiateEnemy(1);
                 InstantiateEnemy(2);
             }
-            enemyParent.AddChildren();
+            _enemyParent.AddChildren();
         }
     }
 }

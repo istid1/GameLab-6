@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2163.6038, g: 2271.0432, b: 3305.7153, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8945,7 +8945,7 @@ MonoBehaviour:
   - {fileID: 1109750593947887635, guid: 1cff37c1ff05dcc47b5e96ca0a29c4ea, type: 3}
   - {fileID: 1109750593947887635, guid: 9da4d7bb5e7ba154d9e7edc2a19ad637, type: 3}
   - {fileID: 1109750593947887635, guid: de3f415747c9ae94bb451ae39e3369af, type: 3}
-  enemiesSpawnAmount: 10
+  enemiesSpawnAmount: 3
   allEnemiesIsSpawned: 0
 --- !u!114 &598816199
 MonoBehaviour:
@@ -18729,11 +18729,31 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 312404935200516141, guid: 1a5d06655aad23f4d9a07b85c82dc887,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 312404935200516141, guid: 1a5d06655aad23f4d9a07b85c82dc887,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 598501219290493097, guid: 1a5d06655aad23f4d9a07b85c82dc887,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1714233967}
+    - target: {fileID: 3009254206449889456, guid: 1a5d06655aad23f4d9a07b85c82dc887,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009254206449889456, guid: 1a5d06655aad23f4d9a07b85c82dc887,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 3009254206449889456, guid: 1a5d06655aad23f4d9a07b85c82dc887,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -18869,6 +18889,36 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6623613319430245784, guid: 1a5d06655aad23f4d9a07b85c82dc887,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 6623613319430245784, guid: 1a5d06655aad23f4d9a07b85c82dc887,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 6623613319430245784, guid: 1a5d06655aad23f4d9a07b85c82dc887,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -61.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6798055583707234153, guid: 1a5d06655aad23f4d9a07b85c82dc887,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 6798055583707234153, guid: 1a5d06655aad23f4d9a07b85c82dc887,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 6798055583707234153, guid: 1a5d06655aad23f4d9a07b85c82dc887,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7115627032517696565, guid: 1a5d06655aad23f4d9a07b85c82dc887,
         type: 3}
       propertyPath: _xButton
@@ -18914,6 +18964,16 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1714233967}
+    - target: {fileID: 7885885552425045931, guid: 1a5d06655aad23f4d9a07b85c82dc887,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 53.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7885885552425045931, guid: 1a5d06655aad23f4d9a07b85c82dc887,
+        type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8678380495282762640, guid: 1a5d06655aad23f4d9a07b85c82dc887,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -24510,6 +24570,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
+  _moneyVFX: {fileID: 0}
 --- !u!1 &1715751315
 GameObject:
   m_ObjectHideFlags: 0

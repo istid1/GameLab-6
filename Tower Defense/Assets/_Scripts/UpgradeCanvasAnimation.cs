@@ -18,9 +18,9 @@ namespace _Scripts
         {
             _towerName.DOAnchorPos(new Vector2(100, 350), 0.5f);
             _damageButton.DOAnchorPos(new Vector2(250, 300), 0.5f);
-            _fireRateButton.DOAnchorPos(new Vector2(250, 250), 0.5f);
-            _rangeButton.DOAnchorPos(new Vector2(250, 200), 0.5f);
-            _xButton.DOAnchorPos(new Vector2(300, 400), 0.5f);
+            _fireRateButton.DOAnchorPos(new Vector2(250, 200), 0.5f);
+            _rangeButton.DOAnchorPos(new Vector2(250, 100), 0.5f);
+            _xButton.DOAnchorPos(new Vector2(300, 500), 0.5f);
           
             
         }

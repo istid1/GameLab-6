@@ -47,6 +47,9 @@ public class TowerFSM : FSM
     protected override void FSMUpdate()
     {
         shootRate = _towerVariables.shootRate;
+        weaponRange = _towerVariables.weaponRange;
+        bulletDamage = _towerVariables.bulletDamage;
+        
         switch (currState)
         {
             case FSMState.Shoot: UpdateShootState(); break;
