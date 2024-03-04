@@ -26,7 +26,7 @@ namespace _Scripts
             {
                 _currentDamageUpgradeLevel++;
                 //bulletDamage = bulletDamage + _currentDamageUpgradeLevel; ////bulletDamage lvl 5 = 20 (20x the original)
-                bulletDamage++;   ////bulletDamage lvl 5 = 5 (5x the original)
+                bulletDamage++;   ////bulletDamage lvl 5 = 5 (5x the original) (Linear)
                 //     ^^^ Decide which one we want to use ^^^
             }
             if (_currentDamageUpgradeLevel == 6)
@@ -34,7 +34,7 @@ namespace _Scripts
                 damageIsUpgraded = true;
             }
         }
-        public void UpgradeRange() //weaponRange level 5 = 17.5f (Tower gets almost double range)
+        public void UpgradeRange() //weaponRange level 5 = 17.5f (Tower gets almost double range) (Linear)
         {
             if (_currentRangeUpgradeLevel < 6)
             {
@@ -46,7 +46,7 @@ namespace _Scripts
                 rangeIsUpgraded = true;
             }
         }
-        public void UpgradeFireRate() //fireRate level 5 = 0.6f (tower shoots almost 2.5x as fast)
+        public void UpgradeFireRate() //fireRate level 5 = 0.6f (tower shoots almost 2.5x faster)
         {
             if (_currentFireRateUpgradeLevel < 6)
             {

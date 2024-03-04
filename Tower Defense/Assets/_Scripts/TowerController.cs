@@ -488,11 +488,9 @@ namespace _Scripts
         
         private void RayCastSelectTower()
         {
-            
             if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Mouse1))
             {
                 _upgradeCanvasAnimation.MoveCanvasDisabled();
-                
                 _currentSelectedTower = null;
             }
             if (Input.GetMouseButtonDown(0))
@@ -505,21 +503,16 @@ namespace _Scripts
                     // If you have specific tag for your tower
                     if(hit.transform.gameObject.tag == "UpgradeTag")
                     {
-
                         _currentSelectedTower = hit.transform.gameObject;
-                        
                         _currTowerText.text = _currentSelectedTower.ToString();
                         _upgradeCanvas.SetActive(true);
                         _upgradeCanvasAnimation.MoveCanvasActive();
-                        
-                        Debug.Log("Tower clicked!");
                     }
 
                     if (hit.transform.gameObject.tag == "Ground" || hit.transform.gameObject.tag == "Enemy")
                     {
                         _currentSelectedTower = null;
                         _upgradeCanvasAnimation.MoveCanvasDisabled();
-                        
                     }
                 }
             }
@@ -529,7 +522,6 @@ namespace _Scripts
         {
             if (_instantiatedTransparentTower == null)
             {
-                
                 _upgradeCanvasAnimation.MoveCanvasDisabled();
                 _currentSelectedTower = null;
             }
@@ -541,7 +533,6 @@ namespace _Scripts
             {
                 var towerVariables = _currentSelectedTower.GetComponent<TowerVariables>();
                 towerVariables.UpgradeDamage();
-                
             }
         }
         private void UpgradeSelectedTowerRange()
@@ -550,8 +541,6 @@ namespace _Scripts
             {
                 var towerVariables = _currentSelectedTower.GetComponent<TowerVariables>();
                 towerVariables.UpgradeRange();
-                
-                
             }
         }
         private void UpgradeSelectedTowerFireRate()
@@ -560,7 +549,6 @@ namespace _Scripts
             {
                 var towerVariables = _currentSelectedTower.GetComponent<TowerVariables>();
                 towerVariables.UpgradeFireRate();
-                
             }
         }
 
