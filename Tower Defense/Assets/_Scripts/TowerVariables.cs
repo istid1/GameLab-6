@@ -25,8 +25,8 @@ namespace _Scripts
             if (_currentDamageUpgradeLevel < 6)
             {
                 _currentDamageUpgradeLevel++;
-                //bulletDamage = bulletDamage + _currentDamageUpgradeLevel; ////bulletDamage lvl 5 = 20 (20x the original)
-                bulletDamage++;   ////bulletDamage lvl 5 = 5 (5x the original) (Linear)
+                bulletDamage = bulletDamage + _currentDamageUpgradeLevel; ////bulletDamage lvl 5 = 20 (20x the original)
+                //bulletDamage++;   ////bulletDamage lvl 5 = 5 (5x the original) (Linear)
                 //     ^^^ Decide which one we want to use ^^^
             }
             if (_currentDamageUpgradeLevel == 6)
