@@ -72,7 +72,7 @@ namespace _Scripts
         public LayerMask towerLayer;
         public LayerMask enemyLayer;
 
-        public VisualEffect _moneyVFX;
+        
 
         private void Awake()
         {
