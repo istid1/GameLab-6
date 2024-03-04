@@ -566,9 +566,19 @@ namespace _Scripts
 
         public void DamageUpgradeButton()
         {
+            if (_currentSelectedTower == null)
+            {
+                return;
+            }
             var towerVariables = _currentSelectedTower.GetComponent<TowerVariables>();
+            
+            if (towerVariables == null)
+            {
+                return;
+            }
             UpgradeSelectedTowerDamage();
-            if (towerVariables.damageIsUpgraded == false)
+            
+            if (!towerVariables.damageIsUpgraded)
             {
                 PlayMoneyVFX();
             }
@@ -576,9 +586,20 @@ namespace _Scripts
 
         public void RangeUpgradeButton()
         {
+
+            if (_currentSelectedTower == null)
+            {
+                return;
+            }
             var towerVariables = _currentSelectedTower.GetComponent<TowerVariables>();
+            
+            if (towerVariables == null)
+            {
+                return;
+            }
             UpgradeSelectedTowerRange();
-            if (towerVariables.rangeIsUpgraded == false)
+            
+            if (!towerVariables.rangeIsUpgraded)
             {
                 PlayMoneyVFX();
             }
@@ -586,9 +607,19 @@ namespace _Scripts
 
         public void FireRateUpgradeButton()
         {
+            if (_currentSelectedTower == null)
+            {
+                return;
+            }
             var towerVariables = _currentSelectedTower.GetComponent<TowerVariables>();
+            
+            if (towerVariables == null)
+            {
+                return;
+            }
             UpgradeSelectedTowerFireRate();
-            if (towerVariables.fireRateIsUpgraded == false)
+            
+            if (!towerVariables.fireRateIsUpgraded)
             {
                 PlayMoneyVFX();
             }
