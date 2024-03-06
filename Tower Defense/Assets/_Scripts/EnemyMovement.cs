@@ -22,7 +22,7 @@ namespace _Scripts
 
         private void Awake()
         {
-            
+            canReachDestination = true;
         }
 
         private void Start()
@@ -32,13 +32,16 @@ namespace _Scripts
 
             enemyParent = gameObject.GetComponentInParent<EnemyParent>();
 
-
+            enemyAgent.SetDestination(_target.position);
 
             //_navMeshAgentQuality = GetComponent<NavMeshAgent>();
         }
 
         private void FixedUpdate()
         {
+            _frameCount++;
+            
+            Debug.Log(_frameCount);
             
             if (!_pathHasBeenMade)
             {
@@ -54,9 +57,15 @@ namespace _Scripts
                 _target = _targetObject.transform;
                 _pathHasBeenMade = true;
             }
-            enemyAgent.SetDestination(_target.position);
+           
+            if (_frameCount >= 10)
+            {
+                
+                ValidatePath();
+                enemyAgent.SetDestination(_target.position);
+                _frameCount = 0;
+            }
             
-            ValidatePath();
         }
 
         private void ValidatePath()

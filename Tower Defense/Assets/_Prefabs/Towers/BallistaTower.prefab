@@ -295,6 +295,7 @@ MonoBehaviour:
   currState: 1
   weaponRange: 10
   shootRate: 1.5
+  _towerVariables: {fileID: 0}
   canShoot: 0
   hasAnimation: 1
   _anim: {fileID: 0}
@@ -320,6 +321,9 @@ MonoBehaviour:
   damageIsUpgraded: 0
   rangeIsUpgraded: 0
   fireRateIsUpgraded: 0
+  shootRate: 2
+  bulletDamage: 1
+  weaponRange: 10
 --- !u!95 &9061194220412542322
 Animator:
   serializedVersion: 7

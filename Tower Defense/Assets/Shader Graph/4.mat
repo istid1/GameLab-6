@@ -78,7 +78,7 @@ Material:
     - _AlphaCutoffEnable: 1
     - _AlphaDstBlend: 10
     - _AlphaSrcBlend: 1
-    - _Alpha_Clip_Threshold: 0.1
+    - _Alpha_Clip_Threshold: 0.15
     - _BlendMode: 4
     - _ConservativeDepthOffsetEnable: 0
     - _CullMode: 0

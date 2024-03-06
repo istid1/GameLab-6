@@ -85,7 +85,7 @@ Material:
     - _Gradient_noise_Scale: 45
     - _MaterialID: 1
     - _MaterialTypeMask: 2
-    - _MovementSpeed: 0.002
+    - _MovementSpeed: 0.001
     - _OpaqueCullMode: 1
     - _PerPixelSorting: 0
     - _RayTracing: 0
