@@ -32,7 +32,7 @@ namespace _Scripts
 
             enemyParent = gameObject.GetComponentInParent<EnemyParent>();
 
-            enemyAgent.SetDestination(_target.position);
+            
 
             //_navMeshAgentQuality = GetComponent<NavMeshAgent>();
         }

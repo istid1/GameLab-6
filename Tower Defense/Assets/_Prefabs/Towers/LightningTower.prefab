@@ -123,6 +123,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lightning
       objectReference: {fileID: 0}
+    - target: {fileID: 7101334940085556638, guid: 7b77aa147eaf55a47a719c1244015f1f,
+        type: 3}
+      propertyPath: m_TagString
+      value: Lightning
+      objectReference: {fileID: 0}
     - target: {fileID: 8767099881845429462, guid: 7b77aa147eaf55a47a719c1244015f1f,
         type: 3}
       propertyPath: m_LocalPosition.y
