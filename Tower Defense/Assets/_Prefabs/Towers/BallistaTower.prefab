@@ -230,7 +230,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e5fe8bca0a6a3c74e9fbcdf1836e609f,
         type: 3}
       propertyPath: m_Layer
-      value: 10
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e5fe8bca0a6a3c74e9fbcdf1836e609f,
         type: 3}
@@ -240,7 +240,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e5fe8bca0a6a3c74e9fbcdf1836e609f,
         type: 3}
       propertyPath: m_TagString
-      value: Tower
+      value: UpgradeTag
       objectReference: {fileID: 0}
     - target: {fileID: 1030026649736416526, guid: e5fe8bca0a6a3c74e9fbcdf1836e609f,
         type: 3}
@@ -377,6 +377,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 9061194220412542322}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e5fe8bca0a6a3c74e9fbcdf1836e609f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6853810585714821777}
     - targetCorrespondingSourceObject: {fileID: -4478070166293126118, guid: e5fe8bca0a6a3c74e9fbcdf1836e609f,
         type: 3}
       insertIndex: -1
@@ -409,6 +413,7 @@ MonoBehaviour:
   currState: 1
   weaponRange: 10
   shootRate: 1.5
+  _towerVariables: {fileID: -1755432985629755056}
   canShoot: 0
   hasAnimation: 1
   _anim: {fileID: 9061194220412542322}
@@ -434,6 +439,9 @@ MonoBehaviour:
   damageIsUpgraded: 0
   rangeIsUpgraded: 0
   fireRateIsUpgraded: 0
+  shootRate: 2
+  bulletDamage: 1
+  weaponRange: 10
 --- !u!95 &9061194220412542322
 Animator:
   serializedVersion: 7
@@ -456,6 +464,27 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!65 &6853810585714821777
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4257651530166487788}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 5.5, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8506715559178998695 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -4478070166293126118, guid: e5fe8bca0a6a3c74e9fbcdf1836e609f,
