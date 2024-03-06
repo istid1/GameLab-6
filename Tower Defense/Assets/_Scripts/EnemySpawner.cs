@@ -17,7 +17,7 @@ namespace _Scripts
         private void Start()
         {
             enemyParent = GameObject.FindGameObjectWithTag("EnemyParent").GetComponent<EnemyParent>();
-            SpawnEnemies();
+            //SpawnEnemies();
             
         }
         private void Update()
