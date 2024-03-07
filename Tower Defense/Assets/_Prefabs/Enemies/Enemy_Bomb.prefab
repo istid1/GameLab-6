@@ -267,7 +267,7 @@ MonoBehaviour:
   stone: 0
   fire: 0
   ice: 0
-  lightning: 0
+  lightning: 1
   bomb: 1
 --- !u!136 &4181170734894390878
 CapsuleCollider:

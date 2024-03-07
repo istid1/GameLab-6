@@ -41,8 +41,6 @@ namespace _Scripts
         {
             _frameCount++;
             
-            Debug.Log(_frameCount);
-            
             if (!_pathHasBeenMade)
             {
                 _targetObject = new GameObject

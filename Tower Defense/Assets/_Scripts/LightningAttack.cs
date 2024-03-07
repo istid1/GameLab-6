@@ -12,13 +12,16 @@ namespace _Scripts
         
 
         private float weaponRange;
-        [SerializeField] 
-        private List<GameObject> _sphereControllers = new List<GameObject>();
+        [SerializeField] private List<GameObject> _sphereControllers = new List<GameObject>();
 
         [SerializeField] private VisualEffect _lightingVFX;
         private List<GameObject> _enemies;
 
-        private const int NumberOfEnemies = 7;
+        [SerializeField] private GameObject _LightningLocalPos;
+
+        public bool isInRange;
+        
+        private const int NumberOfEnemies = 5;
 
         private void Awake()
         {
@@ -28,11 +31,11 @@ namespace _Scripts
         private void Start()
         {
             FindEnemies();
-          
         }
         
         private void Update()
         {
+            Debug.Log(isInRange);
             weaponRange = _towerVariables.weaponRange;
             
             CheckClosestEnemies();
@@ -46,6 +49,7 @@ namespace _Scripts
         private void CheckClosestEnemies()
         {
             var closestEnemies = new List<GameObject>(_enemies.Count);
+    
             foreach (var enemy in _enemies)
             {
                 if (enemy != null)
@@ -58,6 +62,9 @@ namespace _Scripts
                 return Vector3.Distance(transform.position, e1.transform.position)
                     .CompareTo(Vector3.Distance(transform.position, e2.transform.position));
             });
+
+            bool atLeastOneIsInRange = false;
+
             for (var i = 0; i < NumberOfEnemies; i++)
             {
                 if(i < closestEnemies.Count)
@@ -67,16 +74,21 @@ namespace _Scripts
                     {
                         // Play the Visual Effect as the enemy is in range
                         _lightingVFX.Play();
+                        atLeastOneIsInRange = true;
                     }
                 }
                 else
-                    break;
+                {
+                    _sphereControllers[i].transform.position = _LightningLocalPos.transform.position;
+                }
             }
+
+            isInRange = atLeastOneIsInRange;
         }
 
         private void FindEnemies()
         {
-            Debug.Assert(_sphereControllers.Count == NumberOfEnemies, "Not enough SphereControllers. 7 required.");
+            Debug.Assert(_sphereControllers.Count == NumberOfEnemies, "Not enough SphereControllers. 5 required.");
             _enemies = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
         }
         

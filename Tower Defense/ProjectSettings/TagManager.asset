@@ -14,6 +14,8 @@ TagManager:
   - ChildTower
   - EnemyParent
   - UpgradeTag
+  - Lightning
+  - DummyEnemy
   layers:
   - Default
   - TransparentFX
