@@ -160,7 +160,8 @@ public class TowerFSM : FSM
 
             }
             
-            GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            Vector3 bulletPosition = new Vector3(transform.position.x, 10f, transform.position.z);
+            GameObject bullet = Instantiate(bulletPrefab, bulletPosition, Quaternion.identity);
 
             bullet.GetComponent<Projectile>().bulletDamage = bulletDamage;
 
@@ -169,6 +170,7 @@ public class TowerFSM : FSM
             bullet.transform.position = transform.position;
             bullet.transform.rotation = Quaternion.LookRotation(direction);
 
+            
             bullet.GetComponent<Rigidbody>().AddForce(direction * bulletSpeed, ForceMode.Impulse);
 
             //Destroy the bullet after it has travelled the weaponRange

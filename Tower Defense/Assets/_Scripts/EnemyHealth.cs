@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public int health = 3;
+    public float health = 3;
 
     [HideInInspector]
     public string enemyType;
@@ -70,7 +70,7 @@ public class EnemyHealth : MonoBehaviour
         
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
         //Debug.Log("OW");
