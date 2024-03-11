@@ -80,6 +80,9 @@ namespace _Scripts
         [SerializeField] private int _costIceTower = 150;
         [SerializeField] private int _costLightningTower = 200;
         [SerializeField] private int _costBombTower = 250;
+
+        private int _upgradeCost = 50;
+        private bool canAfordUpgrade;
         
         
         private void Awake()
@@ -125,6 +128,16 @@ namespace _Scripts
                 ResetButtonStates();
                 Destroy(_instantiatedTransparentTower);
                 
+            }
+
+            if (_moneySystem.currentMoney >= 50)
+            {
+                canAfordUpgrade = true;
+            }
+
+            if (_moneySystem.currentMoney < 50)
+            {
+                canAfordUpgrade = false;
             }
             
         }
@@ -613,63 +626,74 @@ namespace _Scripts
 
         public void DamageUpgradeButton()
         {
-            if (_currentSelectedTower == null)
+            if (canAfordUpgrade)
             {
-                return;
-            }
-            var towerVariables = _currentSelectedTower.GetComponent<TowerVariables>();
+                if (_currentSelectedTower == null)
+                {
+                    return;
+                }
+                var towerVariables = _currentSelectedTower.GetComponent<TowerVariables>();
             
-            if (towerVariables == null)
-            {
-                return;
-            }
-            UpgradeSelectedTowerDamage();
+                if (towerVariables == null)
+                {
+                    return;
+                }
+                UpgradeSelectedTowerDamage();
             
-            if (!towerVariables.damageIsUpgraded)
-            {
-                PlayUpgradeVFX();
+                if (!towerVariables.damageIsUpgraded)
+                {
+                    PlayUpgradeVFX();
+                }
             }
+           
         }
 
         public void RangeUpgradeButton()
         {
-
-            if (_currentSelectedTower == null)
+            if (canAfordUpgrade)
             {
-                return;
-            }
-            var towerVariables = _currentSelectedTower.GetComponent<TowerVariables>();
+                if (_currentSelectedTower == null)
+                {
+                    return;
+                }
+                var towerVariables = _currentSelectedTower.GetComponent<TowerVariables>();
             
-            if (towerVariables == null)
-            {
-                return;
-            }
-            UpgradeSelectedTowerRange();
+                if (towerVariables == null)
+                {
+                    return;
+                }
+                UpgradeSelectedTowerRange();
             
-            if (!towerVariables.rangeIsUpgraded)
-            {
-                PlayUpgradeVFX();
+                if (!towerVariables.rangeIsUpgraded)
+                {
+                    PlayUpgradeVFX();
+                }
             }
+           
         }
 
         public void FireRateUpgradeButton()
         {
-            if (_currentSelectedTower == null)
+            if (canAfordUpgrade)
             {
-                return;
-            }
-            var towerVariables = _currentSelectedTower.GetComponent<TowerVariables>();
+                if (_currentSelectedTower == null)
+                {
+                    return;
+                }
+                var towerVariables = _currentSelectedTower.GetComponent<TowerVariables>();
             
-            if (towerVariables == null)
-            {
-                return;
-            }
-            UpgradeSelectedTowerFireRate();
+                if (towerVariables == null)
+                {
+                    return;
+                }
+                UpgradeSelectedTowerFireRate();
             
-            if (!towerVariables.fireRateIsUpgraded)
-            {
-                PlayUpgradeVFX();
+                if (!towerVariables.fireRateIsUpgraded)
+                {
+                    PlayUpgradeVFX();
+                }
             }
+            
         }
 
 

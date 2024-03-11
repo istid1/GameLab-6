@@ -8,7 +8,7 @@ namespace _Scripts
     public class FireBulletBehavoir : MonoBehaviour
     {
         // How long the bullet will go into a random upwards direction
-        private const float RANDOM_DIRECTION_TIME = 1f;
+        private const float _RANDOM_DIRECTION_TIME = 1f;
 
         // The time the bullet started moving
         private float _startTime;
@@ -24,7 +24,7 @@ namespace _Scripts
 
         private EnemyHealth _enemyHealth;
 
-        private bool hasHappened;
+        private bool _hasHappened;
 
         [SerializeField] private TowerVariables _towerVariables;
 
@@ -74,7 +74,7 @@ namespace _Scripts
             }
             var elapsedTime = Time.time - _startTime;
             // Determine if the bullet should change direction towards the target
-            if (_randomDirection && elapsedTime > RANDOM_DIRECTION_TIME)
+            if (_randomDirection && elapsedTime > _RANDOM_DIRECTION_TIME)
             {
                 _randomDirection = false;
             }
@@ -96,11 +96,11 @@ namespace _Scripts
             if (other.CompareTag("Enemy"))
             {
                 _enemyHealth = other.GetComponent<EnemyHealth>();
-                if (!hasHappened)
+                if (!_hasHappened)
                 {
                     _enemyHealth.TakeDamage(_bulletDamage);
                     StartCoroutine(DestroyAfterDelay(2f));
-                    hasHappened = true;
+                    _hasHappened = true;
                 }
                 
             }
@@ -109,7 +109,7 @@ namespace _Scripts
         {
             yield return new WaitForSeconds(seconds);
             _enemyHealth.TakeDamage(_bulletDamage);
-            hasHappened = false;
+            _hasHappened = false;
             Destroy(gameObject);
         }
         
