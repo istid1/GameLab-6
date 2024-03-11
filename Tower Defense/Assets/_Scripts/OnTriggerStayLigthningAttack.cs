@@ -9,7 +9,7 @@ namespace _Scripts
         [SerializeField] private TowerVariables _towerVariables;
         private EnemyHealth _enemyHealth;
         private bool _isDamageOverTimeRunning = false;
-        [SerializeField]private int _bulletDamage;
+        [SerializeField] private int _bulletDamage;
         private void Update()
         {
             _bulletDamage = _towerVariables.bulletDamage;

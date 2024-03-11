@@ -262,7 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18b929aca66b0754f81d4702cc83af9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 3
+  health: 10
   enemyType: 
   stone: 1
   fire: 0

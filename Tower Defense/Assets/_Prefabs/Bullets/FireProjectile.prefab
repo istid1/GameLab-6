@@ -171,6 +171,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 50
+  _towerVariables: {fileID: -4078027590017202433, guid: 0bf4a2c899b5e8043bf423c576bdced1,
+    type: 3}
   dragFactor: 0.05
 --- !u!1 &7306368011410956079
 GameObject:
