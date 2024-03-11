@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 
 public class EnemyHealth : MonoBehaviour
 {
+    [SerializeField] private MoneySystem _moneySystem;
     public float health = 3;
 
     [HideInInspector]
@@ -61,18 +62,24 @@ public class EnemyHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (health <= 0)
         {
+            
             enemyParentScript.allEnemies.Remove(this.gameObject);
             enemyMovement.DeleteTarget();
+            
             Destroy(gameObject);
+            
         }
         
     }
 
     public void TakeDamage(float damage)
     {
+        MoneySystem.Instance.currentMoney++;
         health -= damage;
+        
         //Debug.Log("OW");
     }
 }

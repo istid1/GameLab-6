@@ -19,7 +19,7 @@ namespace _Scripts
         {
             if(other.CompareTag("Enemy") && _lightningAttack.isInRange) 
             {
-                Debug.Log("An enemy is within the trigger zone");
+                
                 _enemyHealth = other.GetComponent<EnemyHealth>();
             
                 if (_enemyHealth != null)
@@ -30,14 +30,6 @@ namespace _Scripts
                         _isDamageOverTimeRunning = true;
                     }
                 }
-                else
-                {
-                    Debug.Log("No EnemyHealth Component found on the enemy");
-                }
-            }
-            else
-            {
-                Debug.Log("An unknown entity is within the trigger zone");
             }
         }
 

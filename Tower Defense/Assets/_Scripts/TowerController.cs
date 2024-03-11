@@ -72,8 +72,16 @@ namespace _Scripts
         public LayerMask towerLayer;
         public LayerMask enemyLayer;
 
-        
+        [SerializeField] private MoneySystem _moneySystem;
 
+        // Different costs for towers
+        [SerializeField] private int _costBallistaTower = 50;
+        [SerializeField] private int _costFireTower = 100;
+        [SerializeField] private int _costIceTower = 150;
+        [SerializeField] private int _costLightningTower = 200;
+        [SerializeField] private int _costBombTower = 250;
+        
+        
         private void Awake()
         {
            BuildNavMeshSurfaces();
@@ -175,6 +183,14 @@ namespace _Scripts
 
         private void PlaceTower(RaycastHit hit)
         {
+            int cost = GetCurrentTowerCost();
+            // You may want to do the money check and deduction here also, to avoid any bugs
+            
+            if (_moneySystem.currentMoney < cost)
+            {
+                // Notify the player here. Maybe the tower was already placed by now, hence double checking
+                return;
+            }
             if (towerPrefab == null)
             {
                 return;
@@ -195,6 +211,9 @@ namespace _Scripts
             
             _transparentTowerIsActive = false;
             _blockingTower = newTower;     // Store the reference to the newly placed Tower which might block the path
+
+            _moneySystem.currentMoney -= cost;
+
         }
 
         private void SpawnTransparentTower(RaycastHit hit)
@@ -269,6 +288,20 @@ namespace _Scripts
             return new Vector3(x * gridSize, y * gridSize, z * gridSize);
         }
         
+        private int GetCurrentTowerCost()
+        {
+            // Based on which button is pressed return the cost of the corresponding tower
+            if (_archerButtonIsPressed) return _costBallistaTower;
+            if (_fireButtonIsPressed) return _costFireTower;
+            if (_iceButtonIsPressed) return _costIceTower;
+            if (_lightningButtonIsPressed) return _costLightningTower;
+            if (_bombButtonIsPressed) return _costBombTower;
+            // You get the idea...
+            // Return some default value or throw an exception if no button is pressed  
+            return 0;
+        }
+        
+        
         private void ResetButtonStates()
         {
             _archerButtonIsPressed = false;
@@ -281,6 +314,12 @@ namespace _Scripts
 
         public void ArcherButton()
         {
+            
+            if (_moneySystem.currentMoney < _costBallistaTower)
+            {
+                Debug.Log("Can't afford");
+                return;
+            }
             ResetButtonStates();
             _archerButtonIsPressed = true;
             
@@ -305,6 +344,11 @@ namespace _Scripts
 
         public void FireButton()
         {
+            if (_moneySystem.currentMoney < _costFireTower)
+            {
+                Debug.Log("Can't afford");
+                return;
+            }
             ResetButtonStates();
             _fireButtonIsPressed = true;
 
@@ -328,6 +372,11 @@ namespace _Scripts
 
         public void IceButton()
         {
+            if (_moneySystem.currentMoney < _costIceTower)
+            {
+                Debug.Log("Can't afford");
+                return;
+            }
             ResetButtonStates();
             _iceButtonIsPressed = true;
 
@@ -351,6 +400,11 @@ namespace _Scripts
 
         public void LightningButton()
         {
+            if (_moneySystem.currentMoney < _costLightningTower)
+            {
+                Debug.Log("Can't afford");
+                return;
+            }
             ResetButtonStates();
             _lightningButtonIsPressed = true;
 
@@ -374,6 +428,11 @@ namespace _Scripts
 
         public void BombButton()
         {
+            if (_moneySystem.currentMoney < _costBombTower)
+            {
+                Debug.Log("Can't afford");
+                return;
+            }
             ResetButtonStates();
             _bombButtonIsPressed = true;
 
@@ -568,7 +627,7 @@ namespace _Scripts
             
             if (!towerVariables.damageIsUpgraded)
             {
-                PlayMoneyVFX();
+                PlayUpgradeVFX();
             }
         }
 
@@ -589,7 +648,7 @@ namespace _Scripts
             
             if (!towerVariables.rangeIsUpgraded)
             {
-                PlayMoneyVFX();
+                PlayUpgradeVFX();
             }
         }
 
@@ -609,12 +668,12 @@ namespace _Scripts
             
             if (!towerVariables.fireRateIsUpgraded)
             {
-                PlayMoneyVFX();
+                PlayUpgradeVFX();
             }
         }
 
 
-        private void PlayMoneyVFX()
+        private void PlayUpgradeVFX()
         {
             
             var vfxs = _currentSelectedTower.GetComponentsInChildren<VisualEffect>();

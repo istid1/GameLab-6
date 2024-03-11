@@ -1,0 +1,124 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7795576368167072504
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 179348041745157086}
+  - component: {fileID: 7512614536887616540}
+  - component: {fileID: 5686297198554760212}
+  - component: {fileID: 5063191900335640901}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &179348041745157086
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7795576368167072504}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!156049354 &7512614536887616540
+Grid:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7795576368167072504}
+  m_Enabled: 0
+  m_CellSize: {x: 2, y: 2, z: 0}
+  m_CellGap: {x: 0, y: 0, z: 0}
+  m_CellLayout: 0
+  m_CellSwizzle: 0
+--- !u!114 &5686297198554760212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7795576368167072504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb6d8e131a3dd324eb3af2999eb009cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transparentTowerPrefab: {fileID: 5380279323207597598, guid: 0b5b5a995bda0404bb29b1420084b086,
+    type: 3}
+  towerPrefab: {fileID: 5603472128371696670, guid: 5b38f16182c817d4b8a3992d8f5e9569,
+    type: 3}
+  transparentBallistaTower: {fileID: 5380279323207597598, guid: 0b5b5a995bda0404bb29b1420084b086,
+    type: 3}
+  ballistaTowerPrefab: {fileID: 4257651530166487788, guid: 42400733b9a16fe458f371fe3e18126a,
+    type: 3}
+  transparentFireTower: {fileID: 7477746626052871916, guid: 4c3ded4ba4b6ed549bc6d91e6f513cc4,
+    type: 3}
+  fireTowerPrefab: {fileID: 8224090138231367390, guid: 0bf4a2c899b5e8043bf423c576bdced1,
+    type: 3}
+  transparentIceTower: {fileID: 6424267428156426280, guid: 80243242bfd1abf4180facd28dd58192,
+    type: 3}
+  iceTowerPrefab: {fileID: 7253406737261468422, guid: dff67cbcbd451d648aa40e620ace471b,
+    type: 3}
+  transparentLightningTower: {fileID: 1644943202929347402, guid: 8fe66f844839f5141a542b07acdedec4,
+    type: 3}
+  lightningTowerPrefab: {fileID: 6927684606941454636, guid: 18c998e944ed7b04e8e810e1a8a3cc67,
+    type: 3}
+  transparentBombTower: {fileID: 7307352912609277476, guid: 9718f3e47902fd24b9e2608ddc7a9bfe,
+    type: 3}
+  bombTowerPrefab: {fileID: 3795589574941512052, guid: f7f69332d5bd3e84384776eb51da3a78,
+    type: 3}
+  navMeshSurfaces:
+  - {fileID: 0}
+  - {fileID: 0}
+  placedTower: []
+  enemySpawner: {fileID: 0}
+  _dummyEnemy: {fileID: 0}
+  _currTowerText: {fileID: 0}
+  _upgradeCanvasAnimation: {fileID: 0}
+  _dummyEnemyEnabler: {fileID: 0}
+  _upgradeCanvas: {fileID: 0}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  towerLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  _moneySystem: {fileID: 5063191900335640901}
+  _costBallistaTower: 50
+  _costFireTower: 70
+  _costIceTower: 60
+  _costLightningTower: 80
+  _costBombTower: 100
+--- !u!114 &5063191900335640901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7795576368167072504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60f3b9dc17a3df0419db3ddc0b3887b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _towerController: {fileID: 5686297198554760212}
+  _moneyText: {fileID: 0}
+  currentMoney: 0

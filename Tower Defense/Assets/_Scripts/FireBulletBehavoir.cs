@@ -33,8 +33,9 @@ namespace _Scripts
         
         [SerializeField] private float dragFactor;
     
-        public void SetTarget(Transform target)
+        public void SetTarget(Transform target, TowerVariables towerVariables)
         {
+            
             _target = target;
             // Reset the start time every time a new target is set
             _startTime = Time.time;
@@ -43,8 +44,9 @@ namespace _Scripts
             // Choose a random upwards direction within some range
             _randomUpwardsDirection = Quaternion.Euler(Random.Range(-45, 45), Random.Range(0, 360), 
                 Random.Range(-45, 45)) * Vector3.up;
+            _towerVariables = towerVariables;
 
-            
+
         }
 
         private void Start()
@@ -110,6 +112,7 @@ namespace _Scripts
             hasHappened = false;
             Destroy(gameObject);
         }
-    
+        
+        
     }
 }

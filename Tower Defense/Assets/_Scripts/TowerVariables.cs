@@ -18,7 +18,8 @@ namespace _Scripts
         private int _currentDamageUpgradeLevel = 1;
         
         private TowerFSM _towerFsm;
-        
+
+        [SerializeField] private MoneySystem _moneySystem;
 
         public void UpgradeDamage() 
         {
