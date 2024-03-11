@@ -246,6 +246,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: -6386344264773492242, guid: 9e9c72bebeaa3cb4ca5ab3bc736c56db,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d1311cea6c4877f4eb2f91b17a362168, type: 2}
     - target: {fileID: -4845283291285932575, guid: 9e9c72bebeaa3cb4ca5ab3bc736c56db,
         type: 3}
       propertyPath: m_Layer
@@ -276,6 +281,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: -1539281951866047587, guid: 9e9c72bebeaa3cb4ca5ab3bc736c56db,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d1311cea6c4877f4eb2f91b17a362168, type: 2}
     - target: {fileID: -1511083847661430264, guid: 9e9c72bebeaa3cb4ca5ab3bc736c56db,
         type: 3}
       propertyPath: m_Layer
@@ -331,6 +341,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 3871913819344153956, guid: 9e9c72bebeaa3cb4ca5ab3bc736c56db,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d1311cea6c4877f4eb2f91b17a362168, type: 2}
     - target: {fileID: 5076369328233396797, guid: 9e9c72bebeaa3cb4ca5ab3bc736c56db,
         type: 3}
       propertyPath: m_Layer
@@ -380,6 +395,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 386841301739182107}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9e9c72bebeaa3cb4ca5ab3bc736c56db,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4025791177998539420}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9e9c72bebeaa3cb4ca5ab3bc736c56db,
         type: 3}
@@ -429,6 +448,8 @@ MonoBehaviour:
   shootRate: 5
   _towerVariables: {fileID: -236367552170528870}
   canShoot: 0
+  hasAnimation: 0
+  _anim: {fileID: 0}
   enemyLocList: []
   enemyParent: {fileID: 0}
   closestEnemy: {fileID: 0}
@@ -452,6 +473,10 @@ MonoBehaviour:
   rangeIsUpgraded: 0
   fireRateIsUpgraded: 0
   shootRate: 2
+  bulletDamage: 1
+  weaponRange: 10
+  _currentFireRateUpgradeLevel: 1
+  _moneySystem: {fileID: 0}
 --- !u!65 &3829238797936432743
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -699,4 +724,93 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3672824540391565368, guid: 5b38f16182c817d4b8a3992d8f5e9569,
     type: 3}
   m_PrefabInstance: {fileID: 7899335156272103111}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8142740955181492176
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4604776925144075214}
+    m_Modifications:
+    - target: {fileID: 2149881304420587166, guid: 49be9f4dd370ee34680161905b495fae,
+        type: 3}
+      propertyPath: m_Name
+      value: BombFire
+      objectReference: {fileID: 0}
+    - target: {fileID: 5106704288803929420, guid: 49be9f4dd370ee34680161905b495fae,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.3536
+      objectReference: {fileID: 0}
+    - target: {fileID: 5106704288803929420, guid: 49be9f4dd370ee34680161905b495fae,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.3536
+      objectReference: {fileID: 0}
+    - target: {fileID: 5106704288803929420, guid: 49be9f4dd370ee34680161905b495fae,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.3536
+      objectReference: {fileID: 0}
+    - target: {fileID: 5106704288803929420, guid: 49be9f4dd370ee34680161905b495fae,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 5106704288803929420, guid: 49be9f4dd370ee34680161905b495fae,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.59
+      objectReference: {fileID: 0}
+    - target: {fileID: 5106704288803929420, guid: 49be9f4dd370ee34680161905b495fae,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5106704288803929420, guid: 49be9f4dd370ee34680161905b495fae,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5106704288803929420, guid: 49be9f4dd370ee34680161905b495fae,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5106704288803929420, guid: 49be9f4dd370ee34680161905b495fae,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5106704288803929420, guid: 49be9f4dd370ee34680161905b495fae,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5106704288803929420, guid: 49be9f4dd370ee34680161905b495fae,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5106704288803929420, guid: 49be9f4dd370ee34680161905b495fae,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5106704288803929420, guid: 49be9f4dd370ee34680161905b495fae,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 49be9f4dd370ee34680161905b495fae, type: 3}
+--- !u!4 &4025791177998539420 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5106704288803929420, guid: 49be9f4dd370ee34680161905b495fae,
+    type: 3}
+  m_PrefabInstance: {fileID: 8142740955181492176}
   m_PrefabAsset: {fileID: 0}

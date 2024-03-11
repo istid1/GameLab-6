@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2972451340290293267}
   - component: {fileID: 594095138452268955}
   m_Layer: 0
-  m_Name: Trail
+  m_Name: BombTowerTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,7 +80,7 @@ TrailRenderer:
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 3
     widthCurve:
       serializedVersion: 2
       m_Curve:
