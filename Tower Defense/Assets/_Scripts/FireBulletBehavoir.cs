@@ -101,8 +101,6 @@ namespace _Scripts
                     hasHappened = true;
                 }
                 
-                
-                    
             }
         }
         IEnumerator DestroyAfterDelay(float seconds)
