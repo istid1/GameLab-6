@@ -149,8 +149,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletDamage: 1
-  stone: 0
-  fire: 0
-  ice: 0
-  lightning: 1
-  bomb: 0
+  damageType: 3

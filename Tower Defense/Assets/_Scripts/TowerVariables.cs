@@ -13,7 +13,9 @@ namespace _Scripts
         public int bulletDamage = 1;
         public float weaponRange = 10f;
 
-        private int _currentFireRateUpgradeLevel = 1;
+        [HideInInspector]
+        public int _currentFireRateUpgradeLevel = 1;
+        
         private int _currentRangeUpgradeLevel = 1;
         private int _currentDamageUpgradeLevel = 1;
         

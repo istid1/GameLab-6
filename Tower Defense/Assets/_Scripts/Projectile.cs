@@ -1,4 +1,5 @@
 using System;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -6,46 +7,62 @@ public class Projectile : MonoBehaviour
     [HideInInspector]
     public int bulletDamage = 1;
 
+    public int bulletSpeed;
+
+    private GameObject targetEnemy;
     
-
-    [Header("Damage Type")] 
-    public bool stone;
-    public bool fire;
-    public bool ice;
-    public bool lightning;
-    public bool bomb;
-
-    private string damageType;
-
+    private string damageTypeString;
     private EnemyHealth enemyHealth;
+
+    [SerializeField] private DamageType damageType;
+
+
+    public enum DamageType
+    {
+        Stone,
+        Fire,
+        Ice,
+        Lightning,
+        Bomb
+    }
+
+
+    public void SetTarget(GameObject enemy)
+    {
+        targetEnemy = enemy;
+    }
 
 
     private void Start()
     {
-        if (stone)
-        {
-            damageType = "Stone";
-        }
-        
-        if (ice)
-        {
-            damageType = "Ice";
-        }
-        
-        if (fire)
-        {
-            damageType = "Fire";
-        }
-        if (lightning)
-        {
-            damageType = "Lightning";
-        }
-        if (bomb)
-        {
-            damageType = "Bomb";
-        }
-        
+        SetDamageType();
     }
+    
+    
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        if (targetEnemy != null)
+        {
+            Vector3 direction = (targetEnemy.transform.position - transform.position).normalized;
+            
+            //rotate towards the target
+            Quaternion lookRotation = quaternion.LookRotation(direction, Vector3.up);
+            transform.rotation = lookRotation;
+            
+            transform.position += direction * bulletSpeed * Time.deltaTime;
+        }
+        else
+        {
+            // If enemy is destroyed or missing, destroy the bullet
+            Destroy(gameObject);
+        }
+    }
+    
+    
+    
+    
+    
 
     private void OnTriggerEnter(Collider other)
     {
@@ -54,12 +71,17 @@ public class Projectile : MonoBehaviour
             {
                 
                 enemyHealth = other.GetComponent<EnemyHealth>();
-                if (enemyHealth.enemyType == damageType)
+                if (enemyHealth.enemyTypeString == damageTypeString)
                 {
                     
                     enemyHealth.TakeDamage(bulletDamage);
                     Destroy(gameObject);
 
+                }
+
+                else
+                {
+                    Destroy(gameObject);
                 }
                 
                 //other.GetComponent<EnemyHealth>().TakeDamage(bulletDamage);
@@ -67,4 +89,31 @@ public class Projectile : MonoBehaviour
             }
         
     }
+
+
+    private void SetDamageType()
+    {
+        if (damageType == DamageType.Stone)
+        {
+            damageTypeString = "Stone";
+        }
+        if (damageType == DamageType.Fire)
+        {
+            damageTypeString = "Fire";
+        }
+        if (damageType == DamageType.Ice)
+        {
+            damageTypeString = "Ice";
+        }
+        if (damageType == DamageType.Lightning)
+        {
+            damageTypeString = "Lightning";
+        }
+        if (damageType == DamageType.Bomb)
+        {
+            damageTypeString = "Bomb";
+        }
+    }
+    
+    
 }

@@ -32,11 +32,14 @@ public class TowerFSM : FSM
 
     [SerializeField]
     private GameObject bulletPrefab;
-    private int bulletSpeed = 20;
+    private int bulletSpeed = 25;
 
     public int bulletDamage;
 
     private EnemyParent enemyParentScript;
+
+
+    private int animSpeedMultiplier;
 
     protected override void Initialize()
     {
@@ -57,6 +60,8 @@ public class TowerFSM : FSM
         shootRate = _towerVariables.shootRate;
         weaponRange = _towerVariables.weaponRange;
         bulletDamage = _towerVariables.bulletDamage;
+
+        animSpeedMultiplier = _towerVariables._currentFireRateUpgradeLevel;
         
         switch (currState)
         {
@@ -157,21 +162,27 @@ public class TowerFSM : FSM
             if (hasAnimation)
             {
                 _anim.SetTrigger("PlayTrigger");
+                _anim.SetFloat("UpgradeMultiplier", animSpeedMultiplier);
 
             }
             
             Vector3 bulletPosition = new Vector3(transform.position.x, 10f, transform.position.z);
             GameObject bullet = Instantiate(bulletPrefab, bulletPosition, Quaternion.identity);
 
-            bullet.GetComponent<Projectile>().bulletDamage = bulletDamage;
-
-            Vector3 direction = (closestEnemy.transform.position - transform.position).normalized;
-
-            bullet.transform.position = transform.position;
-            bullet.transform.rotation = Quaternion.LookRotation(direction);
-
+            Projectile projectile = bullet.GetComponent<Projectile>();
             
-            bullet.GetComponent<Rigidbody>().AddForce(direction * bulletSpeed, ForceMode.Impulse);
+            projectile.bulletDamage = bulletDamage;
+            projectile.bulletSpeed = bulletSpeed;
+            projectile.SetTarget(closestEnemy);
+
+
+            // Vector3 direction = (closestEnemy.transform.position - transform.position).normalized;
+            //
+            // bullet.transform.position = transform.position;
+            // bullet.transform.rotation = Quaternion.LookRotation(direction);
+            //
+            // bullet.GetComponent<Rigidbody>().AddForce(direction * bulletSpeed, ForceMode.Impulse);
+
 
             //Destroy the bullet after it has travelled the weaponRange
             Destroy(bullet, weaponRange / bulletSpeed);

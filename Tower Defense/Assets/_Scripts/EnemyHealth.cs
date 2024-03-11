@@ -1,28 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using _Scripts;
+using Unity.Android.Gradle.Manifest;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 
 public class EnemyHealth : MonoBehaviour
 {
     public float health = 3;
-
+    
     [HideInInspector]
-    public string enemyType;
+    public string enemyTypeString;
+    
+    
+    private EnemyParent enemyParentScript;
+    private EnemyMovement enemyMovement;
 
-    [Header("Enemy Type")]
-    public bool stone;
-    public bool fire;
-    public bool ice;
-    public bool lightning;
-    public bool bomb;
+    
+    [SerializeField] private EnemyType enemyType;
+
     
 
-    private EnemyParent enemyParentScript;
+    public enum EnemyType
+    {
+        Stone,
+        Fire,
+        Ice,
+        Lightning,
+        Bomb
+    }
 
-    private EnemyMovement enemyMovement;
     
     
     // Start is called before the first frame update
@@ -31,32 +40,11 @@ public class EnemyHealth : MonoBehaviour
         enemyParentScript = GameObject.FindGameObjectWithTag("EnemyParent").GetComponent<EnemyParent>();
         enemyMovement = this.gameObject.GetComponent<EnemyMovement>();
 
-        if (stone)
-        {
-            enemyType = "Stone";
-        }
-        if (fire)
-        {
-            enemyType = "Fire";
-        }
-        if (ice)
-        {
-            enemyType = "Ice";
-        }
-        if (lightning)
-        {
-            enemyType = "Lightning";
-        }
-        if (bomb)
-        {
-            enemyType = "Bomb";
-        }
-        
 
-        
-        
-        
+        CheckEnemyType();
+
     }
+    
 
     // Update is called once per frame
     void Update()
@@ -74,5 +62,29 @@ public class EnemyHealth : MonoBehaviour
     {
         health -= damage;
         //Debug.Log("OW");
+    }
+    
+    void CheckEnemyType()
+    {
+        if (enemyType == EnemyType.Stone)
+        {
+            enemyTypeString = "Stone";
+        }
+        if (enemyType == EnemyType.Fire)
+        {
+            enemyTypeString = "Fire";
+        }
+        if (enemyType == EnemyType.Ice)
+        {
+            enemyTypeString = "Ice";
+        }
+        if (enemyType == EnemyType.Lightning)
+        {
+            enemyTypeString = "Lightning";
+        }
+        if (enemyType == EnemyType.Bomb)
+        {
+            enemyTypeString = "Bomb";
+        }
     }
 }
