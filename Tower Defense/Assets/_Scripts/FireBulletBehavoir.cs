@@ -33,7 +33,7 @@ namespace _Scripts
         
         [SerializeField] private float dragFactor;
     
-        public void SetTarget(Transform target, TowerVariables towerVariables) //duplicate SetTarget Function (Projectile)
+        public void SetTargetFire(Transform target, TowerVariables towerVariables) //duplicate SetTarget Function (Projectile)
         {
             
             _target = target;

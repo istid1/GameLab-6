@@ -78,7 +78,7 @@ public class FireTowerAttack : MonoBehaviour
             {
                 
                 var bullet = Instantiate(_fireBulletPrefab, _bulletSpawnPoint.transform.position, Quaternion.identity);
-                bullet.GetComponent<FireBulletBehavoir>().SetTarget(_closestEnemy.transform, _towerVariables);
+                bullet.GetComponent<FireBulletBehavoir>().SetTargetFire(_closestEnemy.transform, _towerVariables);
                 
                 
                 _shootTimer = _shootRate;
