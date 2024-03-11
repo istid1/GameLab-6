@@ -153,11 +153,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletDamage: 1
-  stone: 0
-  fire: 0
-  ice: 1
-  lightning: 0
-  bomb: 0
+  bulletSpeed: 0
+  damageType: 2
 --- !u!114 &6314071448253802492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,6 +170,7 @@ MonoBehaviour:
   speed: 50
   _towerVariables: {fileID: -4078027590017202433, guid: 0bf4a2c899b5e8043bf423c576bdced1,
     type: 3}
+  _bulletDamage: 0
   dragFactor: 0.05
 --- !u!1 &7306368011410956079
 GameObject:
