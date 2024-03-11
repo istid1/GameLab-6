@@ -286,6 +286,7 @@ MonoBehaviour:
   _lightningAttack: {fileID: 1842770269074340955}
   _towerVariables: {fileID: -3585210849808423747}
   _bulletDamage: 0
+  _shootRate: 0
 --- !u!4 &4311120373137787186 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3916364076882523972, guid: 7b77aa147eaf55a47a719c1244015f1f,
@@ -313,6 +314,7 @@ MonoBehaviour:
   _lightningAttack: {fileID: 1842770269074340955}
   _towerVariables: {fileID: -3585210849808423747}
   _bulletDamage: 0
+  _shootRate: 0
 --- !u!2083052967 &5382048052546651161 stripped
 VisualEffect:
   m_CorrespondingSourceObject: {fileID: 5133388290633595503, guid: 7b77aa147eaf55a47a719c1244015f1f,
@@ -340,6 +342,7 @@ MonoBehaviour:
   _lightningAttack: {fileID: 1842770269074340955}
   _towerVariables: {fileID: -3585210849808423747}
   _bulletDamage: 0
+  _shootRate: 0
 --- !u!1 &7186591807675634835 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7941660817592691429, guid: 7b77aa147eaf55a47a719c1244015f1f,
@@ -361,6 +364,7 @@ MonoBehaviour:
   _lightningAttack: {fileID: 1842770269074340955}
   _towerVariables: {fileID: -3585210849808423747}
   _bulletDamage: 0
+  _shootRate: 0
 --- !u!1 &9111702911590786344 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8358347507893263198, guid: 7b77aa147eaf55a47a719c1244015f1f,
@@ -382,6 +386,7 @@ MonoBehaviour:
   _lightningAttack: {fileID: 1842770269074340955}
   _towerVariables: {fileID: -3585210849808423747}
   _bulletDamage: 0
+  _shootRate: 0
 --- !u!1001 &5339481107889363882
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -763,6 +768,8 @@ MonoBehaviour:
   shootRate: 2
   bulletDamage: 1
   weaponRange: 10
+  _moneySystem: {fileID: 5063191900335640901, guid: 32a83f5ac556cae41bdf64bece26dffe,
+    type: 3}
 --- !u!65 &1244855555115855666
 BoxCollider:
   m_ObjectHideFlags: 0

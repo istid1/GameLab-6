@@ -262,6 +262,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18b929aca66b0754f81d4702cc83af9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _moneySystem: {fileID: 5063191900335640901, guid: 32a83f5ac556cae41bdf64bece26dffe,
+    type: 3}
   health: 10
   enemyTypeString: 
   enemyType: 1
