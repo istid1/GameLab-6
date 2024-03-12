@@ -443,6 +443,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5787959718985280218}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 372b9a5970311d7449b26df8e81acc68,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -5907063244428177541}
   m_SourcePrefab: {fileID: 100100000, guid: 372b9a5970311d7449b26df8e81acc68, type: 3}
 --- !u!1 &8224090138231367390 stripped
 GameObject:
@@ -494,6 +498,8 @@ MonoBehaviour:
   shootRate: 2
   bulletDamage: 1
   weaponRange: 10
+  _currentFireRateUpgradeLevel: 1
+  _moneySystem: {fileID: 0}
 --- !u!65 &540330611889973762
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -552,6 +558,20 @@ MonoBehaviour:
   _fireBulletPrefab: {fileID: 2323418215457351779, guid: d3fcd146fafc48d4ebab2e8d926c6a89,
     type: 3}
   _bulletSpawnPoint: {fileID: 3949197261793135239}
+--- !u!114 &-5907063244428177541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8224090138231367390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b983a83fd2b0a24e9b052b4a1706578, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerType: 1
+  _towerTypeString: 
 --- !u!4 &8748812668235856996 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 372b9a5970311d7449b26df8e81acc68,

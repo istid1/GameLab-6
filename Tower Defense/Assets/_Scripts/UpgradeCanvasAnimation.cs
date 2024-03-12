@@ -12,12 +12,12 @@ namespace _Scripts
         [SerializeField] private RectTransform _fireRateButton;
         [SerializeField] private RectTransform _rangeButton;
         [SerializeField] private RectTransform _xButton;
-       
+        [SerializeField] private RectTransform _sellButton;
         
         [SerializeField] private TowerController _towerController;
 
 
-        private GameObject towerN, damageB, fireRateB, rangeB, xB;
+        private GameObject towerN, damageB, fireRateB, rangeB, xB, sellB;
         
         
         private void Start()
@@ -27,7 +27,7 @@ namespace _Scripts
             fireRateB = _fireRateButton.gameObject;
             rangeB = _rangeButton.gameObject;
             xB = _xButton.gameObject;
-            
+            sellB = _sellButton.gameObject;
             UpgradeCanvasDisabled();
         }
 
@@ -41,8 +41,8 @@ namespace _Scripts
             _fireRateButton.DOAnchorPos(new Vector2(250, 200), 0.5f);
             _rangeButton.DOAnchorPos(new Vector2(250, 100), 0.5f);
             _xButton.DOAnchorPos(new Vector2(300, 500), 0.5f);
-          
-            
+            _sellButton.DOAnchorPos(new Vector2(250, -350), 0.5f);
+
         }
         public void MoveCanvasDisabled()
         {
@@ -53,7 +53,8 @@ namespace _Scripts
             _fireRateButton.DOAnchorPos(new Vector2(700, 0), 0.5f);
             _xButton.DOAnchorPos(new Vector2(700, 0), 0.5f);
            _rangeButton.DOAnchorPos(new Vector2(700, 0), 0.5f);
-                
+           _sellButton.DOAnchorPos(new Vector2(700, 0), 0.5f);
+
 
         }
 
@@ -75,6 +76,7 @@ namespace _Scripts
             fireRateB.SetActive(isActive);
             rangeB.SetActive(isActive);
             xB.SetActive(isActive);
+            sellB.SetActive(isActive);
         }
         
         

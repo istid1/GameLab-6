@@ -309,7 +309,7 @@ namespace _Scripts
             if (_iceButtonIsPressed) return _costIceTower;
             if (_lightningButtonIsPressed) return _costLightningTower;
             if (_bombButtonIsPressed) return _costBombTower;
-            // You get the idea...
+            
             // Return some default value or throw an exception if no button is pressed  
             return 0;
         }
@@ -693,9 +693,56 @@ namespace _Scripts
                     PlayUpgradeVFX();
                 }
             }
-            
         }
 
+        public void SellButton()
+        {
+            
+            if (_currentSelectedTower == null)
+            {
+                return;
+            }
+            
+            var currentTowerType = _currentSelectedTower.GetComponent<TowerTypeing>();
+
+
+            int currentUpgradeLevelDamage =
+                _currentSelectedTower.GetComponent<TowerVariables>()._currentDamageUpgradeLevel;
+            int currentUpgradeLevelFireRate =
+                _currentSelectedTower.GetComponent<TowerVariables>()._currentFireRateUpgradeLevel;
+            int currentUpgradeLevelRange =
+                _currentSelectedTower.GetComponent<TowerVariables>()._currentRangeUpgradeLevel;
+         
+            int baseRefund = 0;
+            if (currentTowerType._towerTypeString == "BallistaTower")
+            {
+                baseRefund = 50 / 2;
+            }
+            else if (currentTowerType._towerTypeString == "FireTower")
+            {
+                baseRefund = 100 / 2;
+            }
+            else if (currentTowerType._towerTypeString == "IceTower")
+            {
+                baseRefund = 150 / 2;
+            }
+            else if (currentTowerType._towerTypeString == "LightningTower")
+            {
+                baseRefund = 200 / 2;
+            }
+            else if (currentTowerType._towerTypeString == "BombTower")
+            {
+                baseRefund = 250 / 2;
+            }
+
+            int totalRefund = baseRefund + ((currentUpgradeLevelDamage + currentUpgradeLevelRange + currentUpgradeLevelFireRate) * 25);
+            
+            _moneySystem.currentMoney += totalRefund;
+            
+            placedTower.Remove(_currentSelectedTower);
+            Destroy(_currentSelectedTower);
+            
+        }
 
         private void PlayUpgradeVFX()
         {
@@ -710,11 +757,5 @@ namespace _Scripts
                 
             }
         }
-        
-       
-        
-        
-        
-        
     } 
 }
