@@ -53,6 +53,7 @@ namespace _Scripts
         private void Start()
         {
             SetDamageType();
+            _hasHappened = false;
         }
 
         void Update()
