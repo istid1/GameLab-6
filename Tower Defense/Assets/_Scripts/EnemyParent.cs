@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Lumin;
 
 public class EnemyParent : MonoBehaviour
 {
@@ -21,7 +22,8 @@ public class EnemyParent : MonoBehaviour
     private IEnumerator DelayAddChildrenCoroutine()
     {
         yield return new WaitForSeconds(2f);
-        AddMyChildren();
+        //AddMyChildren();
+        AddMyGrandChildren();
     }
     
     void AddMyChildren()
@@ -31,6 +33,21 @@ public class EnemyParent : MonoBehaviour
         foreach (Transform child in transform)
         {
             allEnemies.Add(child.gameObject);
+        }
+    }
+    
+    void AddMyGrandChildren()
+    {
+        allEnemies.Clear();
+        
+        foreach (Transform child in transform)
+        {
+            foreach (Transform grandchild in child)
+            {
+                allEnemies.Add(grandchild.gameObject);
+            }
+            
+            
         }
     }
 

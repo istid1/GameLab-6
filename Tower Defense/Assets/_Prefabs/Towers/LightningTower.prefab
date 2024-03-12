@@ -754,6 +754,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 2323418215457351779, guid: 07b281ababd82724980c0a8b9d0c7e26,
     type: 3}
   bulletDamage: 3
+  towerType: 3
 --- !u!114 &-3585210849808423747
 MonoBehaviour:
   m_ObjectHideFlags: 0
