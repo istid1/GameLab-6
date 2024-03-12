@@ -25,12 +25,13 @@ namespace _Scripts
         private EnemyHealth _enemyHealth;
 
         private bool _hasHappened;
+        private string damageTypeString;
 
         [SerializeField] private TowerVariables _towerVariables;
 
         [SerializeField] private int _bulletDamage;
         
-        
+        [SerializeField] private DamageType damageType;
         [SerializeField] private float dragFactor;
     
         public void SetTargetFire(Transform target, TowerVariables towerVariables) //duplicate SetTarget Function (Projectile)
@@ -51,7 +52,7 @@ namespace _Scripts
 
         private void Start()
         {
-            
+            SetDamageType();
         }
 
         void Update()
@@ -96,13 +97,15 @@ namespace _Scripts
             if (other.CompareTag("Enemy"))
             {
                 _enemyHealth = other.GetComponent<EnemyHealth>();
-                if (!_hasHappened)
-                {
-                    _enemyHealth.TakeDamage(_bulletDamage);
-                    StartCoroutine(DestroyAfterDelay(2f));
-                    _hasHappened = true;
-                }
                 
+                    if (_enemyHealth.enemyTypeString == damageTypeString && !_hasHappened)
+                    {
+                    
+                        _enemyHealth.TakeDamage(_bulletDamage);
+                        
+                        StartCoroutine(DestroyAfterDelay(2f));
+                        _hasHappened = true;
+                    }
             }
         }
         IEnumerator DestroyAfterDelay(float seconds)
@@ -111,6 +114,38 @@ namespace _Scripts
             _enemyHealth.TakeDamage(_bulletDamage);
             _hasHappened = false;
             Destroy(gameObject);
+        }
+        
+        public enum DamageType
+        {
+            Stone,
+            Fire,
+            Ice,
+            Lightning,
+            Bomb
+        }
+        private void SetDamageType()
+        {
+            if (damageType == DamageType.Stone)
+            {
+                damageTypeString = "Stone";
+            }
+            if (damageType == DamageType.Fire)
+            {
+                damageTypeString = "Fire";
+            }
+            if (damageType == DamageType.Ice)
+            {
+                damageTypeString = "Ice";
+            }
+            if (damageType == DamageType.Lightning)
+            {
+                damageTypeString = "Lightning";
+            }
+            if (damageType == DamageType.Bomb)
+            {
+                damageTypeString = "Bomb";
+            }
         }
         
         

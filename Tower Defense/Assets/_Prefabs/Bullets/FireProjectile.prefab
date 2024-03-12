@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 1640273279031767450}
   - component: {fileID: 614211440574113766}
   - component: {fileID: 4517528165816526815}
-  - component: {fileID: -1713998911271867932}
   - component: {fileID: 6314071448253802492}
   m_Layer: 12
   m_Name: FireProjectile
@@ -140,21 +139,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-1713998911271867932
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2323418215457351779}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42954c3a9844db746ba7bcef2c972fd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletDamage: 1
-  bulletSpeed: 0
-  damageType: 2
 --- !u!114 &6314071448253802492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,6 +155,7 @@ MonoBehaviour:
   _towerVariables: {fileID: -4078027590017202433, guid: 0bf4a2c899b5e8043bf423c576bdced1,
     type: 3}
   _bulletDamage: 0
+  damageType: 2
   dragFactor: 0.05
 --- !u!1 &7306368011410956079
 GameObject:
