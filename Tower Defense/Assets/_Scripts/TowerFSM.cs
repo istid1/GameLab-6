@@ -186,7 +186,7 @@ public class TowerFSM : FSM
 
             }
             
-            Vector3 bulletPosition = new Vector3(transform.position.x, 10f, transform.position.z);
+            Vector3 bulletPosition = new Vector3(transform.position.x, 0f, transform.position.z);
             GameObject bullet = Instantiate(bulletPrefab, bulletPosition, Quaternion.identity);
 
             Projectile projectile = bullet.GetComponent<Projectile>();
