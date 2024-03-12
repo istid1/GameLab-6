@@ -16,6 +16,12 @@ TagManager:
   - UpgradeTag
   - Lightning
   - DummyEnemy
+  - GameManager
+  - StoneParent
+  - IceParent
+  - FireParent
+  - LightningParent
+  - BombParent
   layers:
   - Default
   - TransparentFX

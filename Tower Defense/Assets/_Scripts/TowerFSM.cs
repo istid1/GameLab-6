@@ -41,11 +41,29 @@ public class TowerFSM : FSM
 
     private int animSpeedMultiplier;
 
+    [SerializeField] private TowerType towerType;
+    public enum TowerType
+    {
+        Stone, Ice, Fire, Lightning, Bomb,
+    }
+
+    private Transform stoneParent, iceParent, fireParent, lightningParent, bombParent;
+    
+    
+    
+
     protected override void Initialize()
     {
         currState = FSMState.DontShoot;
         enemyParent = GameObject.FindGameObjectWithTag("EnemyParent");
         enemyParentScript = enemyParent.GetComponent<EnemyParent>();
+
+        stoneParent = GameObject.FindGameObjectWithTag("StoneParent").transform;
+        iceParent = GameObject.FindGameObjectWithTag("IceParent").transform;
+        fireParent = GameObject.FindGameObjectWithTag("FireParent").transform;
+        lightningParent = GameObject.FindGameObjectWithTag("LightningParent").transform;
+        bombParent = GameObject.FindGameObjectWithTag("BombParent").transform;
+        
 
         if (hasAnimation)
         {
@@ -120,14 +138,16 @@ public class TowerFSM : FSM
     {
         if (enemyParentScript.allEnemies != null)
         {
-            //Clears the zombieList so it doesn't fill up with duplicates
-            enemyLocList.Clear();
-
-            //Add the zombie gameobjects in the list
-            foreach (Transform child in enemyParent.transform)
-            {
-                enemyLocList.Add(child.gameObject);
-            }
+            // //Clears the zombieList so it doesn't fill up with duplicates
+            // enemyLocList.Clear();
+            //
+            // //Add the zombie gameobjects in the list
+            // foreach (Transform child in enemyParent.transform)
+            // {
+            //     enemyLocList.Add(child.gameObject);
+            // }
+            
+            AddTargets();
 
 
             //Checks which zombie is the closest one, and returns that as the closestZombie
@@ -189,6 +209,71 @@ public class TowerFSM : FSM
         }
     }
 
+    private void AddStoneTargets()
+    {
+       
+        foreach (Transform child in stoneParent)
+        {
+            enemyLocList.Add(child.gameObject);
+        }
+    }
+
+    private void AddTargets()
+    {
+        if (towerType == TowerType.Stone)
+        {
+            enemyLocList.Clear();
+
+            AddStoneTargets();
+        }
+
+        if (towerType == TowerType.Ice)
+        {
+            enemyLocList.Clear();
+            
+
+            AddStoneTargets();
+            
+            foreach (Transform child in iceParent)
+            {
+                enemyLocList.Add(child.gameObject);
+            }
+        }
+
+        if (towerType == TowerType.Fire)
+        {
+            enemyLocList.Clear();
+
+            AddStoneTargets();
+
+            foreach (Transform child in fireParent)
+            {
+                enemyLocList.Add(child.gameObject);
+            }
+        }
+        if (towerType == TowerType.Lightning)
+        {
+            enemyLocList.Clear();
+
+            AddStoneTargets();
+
+            foreach (Transform child in lightningParent)
+            {
+                enemyLocList.Add(child.gameObject);
+            }
+        }
+        if (towerType == TowerType.Bomb)
+        {
+            enemyLocList.Clear();
+
+            AddStoneTargets();
+
+            foreach (Transform child in bombParent)
+            {
+                enemyLocList.Add(child.gameObject);
+            }
+        }
+    }
    
     
 }
