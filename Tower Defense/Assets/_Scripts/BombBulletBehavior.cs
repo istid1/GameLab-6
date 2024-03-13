@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -40,6 +41,8 @@ namespace _Scripts
         private Renderer _bomBulletMeshRenderer;
         [SerializeField] private GameObject _bombTrail;
         private Vector3 _lastKnownPosition;
+
+        private bool _vfxPlayed = false;
         
         // Start is called before the first frame update
         void Start()
@@ -50,30 +53,36 @@ namespace _Scripts
         // Update is called once per frame
         void Update()
         {
-            if (_target == null)
+            var elapsedTime = Time.time - _startTime;
+            if (_randomDirection && elapsedTime > _RANDOM_DIRECTION_TIME)
             {
-                // When the target is null, use the last known position
+                _randomDirection = false;
+            }
+    
+            if (_target != null)
+            {
+                // When the target is not null, store its current position as the last known
+                _lastKnownPosition = _target.position;
+            }
+            else if(!_randomDirection)
+            {
+                // When the target is null and elapseTime is more than _RANDOM_DIRECTION_TIME, use the last known position
                 Vector3 direction = (_lastKnownPosition - transform.position).normalized;
                 transform.position += direction * speed * Time.deltaTime;
-
                 // Add a condition to destroy the gameObject, e.g. when it reaches the last known position
-                if (Vector3.Distance(transform.position, _lastKnownPosition) < 1f)
+                if (Vector3.Distance(transform.position, _lastKnownPosition) < 0.1f)
                 {
-                    Destroy(gameObject, 3f);
+                    Destroy(gameObject, 1f);
                 }
                 return;
             }
-
-            // When the target is not null, store its current position as the last known
-            _lastKnownPosition = _target.position;
-            if (_impactVFXprefab != null && _target != null)
+        
+            if (_impactVFXprefab != null)
             {
-               
-                if(_isCollided)
-                    return;
+                if(_isCollided) return;
 
                 _bulletDamage = _towerVariables.bulletDamage;
-        
+
                 // Check if this script's gameObject is not null before accessing its Transform
                 if (_randomDirection)
                 {
@@ -84,16 +93,9 @@ namespace _Scripts
                     speed = 50;
                 }
 
-                
-        
-                var elapsedTime = Time.time - _startTime;
-                // Determine if the bullet should change direction towards the target
-                if (_randomDirection && elapsedTime > _RANDOM_DIRECTION_TIME)
-                {
-                    _randomDirection = false;
-                }
                 Vector3 direction = _randomDirection ?
                     _randomUpwardsDirection : (_target.position - transform.position).normalized;
+
                 // Apply drag when bullet is moving upwards
                 if (_randomDirection)
                 {
@@ -139,15 +141,26 @@ namespace _Scripts
                 
                 _isCollided = true;
             }
-            if (other.CompareTag("GroundDummy"))
+
+           
+        }
+        
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.CompareTag("Ground") && !_vfxPlayed)
             {
+                speed = 0;
+                _bomBulletMeshRenderer = GetComponent<Renderer>();
                 Debug.Log("ground got hit");
                 _impactVFXGround.SetActive(true);
                 _bombTrail.SetActive(false);
                 _bomBulletMeshRenderer.enabled = false;
+
+                _vfxPlayed = true; // Set the flag to true so this block of code will not be executed again.
             }
-            
         }
+        
+        
         
     }
 }
