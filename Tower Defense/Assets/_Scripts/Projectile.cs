@@ -12,6 +12,7 @@ public class Projectile : MonoBehaviour
     private GameObject targetEnemy;
     
     private string damageTypeString;
+    private string secondaryDamageString;
     private EnemyHealth enemyHealth;
 
     [SerializeField] private DamageType damageType;
@@ -36,6 +37,7 @@ public class Projectile : MonoBehaviour
     private void Start()
     {
         SetDamageType();
+        secondaryDamageString = "Stone";
     }
     
     
@@ -72,6 +74,13 @@ public class Projectile : MonoBehaviour
                 
                 enemyHealth = other.GetComponent<EnemyHealth>();
                 if (enemyHealth.enemyTypeString == damageTypeString)
+                {
+                    
+                    enemyHealth.TakeDamage(bulletDamage);
+                    Destroy(gameObject);
+
+                }
+                if (enemyHealth.enemyTypeString == secondaryDamageString)
                 {
                     
                     enemyHealth.TakeDamage(bulletDamage);

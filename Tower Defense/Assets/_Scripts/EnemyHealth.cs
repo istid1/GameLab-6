@@ -14,10 +14,18 @@ public class EnemyHealth : MonoBehaviour
     
     [HideInInspector]
     public string enemyTypeString;
+
+    //public Material stoneEnemyMaterial;
     
     
     private EnemyParent enemyParentScript;
     private EnemyMovement enemyMovement;
+    private GameObject stoneParent;
+    
+    [SerializeField]
+    private SkinnedMeshRenderer _mR;
+    [SerializeField]
+    private GameManager _gm;
 
     
     [SerializeField] private EnemyType enemyType;
@@ -41,6 +49,9 @@ public class EnemyHealth : MonoBehaviour
         enemyParentScript = GameObject.FindGameObjectWithTag("EnemyParent").GetComponent<EnemyParent>();
         enemyMovement = this.gameObject.GetComponent<EnemyMovement>();
 
+        _mR = gameObject.transform.GetChild(3).GetComponent<SkinnedMeshRenderer>();
+        _gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        stoneParent = GameObject.FindGameObjectWithTag("StoneParent");
 
         CheckEnemyType();
 
@@ -51,7 +62,7 @@ public class EnemyHealth : MonoBehaviour
     void Update()
     {
         
-        if (health <= 0)
+        if (health <= 0 && enemyType == EnemyType.Stone)
         {
             
             enemyParentScript.allEnemies.Remove(this.gameObject);
@@ -59,6 +70,11 @@ public class EnemyHealth : MonoBehaviour
             
             Destroy(gameObject);
             
+        }
+        
+        else if (health <= 0 && enemyType != EnemyType.Stone)
+        {
+            ChangeMeToStone();
         }
         
     }
@@ -76,6 +92,7 @@ public class EnemyHealth : MonoBehaviour
         if (enemyType == EnemyType.Stone)
         {
             enemyTypeString = "Stone";
+            _gm.stoneEnemyHealth = health;
         }
         if (enemyType == EnemyType.Fire)
         {
@@ -93,5 +110,17 @@ public class EnemyHealth : MonoBehaviour
         {
             enemyTypeString = "Bomb";
         }
+    }
+
+
+
+    void ChangeMeToStone()
+    {
+        enemyType = EnemyType.Stone;
+        enemyTypeString = "Stone";
+        _mR.material = _gm.stoneEnemyMaterial;
+        health = _gm.stoneEnemyHealth;
+        transform.parent = stoneParent.transform;
+
     }
 }
