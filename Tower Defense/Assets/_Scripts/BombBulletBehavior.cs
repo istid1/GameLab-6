@@ -6,8 +6,8 @@ namespace _Scripts
 {
     public class BombBulletBehavior : MonoBehaviour
     {
-    
-    
+
+        private bool _damageIsDealt = false;
         // How long the bullet will go into a random upwards direction
         private const float _RANDOM_DIRECTION_TIME = 1.5f;
 
@@ -41,7 +41,8 @@ namespace _Scripts
         private Renderer _bomBulletMeshRenderer;
         [SerializeField] private GameObject _bombTrail;
         private Vector3 _lastKnownPosition;
-
+        
+        private float _sphereCheckRadius = 2.5f;
         private bool _vfxPlayed = false;
         
         // Start is called before the first frame update
@@ -123,28 +124,29 @@ namespace _Scripts
 
         private void OnTriggerEnter(Collider other)
         {
-            
             //_impactVFX.Play();
-            
+
             if (other.CompareTag("Enemy"))
             {
-                
                 Debug.Log(other);
-               //_impactVFX.Play();
-               
+                //_impactVFX.Play();
+
                 _impactVFXprefab.SetActive(true);
-                
+
                 _enemyHealth = other.GetComponent<EnemyHealth>();
                 _bomBulletMeshRenderer = GetComponent<Renderer>();
                 _bomBulletMeshRenderer.enabled = false;
                 _bombTrail.SetActive(false);
-                
                 _isCollided = true;
-            }
 
-           
+                if (!_damageIsDealt)
+                {
+                    DamageAoe();
+                    _damageIsDealt = true;
+                }
+            }
         }
-        
+
         private void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.CompareTag("Ground") && !_vfxPlayed)
@@ -156,11 +158,32 @@ namespace _Scripts
                 _bombTrail.SetActive(false);
                 _bomBulletMeshRenderer.enabled = false;
 
+                if (!_damageIsDealt)
+                {
+                    DamageAoe();
+                    _damageIsDealt = true;
+                }
+
                 _vfxPlayed = true; // Set the flag to true so this block of code will not be executed again.
             }
         }
-        
-        
-        
+
+
+        private void DamageAoe()
+        {
+            // Get all colliders within the radius
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, _sphereCheckRadius);
+
+            // Iterate over all the colliders and find the ones tagged "Enemy"
+            foreach (var hitCollider in hitColliders)
+            {
+                if(hitCollider.CompareTag("Enemy"))
+                {
+                    // Get EnemyHealth component of the enemy
+                    EnemyHealth enemyHealth = hitCollider.GetComponent<EnemyHealth>();
+                    enemyHealth.TakeDamage(_towerVariables.bulletDamage);
+                }
+            }
+        } 
     }
 }
