@@ -22,6 +22,7 @@ TagManager:
   - FireParent
   - LightningParent
   - BombParent
+  - GroundDummy
   layers:
   - Default
   - TransparentFX
@@ -37,7 +38,7 @@ TagManager:
   - EnemyParent
   - Projectile
   - UpgradeLayer
-  - 
+  - GroundDummy
   - 
   - 
   - 

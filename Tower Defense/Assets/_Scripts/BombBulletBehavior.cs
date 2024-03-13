@@ -32,8 +32,15 @@ namespace _Scripts
         [SerializeField] private int _bulletDamage;
 
         [SerializeField] private VisualEffect _impactVFX;
+
+        [SerializeField] private GameObject _impactVFXprefab;
+        [SerializeField] private GameObject _impactVFXGround;
         [SerializeField] private float dragFactor;
-    
+
+        private Renderer _bomBulletMeshRenderer;
+        [SerializeField] private GameObject _bombTrail;
+        private Vector3 _lastKnownPosition;
+        
         // Start is called before the first frame update
         void Start()
         {
@@ -43,40 +50,58 @@ namespace _Scripts
         // Update is called once per frame
         void Update()
         {
-            if(_isCollided)
-                return;
-
-            _bulletDamage = _towerVariables.bulletDamage;
-            
-            if (_randomDirection)
-            {
-                speed = 50;
-            }
-            else
-            {
-                speed = 50;
-            }
-
             if (_target == null)
             {
-                Destroy(gameObject);
+                // When the target is null, use the last known position
+                Vector3 direction = (_lastKnownPosition - transform.position).normalized;
+                transform.position += direction * speed * Time.deltaTime;
+
+                // Add a condition to destroy the gameObject, e.g. when it reaches the last known position
+                if (Vector3.Distance(transform.position, _lastKnownPosition) < 1f)
+                {
+                    Destroy(gameObject, 3f);
+                }
+                return;
             }
-            
-            var elapsedTime = Time.time - _startTime;
-            // Determine if the bullet should change direction towards the target
-            if (_randomDirection && elapsedTime > _RANDOM_DIRECTION_TIME)
+
+            // When the target is not null, store its current position as the last known
+            _lastKnownPosition = _target.position;
+            if (_impactVFXprefab != null && _target != null)
             {
-                _randomDirection = false;
+               
+                if(_isCollided)
+                    return;
+
+                _bulletDamage = _towerVariables.bulletDamage;
+        
+                // Check if this script's gameObject is not null before accessing its Transform
+                if (_randomDirection)
+                {
+                    speed = 50;
+                }
+                else
+                {
+                    speed = 50;
+                }
+
+                
+        
+                var elapsedTime = Time.time - _startTime;
+                // Determine if the bullet should change direction towards the target
+                if (_randomDirection && elapsedTime > _RANDOM_DIRECTION_TIME)
+                {
+                    _randomDirection = false;
+                }
+                Vector3 direction = _randomDirection ?
+                    _randomUpwardsDirection : (_target.position - transform.position).normalized;
+                // Apply drag when bullet is moving upwards
+                if (_randomDirection)
+                {
+                    direction -= direction * (speed * dragFactor);
+                }
+                transform.position += direction * speed * Time.deltaTime;
             }
-            Vector3 direction = _randomDirection ?
-                _randomUpwardsDirection : (_target.position - transform.position).normalized;
-            // Apply drag when bullet is moving upwards
-            if (_randomDirection)
-            {
-    
-                direction -= direction * (speed * dragFactor);
-            }
-            transform.position += direction * speed * Time.deltaTime;
+           
         }
     
     
@@ -96,12 +121,33 @@ namespace _Scripts
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Enemy") || other.CompareTag("Ground"))
+            
+            //_impactVFX.Play();
+            
+            if (other.CompareTag("Enemy"))
             {
-                //_enemyHealth = other.GetComponent<EnemyHealth>();
-                _impactVFX.Play();
+                
+                Debug.Log(other);
+               //_impactVFX.Play();
+               
+                _impactVFXprefab.SetActive(true);
+                
+                _enemyHealth = other.GetComponent<EnemyHealth>();
+                _bomBulletMeshRenderer = GetComponent<Renderer>();
+                _bomBulletMeshRenderer.enabled = false;
+                _bombTrail.SetActive(false);
+                
                 _isCollided = true;
             }
+            if (other.CompareTag("GroundDummy"))
+            {
+                Debug.Log("ground got hit");
+                _impactVFXGround.SetActive(true);
+                _bombTrail.SetActive(false);
+                _bomBulletMeshRenderer.enabled = false;
+            }
+            
         }
+        
     }
 }
