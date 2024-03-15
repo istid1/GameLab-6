@@ -89,13 +89,17 @@ namespace _Scripts
         
         private void Awake()
         {
-            Application.targetFrameRate = 250;
-           BuildNavMeshSurfaces();
+            
+            BuildNavMeshSurfaces();
            _mainCamera = Camera.main;
            _dummyEnemyEnabler.SetActive(true);
         }
 
-        
+        private void Start()
+        {
+            Application.targetFrameRate = 144; 
+        }
+
         // Update is called once per frame
         private void Update()
         {
