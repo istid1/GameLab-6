@@ -21,7 +21,7 @@ public class FireTowerAttack : MonoBehaviour
 
     [SerializeField] private GameObject _bulletSpawnPoint;
     
-    private Transform stoneParent, fireParent;
+    private Transform stoneParent, iceParent;
     
     
  
@@ -32,7 +32,7 @@ public class FireTowerAttack : MonoBehaviour
     void Start()
     {
         stoneParent = GameObject.FindGameObjectWithTag("StoneParent").transform;
-        fireParent = GameObject.FindGameObjectWithTag("FireParent").transform;
+        iceParent = GameObject.FindGameObjectWithTag("IceParent").transform;
         
         FindEnemies();
         
@@ -100,10 +100,24 @@ public class FireTowerAttack : MonoBehaviour
     
     private void FindEnemies()
     {
-        _enemies = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
+        //_enemies = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
         
+        
+        _enemies.Clear();
+
+        foreach (Transform child in stoneParent)
+        {
+            _enemies.Add(child.gameObject);
+        }
+
+        foreach (Transform child in iceParent)
+        {
+            _enemies.Add(child.gameObject);
+        }
         
     }
+    
+    
     
     
     

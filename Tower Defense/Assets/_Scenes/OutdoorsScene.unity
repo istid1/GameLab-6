@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2165.6243, g: 2275.3127, b: 3318.4067, a: 1}
+  m_IndirectSpecularColor: {r: 2163.6272, g: 2271.0432, b: 3305.817, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -24927,7 +24927,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 3362786992609891856}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1774786062}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb6d8e131a3dd324eb3af2999eb009cb, type: 3}
@@ -26069,6 +26069,26 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1766827072}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1774786062 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7795576368167072504, guid: 32a83f5ac556cae41bdf64bece26dffe,
+    type: 3}
+  m_PrefabInstance: {fileID: 3362786992609891856}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1774786066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774786062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b87bbc6b4b2d83f48a5a40548c41d234, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stoneEnemyHealth: 0
+  stoneEnemyMaterial: {fileID: 2100000, guid: 35d699ffc94fe214b90f92f950aeedd8, type: 2}
 --- !u!1 &1780819386
 GameObject:
   m_ObjectHideFlags: 0
@@ -32653,7 +32673,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7795576368167072504, guid: 32a83f5ac556cae41bdf64bece26dffe,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1774786066}
   m_SourcePrefab: {fileID: 100100000, guid: 32a83f5ac556cae41bdf64bece26dffe, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
