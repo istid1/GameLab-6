@@ -12,6 +12,7 @@ public class FireTowerAttack : MonoBehaviour
     private GameObject _closestEnemy;
     private float _shortestDistance = Mathf.Infinity;
     
+    [SerializeField]
     private List<GameObject> _enemies;
     
     private float _weaponRange;
@@ -19,13 +20,22 @@ public class FireTowerAttack : MonoBehaviour
     private int _weaponDamage;
 
     [SerializeField] private GameObject _bulletSpawnPoint;
+    
+    private Transform stoneParent, fireParent;
+    
+    
  
 
     private float _shootTimer;
     // Start is called before the first frame update
     void Start()
     {
+        stoneParent = GameObject.FindGameObjectWithTag("StoneParent").transform;
+        fireParent = GameObject.FindGameObjectWithTag("FireParent").transform;
+        
         FindEnemies();
+        
+        
     }
 
     // Update is called once per frame
@@ -90,6 +100,8 @@ public class FireTowerAttack : MonoBehaviour
     private void FindEnemies()
     {
         _enemies = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
+        
+        
     }
     
     

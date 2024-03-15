@@ -26,6 +26,7 @@ namespace _Scripts
 
         private bool _hasHappened;
         private string damageTypeString;
+        private string secondaryDamageString;
 
         [SerializeField] private TowerVariables _towerVariables;
 
@@ -53,6 +54,7 @@ namespace _Scripts
         private void Start()
         {
             SetDamageType();
+            secondaryDamageString = "Stone";
             _hasHappened = false;
         }
 
@@ -100,6 +102,14 @@ namespace _Scripts
                 _enemyHealth = other.GetComponent<EnemyHealth>();
                 
                     if (_enemyHealth.enemyTypeString == damageTypeString && !_hasHappened)
+                    {
+                    
+                        _enemyHealth.TakeDamage(_bulletDamage);
+                        
+                        StartCoroutine(DestroyAfterDelay(2f));
+                        _hasHappened = true;
+                    }
+                    if (_enemyHealth.enemyTypeString == secondaryDamageString && !_hasHappened)
                     {
                     
                         _enemyHealth.TakeDamage(_bulletDamage);
