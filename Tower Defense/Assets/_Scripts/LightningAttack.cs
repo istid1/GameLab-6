@@ -106,7 +106,7 @@ namespace _Scripts
             {
                 Debug.Assert(_sphereControllers.Count == NumberOfEnemies, "Not enough SphereControllers. 5 required.");
                 //_enemies = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
-            Debug.LogError("FindEnemies");
+                
                 _enemies.Clear();
 
                 foreach (Transform child in stoneParent)
