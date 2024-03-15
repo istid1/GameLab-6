@@ -39,9 +39,7 @@ namespace _Scripts
 
         private void Update()
         {
-         Debug.Log(_currentDamageUpgradeLevel + "Damage");
-         Debug.Log(_currentFireRateUpgradeLevel + "FireRate");
-         Debug.Log(_currentRangeUpgradeLevel + "Range");
+         
         }
 
         public void UpgradeDamage() 
