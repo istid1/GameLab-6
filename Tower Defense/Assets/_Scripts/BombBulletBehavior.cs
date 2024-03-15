@@ -71,7 +71,7 @@ namespace _Scripts
                 Vector3 direction = (_lastKnownPosition - transform.position).normalized;
                 transform.position += direction * speed * Time.deltaTime;
                 // Add a condition to destroy the gameObject, e.g. when it reaches the last known position
-                if (Vector3.Distance(transform.position, _lastKnownPosition) < 0.1f)
+                if (Vector3.Distance(transform.position, _lastKnownPosition) < 1f)
                 {
                     Destroy(gameObject, 1f);
                 }
@@ -136,6 +136,7 @@ namespace _Scripts
                 _bomBulletMeshRenderer.enabled = false;
                 _bombTrail.SetActive(false);
                 _isCollided = true;
+                Destroy(gameObject, 1f);
 
                 if (!_damageIsDealt)
                 {
@@ -155,6 +156,7 @@ namespace _Scripts
                 _impactVFXGround.SetActive(true);
                 _bombTrail.SetActive(false);
                 _bomBulletMeshRenderer.enabled = false;
+                Destroy(gameObject, 1f);
 
                 if (!_damageIsDealt)
                 {
@@ -162,6 +164,7 @@ namespace _Scripts
                     _damageIsDealt = true;
                 }
                 _vfxPlayed = true; // Set the bool to true so this block of code will not be executed again.
+                
             }
             
             if (collision.gameObject.CompareTag("NavMeshGround") && !_vfxPlayed)
@@ -172,6 +175,7 @@ namespace _Scripts
                 _impactVFXGround.SetActive(true);
                 _bombTrail.SetActive(false);
                 _bomBulletMeshRenderer.enabled = false;
+                Destroy(gameObject, 1f);
 
                 if (!_damageIsDealt)
                 {
@@ -179,6 +183,7 @@ namespace _Scripts
                     _damageIsDealt = true;
                 }
                 _vfxPlayed = true; // Set the bool to true so this block of code will not be executed again.
+                
             }
         }
 

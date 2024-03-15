@@ -4,6 +4,7 @@ using _Scripts;
 using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 
@@ -11,7 +12,8 @@ public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private MoneySystem _moneySystem;
     public float health = 3;
-    
+    private float _maxHealth;
+    private float _currentHealth;
     [HideInInspector]
     public string enemyTypeString;
 
@@ -29,7 +31,7 @@ public class EnemyHealth : MonoBehaviour
 
     
     [SerializeField] private EnemyType enemyType;
-
+    [SerializeField] private Slider _slider;
     
 
     public enum EnemyType
@@ -46,6 +48,8 @@ public class EnemyHealth : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        _maxHealth = health;
         enemyParentScript = GameObject.FindGameObjectWithTag("EnemyParent").GetComponent<EnemyParent>();
         enemyMovement = this.gameObject.GetComponent<EnemyMovement>();
 
@@ -61,6 +65,7 @@ public class EnemyHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //_currentHealth = health;
         
         if (health <= 0 && enemyType == EnemyType.Stone)
         {
@@ -81,9 +86,10 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        
         MoneySystem.Instance.currentMoney++;
         health -= damage;
-        
+        UpdateHealthBar(health, _maxHealth);
         //Debug.Log("OW");
     }
     
@@ -123,4 +129,11 @@ public class EnemyHealth : MonoBehaviour
         transform.parent = stoneParent.transform;
 
     }
+
+
+    private void UpdateHealthBar(float currentHealth, float maxHealth)
+    {
+        _slider.value = currentHealth / maxHealth;
+    }
+    
 }
