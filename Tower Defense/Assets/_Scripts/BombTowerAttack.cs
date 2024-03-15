@@ -22,9 +22,17 @@ namespace _Scripts
         [SerializeField] private VisualEffect _shootVFX;
         
         private GameObject _closestEnemy;
+
+        private Transform stoneParent, bombParent;
+        private EnemyParent enemyParentScript;
+        
         // Start is called before the first frame update
         void Start()
         {
+            enemyParentScript = GameObject.FindGameObjectWithTag("EnemyParent").GetComponent<EnemyParent>();
+            stoneParent = GameObject.FindGameObjectWithTag("StoneParent").transform;
+            bombParent = GameObject.FindGameObjectWithTag("BombParent").transform;
+            
             FindEnemies();
         }
 
@@ -92,7 +100,32 @@ namespace _Scripts
         
         private void FindEnemies()
         {
-            _enemies = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
+            //_enemies = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
+            
+            ClearList();
+
+            foreach (Transform child in stoneParent)
+            {
+                _enemies.Add(child.gameObject);
+            }
+
+            foreach (Transform child in bombParent)
+            {
+                _enemies.Add(child.gameObject);
+            }
+        }
+        
+        private void ClearList()
+        {
+
+            if (_enemies != null)
+            {
+                if (_enemies.Count > 0)
+                {
+                    _enemies.Clear();
+                }
+            }
+        
         }
     }
 }
