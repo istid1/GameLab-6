@@ -82,13 +82,14 @@ namespace _Scripts
         [SerializeField] private int _costLightningTower = 200;
         [SerializeField] private int _costBombTower = 250;
 
+        private float _fpsTimer = 0;
         private int _upgradeCost = 50;
         private bool canAfordUpgrade;
         
         
         private void Awake()
         {
-            Application.targetFrameRate = 70;
+            Application.targetFrameRate = 250;
            BuildNavMeshSurfaces();
            _mainCamera = Camera.main;
            _dummyEnemyEnabler.SetActive(true);
@@ -97,8 +98,9 @@ namespace _Scripts
         
         // Update is called once per frame
         private void Update()
-        { 
-            _fpsCounter.text = "FPS : " + ((int)(1f / Time.deltaTime)).ToString();
+        {
+            
+            FPSCounter();
             
             
             CheckColor();
@@ -762,5 +764,15 @@ namespace _Scripts
                 
             }
         }
+
+
+        private void FPSCounter()
+        {
+            _fpsTimer += Time.deltaTime;
+            if (!(_fpsTimer >= 1f)) return;
+            _fpsCounter.text = "FPS : " + ((int)(1f / Time.deltaTime)).ToString();
+            _fpsTimer = 0;
+        }
+
     } 
 }
