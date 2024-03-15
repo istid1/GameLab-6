@@ -34,7 +34,7 @@ namespace _Scripts
         // Update is called once per frame
         void Update()
         {
-            Debug.Log(currentMoney);
+            
             _moneyText.text = "Money : " + currentMoney;
         }
 

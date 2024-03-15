@@ -22,6 +22,7 @@ public class FireTowerAttack : MonoBehaviour
  
 
     private float _shootTimer;
+    
     // Start is called before the first frame update
     void Start()
     {

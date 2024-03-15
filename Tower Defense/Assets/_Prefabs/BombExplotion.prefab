@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2149881304420587166
+--- !u!1 &3374380889536050471
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,23 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5106704288803929420}
-  - component: {fileID: 3545850615620701703}
-  - component: {fileID: 1225770147525780805}
+  - component: {fileID: 1645809255895398182}
+  - component: {fileID: 7946292578964108957}
+  - component: {fileID: 8986224320549468959}
   m_Layer: 0
-  m_Name: BombFire
+  m_Name: BombExplotion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5106704288803929420
+--- !u!4 &1645809255895398182
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2149881304420587166}
+  m_GameObject: {fileID: 3374380889536050471}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -33,15 +33,15 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!2083052967 &3545850615620701703
+--- !u!2083052967 &7946292578964108957
 VisualEffect:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2149881304420587166}
+  m_GameObject: {fileID: 3374380889536050471}
   m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: c9cd2e6a3e68d6f4fb141f23a11cea22, type: 3}
+  m_Asset: {fileID: 8926484042661614526, guid: 22e91ce0ca7b6c444a85b498881d3c3f, type: 3}
   m_InitialEventName: 
   m_InitialEventNameOverriden: 1
   m_StartSeed: 0
@@ -71,14 +71,14 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
---- !u!73398921 &1225770147525780805
+--- !u!73398921 &8986224320549468959
 VFXRenderer:
   serializedVersion: 1
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2149881304420587166}
+  m_GameObject: {fileID: 3374380889536050471}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0

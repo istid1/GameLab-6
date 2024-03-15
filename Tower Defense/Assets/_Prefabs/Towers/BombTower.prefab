@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5949010028267846679
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3843677784421833740}
+  m_Layer: 0
+  m_Name: BulletSpawnPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3843677784421833740
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5949010028267846679}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2, y: 1.5, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4604776925144075214}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &980853560255105039
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -399,6 +430,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4025791177998539420}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9e9c72bebeaa3cb4ca5ab3bc736c56db,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3843677784421833740}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9e9c72bebeaa3cb4ca5ab3bc736c56db,
         type: 3}
@@ -428,6 +463,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8766326156554739481}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9e9c72bebeaa3cb4ca5ab3bc736c56db,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5774045573034351777}
   m_SourcePrefab: {fileID: 100100000, guid: 9e9c72bebeaa3cb4ca5ab3bc736c56db, type: 3}
 --- !u!1 &3795589574941512052 stripped
 GameObject:
@@ -442,7 +481,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3795589574941512052}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: adbcec98cfad85c46b43f7140c500dcb, type: 3}
   m_Name: 
@@ -481,6 +520,8 @@ MonoBehaviour:
   bulletDamage: 1
   weaponRange: 10
   _currentFireRateUpgradeLevel: 1
+  _currentRangeUpgradeLevel: 0
+  _currentDamageUpgradeLevel: 0
   _moneySystem: {fileID: 0}
 --- !u!65 &3829238797936432743
 BoxCollider:
@@ -580,6 +621,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerType: 4
   _towerTypeString: 
+--- !u!114 &5774045573034351777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3795589574941512052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f824887f7cfb7724ab755dff96c9baa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _towerVariables: {fileID: -236367552170528870}
+  _enemies: []
+  _bombBulletPrefab: {fileID: 2323418215457351779, guid: 5f1d1930259e7d1488a1432c6d6a83c3,
+    type: 3}
+  _spawnPos: {fileID: 5949010028267846679}
+  _shootVFX: {fileID: 4626806058091948503}
 --- !u!4 &4604776925144075214 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9e9c72bebeaa3cb4ca5ab3bc736c56db,
@@ -757,6 +816,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: BombFire
       objectReference: {fileID: 0}
+    - target: {fileID: 3545850615620701703, guid: 49be9f4dd370ee34680161905b495fae,
+        type: 3}
+      propertyPath: m_InitialEventName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3545850615620701703, guid: 49be9f4dd370ee34680161905b495fae,
+        type: 3}
+      propertyPath: m_InitialEventNameOverriden
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5106704288803929420, guid: 49be9f4dd370ee34680161905b495fae,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -830,6 +899,12 @@ PrefabInstance:
 --- !u!4 &4025791177998539420 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5106704288803929420, guid: 49be9f4dd370ee34680161905b495fae,
+    type: 3}
+  m_PrefabInstance: {fileID: 8142740955181492176}
+  m_PrefabAsset: {fileID: 0}
+--- !u!2083052967 &4626806058091948503 stripped
+VisualEffect:
+  m_CorrespondingSourceObject: {fileID: 3545850615620701703, guid: 49be9f4dd370ee34680161905b495fae,
     type: 3}
   m_PrefabInstance: {fileID: 8142740955181492176}
   m_PrefabAsset: {fileID: 0}
