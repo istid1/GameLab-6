@@ -757,10 +757,11 @@ namespace _Scripts
             var vfxs = _currentSelectedTower.GetComponentsInChildren<VisualEffect>();
             foreach (var vfx in vfxs)
             {
-                if (vfx.gameObject.tag != "Lightning")
+                if (vfx.gameObject.tag != "Lightning" && vfx.gameObject.tag != "BombFireVFX")
                 {
                     vfx.Play();
                 }
+                
                 
             }
         }
