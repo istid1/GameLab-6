@@ -128,8 +128,6 @@ namespace _Scripts
 
             if (other.CompareTag("Enemy"))
             {
-                Debug.Log(other);
-                //_impactVFX.Play();
 
                 _impactVFXprefab.SetActive(true);
 
@@ -153,7 +151,7 @@ namespace _Scripts
             {
                 speed = 0;
                 _bomBulletMeshRenderer = GetComponent<Renderer>();
-                Debug.Log("ground got hit");
+               
                 _impactVFXGround.SetActive(true);
                 _bombTrail.SetActive(false);
                 _bomBulletMeshRenderer.enabled = false;
@@ -163,8 +161,24 @@ namespace _Scripts
                     DamageAoe();
                     _damageIsDealt = true;
                 }
+                _vfxPlayed = true; // Set the bool to true so this block of code will not be executed again.
+            }
+            
+            if (collision.gameObject.CompareTag("NavMeshGround") && !_vfxPlayed)
+            {
+                speed = 0;
+                _bomBulletMeshRenderer = GetComponent<Renderer>();
+                
+                _impactVFXGround.SetActive(true);
+                _bombTrail.SetActive(false);
+                _bomBulletMeshRenderer.enabled = false;
 
-                _vfxPlayed = true; // Set the flag to true so this block of code will not be executed again.
+                if (!_damageIsDealt)
+                {
+                    DamageAoe();
+                    _damageIsDealt = true;
+                }
+                _vfxPlayed = true; // Set the bool to true so this block of code will not be executed again.
             }
         }
 

@@ -23,6 +23,7 @@ TagManager:
   - LightningParent
   - BombParent
   - GroundDummy
+  - NavMeshGround
   layers:
   - Default
   - TransparentFX
