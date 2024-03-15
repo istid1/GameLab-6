@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.AI.Navigation;
@@ -54,7 +55,7 @@ namespace _Scripts
         private bool _runOnce;
         private bool _currentColor;
         [SerializeField] private TMP_Text _currTowerText;
-
+        [SerializeField] private TMP_Text _fpsCounter;
         private TowerVariables _towerVariables;
         [SerializeField] private UpgradeCanvasAnimation _upgradeCanvasAnimation;
         
@@ -87,20 +88,24 @@ namespace _Scripts
         
         private void Awake()
         {
+            Application.targetFrameRate = 70;
            BuildNavMeshSurfaces();
            _mainCamera = Camera.main;
            _dummyEnemyEnabler.SetActive(true);
         }
+
         
         // Update is called once per frame
         private void Update()
-        {
+        { 
+            _fpsCounter.text = "FPS : " + ((int)(1f / Time.deltaTime)).ToString();
+            
+            
             CheckColor();
             HasMoved();
             UserInputRotateTower();
             EnemiesCantFinishPath();
             DummyCantFinishPath();
-
             
             if (_instantiatedTransparentTower == null)
             {

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7512614536887616540}
   - component: {fileID: 5686297198554760212}
   - component: {fileID: 5063191900335640901}
+  - component: {fileID: 1253144600339740730}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -122,3 +123,17 @@ MonoBehaviour:
   _towerController: {fileID: 5686297198554760212}
   _moneyText: {fileID: 0}
   currentMoney: 0
+--- !u!114 &1253144600339740730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7795576368167072504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b87bbc6b4b2d83f48a5a40548c41d234, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stoneEnemyHealth: 0
+  stoneEnemyMaterial: {fileID: 2100000, guid: 35d699ffc94fe214b90f92f950aeedd8, type: 2}
