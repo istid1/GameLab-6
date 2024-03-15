@@ -88,7 +88,7 @@ public class TowerFSM : FSM
         }
 
         
-        if (enemyParentScript.allEnemies != null)
+        if (enemyParentScript.allEnemies.Count > 0) // != null)
         {
             FindClosestEnemy();
 
@@ -114,7 +114,7 @@ public class TowerFSM : FSM
 
     protected void UpdateShootState()
     {
-        if (enemyParentScript.allEnemies != null)
+        if (enemyParentScript.allEnemies.Count > 0)//!= null)
         {
             
                 shootTimer -= Time.deltaTime;
@@ -136,7 +136,7 @@ public class TowerFSM : FSM
 
     private void FindClosestEnemy()
     {
-        if (enemyParentScript.allEnemies != null)
+        if (enemyParentScript.allEnemies.Count > 0) //!= null)
         {
             // //Clears the zombieList so it doesn't fill up with duplicates
             // enemyLocList.Clear();
@@ -222,15 +222,16 @@ public class TowerFSM : FSM
     {
         if (towerType == TowerType.Stone)
         {
-            enemyLocList.Clear();
+            //enemyLocList.Clear();
+            ClearList();
 
             AddStoneTargets();
         }
 
         if (towerType == TowerType.Ice)
         {
-            enemyLocList.Clear();
-            
+            //enemyLocList.Clear();
+            ClearList();
 
             AddStoneTargets();
             
@@ -242,7 +243,8 @@ public class TowerFSM : FSM
 
         if (towerType == TowerType.Fire)
         {
-            enemyLocList.Clear();
+            //enemyLocList.Clear();
+            ClearList();
 
             AddStoneTargets();
 
@@ -253,7 +255,8 @@ public class TowerFSM : FSM
         }
         if (towerType == TowerType.Lightning)
         {
-            enemyLocList.Clear();
+            //enemyLocList.Clear();
+            ClearList();
 
             AddStoneTargets();
 
@@ -264,7 +267,8 @@ public class TowerFSM : FSM
         }
         if (towerType == TowerType.Bomb)
         {
-            enemyLocList.Clear();
+            //enemyLocList.Clear();
+            ClearList();
 
             AddStoneTargets();
 
@@ -273,6 +277,20 @@ public class TowerFSM : FSM
                 enemyLocList.Add(child.gameObject);
             }
         }
+    }
+
+
+    private void ClearList()
+    {
+
+        if (enemyLocList != null)
+        {
+            if (enemyLocList.Count > 0)
+            {
+                enemyLocList.Clear();
+            }
+        }
+        
     }
    
     

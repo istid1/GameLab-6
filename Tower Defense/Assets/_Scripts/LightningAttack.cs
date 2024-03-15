@@ -15,7 +15,8 @@ namespace _Scripts
         [SerializeField] private List<GameObject> _sphereControllers = new List<GameObject>();
 
         [SerializeField] private VisualEffect _lightingVFX;
-        private List<GameObject> _enemies;
+        
+        public List<GameObject> _enemies;
 
         [SerializeField] private GameObject _LightningLocalPos;
 
@@ -23,9 +24,18 @@ namespace _Scripts
         
         private const int NumberOfEnemies = 5;
 
+        [SerializeField]
+        private Transform stoneParent, lightningParent;
+        [SerializeField]
+        private EnemyParent enemyParentScript;
+
         private void Awake()
         {
-            FindEnemies();
+            stoneParent = GameObject.FindGameObjectWithTag("StoneParent").transform;
+            lightningParent = GameObject.FindGameObjectWithTag("LightningParent").transform;
+            enemyParentScript = GameObject.FindGameObjectWithTag("EnemyParent").GetComponent<EnemyParent>();
+
+            //FindEnemies();
         }
 
         private void Start()
@@ -37,12 +47,16 @@ namespace _Scripts
         {
             Debug.Log(isInRange);
             weaponRange = _towerVariables.weaponRange;
-            
-            CheckClosestEnemies();
-            
-            if (Input.GetKeyDown(KeyCode.Space))
+
+            if (_enemies.Count > 0)
             {
-                FindEnemies();
+                CheckClosestEnemies();
+            }
+           
+            
+            if (Input.GetKeyDown(KeyCode.Space))// && enemyParentScript.allEnemies.Count > 0)
+            {
+                Invoke("FindEnemies", 3f);
             }
         }
 
@@ -88,8 +102,24 @@ namespace _Scripts
 
         private void FindEnemies()
         {
-            Debug.Assert(_sphereControllers.Count == NumberOfEnemies, "Not enough SphereControllers. 5 required.");
-            _enemies = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
+            if (enemyParentScript.allEnemies.Count > 0)
+            {
+                Debug.Assert(_sphereControllers.Count == NumberOfEnemies, "Not enough SphereControllers. 5 required.");
+                //_enemies = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
+            Debug.LogError("FindEnemies");
+                _enemies.Clear();
+
+                foreach (Transform child in stoneParent)
+                {
+                    _enemies.Add(child.gameObject);
+                }
+
+                foreach (Transform child in lightningParent)
+                {
+                    _enemies.Add(child.gameObject);
+                }
+            }
+            
         }
         
         
