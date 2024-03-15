@@ -15,7 +15,7 @@ namespace _Scripts
         [SerializeField] private RectTransform _sellButton;
         
         [SerializeField] private TowerController _towerController;
-
+        
 
         private GameObject towerN, damageB, fireRateB, rangeB, xB, sellB;
         
@@ -31,6 +31,10 @@ namespace _Scripts
             UpgradeCanvasDisabled();
         }
 
+        private void Update()
+        {
+            
+        }
 
         public void MoveCanvasActive()
         {

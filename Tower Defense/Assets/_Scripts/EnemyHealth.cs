@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using _Scripts;
-using Unity.Android.Gradle.Manifest;
+
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
