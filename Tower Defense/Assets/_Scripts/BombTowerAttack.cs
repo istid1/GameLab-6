@@ -24,13 +24,12 @@ namespace _Scripts
         
         private GameObject _closestEnemy;
 
-        //private Transform stoneParent, bombParent;
         private EnemyParent enemyParentScript;
 
         private int animSpeedMultiplier;
         private Animator _anim;
 
-        //private Transform enemyParent;
+        private Transform stoneParent, iceParent, fireParent, lightningParent, bombParent;
         
         // Start is called before the first frame update
         void Start()
@@ -38,8 +37,12 @@ namespace _Scripts
             _anim = GetComponent<Animator>();
             
             enemyParentScript = GameObject.FindGameObjectWithTag("EnemyParent").GetComponent<EnemyParent>();
-            // stoneParent = GameObject.FindGameObjectWithTag("StoneParent").transform;
-            // bombParent = GameObject.FindGameObjectWithTag("BombParent").transform;
+            
+            stoneParent = GameObject.FindGameObjectWithTag("StoneParent").transform;
+            iceParent = GameObject.FindGameObjectWithTag("IceParent").transform;
+            fireParent = GameObject.FindGameObjectWithTag("FireParent").transform;
+            lightningParent = GameObject.FindGameObjectWithTag("LightningParent").transform;
+            bombParent = GameObject.FindGameObjectWithTag("BombParent").transform;
             
             FindEnemies();
         }
@@ -64,10 +67,14 @@ namespace _Scripts
                 ShootBombBullet();
             }
             
+            //FindEnemies();
+            
         }
 
         private void FixedUpdate()
         {
+            
+            
             if (_towerVariables._currentFireRateUpgradeLevel == 0)
             {
                 animSpeedMultiplier = 1;
@@ -121,24 +128,31 @@ namespace _Scripts
         
         private void FindEnemies()
         {
-            //_enemies = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
             
             ClearList();
 
-            if (enemyParentScript.allEnemies.Count > 0)
+            
+            foreach (Transform child in stoneParent)
             {
-                
-                _enemies = enemyParentScript.allEnemies; 
+                _enemies.Add(child.gameObject);
             }
-            // foreach (Transform child in stoneParent)
-            // {
-            //     _enemies.Add(child.gameObject);
-            // }
-            //
-            // foreach (Transform child in bombParent)
-            // {
-            //     _enemies.Add(child.gameObject);
-            // }
+            foreach (Transform child in iceParent)
+            {
+                _enemies.Add(child.gameObject);
+            }
+            foreach (Transform child in fireParent)
+            {
+                _enemies.Add(child.gameObject);
+            }
+            foreach (Transform child in bombParent)
+            {
+                _enemies.Add(child.gameObject);
+            }
+            
+            foreach (Transform child in lightningParent)
+            {
+                _enemies.Add(child.gameObject);
+            }
         }
         
         private void ClearList()

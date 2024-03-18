@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using _Scripts;
 using UnityEngine;
@@ -38,6 +37,7 @@ public class TowerFSM : FSM
 
     private EnemyParent enemyParentScript;
 
+    private Transform bulletSpawnPos;
 
     private int animSpeedMultiplier;
 
@@ -48,8 +48,8 @@ public class TowerFSM : FSM
     }
 
     private Transform stoneParent, iceParent, fireParent, lightningParent, bombParent;
-    
-    
+
+    public Vector3 bulletVector;
     
 
     protected override void Initialize()
@@ -71,6 +71,11 @@ public class TowerFSM : FSM
 
         }
 
+        if (towerType == TowerType.Stone)
+        {
+            bulletSpawnPos = gameObject.transform.GetChild(1).GetChild(0).GetChild(0);
+        }
+
     }
 
     protected override void FSMUpdate()
@@ -79,7 +84,7 @@ public class TowerFSM : FSM
         weaponRange = _towerVariables.weaponRange;
         bulletDamage = _towerVariables.bulletDamage;
 
-        animSpeedMultiplier = _towerVariables._currentFireRateUpgradeLevel;
+        bulletVector = bulletSpawnPos.position;
         
         switch (currState)
         {
@@ -88,7 +93,7 @@ public class TowerFSM : FSM
         }
 
         
-        if (enemyParentScript.allEnemies.Count > 0) // != null)
+        if (enemyParentScript.allEnemies.Count > 0) 
         {
             FindClosestEnemy();
 
@@ -109,12 +114,20 @@ public class TowerFSM : FSM
 
     protected override void FSMFixedUpdate()
     {
+        if (_towerVariables._currentFireRateUpgradeLevel == 0)
+        {
+            animSpeedMultiplier = 1;
+        }
+        else
+        {
+            animSpeedMultiplier = _towerVariables._currentFireRateUpgradeLevel;
 
+        }
     }
 
     protected void UpdateShootState()
     {
-        if (enemyParentScript.allEnemies.Count > 0)//!= null)
+        if (enemyParentScript.allEnemies.Count > 0)
         {
             
                 shootTimer -= Time.deltaTime;
@@ -136,16 +149,9 @@ public class TowerFSM : FSM
 
     private void FindClosestEnemy()
     {
-        if (enemyParentScript.allEnemies.Count > 0) //!= null)
+        if (enemyParentScript.allEnemies.Count > 0) 
         {
-            // //Clears the zombieList so it doesn't fill up with duplicates
-            // enemyLocList.Clear();
-            //
-            // //Add the zombie gameobjects in the list
-            // foreach (Transform child in enemyParent.transform)
-            // {
-            //     enemyLocList.Add(child.gameObject);
-            // }
+            
             
             AddTargets();
 
@@ -186,9 +192,17 @@ public class TowerFSM : FSM
 
             }
             
-            Vector3 bulletPosition = new Vector3(transform.position.x, 0f, transform.position.z);
-            GameObject bullet = Instantiate(bulletPrefab, bulletPosition, Quaternion.identity);
-
+            
+            
+            //Instantiate projectile
+            GameObject bullet = Instantiate(bulletPrefab, bulletVector, Quaternion.identity);
+            
+            //Calculate direction
+            Vector3 directionToEnemy = (closestEnemy.transform.position - bullet.transform.position).normalized;
+            
+            //Apply rotation
+            bullet.transform.rotation = Quaternion.LookRotation(directionToEnemy);
+            
             Projectile projectile = bullet.GetComponent<Projectile>();
             
             projectile.bulletDamage = bulletDamage;
@@ -196,13 +210,7 @@ public class TowerFSM : FSM
             projectile.SetTarget(closestEnemy);
 
 
-            // Vector3 direction = (closestEnemy.transform.position - transform.position).normalized;
-            //
-            // bullet.transform.position = transform.position;
-            // bullet.transform.rotation = Quaternion.LookRotation(direction);
-            //
-            // bullet.GetComponent<Rigidbody>().AddForce(direction * bulletSpeed, ForceMode.Impulse);
-
+            
 
             //Destroy the bullet after it has travelled the weaponRange
             Destroy(bullet, weaponRange / bulletSpeed);
@@ -222,7 +230,6 @@ public class TowerFSM : FSM
     {
         if (towerType == TowerType.Stone)
         {
-            //enemyLocList.Clear();
             ClearList();
 
             AddStoneTargets();
@@ -230,7 +237,6 @@ public class TowerFSM : FSM
 
         if (towerType == TowerType.Ice)
         {
-            //enemyLocList.Clear();
             ClearList();
 
             AddStoneTargets();
@@ -243,7 +249,6 @@ public class TowerFSM : FSM
 
         if (towerType == TowerType.Fire)
         {
-            //enemyLocList.Clear();
             ClearList();
 
             AddStoneTargets();
@@ -255,7 +260,6 @@ public class TowerFSM : FSM
         }
         if (towerType == TowerType.Lightning)
         {
-            //enemyLocList.Clear();
             ClearList();
 
             AddStoneTargets();
@@ -267,7 +271,6 @@ public class TowerFSM : FSM
         }
         if (towerType == TowerType.Bomb)
         {
-            //enemyLocList.Clear();
             ClearList();
 
             AddStoneTargets();

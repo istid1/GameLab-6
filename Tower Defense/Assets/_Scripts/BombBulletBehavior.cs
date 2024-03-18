@@ -26,7 +26,6 @@ namespace _Scripts
         private EnemyHealth _enemyHealth;
 
         private bool _hasHappened;
-        private string damageTypeString, secondaryDamageTypeString;
 
         [SerializeField] private TowerVariables _towerVariables;
 
@@ -49,8 +48,6 @@ namespace _Scripts
         // Start is called before the first frame update
         void Start()
         {
-            damageTypeString = "Bomb";
-            secondaryDamageTypeString = "Stone";
         }
 
         // Update is called once per frame
@@ -202,12 +199,8 @@ namespace _Scripts
                 {
                     // Get EnemyHealth component of the enemy
                     EnemyHealth enemyHealth = hitCollider.GetComponent<EnemyHealth>();
-
-                    if (enemyHealth.enemyTypeString == damageTypeString ||
-                        enemyHealth.enemyTypeString == secondaryDamageTypeString)
-                    {
-                        enemyHealth.TakeDamage(_towerVariables.bulletDamage);
-                    }
+                    enemyHealth.TakeDamage(_towerVariables.bulletDamage);
+                    
                     
                 }
             }

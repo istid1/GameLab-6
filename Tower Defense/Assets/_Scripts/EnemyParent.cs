@@ -12,19 +12,12 @@ public class EnemyParent : MonoBehaviour
 
     public void AddChildren()
     {
-        StartCoroutine(DelayAddChildrenCoroutine());
+        Invoke("AddMyGrandChildren", 2f);
     }
     
 
 
     
-
-    private IEnumerator DelayAddChildrenCoroutine()
-    {
-        yield return new WaitForSeconds(2f);
-        //AddMyChildren();
-        AddMyGrandChildren();
-    }
     
     void AddMyChildren()
     {

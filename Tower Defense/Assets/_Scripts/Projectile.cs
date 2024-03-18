@@ -6,9 +6,11 @@ public class Projectile : MonoBehaviour
 {
     [HideInInspector]
     public int bulletDamage = 1;
-
+    
     public int bulletSpeed;
 
+    private float heightOffset = 1f;
+    
     private GameObject targetEnemy;
     
     private string damageTypeString;
@@ -36,7 +38,7 @@ public class Projectile : MonoBehaviour
 
     private void Start()
     {
-        SetDamageType();
+        SetDamageType();                     //Will this do double damage when set on the ballista?
         secondaryDamageString = "Stone";
     }
     
@@ -46,7 +48,11 @@ public class Projectile : MonoBehaviour
     {
         if (targetEnemy != null)
         {
-            Vector3 direction = (targetEnemy.transform.position - transform.position).normalized;
+            Vector3 targetPos = new Vector3(targetEnemy.transform.position.x ,
+                targetEnemy.transform.position.y + heightOffset, targetEnemy.transform.position.z );//.normalized;
+            
+            //Vector3 direction = (targetEnemy.transform.position - transform.position).normalized;
+            Vector3 direction = (targetPos - transform.position).normalized;
             
             //rotate towards the target
             Quaternion lookRotation = quaternion.LookRotation(direction, Vector3.up);
