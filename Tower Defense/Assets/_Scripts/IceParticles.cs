@@ -6,12 +6,12 @@ public class IceParticles : MonoBehaviour
 {
    
 
-    public float _rotationSpeed = -1f;
+    private float _rotationSpeed = -1f;
     // Start is called before the first frame update
     // Start is called before the first frame update
     void Start()
     {
-    
+        _rotationSpeed = Random.Range(-1f, -2f);
     }
     
     // Update is called once per frame
