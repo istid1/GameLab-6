@@ -11,8 +11,11 @@ namespace _Scripts
 
         [SerializeField] private TowerVariables _towerVariables;
         [SerializeField] private GameObject _projectile;
-
+        
+        
+        private List<NavMeshAgent> _slowedEnemies = new List<NavMeshAgent>();
         public bool isAttacking;
+        
         // The radius of the sphere
         private float _radius = 3.0f;
         private bool _enemyInRange;
@@ -46,19 +49,30 @@ namespace _Scripts
 
         private void UpScale()
         {
+            
             isAttacking = true;
-            var scaleIncrement = _currentLevel * 0.025f + _startScale;
-            var scaleY = _currentLevel * 0.025f;
-
-            if (_currentLevel == 5)
+            switch (_towerVariables._currentRangeUpgradeLevel)
             {
-                scaleIncrement += 0.025f;
-                scaleY += 0.025f;
+                case 0:
+                    _projectile.transform.DOScale(new Vector3(_startScale + 0.15f, 0.1f, _startScale + 0.15f), 0.5f);
+                    break;
+                case 1:
+                    _projectile.transform.DOScale(new Vector3(_startScale + 0.2f, 0.15f, _startScale + 0.2f), 0.5f);
+                    break;
+                case 2:
+                    _projectile.transform.DOScale(new Vector3(_startScale + 0.25f, 0.2f, _startScale + 0.25f), 0.5f);
+                    break;
+                case 3:
+                    _projectile.transform.DOScale(new Vector3(_startScale + 0.3f, 0.25f, _startScale + 0.3f), 0.5f);
+                    break;
+                case 4:
+                    _projectile.transform.DOScale(new Vector3(_startScale + 0.35f, 0.3f, _startScale + 0.35f), 0.5f);
+                    break;
+                case 5:
+                    _projectile.transform.DOScale(new Vector3(_startScale + 0.375f, 0.325f, _startScale + 0.375f), 0.5f);
+                    break;
             }
-
-            _projectile.transform.DOScale(new Vector3(scaleIncrement, scaleY, scaleIncrement), 0.5f);
         }
-
 
         private void DownScale()
         {
@@ -75,9 +89,9 @@ namespace _Scripts
             var layerMask = 1 << LayerMask.NameToLayer("Enemy");
             hits = Physics.SphereCastAll(ray, _radius, _maxDistance, layerMask);
             _enemyInRange = false;
-            
-            //Declare list to store components
-             var enemyComponentsInRange = new List<NavMeshAgent>(); 
+            // Declare list to store components
+            var enemyComponentsInRange = new HashSet<NavMeshAgent>(); 
+            var enemiesToRestore = new HashSet<NavMeshAgent>();
 
             if (hits.Any(hit => hit.collider.gameObject.CompareTag("Enemy")))
             {
@@ -86,18 +100,39 @@ namespace _Scripts
                     NavMeshAgent component = hitResult.collider.gameObject.GetComponent<NavMeshAgent>();
                     if (component != null)
                     {
-                        //add component to the list
+                        // Add component to the list
                         enemyComponentsInRange.Add(component);
-                        component.speed /= 2;
+                        if (!_slowedEnemies.Contains(component))
+                        {
+                            component.speed /= 2;
+                            _slowedEnemies.Add(component);
+                        }
                     }
                 }
                 _enemyInRange = true;
                 UpScale();
-                return;
+            }
+    
+            // Handle enemies leaving the range.
+            foreach (var enemy in _slowedEnemies)
+            {
+                if (!enemyComponentsInRange.Contains(enemy))
+                {
+                    enemy.speed *= 2; // Restore original speed
+                    enemiesToRestore.Add(enemy);
+                }
             }
 
-            //No enemies in range
-            DownScale();
+            foreach (var enemy in enemiesToRestore)
+            {
+                _slowedEnemies.Remove(enemy);
+            }
+
+            // No enemies in range
+            if (!_enemyInRange)
+            {
+                DownScale();
+            }
         }
         
         private void OnDrawGizmos()
