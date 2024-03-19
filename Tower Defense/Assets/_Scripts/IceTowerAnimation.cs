@@ -1,5 +1,8 @@
+using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace _Scripts
 {
@@ -9,31 +12,26 @@ namespace _Scripts
         [SerializeField] private TowerVariables _towerVariables;
         [SerializeField] private GameObject _projectile;
 
-        public bool isAttacking = false;
+        public bool isAttacking;
         // The radius of the sphere
         private float _radius = 3.0f;
-        private bool _enemyInRange = false;
+        private bool _enemyInRange;
         
-        // The maximum distance the spherecast will check
+        
         private float _maxDistance = 0f;
         
         private int _currentLevel;        
         private float _startScale = 0.15f;
         
-        // Start is called before the first frame update
-        void Start()
-        {
-            
-        }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
 
             _currentLevel = _towerVariables._currentRangeUpgradeLevel;
             
             RadiusScaleWithRange();
-            SphereCastAndLog();
+            SphereCast();
             
             if (Input.GetKeyDown(KeyCode.P))
             {
@@ -49,27 +47,16 @@ namespace _Scripts
         private void UpScale()
         {
             isAttacking = true;
-            switch (_towerVariables._currentRangeUpgradeLevel)
+            var scaleIncrement = _currentLevel * 0.025f + _startScale;
+            var scaleY = _currentLevel * 0.025f;
+
+            if (_currentLevel == 5)
             {
-                case 0:
-                    _projectile.transform.DOScale(new Vector3(_startScale + 0.15f, 0.1f, _startScale + 0.15f), 0.5f);
-                    break;
-                case 1:
-                    _projectile.transform.DOScale(new Vector3(_startScale + 0.2f, 0.15f, _startScale + 0.2f), 0.5f);
-                    break;
-                case 2:
-                    _projectile.transform.DOScale(new Vector3(_startScale + 0.25f, 0.2f, _startScale + 0.25f), 0.5f);
-                    break;
-                case 3:
-                    _projectile.transform.DOScale(new Vector3(_startScale + 0.3f, 0.25f, _startScale + 0.3f), 0.5f);
-                    break;
-                case 4:
-                    _projectile.transform.DOScale(new Vector3(_startScale + 0.35f, 0.3f, _startScale + 0.35f), 0.5f);
-                    break;
-                case 5:
-                    _projectile.transform.DOScale(new Vector3(_startScale + 0.375f, 0.325f, _startScale + 0.375f), 0.5f);
-                    break;
+                scaleIncrement += 0.025f;
+                scaleY += 0.025f;
             }
+
+            _projectile.transform.DOScale(new Vector3(scaleIncrement, scaleY, scaleIncrement), 0.5f);
         }
 
 
@@ -80,34 +67,37 @@ namespace _Scripts
         }
     
         
-        
-        
-        private void SphereCastAndLog()
+        private void SphereCast()
         {
             var transform1 = transform;
             var ray = new Ray(transform1.position, transform1.forward);
             RaycastHit[] hits;
-
             var layerMask = 1 << LayerMask.NameToLayer("Enemy");
-
+            hits = Physics.SphereCastAll(ray, _radius, _maxDistance, layerMask);
+            _enemyInRange = false;
             
-           
-            hits = Physics.SphereCastAll(ray, _radius, layerMask);
+            //Declare list to store components
+             var enemyComponentsInRange = new List<NavMeshAgent>(); 
 
-            foreach (var hit in hits)
+            if (hits.Any(hit => hit.collider.gameObject.CompareTag("Enemy")))
             {
-                
-                if(hit.collider.gameObject.CompareTag("Enemy"))
+                foreach(var hitResult in hits.Where(hit => hit.collider.gameObject.CompareTag("Enemy")))
                 {
-                    _enemyInRange = true;
-                   UpScale();
-                   break;
+                    NavMeshAgent component = hitResult.collider.gameObject.GetComponent<NavMeshAgent>();
+                    if (component != null)
+                    {
+                        //add component to the list
+                        enemyComponentsInRange.Add(component);
+                        component.speed /= 2;
+                    }
                 }
-                if(!_enemyInRange)
-                {
-                    DownScale();
-                }
+                _enemyInRange = true;
+                UpScale();
+                return;
             }
+
+            //No enemies in range
+            DownScale();
         }
         
         private void OnDrawGizmos()
