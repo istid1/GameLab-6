@@ -163,7 +163,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b448a3c3db0adef49a38fa69596ef0c6,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.9908817
+      value: 1.7605525
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b448a3c3db0adef49a38fa69596ef0c6,
         type: 3}
@@ -273,3 +273,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52425afa19e724846a8b976b893fa9bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _towerVariables: {fileID: 0}
