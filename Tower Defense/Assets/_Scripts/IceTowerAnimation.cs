@@ -12,6 +12,7 @@ namespace _Scripts
         [SerializeField] private TowerVariables _towerVariables;
         [SerializeField] private GameObject _projectile;
         
+        private static Dictionary<NavMeshAgent, IceTowerAnimation> slowedEnemies = new Dictionary<NavMeshAgent, IceTowerAnimation>();
         
         private List<NavMeshAgent> _slowedEnemies = new List<NavMeshAgent>();
         public bool isAttacking;
@@ -104,7 +105,7 @@ namespace _Scripts
                         enemyComponentsInRange.Add(component);
                         if (!_slowedEnemies.Contains(component))
                         {
-                            component.speed /= 2;
+                            component.speed *= 0.9f;
                             _slowedEnemies.Add(component);
                         }
                     }
@@ -127,7 +128,7 @@ namespace _Scripts
                 //Reduce movement speed by /2
                 if (!enemyComponentsInRange.Contains(enemy))
                 {
-                    enemy.speed *= 2; // Restore original speed
+                    enemy.speed /= 0.9f; // Restore original speed
                     enemiesToRestore.Add(enemy);
                 }
             }
