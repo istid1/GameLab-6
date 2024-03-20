@@ -25,7 +25,11 @@ namespace _Scripts
         
         private float _maxDistance = 0f;
         
-        private int _currentLevel;        
+        private int _currentLevel;  
+        
+        private int _currentLevelFireRate;
+        private float _fireRate;
+        
         private float _startScale = 0.15f;
         
 
@@ -34,8 +38,10 @@ namespace _Scripts
         {
 
             _currentLevel = _towerVariables._currentRangeUpgradeLevel;
+            _currentLevelFireRate = _towerVariables._currentFireRateUpgradeLevel;
             
             RadiusScaleWithRange();
+            FireRateScaleLevelScale();
             SphereCast();
             
             if (Input.GetKeyDown(KeyCode.P))
@@ -111,7 +117,10 @@ namespace _Scripts
                         {
                             component.speed *= 0.9f;
                             _slowedEnemies.Add(component);
-                            StartCoroutine(DamageEnemiesOverTime(component, 1, 1f));
+                            
+                            _towerVariables._currentFireRateUpgradeLevel = 1;
+                            StartCoroutine(DamageEnemiesOverTime(component, 1 + _towerVariables._currentDamageUpgradeLevel, _fireRate));
+                            
                         }
                     }
                 }
@@ -171,6 +180,20 @@ namespace _Scripts
                 4 => 7f,
                 5 => 7.25f,
                 _ => _radius
+            };
+        }
+
+        private void FireRateScaleLevelScale()
+        {
+            _fireRate = _currentLevelFireRate switch
+            {
+                0 => 1f,
+                1 => 0.8f,
+                2 => 0.6f,
+                3 => 0.4f,
+                4 => 0.3f,
+                5 => 0.35f,
+                _ => _fireRate
             };
         }
         
