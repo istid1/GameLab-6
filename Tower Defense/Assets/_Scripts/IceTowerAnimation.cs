@@ -118,8 +118,7 @@ namespace _Scripts
                             component.speed *= 0.9f;
                             _slowedEnemies.Add(component);
                             
-                            _towerVariables._currentFireRateUpgradeLevel = 1;
-                            StartCoroutine(DamageEnemiesOverTime(component, 1 + _towerVariables._currentDamageUpgradeLevel, _fireRate));
+                            StartCoroutine(DamageEnemiesOverTime(component, _towerVariables.bulletDamage, _fireRate));
                             
                         }
                     }
@@ -187,12 +186,12 @@ namespace _Scripts
         {
             _fireRate = _currentLevelFireRate switch
             {
-                0 => 1f,
-                1 => 0.8f,
-                2 => 0.6f,
-                3 => 0.4f,
-                4 => 0.3f,
-                5 => 0.35f,
+                0 => 2f,
+                1 => 1.5f,
+                2 => 1f,
+                3 => 0.5f,
+                4 => 0.25f,
+                5 => 0.175f,
                 _ => _fireRate
             };
         }
