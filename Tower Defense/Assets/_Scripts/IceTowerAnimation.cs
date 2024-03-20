@@ -31,7 +31,7 @@ namespace _Scripts
         private int _currentLevelFireRate;
         private float _fireRate;
         
-        private float _startScale = 0.15f;
+        private float _startScale = 0.155f;
         
         private string secondaryDamageString;
         private string damageTypeString;
@@ -81,22 +81,22 @@ namespace _Scripts
             switch (_towerVariables._currentRangeUpgradeLevel)
             {
                 case 0:
-                    _projectile.transform.DOScale(new Vector3(_startScale + 0.15f, 0.1f, _startScale + 0.15f), 0.5f);
+                    _projectile.transform.DOScale(new Vector3(_startScale + 0.15f, 0.65f, _startScale + 0.15f), 0.5f);
                     break;
                 case 1:
-                    _projectile.transform.DOScale(new Vector3(_startScale + 0.2f, 0.15f, _startScale + 0.2f), 0.5f);
+                    _projectile.transform.DOScale(new Vector3(_startScale + 0.2f, 0.65f, _startScale + 0.2f), 0.5f);
                     break;
                 case 2:
-                    _projectile.transform.DOScale(new Vector3(_startScale + 0.25f, 0.2f, _startScale + 0.25f), 0.5f);
+                    _projectile.transform.DOScale(new Vector3(_startScale + 0.25f, 0.65f, _startScale + 0.25f), 0.5f);
                     break;
                 case 3:
-                    _projectile.transform.DOScale(new Vector3(_startScale + 0.3f, 0.25f, _startScale + 0.3f), 0.5f);
+                    _projectile.transform.DOScale(new Vector3(_startScale + 0.3f, 0.65f, _startScale + 0.3f), 0.5f);
                     break;
                 case 4:
-                    _projectile.transform.DOScale(new Vector3(_startScale + 0.35f, 0.3f, _startScale + 0.35f), 0.5f);
+                    _projectile.transform.DOScale(new Vector3(_startScale + 0.35f, 0.65f, _startScale + 0.35f), 0.5f);
                     break;
                 case 5:
-                    _projectile.transform.DOScale(new Vector3(_startScale + 0.375f, 0.325f, _startScale + 0.375f), 0.5f);
+                    _projectile.transform.DOScale(new Vector3(_startScale + 0.375f, 0.65f, _startScale + 0.375f), 0.5f);
                     break;
             }
         }
@@ -104,7 +104,7 @@ namespace _Scripts
         private void DownScale()
         {
             isAttacking = false;
-            _projectile.transform.DOScale(new Vector3(_startScale, 0.5f, _startScale), 0.5f);
+            _projectile.transform.DOScale(new Vector3(_startScale, 0.55f, _startScale), 0.5f);
         }
     
         

@@ -12,15 +12,15 @@ namespace _Scripts
         [SerializeField] private IceTowerAnimation _IceTowerAnimation;
         
         private int _currentLevelFireRate;
-        
-        private int _rotationSpeed;
+        private float _fireRateScale;
+        private float _rotationSpeed;
         
         private int _idleRotationSpeed;
         
         
         private void Start()
         {
-            _rotationSpeed = Random.Range(-3, 3);
+            _rotationSpeed = Random.Range(-1, 1);
             if (_rotationSpeed == 0)
             {
                 _rotationSpeed++;
@@ -38,7 +38,7 @@ namespace _Scripts
         {
 
             _currentLevelFireRate = _towerVariables._currentFireRateUpgradeLevel;
-
+            FireRateScaleLevelScale();
             if (_IceTowerAnimation.isAttacking == false)
             {
                 transform.Rotate(0f, 0f, _idleRotationSpeed);
@@ -46,19 +46,27 @@ namespace _Scripts
             
             if (_IceTowerAnimation.isAttacking)
             {
-                int rotationSpeed = Math.Abs(_rotationSpeed + _currentLevelFireRate) * -1;
-                if (rotationSpeed == 0)
-                {
-                    rotationSpeed++;
-                }
                 
-                transform.Rotate(0f, 0f, rotationSpeed);
+                transform.Rotate(0f, 0f, _rotationSpeed * _fireRateScale);
             }
-           
-            
-                
-          
             
         }
+        
+        private void FireRateScaleLevelScale()
+        {
+            _fireRateScale = _currentLevelFireRate switch
+            {
+                0 => 2.5f,
+                1 => 3f,
+                2 => 3.5f,
+                3 => 3.75f,
+                4 => 4f,
+                5 => 4.25f,
+                _ => _fireRateScale
+            };
+        } 
+        
+        
+        
     }
 }
