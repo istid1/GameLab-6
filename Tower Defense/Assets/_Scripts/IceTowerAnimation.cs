@@ -127,22 +127,15 @@ namespace _Scripts
                 foreach(var hitResult in hits.Where(hit => hit.collider.gameObject.CompareTag("Enemy")))
                 {
                     NavMeshAgent component = hitResult.collider.gameObject.GetComponent<NavMeshAgent>();
-                    if (component != null)
-                    {
-                        // Add component to the list
-                        enemyComponentsInRange.Add(component);
-                        
-                        if (!_slowedEnemies.Contains(component))
-                        {
-                            component.speed *= 0.9f;
-                            _slowedEnemies.Add(component);
-                            
-                            StartCoroutine(DamageEnemiesOverTime(component, _towerVariables.bulletDamage, _fireRate));
+                    if (component == null) continue;
+                    // Add component to the list
+                    enemyComponentsInRange.Add(component);
 
+                    if (_slowedEnemies.Contains(component)) continue;
+                    component.speed *= 0.9f;
+                    _slowedEnemies.Add(component);
                             
-                            
-                        }
-                    }
+                    StartCoroutine(DamageEnemiesOverTime(component, _towerVariables.bulletDamage, _fireRate));
                 }
                 _enemyInRange = true;
                 UpScale();
@@ -160,11 +153,9 @@ namespace _Scripts
                 }
                 
                 //Reduce movement speed by /2
-                if (!enemyComponentsInRange.Contains(enemy))
-                {
-                    enemy.speed /= 0.9f; // Restore original speed
-                    enemiesToRestore.Add(enemy);
-                }
+                if (enemyComponentsInRange.Contains(enemy)) continue;
+                enemy.speed /= 0.9f; // Restore original speed
+                enemiesToRestore.Add(enemy);
             }
 
             foreach (var enemy in enemiesToRestore)
@@ -246,26 +237,15 @@ namespace _Scripts
         
         private void SetDamageType()
         {
-            if (damageType == DamageType.Stone)
+            damageTypeString = damageType switch
             {
-                damageTypeString = "Stone";
-            }
-            if (damageType == DamageType.Fire)
-            {
-                damageTypeString = "Fire";
-            }
-            if (damageType == DamageType.Ice)
-            {
-                damageTypeString = "Ice";
-            }
-            if (damageType == DamageType.Lightning)
-            {
-                damageTypeString = "Lightning";
-            }
-            if (damageType == DamageType.Bomb)
-            {
-                damageTypeString = "Bomb";
-            }
+                DamageType.Stone => "Stone",
+                DamageType.Fire => "Fire",
+                DamageType.Ice => "Ice",
+                DamageType.Lightning => "Lightning",
+                DamageType.Bomb => "Bomb",
+                _ => damageTypeString
+            };
         }
         
         
