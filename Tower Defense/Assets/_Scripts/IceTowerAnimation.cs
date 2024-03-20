@@ -116,6 +116,15 @@ namespace _Scripts
             // Handle enemies leaving the range.
             foreach (var enemy in _slowedEnemies)
             {
+                
+                // Check if the enemy or its GameObject has been destroyed
+                if (enemy == null || enemy.gameObject == null)
+                {
+                    enemiesToRestore.Add(enemy);
+                    continue;
+                }
+                
+                //Reduce movement speed by /2
                 if (!enemyComponentsInRange.Contains(enemy))
                 {
                     enemy.speed *= 2; // Restore original speed

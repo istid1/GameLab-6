@@ -43,6 +43,17 @@ namespace _Scripts
                 _isDamageOverTimeRunning = false;
             }
         }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if(other.CompareTag("Enemy") && _enemyHealth != null) 
+            {
+                
+                _enemyHealth.TakeDamage(_bulletDamage);
+                _isDamageOverTimeRunning = false;
+            }
+        }
+
         private void TakeDamageOverTime()
         {
             if (_enemyHealth != null)// assuming IsAlive is a property indicating if enemy is alive
