@@ -3657,6 +3657,7 @@ MonoBehaviour:
   _towerVariables: {fileID: -1725511436372650955}
   _projectile: {fileID: 9025548190374304340}
   isAttacking: 0
+  damageType: 1
 --- !u!4 &8062171569584423356 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 595bb901670897d439750d405eae4725,

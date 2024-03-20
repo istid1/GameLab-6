@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,24 @@ namespace _Scripts
         
         private float _startScale = 0.15f;
         
+        private string secondaryDamageString;
+        private string damageTypeString;
+        [SerializeField] private DamageType damageType;
+        private enum DamageType
+        {
+            Stone,
+            Fire,
+            Ice,
+            Lightning,
+            Bomb
+        }
+
+
+        private void Start()
+        {
+            SetDamageType();
+            secondaryDamageString = "Stone";
+        }
 
         // Update is called once per frame
         private void Update()
@@ -119,6 +138,8 @@ namespace _Scripts
                             _slowedEnemies.Add(component);
                             
                             StartCoroutine(DamageEnemiesOverTime(component, _towerVariables.bulletDamage, _fireRate));
+
+                            
                             
                         }
                     }
@@ -199,10 +220,15 @@ namespace _Scripts
         
         private IEnumerator DamageEnemiesOverTime(NavMeshAgent enemy, int damage, float damageInterval)
         {
+            
             while (_slowedEnemies.Contains(enemy))
             {
                 var enemyHealth = enemy.GetComponent<EnemyHealth>();
-                if (enemyHealth != null)
+                if (enemyHealth != null && enemyHealth.enemyTypeString == damageTypeString)
+                {
+                    enemyHealth.TakeDamage(damage);
+                }
+                else if (enemyHealth != null && enemyHealth.enemyTypeString == secondaryDamageString)
                 {
                     enemyHealth.TakeDamage(damage);
                 }
@@ -217,6 +243,30 @@ namespace _Scripts
         }
         
         
+        
+        private void SetDamageType()
+        {
+            if (damageType == DamageType.Stone)
+            {
+                damageTypeString = "Stone";
+            }
+            if (damageType == DamageType.Fire)
+            {
+                damageTypeString = "Fire";
+            }
+            if (damageType == DamageType.Ice)
+            {
+                damageTypeString = "Ice";
+            }
+            if (damageType == DamageType.Lightning)
+            {
+                damageTypeString = "Lightning";
+            }
+            if (damageType == DamageType.Bomb)
+            {
+                damageTypeString = "Bomb";
+            }
+        }
         
         
     }

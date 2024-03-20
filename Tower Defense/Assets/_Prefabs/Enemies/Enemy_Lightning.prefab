@@ -278,7 +278,7 @@ MonoBehaviour:
   enemyTypeString: 
   _mR: {fileID: 0}
   _gm: {fileID: 0}
-  enemyType: 0
+  enemyType: 3
   _slider: {fileID: 1700096883740907324}
 --- !u!136 &4181170734894390878
 CapsuleCollider:
