@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace _Scripts
@@ -9,64 +11,50 @@ namespace _Scripts
         [SerializeField] private TowerVariables _towerVariables;
         private EnemyHealth _enemyHealth;
         private bool _isDamageOverTimeRunning = false;
+        private bool _lightningAttackStarted = false; // This is the flag we're adding
         [SerializeField] private int _bulletDamage;
         [SerializeField] private float _shootRate;
         private void Update()
         {
             _bulletDamage = _towerVariables.bulletDamage;
-            _shootRate = _towerVariables.shootRate;
+            _shootRate =  _towerVariables.shootRate;
         }
-
         private void OnTriggerStay(Collider other)
         {
-            if(other.CompareTag("Enemy") && _lightningAttack.isInRange) 
+            if(other.CompareTag("Enemy") && _lightningAttack.isInRange && !_lightningAttackStarted) 
             {
-                
+                _lightningAttackStarted = true; // Set the flag to true
                 _enemyHealth = other.GetComponent<EnemyHealth>();
             
                 if (_enemyHealth != null)
                 {
-                    if (!_isDamageOverTimeRunning) 
-                    {
-                        InvokeRepeating(nameof(TakeDamageOverTime), _shootRate, _shootRate);
-                        _isDamageOverTimeRunning = true;
-                    }
+                    StartCoroutine(TakeDamageOverTime());
                 }
             }
         }
-
-        void OnTriggerExit(Collider other)
+        private void OnTriggerExit(Collider other)
         {
             if(other.CompareTag("Enemy") && _enemyHealth != null) 
             {
-                CancelInvoke(nameof(TakeDamageOverTime));
-                _isDamageOverTimeRunning = false;
+                StopCoroutine(TakeDamageOverTime());
+                _lightningAttackStarted = false; // Reset the flag
             }
         }
-
-        private void OnTriggerEnter(Collider other)
+        private IEnumerator TakeDamageOverTime()
         {
-            if(other.CompareTag("Enemy") && _enemyHealth != null) 
-            {
-                
-                _enemyHealth.TakeDamage(_bulletDamage);
-                _isDamageOverTimeRunning = false;
-            }
-        }
+            const float defaultShootRate = 1f; // Define your default shoot rate value
 
-        private void TakeDamageOverTime()
-        {
-            if (_enemyHealth != null)// assuming IsAlive is a property indicating if enemy is alive
+            while (_enemyHealth != null) // Assuming IsAlive is a property indicating if enemy is alive
             {
                 _enemyHealth.TakeDamage(_bulletDamage);
-            }
-            else
-            {
-                // enemy is dead, stop invoking TakeDamageOverTime
-                CancelInvoke(nameof(TakeDamageOverTime));
-                _isDamageOverTimeRunning = false;
-            }
-        }
+
+                // Checks if _shootRate is zero, and if so, assigns it a default value
+                if (_shootRate == 0) {
+                    _shootRate = defaultShootRate;
+                }
         
+                yield return new WaitForSeconds(1f / _shootRate);
+            }
+        }
     }
 }
