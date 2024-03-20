@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
@@ -13,7 +14,7 @@ namespace _Scripts
         [SerializeField] private GameObject _projectile;
         
         private static Dictionary<NavMeshAgent, IceTowerAnimation> slowedEnemies = new Dictionary<NavMeshAgent, IceTowerAnimation>();
-        
+        private HashSet<NavMeshAgent> enemyComponentsInRange = new HashSet<NavMeshAgent>(); 
         private List<NavMeshAgent> _slowedEnemies = new List<NavMeshAgent>();
         public bool isAttacking;
         
@@ -91,8 +92,10 @@ namespace _Scripts
             hits = Physics.SphereCastAll(ray, _radius, _maxDistance, layerMask);
             _enemyInRange = false;
             // Declare list to store components
-            var enemyComponentsInRange = new HashSet<NavMeshAgent>(); 
             var enemiesToRestore = new HashSet<NavMeshAgent>();
+    
+            enemyComponentsInRange.Clear(); // Ensure HashSet is clear before filling
+            
 
             if (hits.Any(hit => hit.collider.gameObject.CompareTag("Enemy")))
             {
@@ -103,10 +106,12 @@ namespace _Scripts
                     {
                         // Add component to the list
                         enemyComponentsInRange.Add(component);
+                        
                         if (!_slowedEnemies.Contains(component))
                         {
                             component.speed *= 0.9f;
                             _slowedEnemies.Add(component);
+                            StartCoroutine(DamageEnemiesOverTime(component, 1, 1f));
                         }
                     }
                 }
@@ -168,6 +173,29 @@ namespace _Scripts
                 _ => _radius
             };
         }
+        
+        
+        private IEnumerator DamageEnemiesOverTime(NavMeshAgent enemy, int damage, float damageInterval)
+        {
+            while (_slowedEnemies.Contains(enemy))
+            {
+                var enemyHealth = enemy.GetComponent<EnemyHealth>();
+                if (enemyHealth != null)
+                {
+                    enemyHealth.TakeDamage(damage);
+                }
+                yield return new WaitForSeconds(damageInterval);
+
+                // Check if the enemy or its GameObject has been destroyed
+                if (enemy == null || enemy.gameObject == null || !enemyComponentsInRange.Contains(enemy))
+                {
+                    yield break;
+                }
+            }
+        }
+        
+        
+        
         
     }
 }
