@@ -424,6 +424,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4357632589294831248, guid: 595bb901670897d439750d405eae4725,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 68ca2f63fa0139841bf5557eb667cdae, type: 2}
+    - target: {fileID: -4357632589294831248, guid: 595bb901670897d439750d405eae4725,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ee551e8de46e71d45a47a4dd713bcfdf, type: 2}
     - target: {fileID: -3613152112653982385, guid: 595bb901670897d439750d405eae4725,
         type: 3}
       propertyPath: m_Layer
@@ -527,6 +537,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8588478265829710406}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 595bb901670897d439750d405eae4725,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7997241834818822130}
   m_SourcePrefab: {fileID: 100100000, guid: 595bb901670897d439750d405eae4725, type: 3}
 --- !u!1 &7253406737261468422 stripped
 GameObject:
@@ -541,7 +555,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7253406737261468422}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: adbcec98cfad85c46b43f7140c500dcb, type: 3}
   m_Name: 
@@ -580,6 +594,8 @@ MonoBehaviour:
   bulletDamage: 1
   weaponRange: 10
   _currentFireRateUpgradeLevel: 1
+  _currentRangeUpgradeLevel: 0
+  _currentDamageUpgradeLevel: 0
   _moneySystem: {fileID: 0}
 --- !u!65 &3394021472511739394
 BoxCollider:
@@ -679,6 +695,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerType: 2
   _towerTypeString: 
+--- !u!114 &7997241834818822130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7253406737261468422}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9b1bc5f97ce5b74cbdd36752321704d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _towerVariables: {fileID: -1725511436372650955}
+  _projectile: {fileID: 0}
+  isAttacking: 0
+  damageType: 1
 --- !u!4 &8062171569584423356 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 595bb901670897d439750d405eae4725,
