@@ -105,8 +105,6 @@ namespace _Scripts
         {
             
             FPSCounter();
-            
-            
             CheckColor();
             HasMoved();
             UserInputRotateTower();
@@ -208,11 +206,10 @@ namespace _Scripts
         private void PlaceTower(RaycastHit hit)
         {
             int cost = GetCurrentTowerCost();
-            // You may want to do the money check and deduction here also, to avoid any bugs
+            
             
             if (_moneySystem.currentMoney < cost)
             {
-                // Notify the player here. Maybe the tower was already placed by now, hence double checking
                 return;
             }
             if (towerPrefab == null)
@@ -527,7 +524,6 @@ namespace _Scripts
             _enemyMovements = GetEnemyMovementComponents();
             if (_enemyMovements == null) 
             {
-              //  Debug.Log("No enemyMovements");
                 return;
             }
 
@@ -548,13 +544,13 @@ namespace _Scripts
         
         private void DestroyBlockTower()
         {
-            if (_blockingTower == null) return;
-            placedTower.Remove(_blockingTower);    // remove the Tower from the list
-            _moneySystem.currentMoney += GetCurrentTowerCost(); //Refund the cost of the tower if the tower will block the enemies path 
-            Destroy(_blockingTower);              // destroy the Tower object
-            _blockingTower = null;                // Nullify the reference to avoid deleting the same tower multiple times
-            ResetButtonStates();
-            Destroy(_instantiatedTransparentTower);
+            if (_blockingTower == null) return;                 // null check
+            placedTower.Remove(_blockingTower);                 // remove the Tower from the list
+            _moneySystem.currentMoney += GetCurrentTowerCost(); // Refund the cost of the tower if the tower will block the enemies path 
+            Destroy(_blockingTower);                            // destroy the Tower object
+            _blockingTower = null;                              // Nullify the reference to avoid deleting the same tower multiple times
+            ResetButtonStates();                                // Reset current selected tower button
+            Destroy(_instantiatedTransparentTower);             // destroy the transparent tower
             
         }
         
@@ -568,7 +564,7 @@ namespace _Scripts
 
             if (_mouseLastPosition == _instantiatedTransparentTower.transform.position) return;
             _mouseLastPosition = _instantiatedTransparentTower.transform.position;
-            // Debug.Log("Tower Moved");
+            
             _willBlockAgent = false;
         }
         
@@ -586,7 +582,7 @@ namespace _Scripts
                 
                 if (Physics.Raycast(ray, out hit))
                 {
-                    // If you have specific tag for your tower
+                    
                     if(hit.transform.gameObject.tag == "UpgradeTag")
                     {
                         _currentSelectedTower = hit.transform.gameObject;
@@ -768,8 +764,6 @@ namespace _Scripts
                 {
                     vfx.Play();
                 }
-                
-                
             }
         }
 
@@ -778,9 +772,16 @@ namespace _Scripts
         {
             _fpsTimer += Time.deltaTime;
             if (!(_fpsTimer >= 1f)) return;
-            _fpsCounter.text = "FPS : " + ((int)(1f / Time.deltaTime)).ToString();
+            _fpsCounter.text = "FPS : " + ((int)(1f / Time.deltaTime));
             _fpsTimer = 0;
         }
 
-    } 
-}
+        
+        
+        
+        
+        
+        
+        
+    } //outside Class
+} // outside Namespace
