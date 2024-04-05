@@ -23,6 +23,8 @@ public class EnemyHealth : MonoBehaviour
     private EnemyParent enemyParentScript;
     private EnemyMovement enemyMovement;
     private GameObject stoneParent;
+
+    private EnemyFlySpawner enemyFlySpawnerScript;
     
     [SerializeField]
     private SkinnedMeshRenderer _mR;
@@ -52,6 +54,9 @@ public class EnemyHealth : MonoBehaviour
         _maxHealth = health;
         enemyParentScript = GameObject.FindGameObjectWithTag("EnemyParent").GetComponent<EnemyParent>();
         enemyMovement = this.gameObject.GetComponent<EnemyMovement>();
+        
+        enemyFlySpawnerScript = GameObject.FindAnyObjectByType<EnemyFlySpawner>().GetComponent<EnemyFlySpawner>();
+
 
         _mR = gameObject.transform.GetChild(3).GetComponent<SkinnedMeshRenderer>();
         _gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
@@ -72,6 +77,16 @@ public class EnemyHealth : MonoBehaviour
             
             enemyParentScript.allEnemies.Remove(this.gameObject);
             enemyMovement.DeleteTarget();
+            
+            Destroy(gameObject);
+            
+        }
+        
+        if (health <= 0 && enemyType == EnemyType.Lightning)
+        {
+            
+            enemyParentScript.allEnemies.Remove(this.gameObject);
+            enemyFlySpawnerScript.hasSquad.Remove(this.gameObject);
             
             Destroy(gameObject);
             
