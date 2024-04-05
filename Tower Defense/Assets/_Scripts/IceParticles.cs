@@ -39,16 +39,18 @@ namespace _Scripts
 
             _currentLevelFireRate = _towerVariables._currentFireRateUpgradeLevel;
             FireRateScaleLevelScale();
+           
             if (_IceTowerAnimation.isAttacking == false)
             {
-                transform.Rotate(0f, 0f, _idleRotationSpeed);
+                transform.Rotate(0f, _idleRotationSpeed, 0f );
             }
             
             if (_IceTowerAnimation.isAttacking)
             {
                 
-                transform.Rotate(0f, 0f, _rotationSpeed * _fireRateScale);
+                transform.Rotate(0f, _rotationSpeed * _fireRateScale, 0f );
             }
+            
             
         }
         
