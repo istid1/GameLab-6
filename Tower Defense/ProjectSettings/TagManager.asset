@@ -25,6 +25,8 @@ TagManager:
   - GroundDummy
   - NavMeshGround
   - BombFireVFX
+  - FlySlowDownWall
+  - EndZoneFly
   layers:
   - Default
   - TransparentFX
@@ -41,7 +43,7 @@ TagManager:
   - Projectile
   - UpgradeLayer
   - GroundDummy
-  - 
+  - EnemyFlying
   - 
   - 
   - 
