@@ -534,6 +534,7 @@ namespace _Scripts
             if (_enemyMovements.All(enemyMovements => enemyMovements.canReachDestination)) return;
             DestroyBlockTower();
             _willBlockAgent = true;
+            
         }
         
         private void DummyCantFinishPath()
@@ -547,12 +548,17 @@ namespace _Scripts
         
         private void DestroyBlockTower()
         {
+            
             if (_blockingTower == null) return;
             placedTower.Remove(_blockingTower);    // remove the Tower from the list
+            _moneySystem.currentMoney += GetCurrentTowerCost();
             Destroy(_blockingTower);              // destroy the Tower object
             _blockingTower = null;                // Nullify the reference to avoid deleting the same tower multiple times
             ResetButtonStates();
             Destroy(_instantiatedTransparentTower);
+            
+            
+            
         }
         
         
