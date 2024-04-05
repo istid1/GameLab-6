@@ -1,26 +1,69 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+namespace _Scripts
 {
-
-    //[HideInInspector]
-    public float stoneEnemyHealth;
-
-    public Material stoneEnemyMaterial;
-    
-    
-    
-    // Start is called before the first frame update
-    void Start()
+    public class GameManager : MonoBehaviour
     {
-        
-    }
+        //[HideInInspector]
+        public float stoneEnemyHealth;
+        public Material stoneEnemyMaterial;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private bool _enemiesIsAlive;
+        private bool _startButtonIsPressed = false;
+        public int currentRound;
+        [SerializeField] private GameObject _startButton;
+        private EnemyParent _enemyParent;
+        [SerializeField] private EnemySpawner _enemySpawner;
+
+        // Start is called before the first frame update
+        void Start()
+        {
+            currentRound = 0;
+            FindEnemyParentInScene();
+        }
+        // Update is called once per frame
+        void Update()
+        {
+            CheckForEnemies();
+            if (!_enemiesIsAlive && _startButtonIsPressed)
+            {
+                currentRound += 1;
+                Debug.Log("Starting round " + currentRound);
+                _enemySpawner.SpawnEnemies();
+            }          
+        }
+        private void FindEnemyParentInScene()
+        {
+            _enemyParent = GameObject.FindGameObjectWithTag("EnemyParent").GetComponent<EnemyParent>();
+        }
+
+        private void CheckForEnemies()
+        {
+            // Ensure that the EnemyParent component has been found
+            if (_enemyParent != null)
+            {
+                // Check if the list is not null and has elements
+                if (_enemyParent.allEnemies != null && _enemyParent.allEnemies.Count > 0)
+                {
+                    _enemiesIsAlive = true;
+                    Debug.Log("There are currently " + _enemyParent.allEnemies.Count + " enemies.");
+                }
+                else
+                {
+                    _enemiesIsAlive = false;
+                    Debug.Log("There are currently no enemies in the list.");
+                }
+            } 
+            else 
+            {
+                Debug.LogError("EnemyParent is not assigned!");
+            }
+        }
+        public void StartGameButton()
+        {
+            _startButtonIsPressed = true;
+            currentRound += 1;
+            _startButton.SetActive(false);
+        }
     }
 }

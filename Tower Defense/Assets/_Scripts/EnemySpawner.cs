@@ -84,7 +84,12 @@ namespace _Scripts
             }
         }
 
-        private void SpawnEnemies()
+        public void SpawnEnemies()
+        // Stone enemies Round 1-5
+        // Fire enemeis Round 5-10
+        // ice enemies Round 10-15
+        // Flying enemies Round 15-20
+        // Bomb enemies Round 20-Infinite...
         {
             if (enemyParent.allEnemies.Count <= 41)
             {
@@ -97,6 +102,53 @@ namespace _Scripts
                 enemyParent.AddChildren();
             }
             
+        }
+
+        private void SpawnStoneEnemy()
+        {
+            if (enemyParent.allEnemies.Count <= 41)
+            {
+                for (var i = 0; i < enemiesSpawnAmount; i++)
+                {
+                    InstantiateEnemy(0); // stone enemy Index
+                }
+                enemyParent.AddChildren();
+            }
+        }
+        private void SpawnFireEnemy()
+        {
+            if (enemyParent.allEnemies.Count <= 41)
+            {
+                for (var i = 0; i < enemiesSpawnAmount; i++)
+                {
+                    InstantiateEnemy(1); // Fire enemy Index
+                }
+                enemyParent.AddChildren();
+            }
+        }
+        
+        private void SpawnIceEnemy()
+        {
+            if (enemyParent.allEnemies.Count <= 41)
+            {
+                for (var i = 0; i < enemiesSpawnAmount; i++)
+                {
+                    InstantiateEnemy(2); // Ice enemy Index
+                }
+                enemyParent.AddChildren();
+            }
+        }
+        
+        private void SpawnBombEnemy()
+        {
+            if (enemyParent.allEnemies.Count <= 41)
+            {
+                for (var i = 0; i < enemiesSpawnAmount; i++)
+                {
+                    InstantiateEnemy(3); // bomb enemy Index
+                }
+                enemyParent.AddChildren();
+            }
         }
 
 
