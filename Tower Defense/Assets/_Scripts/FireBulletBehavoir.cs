@@ -122,9 +122,13 @@ namespace _Scripts
         IEnumerator DestroyAfterDelay(float seconds)
         {
             yield return new WaitForSeconds(seconds);
-            _enemyHealth.TakeDamage(_bulletDamage);
-            _hasHappened = false;
-            Destroy(gameObject);
+            if (_enemyHealth.enemyTypeString == secondaryDamageString || _enemyHealth.enemyTypeString == damageTypeString)
+            {
+                _enemyHealth.TakeDamage(_bulletDamage);
+                _hasHappened = false;
+                Destroy(gameObject);
+            }
+            
         }
         
         public enum DamageType
