@@ -548,16 +548,13 @@ namespace _Scripts
         
         private void DestroyBlockTower()
         {
-            
             if (_blockingTower == null) return;
             placedTower.Remove(_blockingTower);    // remove the Tower from the list
-            _moneySystem.currentMoney += GetCurrentTowerCost();
+            _moneySystem.currentMoney += GetCurrentTowerCost(); //Refund the cost of the tower if the tower will block the enemies path 
             Destroy(_blockingTower);              // destroy the Tower object
             _blockingTower = null;                // Nullify the reference to avoid deleting the same tower multiple times
             ResetButtonStates();
             Destroy(_instantiatedTransparentTower);
-            
-            
             
         }
         
