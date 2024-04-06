@@ -12,23 +12,30 @@ namespace _Scripts
         private bool _pathHasBeenMade;
         public NavMeshAgent agent;
         private NavMeshPath _path;
-        [SerializeField] private float _movementSpeedAfterWall;
+        private float _movementSpeedAfterWall;
         private GameObject _targetObject;
         
         private int _frameCount = 0;
 
         private EnemyParent enemyParent;
 
-
+        private GameManager _gm;
+        
         private void Awake()
         {
             canReachDestination = true;
+            _gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         }
 
         private void Start()
         {
             agent = GetComponent<NavMeshAgent>();
             _path = new NavMeshPath();
+            
+            //Get speed variable from GM
+            agent.speed = _gm.speedBeforeWall;
+            _movementSpeedAfterWall = _gm.speedAfterWall;
+            
 
             enemyParent = gameObject.GetComponentInParent<EnemyParent>();
 

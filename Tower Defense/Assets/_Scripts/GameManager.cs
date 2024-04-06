@@ -9,6 +9,22 @@ public class GameManager : MonoBehaviour
     public float stoneEnemyHealth;
 
     public Material stoneEnemyMaterial;
+
+    
+    [Header("EnemyHealth")] 
+    public float stoneHealth;
+    public float iceHealth;
+    public float fireHealth;
+    public float lightningHealth;
+    public float bombHealth;
+    
+    [Header("Speed")] 
+    public float speedBeforeWall;
+    public float speedAfterWall;
+    
+    
+    //[Header("")] //Space in inspector
+    //public float rnd;
     
     
     
