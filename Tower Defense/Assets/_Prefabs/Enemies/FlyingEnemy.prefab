@@ -106,7 +106,7 @@ PrefabInstance:
     - target: {fileID: 4369771287798288250, guid: be44c9a58439323478f7c789a0cbb32f,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.192
+      value: 0.89
       objectReference: {fileID: 0}
     - target: {fileID: 4369771287798288250, guid: be44c9a58439323478f7c789a0cbb32f,
         type: 3}
@@ -154,6 +154,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -9063589543538667217, guid: c616721ae6c48f2408820c397dc477dc,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6c1e293faa2316a488987806134c9dfc, type: 2}
     - target: {fileID: -8679921383154817045, guid: c616721ae6c48f2408820c397dc477dc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -162,12 +167,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: c616721ae6c48f2408820c397dc477dc,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2.39
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c616721ae6c48f2408820c397dc477dc,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 5.87
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c616721ae6c48f2408820c397dc477dc,
         type: 3}
@@ -209,6 +214,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: -7268831573535046664, guid: c616721ae6c48f2408820c397dc477dc,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6c1e293faa2316a488987806134c9dfc, type: 2}
     - target: {fileID: -6156948539732257737, guid: c616721ae6c48f2408820c397dc477dc,
         type: 3}
       propertyPath: m_Layer
@@ -304,6 +314,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 5038598344357178107, guid: c616721ae6c48f2408820c397dc477dc,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6c1e293faa2316a488987806134c9dfc, type: 2}
     - target: {fileID: 6157740962562886903, guid: c616721ae6c48f2408820c397dc477dc,
         type: 3}
       propertyPath: m_Layer
@@ -410,7 +425,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 1.5
-  m_Center: {x: 0, y: 1.23, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2893403957676861658
 MonoBehaviour:
   m_ObjectHideFlags: 0

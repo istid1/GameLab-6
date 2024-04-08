@@ -72,11 +72,11 @@ public class EnemyFlySpawner : MonoBehaviour
             do
             {
                 RandomPos();
-                myRndPos = new Vector3(rndX, 4, rndZ);
+                myRndPos = new Vector3(rndX, 5, rndZ);
             }
             while (Physics.OverlapSphere(myRndPos, enemyRadius, enemyLayer).Length > 0);
 
-            targetPos = new Vector3(rndX, 4, -28);
+            targetPos = new Vector3(rndX, 5, -28);
             Vector3 direction = targetPos - myRndPos;
             Quaternion rotation = Quaternion.LookRotation(direction);
 
