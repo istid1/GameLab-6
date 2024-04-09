@@ -28,12 +28,16 @@ namespace _Scripts
 
         private int animSpeedMultiplier;
         private Animator _anim;
-
+        
         private Transform stoneParent, iceParent, fireParent, lightningParent, bombParent;
+        
+        private GameManager _gameManager;
+        private int _currentRound = -1;
         
         // Start is called before the first frame update
         void Start()
         {
+            _gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
             _anim = GetComponent<Animator>();
             
             enemyParentScript = GameObject.FindGameObjectWithTag("EnemyParent").GetComponent<EnemyParent>();
@@ -45,6 +49,8 @@ namespace _Scripts
             bombParent = GameObject.FindGameObjectWithTag("BombParent").transform;
             
             FindEnemies();
+            
+            
         }
 
         // Update is called once per frame
@@ -54,6 +60,13 @@ namespace _Scripts
             _weaponRange = _towerVariables.weaponRange;
             _shootRate = _towerVariables.shootRate;
             _weaponDamage = _towerVariables.bulletDamage;
+            
+            if (_gameManager.currentRound != _currentRound)
+            {
+                FindEnemies();
+                _currentRound = _gameManager.currentRound;
+            
+            }
             
             if (Input.GetKeyDown(KeyCode.Space))
             {

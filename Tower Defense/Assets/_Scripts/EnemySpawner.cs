@@ -104,18 +104,17 @@ namespace _Scripts
             
         }
 
-        private void SpawnStoneEnemy()
+        public void SpawnStoneEnemy()
         {
-            if (enemyParent.allEnemies.Count <= 41)
+            if (enemyParent.allEnemies.Count <= 1)
             {
-                for (var i = 0; i < enemiesSpawnAmount; i++)
-                {
+                
                     InstantiateEnemy(0); // stone enemy Index
-                }
+                
                 enemyParent.AddChildren();
             }
         }
-        private void SpawnFireEnemy()
+        public void SpawnFireEnemy()
         {
             if (enemyParent.allEnemies.Count <= 41)
             {
@@ -127,7 +126,7 @@ namespace _Scripts
             }
         }
         
-        private void SpawnIceEnemy()
+        public void SpawnIceEnemy()
         {
             if (enemyParent.allEnemies.Count <= 41)
             {
@@ -139,7 +138,7 @@ namespace _Scripts
             }
         }
         
-        private void SpawnBombEnemy()
+        public void SpawnBombEnemy()
         {
             if (enemyParent.allEnemies.Count <= 41)
             {

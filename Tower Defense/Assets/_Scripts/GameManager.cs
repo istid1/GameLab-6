@@ -1,5 +1,6 @@
+using System;
 using UnityEngine;
-
+using TMPro;
 namespace _Scripts
 {
     public class GameManager : MonoBehaviour
@@ -8,8 +9,13 @@ namespace _Scripts
         public float stoneEnemyHealth;
         public Material stoneEnemyMaterial;
 
+
+
+        [SerializeField] private TMP_Text _currRoundText; 
+        private int _frameCount;
         private bool _enemiesIsAlive;
-        private bool _startButtonIsPressed = false;
+        private bool _hasSpawned;
+        private bool _startButtonIsPressed;
         public int currentRound;
         [SerializeField] private GameObject _startButton;
         private EnemyParent _enemyParent;
@@ -18,20 +24,79 @@ namespace _Scripts
         // Start is called before the first frame update
         void Start()
         {
-            currentRound = 0;
+            currentRound = -1;
             FindEnemyParentInScene();
         }
-        // Update is called once per frame
-        void Update()
+
+        private void Update()
         {
-            CheckForEnemies();
-            if (!_enemiesIsAlive && _startButtonIsPressed)
+            CheckForEnemies(); // checks how many enemies is in scene
+
+            _currRoundText.text = "Round : " + currentRound;
+        }
+
+        // Update is called once per frame
+        void FixedUpdate()
+        {
+            FrameCount();
+        }
+
+        private void FrameCount()
+        {
+            _frameCount++;
+            if (_frameCount >= 150) // 3 second delay before spawning enemies. Makes sure that the bools' has been properly changed.
             {
+                
+                if (!_enemiesIsAlive && _startButtonIsPressed)
+                {
+                    CheckAndSpawnEnemies();
+                }
+                _frameCount = 0;
+            } 
+        }
+        
+        private void CheckAndSpawnEnemies()
+        {
+            if (!_hasSpawned)
+            {
+                _hasSpawned = true;
                 currentRound += 1;
                 Debug.Log("Starting round " + currentRound);
-                _enemySpawner.SpawnEnemies();
-            }          
+                
+                
+                SpawnEnemiesRoundScale();
+                
+                _enemiesIsAlive = true;
+                
+            }
         }
+
+        private void SpawnEnemiesRoundScale()
+        {
+            
+            for (int i = 0; i < currentRound; i++) // Spawn a stone enemy every round. Amount = currentRound 
+            {
+                _enemySpawner.SpawnStoneEnemy();
+            }
+            
+            for (int i = 5; i < currentRound; i++) // Spawn Fire Enemy after round 5
+            {
+                _enemySpawner.SpawnFireEnemy();
+            }
+            
+            for (int i = 10; i < currentRound; i++) // Spawn Ice Enemy after round 10
+            {
+                _enemySpawner.SpawnIceEnemy();
+            }
+            
+            for (int i = 15; i < currentRound; i++) // Spawn Bomb Enemy after round 15
+            {
+                _enemySpawner.SpawnBombEnemy();
+            }
+            
+            
+        }
+        
         private void FindEnemyParentInScene()
         {
             _enemyParent = GameObject.FindGameObjectWithTag("EnemyParent").GetComponent<EnemyParent>();
@@ -46,11 +111,14 @@ namespace _Scripts
                 if (_enemyParent.allEnemies != null && _enemyParent.allEnemies.Count > 0)
                 {
                     _enemiesIsAlive = true;
+                    _hasSpawned = true;
                     Debug.Log("There are currently " + _enemyParent.allEnemies.Count + " enemies.");
                 }
                 else
                 {
                     _enemiesIsAlive = false;
+                    _hasSpawned = false;
+                    
                     Debug.Log("There are currently no enemies in the list.");
                 }
             } 
@@ -61,9 +129,11 @@ namespace _Scripts
         }
         public void StartGameButton()
         {
+            _frameCount = 0;
             _startButtonIsPressed = true;
             currentRound += 1;
             _startButton.SetActive(false);
+            
         }
     }
 }

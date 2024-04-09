@@ -29,17 +29,21 @@ namespace _Scripts
         [SerializeField]
         private EnemyParent enemyParentScript;
 
+        private GameManager _gameManager;
+        private int _currentRound = -1;
+        
         private void Awake()
         {
             stoneParent = GameObject.FindGameObjectWithTag("StoneParent").transform;
             lightningParent = GameObject.FindGameObjectWithTag("LightningParent").transform;
             enemyParentScript = GameObject.FindGameObjectWithTag("EnemyParent").GetComponent<EnemyParent>();
 
-            //FindEnemies();
+            
         }
 
         private void Start()
         {
+            _gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
             FindEnemies();
         }
         
@@ -47,6 +51,14 @@ namespace _Scripts
         {
             Debug.Log(isInRange);
             weaponRange = _towerVariables.weaponRange;
+            
+            if (_gameManager.currentRound != _currentRound)
+            {
+                Debug.Log("PING!");
+                FindEnemies();
+                _currentRound = _gameManager.currentRound;
+            
+            }
 
             if (_enemies.Count > 0)
             {
@@ -102,12 +114,11 @@ namespace _Scripts
 
         private void FindEnemies()
         {
-            if (enemyParentScript.allEnemies.Count > 0)
-            {
-                Debug.Assert(_sphereControllers.Count == NumberOfEnemies, "Not enough SphereControllers. 5 required.");
+            
+                //Debug.Assert(_sphereControllers.Count == NumberOfEnemies, "Not enough SphereControllers. 5 required.");
                 //_enemies = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
                 
-                _enemies.Clear();
+                ClearList();
 
                 foreach (Transform child in stoneParent)
                 {
@@ -118,8 +129,19 @@ namespace _Scripts
                 {
                     _enemies.Add(child.gameObject);
                 }
+        }
+        
+        private void ClearList()
+        {
+
+            if (_enemies != null)
+            {
+                if (_enemies.Count > 0)
+                {
+                    _enemies.Clear();
+                }
             }
-            
+        
         }
         
         

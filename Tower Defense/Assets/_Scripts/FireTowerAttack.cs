@@ -21,20 +21,23 @@ public class FireTowerAttack : MonoBehaviour
 
     [SerializeField] private GameObject _bulletSpawnPoint;
     
-    private Transform stoneParent, iceParent;
+    private Transform stoneParent, fireParent;
     
-    
- 
+    private GameManager _gameManager;
+    private int _currentRound = -1;
 
     private float _shootTimer;
     
     // Start is called before the first frame update
     void Start()
     {
+        _gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        
         stoneParent = GameObject.FindGameObjectWithTag("StoneParent").transform;
-        iceParent = GameObject.FindGameObjectWithTag("IceParent").transform;
+        fireParent = GameObject.FindGameObjectWithTag("FireParent").transform;
         
         FindEnemies();
+        
         
         
     }
@@ -45,6 +48,14 @@ public class FireTowerAttack : MonoBehaviour
         _weaponRange = _towerVariables.weaponRange;
         _shootRate = _towerVariables.shootRate;
         _weaponDamage = _towerVariables.bulletDamage;
+
+        if (_gameManager.currentRound != _currentRound)
+        {
+            FindEnemies();
+            _currentRound = _gameManager.currentRound;
+            
+        }
+        
         
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -60,6 +71,8 @@ public class FireTowerAttack : MonoBehaviour
     }
 
 
+    
+    
     private GameObject FindClosestEnemy()
     {
         _shortestDistance = Mathf.Infinity;
@@ -110,7 +123,7 @@ public class FireTowerAttack : MonoBehaviour
             _enemies.Add(child.gameObject);
         }
 
-        foreach (Transform child in iceParent)
+        foreach (Transform child in fireParent)
         {
             _enemies.Add(child.gameObject);
         }
