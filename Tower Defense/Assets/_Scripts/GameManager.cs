@@ -10,7 +10,7 @@ namespace _Scripts
         public Material stoneEnemyMaterial;
 
 
-
+        [SerializeField] private MoneySystem _moneySystem;
         [SerializeField] private TMP_Text _currRoundText; 
         private int _frameCount;
         private bool _enemiesIsAlive;
@@ -50,6 +50,7 @@ namespace _Scripts
                 if (!_enemiesIsAlive && _startButtonIsPressed)
                 {
                     CheckAndSpawnEnemies();
+                    
                 }
                 _frameCount = 0;
             } 
@@ -73,7 +74,7 @@ namespace _Scripts
 
         private void SpawnEnemiesRoundScale()
         {
-            
+            _moneySystem.currentMoney += 25 * currentRound;
             for (int i = 0; i < currentRound; i++) // Spawn a stone enemy every round. Amount = currentRound 
             {
                 _enemySpawner.SpawnStoneEnemy();

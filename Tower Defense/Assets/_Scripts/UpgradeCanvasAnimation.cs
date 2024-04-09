@@ -69,8 +69,12 @@ namespace _Scripts
         }
 
             public void UpgradeCanvasDisabled()
-        { 
-            StartCoroutine(TurnOffCanvas());
+        {
+            if (this.gameObject.activeInHierarchy)
+            {
+                StartCoroutine(TurnOffCanvas());
+            }
+            
         }
 
         private void SetUpgradeCanvasState(bool isActive)

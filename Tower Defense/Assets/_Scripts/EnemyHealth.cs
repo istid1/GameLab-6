@@ -31,6 +31,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField]
     private GameManager _gm;
 
+    private GameManager _gameManager;
     
     [SerializeField] private EnemyType enemyType;
     [SerializeField] private Slider _slider;
@@ -50,9 +51,12 @@ public class EnemyHealth : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        _gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        health = 1 + _gameManager.currentRound * 2;
         _maxHealth = health;
+        
         enemyParentScript = GameObject.FindGameObjectWithTag("EnemyParent").GetComponent<EnemyParent>();
+        
         enemyMovement = this.gameObject.GetComponent<EnemyMovement>();
         
         enemyFlySpawnerScript = GameObject.FindAnyObjectByType<EnemyFlySpawner>().GetComponent<EnemyFlySpawner>();
@@ -63,6 +67,8 @@ public class EnemyHealth : MonoBehaviour
         stoneParent = GameObject.FindGameObjectWithTag("StoneParent");
 
         CheckEnemyType();
+
+        
 
     }
     

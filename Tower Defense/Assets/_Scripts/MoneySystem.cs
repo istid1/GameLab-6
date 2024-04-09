@@ -28,7 +28,7 @@ namespace _Scripts
         // Start is called before the first frame update
         void Start()
         {
-            currentMoney = 5000;
+            currentMoney = 100;
         }
 
         // Update is called once per frame
