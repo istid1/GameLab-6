@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class SquadLeader : MonoBehaviour
 {
-    public float speed = 20f;
-    public float speedAfterWall = 5f;
+    [HideInInspector] public float speed;
+    [HideInInspector] public float speedAfterWall;
     public List<GameObject> mySquad;
 
     
@@ -15,29 +15,41 @@ public class SquadLeader : MonoBehaviour
     private Vector3 myWaypoint;
 
     private GameObject lightningParent;
+
+    private GameManager _gm;
     
-    
+    private void Awake()
+    {
+        _gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+    }
     
     // Start is called before the first frame update
     void Start()
     {
+        //Grabs the speed variables from the GM
+        speed = _gm.speedBeforeWall;
+        speedAfterWall = _gm.speedAfterWall;
+        
         lightningParent = GameObject.FindGameObjectWithTag("LightningParent");
         
+        //Sets waypoint to travel to
         myWaypoint = new Vector3(transform.position.x, 4, -28);
         GatherSquad();
     }
 
     private void FixedUpdate()
     {
+        //Movement
         transform.position = Vector3.MoveTowards(transform.position, myWaypoint, speed * Time.deltaTime);
     }
 
 
 
-    private void GatherSquad()
+    private void GatherSquad()      //Finds all FlyingEnemies that are not currently in a Squad
     {
         foreach (Transform child in lightningParent.transform)
         {
+            //If "HasSquad" list doesn't contain gameobject, add it to "HasSquad" & "MySquad" lists
             if (enemyFlySpawnerScript.hasSquad.Contains(child.gameObject) == false)
             {
                 mySquad.Add(child.gameObject);
@@ -52,7 +64,10 @@ public class SquadLeader : MonoBehaviour
         {
             foreach (GameObject child in mySquad)
             {
+                //Sets the speed of All flying enemies in the Squad
                 child.GetComponent<EnemyFlyMovement>().speed = speedAfterWall;
+                //Sets it so that the enemies now can be damaged
+                child.GetComponent<EnemyHealth>().canTakeDamage = true;
             }
             
             Destroy((gameObject));

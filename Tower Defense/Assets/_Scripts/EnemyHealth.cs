@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using _Scripts;
@@ -11,11 +12,13 @@ using Random = UnityEngine.Random;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private MoneySystem _moneySystem;
-    public float health = 3;
+    [HideInInspector] public float health;
     private float _maxHealth;
     private float _currentHealth;
     [HideInInspector]
     public string enemyTypeString;
+
+    [HideInInspector] public bool canTakeDamage;
 
     //public Material stoneEnemyMaterial;
     
@@ -46,8 +49,12 @@ public class EnemyHealth : MonoBehaviour
         Bomb
     }
 
-    
-    
+    private void Awake()
+    {
+        _gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        GetHealth();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -63,7 +70,7 @@ public class EnemyHealth : MonoBehaviour
 
 
         _mR = gameObject.transform.GetChild(3).GetComponent<SkinnedMeshRenderer>();
-        _gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        
         stoneParent = GameObject.FindGameObjectWithTag("StoneParent");
 
         CheckEnemyType();
@@ -107,11 +114,13 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        
-        MoneySystem.Instance.currentMoney++;
-        health -= damage;
-        UpdateHealthBar(health, _maxHealth);
-        //Debug.Log("OW");
+        if (canTakeDamage)      //Makes it so that the flying enemies can't be damaged before they have reached the slowDownWall - Changed to true by SquadLeader
+        {
+            MoneySystem.Instance.currentMoney++;
+            health -= damage;
+            UpdateHealthBar(health, _maxHealth);
+            //Debug.Log("OW");
+        }
     }
     
     void CheckEnemyType()
@@ -119,15 +128,18 @@ public class EnemyHealth : MonoBehaviour
         if (enemyType == EnemyType.Stone)
         {
             enemyTypeString = "Stone";
-            _gm.stoneEnemyHealth = health;
+            _gm.stoneEnemyHealth = health; // Might not need this anymore
+            canTakeDamage = true;
         }
         if (enemyType == EnemyType.Fire)
         {
             enemyTypeString = "Fire";
+            canTakeDamage = true;
         }
         if (enemyType == EnemyType.Ice)
         {
             enemyTypeString = "Ice";
+            canTakeDamage = true;
         }
         if (enemyType == EnemyType.Lightning)
         {
@@ -136,6 +148,7 @@ public class EnemyHealth : MonoBehaviour
         if (enemyType == EnemyType.Bomb)
         {
             enemyTypeString = "Bomb";
+            canTakeDamage = true;
         }
     }
 
@@ -155,6 +168,33 @@ public class EnemyHealth : MonoBehaviour
     private void UpdateHealthBar(float currentHealth, float maxHealth)
     {
         _slider.value = currentHealth / maxHealth;
+    }
+
+
+    private void GetHealth() //Get health from GM
+    {
+        if (enemyType == EnemyType.Stone)
+        {
+            health = _gm.stoneHealth;
+           // _gm.stoneEnemyHealth = health; //Might not need this one anymore
+
+        }
+        if (enemyType == EnemyType.Fire)
+        {
+            health = _gm.fireHealth;
+        }
+        if (enemyType == EnemyType.Ice)
+        {
+            health = _gm.iceHealth;
+        }
+        if (enemyType == EnemyType.Lightning)
+        {
+            health = _gm.lightningHealth;
+        }
+        if (enemyType == EnemyType.Bomb)
+        {
+            health = _gm.bombHealth;
+        }
     }
     
 }
