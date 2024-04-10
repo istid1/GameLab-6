@@ -5,10 +5,6 @@ namespace _Scripts
 {
     public class TowerVariables : MonoBehaviour
     {
-    
-        public bool damageIsUpgraded;
-        public bool rangeIsUpgraded;
-        public bool fireRateIsUpgraded;
 
         public float shootRate = 2f;
         public int bulletDamage = 1;
@@ -55,10 +51,7 @@ namespace _Scripts
                     _moneySystem.DeductMoney(50);
                 
                 }
-                if (_currentDamageUpgradeLevel == 5)
-                {
-                    damageIsUpgraded = true;
-                }
+                
         }
         
         public void UpgradeRange() //weaponRange level 5 = 17.5f (Tower gets almost double range) (Linear)
@@ -71,10 +64,7 @@ namespace _Scripts
                 
                     _moneySystem.DeductMoney(50);
                 }
-                if (_currentRangeUpgradeLevel == 5)
-                {
-                    rangeIsUpgraded = true;
-                }
+                
             
           
         }
@@ -88,10 +78,7 @@ namespace _Scripts
                 
                     _moneySystem.DeductMoney(50);
                 }
-                if (_currentFireRateUpgradeLevel == 5)
-                {
-                    fireRateIsUpgraded = true;
-                }
+              
         }
     }
 }
