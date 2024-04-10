@@ -9,9 +9,7 @@ public class Upgrades : MonoBehaviour
 
     private TowerController _towerController;
     
-    private bool _fireRateIsActive;
-    private bool _damageIsActive;
-    private bool _rangeIsActive;
+ 
          
     // Start is called before the first frame update
     void Start()
@@ -27,17 +25,17 @@ public class Upgrades : MonoBehaviour
 
     private void FireRate()
     {
-        _fireRateIsActive = true;
+        
     }
 
     private void Damage()
     {
-        _damageIsActive = true;
+        
     }
 
     private void Range()
     {
-        _rangeIsActive = true;
+        
     }
 
     

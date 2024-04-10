@@ -83,7 +83,7 @@ namespace _Scripts
         [SerializeField] private int _costBombTower = 250;
 
         private float _fpsTimer = 0;
-        private int _upgradeCost = 50;
+        //private int _upgradeCost = 50;
         private bool canAfordUpgrade;
         
         
