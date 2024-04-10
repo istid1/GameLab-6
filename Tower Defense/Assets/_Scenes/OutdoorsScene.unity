@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2694.9358, g: 2824.258, b: 4100.977, a: 1}
+  m_IndirectSpecularColor: {r: 2702.5413, g: 2840.4338, b: 4147.852, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -910,7 +910,6 @@ GameObject:
   - component: {fileID: 261513849}
   - component: {fileID: 261513848}
   - component: {fileID: 261513847}
-  - component: {fileID: 261513852}
   - component: {fileID: 261513854}
   - component: {fileID: 261513853}
   m_Layer: 0
@@ -919,7 +918,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &261513847
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1009,37 +1008,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 169232718}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &261513852
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 261513845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AgentTypeID: 0
-  m_CollectObjects: 0
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 2, z: 0}
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_UseGeometry: 0
-  m_DefaultArea: 0
-  m_GenerateLinks: 0
-  m_IgnoreNavMeshAgent: 1
-  m_IgnoreNavMeshObstacle: 1
-  m_OverrideTileSize: 0
-  m_TileSize: 256
-  m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
-  m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 712bf8ab2f45d544daf086ffbc6d72fd, type: 2}
-  m_BuildHeightMesh: 0
 --- !u!54 &261513853
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2572,6 +2540,7 @@ GameObject:
   - component: {fileID: 943137171}
   - component: {fileID: 943137170}
   - component: {fileID: 943137173}
+  - component: {fileID: 943137174}
   m_Layer: 0
   m_Name: FlyingEnemySpawner
   m_TagString: Untagged
@@ -2669,6 +2638,25 @@ MonoBehaviour:
     m_Bits: 32768
   enemyRadius: 1.5
   hasSquad: []
+--- !u!114 &943137174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943137168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &993740885
 GameObject:
   m_ObjectHideFlags: 0
@@ -2885,7 +2873,7 @@ PrefabInstance:
     - target: {fileID: 2720767966253281199, guid: 6646cb2a55d98424e80b78331c6489d5,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2725473023229696548, guid: 6646cb2a55d98424e80b78331c6489d5,
         type: 3}
@@ -3211,7 +3199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AgentTypeID: 0
-  m_CollectObjects: 2
+  m_CollectObjects: 0
   m_Size: {x: 10, y: 10, z: 10}
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
@@ -3227,7 +3215,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 6e8f587d6eb64b84db482f96b0dbfc85, type: 2}
   m_BuildHeightMesh: 0
 --- !u!54 &1183390006
 Rigidbody:
@@ -6227,7 +6215,7 @@ PrefabInstance:
         type: 3}
       propertyPath: 'navMeshSurfaces.Array.data[1]'
       value: 
-      objectReference: {fileID: 261513852}
+      objectReference: {fileID: 0}
     - target: {fileID: 7795576368167072504, guid: 32a83f5ac556cae41bdf64bece26dffe,
         type: 3}
       propertyPath: m_Name

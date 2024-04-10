@@ -90,7 +90,7 @@ namespace _Scripts
         private void Awake()
         {
             
-            BuildNavMeshSurfaces();
+            //BuildNavMeshSurfaces();
            _mainCamera = Camera.main;
            _dummyEnemyEnabler.SetActive(true);
         }
@@ -151,6 +151,7 @@ namespace _Scripts
             
         }
         
+        /*
         private void BuildNavMeshSurfaces()
         {
             foreach (var t in navMeshSurfaces)
@@ -158,7 +159,7 @@ namespace _Scripts
                 t.BuildNavMesh();
             }
         }
-        
+        */
         private static bool RayCastHitsLayer(Ray ray, LayerMask layer, out RaycastHit hit) //RayCast layers
         {
             return Physics.Raycast(ray, out hit, Mathf.Infinity, layer);
