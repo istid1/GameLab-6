@@ -42,8 +42,7 @@ public class EnemyFlySpawner : MonoBehaviour
         leaderSpawnVector = squadLeaderSpawnPos.transform.position;
         _enemyParent = GameObject.FindGameObjectWithTag("EnemyParent").GetComponent<EnemyParent>();
         
-        //JUST FOR TESTING!/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        SpawnFlyingEnemy(amountToSpawn);
+      
     }
 
     // Update is called once per frame

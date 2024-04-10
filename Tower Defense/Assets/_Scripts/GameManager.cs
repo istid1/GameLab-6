@@ -21,6 +21,20 @@ namespace _Scripts
         private EnemyParent _enemyParent;
         [SerializeField] private EnemySpawner _enemySpawner;
 
+       
+    
+        [Header("EnemyHealth")] 
+        public float stoneHealth;
+        public float iceHealth;
+        public float fireHealth;
+        public float lightningHealth;
+        public float bombHealth;
+    
+        [Header("Speed")] 
+        public float speedBeforeWall;
+        public float speedAfterWall;
+        
+        
         // Start is called before the first frame update
         void Start()
         {
