@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4447983984908263884}
   - component: {fileID: 6449722300738182459}
+  - component: {fileID: 8982299823630710255}
   m_Layer: 0
   m_Name: Video Player Ads
   m_TagString: Untagged
@@ -57,14 +58,31 @@ VideoPlayer:
   m_TargetAudioSources:
   - {fileID: 0}
   m_DirectAudioVolumes:
-  - 0.5
+  - 0.25
   m_Url: 
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_SkipOnDrop: 1
   m_Looping: 0
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
+--- !u!114 &8982299823630710255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2308743424554832081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39f3bd70347b7f94c9128bfcae9d206b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameManager: {fileID: 0}
+  _videoPlayer: {fileID: 6449722300738182459}
+  _canvas1: {fileID: 0}
+  _canvas2: {fileID: 0}
+  _timeRemaining: 30
