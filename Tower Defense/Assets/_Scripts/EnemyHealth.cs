@@ -18,6 +18,8 @@ public class EnemyHealth : MonoBehaviour
     [HideInInspector]
     public string enemyTypeString;
 
+    [HideInInspector] public bool canTakeDamage;
+
     //public Material stoneEnemyMaterial;
     
     
@@ -106,11 +108,13 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        
-        MoneySystem.Instance.currentMoney++;
-        health -= damage;
-        UpdateHealthBar(health, _maxHealth);
-        //Debug.Log("OW");
+        if (canTakeDamage)      //Makes it so that the flying enemies can't be damaged before they have reached the slowDownWall - Changed to true by SquadLeader
+        {
+            MoneySystem.Instance.currentMoney++;
+            health -= damage;
+            UpdateHealthBar(health, _maxHealth);
+            //Debug.Log("OW");
+        }
     }
     
     void CheckEnemyType()
@@ -119,14 +123,17 @@ public class EnemyHealth : MonoBehaviour
         {
             enemyTypeString = "Stone";
             _gm.stoneEnemyHealth = health; // Might not need this anymore
+            canTakeDamage = true;
         }
         if (enemyType == EnemyType.Fire)
         {
             enemyTypeString = "Fire";
+            canTakeDamage = true;
         }
         if (enemyType == EnemyType.Ice)
         {
             enemyTypeString = "Ice";
+            canTakeDamage = true;
         }
         if (enemyType == EnemyType.Lightning)
         {
@@ -135,6 +142,7 @@ public class EnemyHealth : MonoBehaviour
         if (enemyType == EnemyType.Bomb)
         {
             enemyTypeString = "Bomb";
+            canTakeDamage = true;
         }
     }
 

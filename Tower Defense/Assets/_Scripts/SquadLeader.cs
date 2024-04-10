@@ -66,6 +66,8 @@ public class SquadLeader : MonoBehaviour
             {
                 //Sets the speed of All flying enemies in the Squad
                 child.GetComponent<EnemyFlyMovement>().speed = speedAfterWall;
+                //Sets it so that the enemies now can be damaged
+                child.GetComponent<EnemyHealth>().canTakeDamage = true;
             }
             
             Destroy((gameObject));
