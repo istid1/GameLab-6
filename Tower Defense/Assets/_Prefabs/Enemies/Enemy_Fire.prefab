@@ -12,7 +12,7 @@ PrefabInstance:
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: a9de97372fdc3a74f9f443ec3ab5b004, type: 2}
+      objectReference: {fileID: 2100000, guid: 870b47f6003cb4e4a91773f37f6207a2, type: 2}
     - target: {fileID: -8679921383154817045, guid: 94e7968e7c79baa45a8b16db9f4a6887,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -63,6 +63,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6039501352494881244, guid: 94e7968e7c79baa45a8b16db9f4a6887,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 5561349426305759274, guid: e5fe8bca0a6a3c74e9fbcdf1836e609f,
+        type: 3}
+    - target: {fileID: -4109581664301991996, guid: 94e7968e7c79baa45a8b16db9f4a6887,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 5561349426305759274, guid: e5fe8bca0a6a3c74e9fbcdf1836e609f,
+        type: 3}
     - target: {fileID: 919132149155446097, guid: 94e7968e7c79baa45a8b16db9f4a6887,
         type: 3}
       propertyPath: m_Name
@@ -78,6 +90,12 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 7577152532946649237, guid: 94e7968e7c79baa45a8b16db9f4a6887,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 5561349426305759274, guid: e5fe8bca0a6a3c74e9fbcdf1836e609f,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -191,7 +209,6 @@ MonoBehaviour:
   enemyAgent: {fileID: 5722058597224277827}
   canReachDestination: 0
   agent: {fileID: 5722058597224277827}
-  _movementSpeedAfterWall: 3
 --- !u!114 &7077976333428279554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,6 +293,9 @@ MonoBehaviour:
     type: 3}
   health: 10
   enemyTypeString: 
+  canTakeDamage: 0
+  _animator: {fileID: -8388164480318108732}
+  _insideModel: {fileID: 0}
   _mR: {fileID: 0}
   _gm: {fileID: 0}
   enemyType: 1

@@ -191,7 +191,6 @@ MonoBehaviour:
   enemyAgent: {fileID: 5722058597224277827}
   canReachDestination: 0
   agent: {fileID: 5722058597224277827}
-  _movementSpeedAfterWall: 3
 --- !u!114 &7077976333428279554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,6 +275,8 @@ MonoBehaviour:
     type: 3}
   health: 10
   enemyTypeString: 
+  canTakeDamage: 0
+  _animator: {fileID: -8388164480318108732}
   _mR: {fileID: 0}
   _gm: {fileID: 0}
   enemyType: 4

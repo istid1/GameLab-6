@@ -22,11 +22,14 @@ public class EnemyHealth : MonoBehaviour
 
     //public Material stoneEnemyMaterial;
     
+    [SerializeField] private Animator _animator;
     
+    //[SerializeField] private GameObject _insideModel;
     private EnemyParent enemyParentScript;
     private EnemyMovement enemyMovement;
     private GameObject stoneParent;
 
+    
     private EnemyFlySpawner enemyFlySpawnerScript;
     
     [SerializeField]
@@ -78,7 +81,13 @@ public class EnemyHealth : MonoBehaviour
         
 
     }
-    
+
+    private void DestroyPlz()
+    {
+        enemyParentScript.allEnemies.Remove(this.gameObject);
+        enemyMovement.DeleteTarget();
+        Destroy(gameObject);
+    }
 
     // Update is called once per frame
     void Update()
@@ -87,11 +96,8 @@ public class EnemyHealth : MonoBehaviour
         
         if (health <= 0 && enemyType == EnemyType.Stone)
         {
-            
-            enemyParentScript.allEnemies.Remove(this.gameObject);
-            enemyMovement.DeleteTarget();
-            
-            Destroy(gameObject);
+            _animator.SetTrigger("Death");
+            Invoke(nameof(DestroyPlz),1f);
             
         }
         
@@ -107,6 +113,7 @@ public class EnemyHealth : MonoBehaviour
         
         else if (health <= 0 && enemyType != EnemyType.Stone)
         {
+            
             ChangeMeToStone();
         }
         
@@ -135,6 +142,7 @@ public class EnemyHealth : MonoBehaviour
         {
             enemyTypeString = "Fire";
             canTakeDamage = true;
+           
         }
         if (enemyType == EnemyType.Ice)
         {
@@ -153,14 +161,19 @@ public class EnemyHealth : MonoBehaviour
     }
 
 
-
-    void ChangeMeToStone()
+    private void DeathToStone()
     {
         enemyType = EnemyType.Stone;
         enemyTypeString = "Stone";
         _mR.material = _gm.stoneEnemyMaterial;
         health = _gm.stoneEnemyHealth;
         transform.parent = stoneParent.transform;
+    }
+
+    void ChangeMeToStone()
+    {
+        _animator.SetTrigger("Death");
+        Invoke(nameof(DeathToStone), 1f);        
 
     }
 
