@@ -96,7 +96,7 @@ public class EnemyHealth : MonoBehaviour
         
         if (health <= 0 && enemyType == EnemyType.Stone)
         {
-            //_animator.SetTrigger("Death");
+            _animator.SetTrigger("DeathStone");
             Invoke(nameof(DestroyPlz),1f);
             
         }
@@ -172,7 +172,7 @@ public class EnemyHealth : MonoBehaviour
 
     void ChangeMeToStone()
     {
-        _animator.SetTrigger("Death");
+        //_animator.SetTrigger("DeathElse");
         Invoke(nameof(DeathToStone), 1f);        
 
     }
