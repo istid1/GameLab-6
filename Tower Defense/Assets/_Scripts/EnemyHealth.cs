@@ -96,7 +96,7 @@ public class EnemyHealth : MonoBehaviour
         
         if (health <= 0 && enemyType == EnemyType.Stone)
         {
-            _animator.SetTrigger("Death");
+            //_animator.SetTrigger("Death");
             Invoke(nameof(DestroyPlz),1f);
             
         }
