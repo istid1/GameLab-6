@@ -168,6 +168,7 @@ public class EnemyHealth : MonoBehaviour
         //_mR.material = _gm.stoneEnemyMaterial;
         _animator.SetTrigger("FireToStone");
         health = _gm.stoneEnemyHealth;
+        _maxHealth = _gm.stoneEnemyHealth;
         transform.parent = stoneParent.transform;
     }
 
