@@ -559,6 +559,7 @@ MonoBehaviour:
   _gm: {fileID: 0}
   enemyType: 1
   _slider: {fileID: 7511280676544738534}
+  _sliderGameObject: {fileID: 8479555835960840112}
 --- !u!136 &4181170734894390878
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -770,6 +771,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &8479555835960840112 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3467199889066286727, guid: be44c9a58439323478f7c789a0cbb32f,
+    type: 3}
+  m_PrefabInstance: {fileID: 5021681770984673591}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8724619421189119565 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4369771287798288250, guid: be44c9a58439323478f7c789a0cbb32f,

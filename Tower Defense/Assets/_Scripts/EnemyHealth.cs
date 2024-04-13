@@ -1,12 +1,10 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using _Scripts;
 
 using UnityEngine;
-using UnityEngine.Serialization;
+
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
+
 
 
 public class EnemyHealth : MonoBehaviour
@@ -41,6 +39,7 @@ public class EnemyHealth : MonoBehaviour
     
     [SerializeField] private EnemyType enemyType;
     [SerializeField] private Slider _slider;
+    [SerializeField] private GameObject _sliderGameObject;
     
 
     public enum EnemyType
@@ -96,6 +95,7 @@ public class EnemyHealth : MonoBehaviour
         
         if (health <= 0 && enemyType == EnemyType.Stone)
         {
+            _sliderGameObject.SetActive(false);
             _animator.SetTrigger("DeathStone");
             Invoke(nameof(DestroyPlz),1f);
             
@@ -161,21 +161,23 @@ public class EnemyHealth : MonoBehaviour
     }
 
 
-    private void DeathToStone()
+    private void DeathToStone() // Sets Enemy Typing and triggers animation
     {
         enemyType = EnemyType.Stone;
         enemyTypeString = "Stone";
-        //_mR.material = _gm.stoneEnemyMaterial;
-        _animator.SetTrigger("FireToStone");
-        health = _gm.stoneEnemyHealth;
-        _maxHealth = _gm.stoneEnemyHealth;
         transform.parent = stoneParent.transform;
+        
+        _animator.SetTrigger("FireToStone");
     }
 
-    void ChangeMeToStone()
+    void ChangeMeToStone() // triggers animation and updates the Hp bar
     {
+        health = _gm.stoneEnemyHealth;
+        _maxHealth = _gm.stoneEnemyHealth;
+        UpdateHealthBar(health, _maxHealth);
+        
         _animator.SetTrigger("FireDeath");
-        Invoke(nameof(DeathToStone), 1.5f);        
+        Invoke(nameof(DeathToStone), 1f);        
 
     }
 
@@ -191,7 +193,6 @@ public class EnemyHealth : MonoBehaviour
         if (enemyType == EnemyType.Stone)
         {
             health = _gm.stoneHealth;
-           // _gm.stoneEnemyHealth = health; //Might not need this one anymore
         }
         if (enemyType == EnemyType.Fire)
         {
