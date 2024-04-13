@@ -13,8 +13,8 @@ public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private MoneySystem _moneySystem;
     [HideInInspector] public float health;
-    private float _maxHealth;
-    private float _currentHealth;
+    [SerializeField] private float _maxHealth;
+    [SerializeField] private float _currentHealth;
     [HideInInspector]
     public string enemyTypeString;
 
@@ -62,9 +62,9 @@ public class EnemyHealth : MonoBehaviour
     void Start()
     {
         _gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        health = 1 + _gameManager.currentRound * 2;
+        //health = 1 + _gameManager.currentRound * 2;
         _maxHealth = health;
-        
+        //_slider.maxValue = _maxHealth;
         enemyParentScript = GameObject.FindGameObjectWithTag("EnemyParent").GetComponent<EnemyParent>();
         
         enemyMovement = this.gameObject.GetComponent<EnemyMovement>();
@@ -165,15 +165,16 @@ public class EnemyHealth : MonoBehaviour
     {
         enemyType = EnemyType.Stone;
         enemyTypeString = "Stone";
-        _mR.material = _gm.stoneEnemyMaterial;
+        //_mR.material = _gm.stoneEnemyMaterial;
+        _animator.SetTrigger("FireToStone");
         health = _gm.stoneEnemyHealth;
         transform.parent = stoneParent.transform;
     }
 
     void ChangeMeToStone()
     {
-        //_animator.SetTrigger("DeathElse");
-        Invoke(nameof(DeathToStone), 1f);        
+        _animator.SetTrigger("FireDeath");
+        Invoke(nameof(DeathToStone), 1.5f);        
 
     }
 
@@ -190,7 +191,6 @@ public class EnemyHealth : MonoBehaviour
         {
             health = _gm.stoneHealth;
            // _gm.stoneEnemyHealth = health; //Might not need this one anymore
-
         }
         if (enemyType == EnemyType.Fire)
         {

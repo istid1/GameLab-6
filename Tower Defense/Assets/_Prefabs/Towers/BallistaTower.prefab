@@ -597,7 +597,6 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1387347885061660366, guid: f4445569d8f29984fbdc109a8c3f33fc,
     type: 3}
   bulletDamage: 1
-  bulletSpawnPos: {fileID: 0}
   towerType: 0
   bulletVector: {x: 0, y: 0, z: 0}
 --- !u!114 &-1755432985629755056
@@ -677,7 +676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b983a83fd2b0a24e9b052b4a1706578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerType: 0
+  towerType: 4
   _towerTypeString: 
 --- !u!1 &8506715559178998695 stripped
 GameObject:
