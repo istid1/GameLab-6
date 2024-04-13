@@ -98,6 +98,7 @@ public class EnemyHealth : MonoBehaviour
             _sliderGameObject.SetActive(false);
             
             _animator.SetTrigger("StoneDeath");
+            
             Invoke(nameof(DestroyPlz),1f);
             
         }

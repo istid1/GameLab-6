@@ -480,6 +480,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 2323418215457351779, guid: d3fcd146fafc48d4ebab2e8d926c6a89,
     type: 3}
   bulletDamage: 2
+  towerType: 2
+  bulletVector: {x: 0, y: 0, z: 0}
 --- !u!114 &-4078027590017202433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -499,6 +501,8 @@ MonoBehaviour:
   bulletDamage: 1
   weaponRange: 10
   _currentFireRateUpgradeLevel: 1
+  _currentRangeUpgradeLevel: 0
+  _currentDamageUpgradeLevel: 0
   _moneySystem: {fileID: 0}
 --- !u!65 &540330611889973762
 BoxCollider:
@@ -557,6 +561,7 @@ MonoBehaviour:
   _towerVariables: {fileID: -4078027590017202433}
   _fireBulletPrefab: {fileID: 2323418215457351779, guid: d3fcd146fafc48d4ebab2e8d926c6a89,
     type: 3}
+  _enemies: []
   _bulletSpawnPoint: {fileID: 3949197261793135239}
 --- !u!114 &-5907063244428177541
 MonoBehaviour:
