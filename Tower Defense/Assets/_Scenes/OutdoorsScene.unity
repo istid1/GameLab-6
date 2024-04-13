@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2694.8323, g: 2823.672, b: 4099.235, a: 1}
+  m_IndirectSpecularColor: {r: 2690.9456, g: 2820.9846, b: 4097.8833, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2193,8 +2193,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab:
   - {fileID: 1109750593947887635, guid: 1cff37c1ff05dcc47b5e96ca0a29c4ea, type: 3}
-  - {fileID: 1109750593947887635, guid: 9da4d7bb5e7ba154d9e7edc2a19ad637, type: 3}
   - {fileID: 1109750593947887635, guid: de3f415747c9ae94bb451ae39e3369af, type: 3}
+  - {fileID: 1109750593947887635, guid: 9da4d7bb5e7ba154d9e7edc2a19ad637, type: 3}
   enemiesSpawnAmount: 1
   allEnemiesIsSpawned: 0
 --- !u!114 &598816199
@@ -7009,89 +7009,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &2040444058
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 301020881356501673, guid: de3f415747c9ae94bb451ae39e3369af,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1.9207118
-      objectReference: {fileID: 0}
-    - target: {fileID: 301020881356501673, guid: de3f415747c9ae94bb451ae39e3369af,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 301020881356501673, guid: de3f415747c9ae94bb451ae39e3369af,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.15348768
-      objectReference: {fileID: 0}
-    - target: {fileID: 301020881356501673, guid: de3f415747c9ae94bb451ae39e3369af,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 301020881356501673, guid: de3f415747c9ae94bb451ae39e3369af,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 301020881356501673, guid: de3f415747c9ae94bb451ae39e3369af,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 301020881356501673, guid: de3f415747c9ae94bb451ae39e3369af,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 301020881356501673, guid: de3f415747c9ae94bb451ae39e3369af,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 301020881356501673, guid: de3f415747c9ae94bb451ae39e3369af,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 301020881356501673, guid: de3f415747c9ae94bb451ae39e3369af,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1109750593947887635, guid: de3f415747c9ae94bb451ae39e3369af,
-        type: 3}
-      propertyPath: m_Name
-      value: Enemy_Ice
-      objectReference: {fileID: 0}
-    - target: {fileID: 3005836309280506012, guid: de3f415747c9ae94bb451ae39e3369af,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3005836309280506012, guid: de3f415747c9ae94bb451ae39e3369af,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3582587730707344916, guid: de3f415747c9ae94bb451ae39e3369af,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: de3f415747c9ae94bb451ae39e3369af, type: 3}
 --- !u!114 &2077769709 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4413842865259738656, guid: 1a5d06655aad23f4d9a07b85c82dc887,
@@ -7878,4 +7795,3 @@ SceneRoots:
   - {fileID: 1132732012}
   - {fileID: 1261233671}
   - {fileID: 1470305356}
-  - {fileID: 2040444058}
