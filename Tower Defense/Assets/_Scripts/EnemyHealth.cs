@@ -96,7 +96,8 @@ public class EnemyHealth : MonoBehaviour
         if (health <= 0 && enemyType == EnemyType.Stone)
         {
             _sliderGameObject.SetActive(false);
-            _animator.SetTrigger("DeathStone");
+            
+            _animator.SetTrigger("StoneDeath");
             Invoke(nameof(DestroyPlz),1f);
             
         }
@@ -163,11 +164,17 @@ public class EnemyHealth : MonoBehaviour
 
     private void DeathToStone() // Sets Enemy Typing and triggers animation
     {
+       
+
+        if (enemyType == EnemyType.Fire)
+        {
+            _animator.SetTrigger("FireToStone");
+        }
         enemyType = EnemyType.Stone;
         enemyTypeString = "Stone";
         transform.parent = stoneParent.transform;
         
-        _animator.SetTrigger("FireToStone");
+        ;
     }
 
     void ChangeMeToStone() // triggers animation and updates the Hp bar
@@ -176,7 +183,16 @@ public class EnemyHealth : MonoBehaviour
         _maxHealth = _gm.stoneEnemyHealth;
         UpdateHealthBar(health, _maxHealth);
         
-        _animator.SetTrigger("FireDeath");
+        if (enemyType == EnemyType.Ice)
+        {
+            _animator.SetTrigger("IceToStone");
+        }
+        
+        if (enemyType == EnemyType.Fire)
+        {
+            _animator.SetTrigger("FireDeath");
+        }
+        
         Invoke(nameof(DeathToStone), 1f);        
 
     }
