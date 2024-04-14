@@ -83,8 +83,7 @@ public class EnemyHealth : MonoBehaviour
 
     private void DestroyPlz()
     {
-        enemyParentScript.allEnemies.Remove(this.gameObject);
-        enemyMovement.DeleteTarget();
+        
         Destroy(gameObject);
     }
 
@@ -98,6 +97,8 @@ public class EnemyHealth : MonoBehaviour
             _sliderGameObject.SetActive(false);
             
             _animator.SetTrigger("StoneDeath");
+            enemyParentScript.allEnemies.Remove(this.gameObject);
+            enemyMovement.DeleteTarget();
             
             Invoke(nameof(DestroyPlz),1f);
             
