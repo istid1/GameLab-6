@@ -11,7 +11,8 @@ namespace _Scripts
 
 
         [SerializeField] private MoneySystem _moneySystem;
-        [SerializeField] private TMP_Text _currRoundText; 
+        [SerializeField] private TMP_Text _currRoundText;
+        [SerializeField] private TMP_Text _HP;
         private int _frameCount;
         private bool _enemiesIsAlive;
         private bool _hasSpawned;
@@ -21,7 +22,8 @@ namespace _Scripts
         private EnemyParent _enemyParent;
         [SerializeField] private EnemySpawner _enemySpawner;
 
-       
+        [SerializeField] private int _playerHealth;
+        [SerializeField] private GameObject _endZone;
     
         [Header("EnemyHealth")] 
         public float stoneHealth;
@@ -47,6 +49,7 @@ namespace _Scripts
             CheckForEnemies(); // checks how many enemies is in scene
 
             _currRoundText.text = "Round : " + currentRound;
+            _HP.text = "HP : " + _playerHealth;
         }
 
         // Update is called once per frame
@@ -150,5 +153,14 @@ namespace _Scripts
             _startButton.SetActive(false);
             
         }
+        void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.CompareTag("Enemy"))
+            {
+                _playerHealth--;
+            }
+        }
+        
+        
     }
 }
