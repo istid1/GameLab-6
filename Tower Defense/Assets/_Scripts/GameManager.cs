@@ -23,6 +23,7 @@ namespace _Scripts
         [SerializeField] private GameObject _startButton;
         private EnemyParent _enemyParent;
         [SerializeField] private EnemySpawner _enemySpawner;
+        [SerializeField] private EnemyFlySpawner _enemyFlySpawner;
 
         [SerializeField] private int _playerHealth;
 
@@ -130,6 +131,10 @@ namespace _Scripts
             for (int i = 15; i < currentRound; i++) // Spawn Bomb Enemy after round 15
             {
                 _enemySpawner.SpawnBombEnemy();
+            }
+            for (int i = 20; i < currentRound; i++) // Spawn Flying Enemy after round 15
+            {
+                _enemyFlySpawner.SpawnFlyingEnemy(1 + currentRound - 20);
             }
             
             

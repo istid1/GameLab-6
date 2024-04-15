@@ -76,10 +76,6 @@ namespace _Scripts
             
             if (enemyIndex == 3)
             {
-                instantiatedEnemy.transform.parent = lightningParent.transform;
-            }
-            if (enemyIndex == 4)
-            {
                 instantiatedEnemy.transform.parent = bombParent.transform;
             }
         }
