@@ -120,7 +120,8 @@ namespace _Scripts
             {
                 for (var i = 0; i < enemiesSpawnAmount; i++)
                 {
-                    InstantiateEnemy(1); // Fire enemy Index
+                   
+                    InstantiateEnemy(1);// Fire enemy Index
                 }
                 enemyParent.AddChildren();
             }

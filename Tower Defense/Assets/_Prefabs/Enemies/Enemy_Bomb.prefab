@@ -191,7 +191,6 @@ MonoBehaviour:
   enemyAgent: {fileID: 5722058597224277827}
   canReachDestination: 0
   agent: {fileID: 5722058597224277827}
-  _movementSpeedAfterWall: 3
 --- !u!114 &7077976333428279554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,11 +274,16 @@ MonoBehaviour:
   _moneySystem: {fileID: 5063191900335640901, guid: 32a83f5ac556cae41bdf64bece26dffe,
     type: 3}
   health: 10
+  _maxHealth: 0
+  _currentHealth: 0
   enemyTypeString: 
+  canTakeDamage: 0
+  _animator: {fileID: -8388164480318108732}
   _mR: {fileID: 0}
   _gm: {fileID: 0}
   enemyType: 4
   _slider: {fileID: 6540775908321985834}
+  _sliderGameObject: {fileID: 5140159586477162108}
 --- !u!136 &4181170734894390878
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -431,6 +435,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be44c9a58439323478f7c789a0cbb32f, type: 3}
+--- !u!1 &5140159586477162108 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3467199889066286727, guid: be44c9a58439323478f7c789a0cbb32f,
+    type: 3}
+  m_PrefabInstance: {fileID: 8595247453020348667}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &5471028921924382593 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4369771287798288250, guid: be44c9a58439323478f7c789a0cbb32f,

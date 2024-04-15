@@ -67,7 +67,11 @@ namespace _Scripts
             {
                 
                 ValidatePath();
-                enemyAgent.SetDestination(_target.position);
+                if (_target != null)
+                {
+                    enemyAgent.SetDestination(_target.position);
+                }
+                
                 _frameCount = 0;
             }
             
@@ -75,8 +79,11 @@ namespace _Scripts
 
         private void ValidatePath()
         {
-        
-            agent.CalculatePath(_target.position, _path);
+            if (_target != null)
+            {
+                agent.CalculatePath(_target.position, _path);
+            }
+            
             switch (_path.status)
             {
                 case NavMeshPathStatus.PathComplete:
