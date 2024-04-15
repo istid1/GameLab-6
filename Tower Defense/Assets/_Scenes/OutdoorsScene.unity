@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2700.5627, g: 2835.3206, b: 4128.6255, a: 1}
+  m_IndirectSpecularColor: {r: 2700.4612, g: 2835.008, b: 4127.2817, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6508,6 +6508,11 @@ PrefabInstance:
       propertyPath: _moneyText
       value: 
       objectReference: {fileID: 92544658}
+    - target: {fileID: 5063191900335640901, guid: 32a83f5ac556cae41bdf64bece26dffe,
+        type: 3}
+      propertyPath: currentMoney
+      value: 50000
+      objectReference: {fileID: 0}
     - target: {fileID: 5686297198554760212, guid: 32a83f5ac556cae41bdf64bece26dffe,
         type: 3}
       propertyPath: _dummyEnemy
