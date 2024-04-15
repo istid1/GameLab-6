@@ -55,7 +55,7 @@ namespace _Scripts
                     name = "Enemy Target Position",
                     transform =
                     {
-                        position = new Vector3(0, 0, -24)
+                        position = new Vector3(0, 0, -30)
                     }
                 };
 

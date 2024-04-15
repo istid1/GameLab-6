@@ -1,13 +1,15 @@
 using System;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
+
 namespace _Scripts
 {
     public class GameManager : MonoBehaviour
     {
         //[HideInInspector]
         public float stoneEnemyHealth;
-        public Material stoneEnemyMaterial;
+        //public Material stoneEnemyMaterial;
 
 
         [SerializeField] private MoneySystem _moneySystem;
@@ -23,7 +25,9 @@ namespace _Scripts
         [SerializeField] private EnemySpawner _enemySpawner;
 
         [SerializeField] private int _playerHealth;
-        [SerializeField] private GameObject _endZone;
+
+        [SerializeField] private GameObject _gameOverScreen;
+        
     
         [Header("EnemyHealth")] 
         public float stoneHealth;
@@ -40,6 +44,7 @@ namespace _Scripts
         // Start is called before the first frame update
         void Start()
         {
+            Time.timeScale = 1;
             currentRound = -1;
             FindEnemyParentInScene();
         }
@@ -49,7 +54,14 @@ namespace _Scripts
             CheckForEnemies(); // checks how many enemies is in scene
 
             _currRoundText.text = "Round : " + currentRound;
-            //_HP.text = "HP : " + _playerHealth;
+            _HP.text = "HP : " + _playerHealth;
+
+
+            if (_playerHealth <= 0)
+            {
+                Time.timeScale = 0;
+                _gameOverScreen.SetActive(true);
+            }
         }
 
         // Update is called once per frame
@@ -58,6 +70,14 @@ namespace _Scripts
             FrameCount();
         }
 
+        public void RestartGame()
+        {
+            Time.timeScale = 1;
+            var currentSceneName = SceneManager.GetActiveScene().name;
+
+            SceneManager.LoadScene(currentSceneName);
+        }
+        
         private void FrameCount()
         {
             _frameCount++;
