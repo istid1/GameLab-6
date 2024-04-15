@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2694.1545, g: 2825.1409, b: 4103.4927, a: 1}
+  m_IndirectSpecularColor: {r: 2698.635, g: 2832.3948, b: 4122.016, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6757,8 +6757,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278716671
+  m_fontColor: {r: 1, g: 0.033018887, b: 0.033018887, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -6936,7 +6936,7 @@ PrefabInstance:
     - target: {fileID: 7445649648256763166, guid: e6b5dac4f544da648b12adf1f389049e,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7215,22 +7215,22 @@ PrefabInstance:
     - target: {fileID: 1253144600339740730, guid: 32a83f5ac556cae41bdf64bece26dffe,
         type: 3}
       propertyPath: iceHealth
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1253144600339740730, guid: 32a83f5ac556cae41bdf64bece26dffe,
         type: 3}
       propertyPath: bombHealth
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1253144600339740730, guid: 32a83f5ac556cae41bdf64bece26dffe,
         type: 3}
       propertyPath: fireHealth
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1253144600339740730, guid: 32a83f5ac556cae41bdf64bece26dffe,
         type: 3}
       propertyPath: stoneHealth
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1253144600339740730, guid: 32a83f5ac556cae41bdf64bece26dffe,
         type: 3}
@@ -7270,7 +7270,7 @@ PrefabInstance:
     - target: {fileID: 1253144600339740730, guid: 32a83f5ac556cae41bdf64bece26dffe,
         type: 3}
       propertyPath: lightningHealth
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1253144600339740730, guid: 32a83f5ac556cae41bdf64bece26dffe,
         type: 3}
@@ -7290,7 +7290,7 @@ PrefabInstance:
     - target: {fileID: 5063191900335640901, guid: 32a83f5ac556cae41bdf64bece26dffe,
         type: 3}
       propertyPath: currentMoney
-      value: 50000
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5686297198554760212, guid: 32a83f5ac556cae41bdf64bece26dffe,
         type: 3}

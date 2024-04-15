@@ -52,6 +52,12 @@ namespace _Scripts
 
         private void Update()
         {
+            stoneHealth = 1 + currentRound * 2;
+            iceHealth = 1 + currentRound * 2;
+            fireHealth = 1 + currentRound * 2;
+            lightningHealth = 1 + currentRound * 2;
+            bombHealth = 1 + currentRound * 2;
+            
             CheckForEnemies(); // checks how many enemies is in scene
 
             _currRoundText.text = "Round : " + currentRound;
