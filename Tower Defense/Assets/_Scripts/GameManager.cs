@@ -49,7 +49,7 @@ namespace _Scripts
             CheckForEnemies(); // checks how many enemies is in scene
 
             _currRoundText.text = "Round : " + currentRound;
-            _HP.text = "HP : " + _playerHealth;
+            //_HP.text = "HP : " + _playerHealth;
         }
 
         // Update is called once per frame
