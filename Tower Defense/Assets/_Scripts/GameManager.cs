@@ -21,6 +21,7 @@ namespace _Scripts
         private bool _startButtonIsPressed;
         public int currentRound;
         [SerializeField] private GameObject _startButton;
+        [SerializeField] private GameObject _tutorialButton;
         private EnemyParent _enemyParent;
         [SerializeField] private EnemySpawner _enemySpawner;
         [SerializeField] private EnemyFlySpawner _enemyFlySpawner;
@@ -182,6 +183,7 @@ namespace _Scripts
             _startButtonIsPressed = true;
             currentRound += 1;
             _startButton.SetActive(false);
+            _tutorialButton.SetActive(false);
             
         }
         void OnTriggerEnter(Collider other)

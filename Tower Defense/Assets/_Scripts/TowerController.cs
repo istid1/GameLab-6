@@ -37,7 +37,7 @@ namespace _Scripts
         [SerializeField] private GameObject bombTowerPrefab;
 
         [SerializeField] private NavMeshSurface[] navMeshSurfaces;
-        [SerializeField] private List<GameObject> placedTower = new List<GameObject>();
+        public List<GameObject> placedTower = new List<GameObject>();
         [FormerlySerializedAs("_enemySpawner")] [SerializeField] private EnemySpawner enemySpawner;
 
         private Camera _mainCamera;
