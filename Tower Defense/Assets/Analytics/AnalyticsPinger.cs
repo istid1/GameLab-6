@@ -42,7 +42,7 @@ public class AnalyticsPinger : MonoBehaviour
 
         // The ‘levelCompleted’ event will get cached locally
         //and sent during the next scheduled upload, within 1 minute
-        AnalyticsService.Instance.CustomData("levelCompleted", parameters);
+        AnalyticsService.Instance.CustomData("AdButtonPress", parameters);
 
         // You can call Events.Flush() to send the event immediately
         AnalyticsService.Instance.Flush();
