@@ -11,7 +11,7 @@ namespace _Scripts
         public float stoneEnemyHealth;
         //public Material stoneEnemyMaterial;
 
-
+        [SerializeField] private Ads _ads;
         [SerializeField] private MoneySystem _moneySystem;
         [SerializeField] private TMP_Text _currRoundText;
         [SerializeField] private TMP_Text _HP;
@@ -121,6 +121,7 @@ namespace _Scripts
             {
                 _hasSpawned = true;
                 currentRound += 1;
+                _ads._hasPlayed = false;
                 Debug.Log("Starting round " + currentRound);
                 
                 

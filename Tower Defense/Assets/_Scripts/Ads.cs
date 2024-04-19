@@ -18,7 +18,7 @@ namespace _Scripts
 
         [SerializeField] private GameObject _exitAdButton;
 
-        private bool _hasPlayed;
+        public bool _hasPlayed;
         public float _timeRemaining = 30;
 
         
@@ -38,7 +38,7 @@ namespace _Scripts
         void Update()
         {
 
-            if ( _gameManager.currentRound == 1 && !_hasPlayed)
+            if ( _gameManager.currentRound % 2 == 0 && !_hasPlayed)
             {
                 _skipButtonCanvas.SetActive(true);
                 _videoPlayer.Play();
@@ -83,6 +83,7 @@ namespace _Scripts
         {
             _videoPlayer.Stop();
             Time.timeScale = 1;
+            
             _canvas1.SetActive(true);
             _canvas2.SetActive(true);
             _skipButtonCanvas.SetActive(false);
