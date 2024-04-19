@@ -103,6 +103,12 @@ namespace _Scripts
                 //Invoke(nameof(DestroyPlz),1f);
             
             }
+
+           
+            if (health <= 0 && enemyType == EnemyType.Lightning)
+            {
+                _animator.SetTrigger("StoneDeath");
+            }
         
            
         
@@ -205,11 +211,6 @@ namespace _Scripts
             if (enemyType == EnemyType.Bomb)
             {
                 _animator.SetTrigger("BombToStone");
-            }
-
-            if (enemyType == EnemyType.Lightning)
-            {
-                _animator.SetTrigger("FlyToStone");
             }
         
             Invoke(nameof(DeathToStone), 1f);        
