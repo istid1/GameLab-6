@@ -34,10 +34,18 @@ public class TutorialManager : MonoBehaviour
 
     private GameObject ballistaButton, fireButton, iceButton, lightningButton, bombButton;
 
-   [HideInInspector] public TMP_Text tutorialText, secondTutText;
+   [HideInInspector] public TMP_Text tutorialText, secondTutText, clickToContinueText;
    [HideInInspector] public GameObject camCtrlPanel, moneyInfoPanel, towerPanel, panelToFlash;
-   [HideInInspector] public GameObject tutorialPanel, imageKing, secondTutPanel, secondImageKing;
+   [HideInInspector] public GameObject tutorialPanel, secondTutPanel, secondImageKing;
    [HideInInspector] public Button nextEventButton, sceneSwitchButton;
+
+   //Images of the king
+   //[Header("Images King")] 
+   [HideInInspector] public GameObject kingHappy, kingConfused, kingSpooked, kingCry, kingAngry;
+   // public GameObject kingConfused;
+   // public GameObject kingSpooked;
+   // public GameObject kingCry;
+   // public GameObject kingAngry;
    
     private readonly float maxAlpha = 100f / 255f; //Max opacity set to 39.2%
 
@@ -59,7 +67,7 @@ public class TutorialManager : MonoBehaviour
         
         tutorialPanel = GameObject.FindWithTag("TutorialCanvas").transform.GetChild(0).gameObject;
         tutorialText = GameObject.FindWithTag("TutorialCanvas").transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-        imageKing = GameObject.FindWithTag("TutorialCanvas").transform.GetChild(2).gameObject;
+        kingHappy = GameObject.FindWithTag("TutorialCanvas").transform.GetChild(2).gameObject;
         camCtrlPanel = GameObject.FindWithTag("TutorialCanvas").transform.GetChild(3).gameObject;
         moneyInfoPanel = GameObject.FindWithTag("TutorialCanvas").transform.GetChild(4).gameObject;
         towerPanel = GameObject.FindWithTag("TutorialCanvas").transform.GetChild(5).gameObject;
@@ -68,6 +76,15 @@ public class TutorialManager : MonoBehaviour
         secondImageKing = GameObject.FindWithTag("TutorialCanvas").transform.GetChild(8).gameObject;
         nextEventButton = GameObject.FindWithTag("TutorialCanvas").transform.GetChild(9).GetComponent<Button>();
         sceneSwitchButton = GameObject.FindWithTag("TutorialCanvas").transform.GetChild(10).GetComponent<Button>();
+        clickToContinueText = GameObject.FindWithTag("TutorialCanvas").transform.GetChild(11).GetComponent<TextMeshProUGUI>();
+        
+        //Images of king
+        kingConfused = GameObject.FindWithTag("TutorialCanvas").transform.GetChild(13).gameObject;
+        kingSpooked = GameObject.FindWithTag("TutorialCanvas").transform.GetChild(14).gameObject;
+        kingCry = GameObject.FindWithTag("TutorialCanvas").transform.GetChild(15).gameObject;
+        kingAngry = GameObject.FindWithTag("TutorialCanvas").transform.GetChild(16).gameObject;
+        
+
 
         ballistaButton = mainCanvas.transform.GetChild(0).gameObject;
         fireButton = mainCanvas.transform.GetChild(1).gameObject;
@@ -90,6 +107,8 @@ public class TutorialManager : MonoBehaviour
         HideTowerButtons();
         HideCtrlText();
         HideMoneyText();
+        
+        HideAllKings();
         
         DisableAllTowerButtons();
 
@@ -300,26 +319,33 @@ public class TutorialManager : MonoBehaviour
     public void TutPart1()
     {
         tutorialText.text = "Welcome to your new role as Chief Strategist of our kingdom. ";
+        clickToContinueText.text = "Click anywhere to continue.";
+        
+        kingHappy.SetActive(true);
     }
     public void TutPart2()
     {
         tutorialText.text = "As my trusted advisor in matters of defense and warfare, your insights will be invaluable in " +
             "safeguarding our realm against threats both internal and external.";
+        clickToContinueText.text = "Click anywhere to continue.";
         
     }
     public void TutPart3()
     {
         tutorialText.text = "Together, we shall fortify our defenses and ensure the prosperity and security of our people.";
+        clickToContinueText.text = "Click anywhere to continue.";
         
     }
     public void TutPart4()
     {
         tutorialText.text = "First, let's acquaint you with the basics.";
+        clickToContinueText.text = "Click anywhere to continue.";
 
     }
     public void TutPart5()
     {
         tutorialText.text = "In the bottom left corner, you'll find the camera controls and options to deselect towers.";
+        clickToContinueText.text = "Click anywhere to continue.";
         ShowCtrlText();
         ActivatePanel();
 
@@ -327,6 +353,7 @@ public class TutorialManager : MonoBehaviour
     public void TutPart6()
     {
         tutorialText.text = "At the top of the screen, keep an eye on your available funds, current round, and the health of our castle.";
+        clickToContinueText.text = "Click anywhere to continue.";
         ShowMoneyText();
         panelToFlash = moneyInfoPanel;
         ActivatePanel();
@@ -334,6 +361,7 @@ public class TutorialManager : MonoBehaviour
     public void TutPart7()
     {
         tutorialText.text = "Here, you'll find all the available towers for placement.";
+        clickToContinueText.text = "Click anywhere to continue.";
         panelToFlash = towerPanel;
         ShowTowerButtons();
         ActivatePanel();
@@ -342,26 +370,38 @@ public class TutorialManager : MonoBehaviour
     public void TutPart8()
     {
         tutorialText.text = "Hold on! Our scouts have spotted enemies closing in.";
+        clickToContinueText.text = "Click anywhere to continue.";
+        
+        HideAllKings();
+        kingSpooked.SetActive(true);
 
     }
 
     public void TutPart9()
     {
         tutorialText.text =
-            "Select the ballista tower and position it on the battlefield. \nRemember, the enemy always aims for the shortest route to our castle.";
+            "Select the ballista tower and position it in the middle of the battlefield. \nRemember, the enemy always aims for the shortest route to our castle.";
         ballistaButton.GetComponent<Button>().interactable = true;
+        clickToContinueText.text = "";
+        
+        HideAllKings();
+        kingAngry.SetActive(true);
     }
 
     public void TutPart10()
     {
-        tutorialText.text = "Great! Now you have selected the Ballista tower. You can place it on the battlefield by clicking on an empty tile.";
+        tutorialText.text = "Excellent! Now that you've chosen the Ballista tower, it's time to position it on the battlefield. Click on an empty tile to place it.";
         _gm.currentRound = 1;
         
     }
 
     public void TutPart11()
     {
-        tutorialText.text = "Good job! Now let's wait for the enemy to approach.";
+        tutorialText.text = "Well done! Let's patiently await the enemy's approach.";
+        
+        HideAllKings();
+        kingHappy.SetActive(true);
+        
         ballistaButton.GetComponent<Button>().interactable = false;
         
         enemySpawner.SpawnStoneEnemy();
@@ -371,67 +411,100 @@ public class TutorialManager : MonoBehaviour
 
     public void TutPart12()
     {
-        tutorialText.text = "Our scouts report a new enemy type is approaching.";
+        tutorialText.text = "Our scouts have sighted a new type of enemy approaching.";
+        clickToContinueText.text = "Click anywhere to continue.";
+        
+        HideAllKings();
+        kingSpooked.SetActive(true);
     }
 
     public void TutPart13()
     {
-        tutorialText.text = "This is an ice type, so we'll need to use our fire tower to melt the ice before we can damage him.";
+        tutorialText.text = "This one's an ice type, which means we'll need our fire tower to melt its icy defenses before we can inflict damage.";
+        clickToContinueText.text = "Click anywhere to continue.";
+        
+        HideAllKings();
+        kingConfused.SetActive(true);
     }
     public void TutPart14()
     {
-        tutorialText.text = "Select the fire tower.";
+        tutorialText.text = "Chose the fire tower.";
+        clickToContinueText.text = "";
         fireButton.GetComponent<Button>().interactable = true;
         _moneySystem.currentMoney = 100;
+        
+        HideAllKings();
+        kingAngry.SetActive(true);
 
     }
     public void TutPart15()
     {
-        tutorialText.text = "Now place it on the battlefield. Make sure the ballista has enough time to damage him.";
+        tutorialText.text = "And position it strategically. Ensure the ballista has ample time to weaken its defenses.";
     }
 
     public void TutPart16()
     {
-        tutorialText.text = "Now let's wait for him to approach.";
+        tutorialText.text = "Now, let's anticipate its advance.";
         enemySpawner.SpawnFireEnemy();
         fireButton.GetComponent<Button>().interactable = false;
     }
 
     public void TutPart17()
     {
-        tutorialText.text = "Good job!";
+        tutorialText.text = "Splendid work!";
+        clickToContinueText.text = "Click anywhere to continue.";
+        
+        HideAllKings();
+        kingHappy.SetActive(true);
     }
     public void TutPart18()
     {
-        tutorialText.text = "Another enemy is coming! It's a fire type.";
+        tutorialText.text = "Another adversary approaches, this time a fire type.";
+        clickToContinueText.text = "Click anywhere to continue.";
+        
+        HideAllKings();
+        kingSpooked.SetActive(true);
     }
     public void TutPart19()
     {
-        tutorialText.text = "We'll need to use ice to cool him down!";
+        tutorialText.text = "We'll counter with ice to cool its fiery temper.";
+        clickToContinueText.text = "Click anywhere to continue.";
+        
+        HideAllKings();
+        kingAngry.SetActive(true);
     }
     public void TutPart20()
     {
         tutorialText.text = "Select the ice tower.";
         iceButton.GetComponent<Button>().interactable = true;
         _moneySystem.currentMoney = 150;
+        clickToContinueText.text = "";
     }
     public void TutPart21()
     {
-        tutorialText.text = "Place it on the battlefield.";
+        tutorialText.text = "And position it carefully.";
     }
     public void TutPart22()
     {
-        tutorialText.text = "Great! Now let's wait.";
+        tutorialText.text = "Excellent! Now, we await its arrival.";
         enemySpawner.SpawnIceEnemy();
         iceButton.GetComponent<Button>().interactable = false;
+        
+        HideAllKings();
+        kingHappy.SetActive(true);
     }
     public void TutPart23()
     {
-        tutorialText.text = "The next one is a flying enemy. The issue with this one is that it can fly over the towers.";
+        tutorialText.text = "Here comes the next challenge: a flying enemy. Beware, it can soar over our defenses.";
+        clickToContinueText.text = "Click anywhere to continue.";
+        
+        HideAllKings();
+        kingAngry.SetActive(true);
     }
     public void TutPart24()
     {
-        tutorialText.text = "We'll have to use lightning to take him out. Select the lightning tower.";
+        clickToContinueText.text = "";
+        tutorialText.text = "We'll need the lightning tower to strike it down. Select it.";
         lightningButton.GetComponent<Button>().interactable = true;
         _moneySystem.currentMoney = 200;
     }
@@ -441,52 +514,68 @@ public class TutorialManager : MonoBehaviour
     }
     public void TutPart26()
     {
-        tutorialText.text = "Let's wait again.";
+        tutorialText.text = "Let's be patient as we await its descent.";
         _enemyFlySpawner.SpawnFlyingEnemy(1);
         lightningButton.GetComponent<Button>().interactable = false;
+        
+        HideAllKings();
+        kingHappy.SetActive(true);
     }
     public void TutPart27()
     {
-        tutorialText.text = "Last enemy type incoming. It's a though one, so we'll use bombs.";
+        tutorialText.text = "The final foe approaches, a formidable one indeed. We'll deploy bombs to handle this threat.";
+        clickToContinueText.text = "Click anywhere to continue.";
+        
+        HideAllKings();
+        kingAngry.SetActive(true);
     }
     public void TutPart28()
     {
-        tutorialText.text = "Select the bomb tower";
+        clickToContinueText.text = "";
+        tutorialText.text = "Chose the bomb tower";
         bombButton.GetComponent<Button>().interactable = true;
         _moneySystem.currentMoney = 250;
     }
     public void TutPart29()
     {
-        tutorialText.text = "Place it on the battlefield.";
+        tutorialText.text = "Position it with care.";
     }
     public void TutPart30()
     {
-        tutorialText.text = "And then we wait again.";
+        tutorialText.text = "And now, we wait once more.";
         enemySpawner.SpawnBombEnemy();
         bombButton.GetComponent<Button>().interactable = false;
     }
     public void TutPart31()
     {
-        tutorialText.text = "Well done!";
+        tutorialText.text = "Bravo! You've handled each challenge admirably.";
+        clickToContinueText.text = "Click anywhere to continue.";
+        
+        HideAllKings();
+        kingHappy.SetActive(true);
     }
     public void TutPart32()
     {
         tutorialPanel.SetActive(false);
         tutorialText.text = "";
-        imageKing.SetActive(false);
+        
         
         secondTutPanel.SetActive(true);
-        secondTutText.text = "Oh, one final thing! If you click on a placed tower, an upgrade menu will pop up!";
+        secondTutText.text = "Ah, one more crucial detail! Click on any placed tower to access the upgrade menu.";
         secondImageKing.SetActive(true);
         nextEventButton.gameObject.SetActive(true);
+        clickToContinueText.text = "";
+        
+        HideAllKings();
+        secondImageKing.SetActive(true);
     }
     public void TutPart33()
     {
-        secondTutText.text = "Here you can upgrade Range, Damage, and FireRate of each individual tower. You can also sell towers here.";
+        secondTutText.text = "Here, you can enhance its range, damage, and fire rate, or sell it if needed.";
     }
     public void TutPart34()
     {
-        secondTutText.text = "That's all I have to teach you. Good luck!";
+        secondTutText.text = "That concludes our tutorial. Best of luck defending our kingdom!";
         nextEventButton.gameObject.SetActive(false);
         sceneSwitchButton.gameObject.SetActive(true);
     }
@@ -532,5 +621,14 @@ public class TutorialManager : MonoBehaviour
             NextEvent();
             bombPlaced = true;
         }
+    }
+
+    public void HideAllKings()
+    {
+        kingHappy.SetActive(false);
+        kingConfused.SetActive(false);
+        kingSpooked.SetActive(false);
+        kingCry.SetActive(false);
+        kingAngry.SetActive(false);
     }
 }
