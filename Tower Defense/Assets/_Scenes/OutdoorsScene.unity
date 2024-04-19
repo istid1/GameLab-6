@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2700.4612, g: 2835.0159, b: 4127.266, a: 1}
+  m_IndirectSpecularColor: {r: 2700.4534, g: 2835.0002, b: 4127.235, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6861,13 +6861,48 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2918714191379488047, guid: ff266cd10dbd66b40af620dea917c091,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2918714191379488047, guid: ff266cd10dbd66b40af620dea917c091,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2918714191379488047, guid: ff266cd10dbd66b40af620dea917c091,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 658946463}
     - target: {fileID: 2918714191379488047, guid: ff266cd10dbd66b40af620dea917c091,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 898475095}
+    - target: {fileID: 2918714191379488047, guid: ff266cd10dbd66b40af620dea917c091,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2918714191379488047, guid: ff266cd10dbd66b40af620dea917c091,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ExitAdButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 2918714191379488047, guid: ff266cd10dbd66b40af620dea917c091,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: AdButtonPress
+      objectReference: {fileID: 0}
+    - target: {fileID: 2918714191379488047, guid: ff266cd10dbd66b40af620dea917c091,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: AnalyticsPinger, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2918714191379488047, guid: ff266cd10dbd66b40af620dea917c091,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6658071370695698987, guid: ff266cd10dbd66b40af620dea917c091,
         type: 3}
