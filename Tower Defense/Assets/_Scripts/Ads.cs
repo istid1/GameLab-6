@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
 
@@ -18,6 +19,12 @@ namespace _Scripts
 
         [SerializeField] private GameObject _exitAdButton;
 
+        //Random ad system
+        public List<VideoClip> adList;
+        private VideoClip randomClip;
+
+        
+        
         public bool _hasPlayed;
         public float _timeRemaining = 30;
         private int _previousRound = -1;
@@ -39,18 +46,20 @@ namespace _Scripts
         void Update()
         {
             
-            if (_gameManager.currentRound % 2 == 0 && !_hasPlayed)   //Dissable canvases and start playing ads on round 2,4,6,8,etc... (not on round 0)
+            if (_gameManager.currentRound % 2 == 0)   //Dissable canvases and start playing ads on round 2,4,6,8,etc... (not on round 0)
             {
-                if (_gameManager.currentRound > 0)
-                {
+               
                     _skipButtonCanvas.SetActive(true);
+                    RandomClipSelector();
+                    _videoPlayer.clip = randomClip;
                     _videoPlayer.Play();
-                    _hasPlayed = true;
+                
+                    //_hasPlayed = true;
                     Time.timeScale = 0;
                     _canvas1.SetActive(false);
                     _canvas2.SetActive(false);
                     StartCoroutine(StartCountdown());
-                }
+                
                     
             }
             
@@ -88,7 +97,7 @@ namespace _Scripts
 
         private void ReturnToGame() //speaks for itself
         {
-            _hasPlayed = false;
+            
             _videoPlayer.Stop();
             Time.timeScale = 1;
             
@@ -98,7 +107,16 @@ namespace _Scripts
             
         }
         
-        
+       
+
+
+        void RandomClipSelector()
+        {
+
+            int randomIndex = Random.Range(0, adList.Count);
+            randomClip = adList[randomIndex];
+
+        }
 
     }
 }
