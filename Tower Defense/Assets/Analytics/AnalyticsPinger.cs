@@ -29,7 +29,7 @@ public class AnalyticsPinger : MonoBehaviour
         
     }
     
-    private void AdButtonPress()
+    public void AdButtonPress()
     {
       
         int currentLevel = Random.Range(1, 4); // Gets a random number from 1-3
