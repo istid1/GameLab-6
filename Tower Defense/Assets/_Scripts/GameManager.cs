@@ -41,6 +41,8 @@ namespace _Scripts
         [Header("Speed")] 
         public float speedBeforeWall;
         public float speedAfterWall;
+
+        public bool tutorial;
         
         
         // Start is called before the first frame update
@@ -53,11 +55,23 @@ namespace _Scripts
 
         private void Update()
         {
-            stoneHealth = 1 + currentRound * 2;
-            iceHealth = 1 + currentRound * 2;
-            fireHealth = 1 + currentRound * 2;
-            lightningHealth = 1 + currentRound * 2;
-            bombHealth = 1 + currentRound * 2;
+            if (!tutorial)
+            {
+                stoneHealth = 1 + currentRound * 2;
+                iceHealth = 1 + currentRound * 2;
+                fireHealth = 1 + currentRound * 2;
+                lightningHealth = 1 + currentRound * 2;
+                bombHealth = 1 + currentRound * 2;
+            }
+            else
+            {
+                stoneHealth = 1;
+                iceHealth = 1;
+                fireHealth = 1;
+                lightningHealth = 1;
+                bombHealth = 1;
+            }
+            
             
             CheckForEnemies(); // checks how many enemies is in scene
 
