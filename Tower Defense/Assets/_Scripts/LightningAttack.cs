@@ -49,12 +49,22 @@ namespace _Scripts
         
         private void Update()
         {
-            Debug.Log(isInRange);
-            weaponRange = _towerVariables.weaponRange;
+
+            if (_gameManager.tutorial == true)
+            {
+                weaponRange = 20f;
+            }
+
+            if (_gameManager.tutorial == false)
+            {
+                weaponRange = _towerVariables.weaponRange;
+            }
+            
+            
             
             if (_gameManager.currentRound != _currentRound)
             {
-                Debug.Log("PING!");
+                
                 FindEnemies();
                 _currentRound = _gameManager.currentRound;
             
