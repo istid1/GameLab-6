@@ -427,6 +427,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1562287538373694670 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3467199889066286727, guid: be44c9a58439323478f7c789a0cbb32f,
+    type: 3}
+  m_PrefabInstance: {fileID: 2716703914251078217}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1807948983242474803 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4369771287798288250, guid: be44c9a58439323478f7c789a0cbb32f,
@@ -818,12 +824,12 @@ MonoBehaviour:
   _currentHealth: 0
   enemyTypeString: 
   canTakeDamage: 0
-  _animator: {fileID: 0}
+  _animator: {fileID: 1665606079644160643}
   _mR: {fileID: 0}
   _gm: {fileID: 0}
   enemyType: 3
   _slider: {fileID: 594016502461869976}
-  _sliderGameObject: {fileID: 0}
+  _sliderGameObject: {fileID: 1562287538373694670}
 --- !u!135 &898769604056174469
 SphereCollider:
   m_ObjectHideFlags: 0

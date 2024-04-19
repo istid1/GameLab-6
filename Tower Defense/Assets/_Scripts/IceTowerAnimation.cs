@@ -62,6 +62,7 @@ namespace _Scripts
             
             RadiusScaleWithRange();
             FireRateScaleLevelScale();
+            
             SphereCast();
             
             if (Input.GetKeyDown(KeyCode.P))
@@ -194,6 +195,7 @@ namespace _Scripts
                 _ => _radius
             };
         }
+        
 
         private void FireRateScaleLevelScale()
         {

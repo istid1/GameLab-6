@@ -104,15 +104,7 @@ namespace _Scripts
             
             }
         
-            if (health <= 0 && enemyType == EnemyType.Lightning)
-            {
-            
-                enemyParentScript.allEnemies.Remove(this.gameObject);
-                enemyFlySpawnerScript.hasSquad.Remove(this.gameObject);
-            
-                Destroy(gameObject);
-            
-            }
+           
         
             else if (health <= 0 && enemyType != EnemyType.Stone)
             {
@@ -122,6 +114,16 @@ namespace _Scripts
         
         }
 
+
+        public void DestroyFlyingEnemy()
+        {
+                enemyParentScript.allEnemies.Remove(this.gameObject);
+                enemyFlySpawnerScript.hasSquad.Remove(this.gameObject);
+                
+                Destroy(gameObject);
+                
+        }
+        
         public void TakeDamage(float damage)
         {
             if (canTakeDamage)      //Makes it so that the flying enemies can't be damaged before they have reached the slowDownWall - Changed to true by SquadLeader
@@ -172,11 +174,16 @@ namespace _Scripts
             {
                 _animator.SetTrigger("FireToStone");
             }
-            enemyType = EnemyType.Stone;
-            enemyTypeString = "Stone";
-            transform.parent = stoneParent.transform;
+
+            if (enemyType != EnemyType.Lightning)
+            {
+                enemyType = EnemyType.Stone;
+                enemyTypeString = "Stone";
+                transform.parent = stoneParent.transform;
+            }
+           
         
-            ;
+            
         }
 
         void ChangeMeToStone() // triggers animation and updates the Hp bar
@@ -190,9 +197,19 @@ namespace _Scripts
                 _animator.SetTrigger("IceToStone");
             }
         
-            if (enemyType == EnemyType.Fire)
+            if (enemyType == EnemyType.Fire) // the fire enemy's animator setup is poorly made compared to the rest
             {
                 _animator.SetTrigger("FireDeath");
+            }
+
+            if (enemyType == EnemyType.Bomb)
+            {
+                _animator.SetTrigger("BombToStone");
+            }
+
+            if (enemyType == EnemyType.Lightning)
+            {
+                _animator.SetTrigger("FlyToStone");
             }
         
             Invoke(nameof(DeathToStone), 1f);        
