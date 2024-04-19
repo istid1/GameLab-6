@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -18,6 +19,8 @@ namespace _Scripts
         private HashSet<NavMeshAgent> enemyComponentsInRange = new HashSet<NavMeshAgent>(); 
         private List<NavMeshAgent> _slowedEnemies = new List<NavMeshAgent>();
         public bool isAttacking;
+
+        [SerializeField] private GameManager _gameManager;
         
         // The radius of the sphere
         private float _radius = 3.0f;
@@ -49,6 +52,7 @@ namespace _Scripts
 
         private void Start()
         {
+            _gameManager = _gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
             SetDamageType();
             secondaryDamageString = "Stone";
         }
@@ -59,20 +63,21 @@ namespace _Scripts
 
             _currentLevel = _towerVariables._currentRangeUpgradeLevel;
             _currentLevelFireRate = _towerVariables._currentFireRateUpgradeLevel;
+
+            if (_gameManager.tutorial == true)
+            {
+                RadiusScaleWithRangeTUTORIAL();
+            }
+            if (_gameManager.tutorial == false)
+            {
+                RadiusScaleWithRange();
+            }
             
-            RadiusScaleWithRange();
             FireRateScaleLevelScale();
             
             SphereCast();
             
-            if (Input.GetKeyDown(KeyCode.P))
-            {
-                UpScale();
-            }
-            if (Input.GetKeyDown(KeyCode.O))
-            {
-                DownScale();
-            }
+          
             
         }
 
@@ -87,6 +92,32 @@ namespace _Scripts
                     break;
                 case 1:
                     _projectile.transform.DOScale(new Vector3(_startScale + 1.25f, _startScale + 1.25f, _startScale + 1.25f), 0.5f);
+                    break;
+                case 2:
+                    _projectile.transform.DOScale(new Vector3(_startScale + 1.5f, _startScale + 1.5f, _startScale + 1.5f), 0.5f);
+                    break;
+                case 3:
+                    _projectile.transform.DOScale(new Vector3(_startScale + 1.75f, _startScale + 1.75f, _startScale + 1.75f), 0.5f);
+                    break;
+                case 4:
+                    _projectile.transform.DOScale(new Vector3(_startScale + 2f, _startScale + 2f, _startScale + 2f), 0.5f);
+                    break;
+                case 5:
+                    _projectile.transform.DOScale(new Vector3(_startScale + 2.175f, _startScale + 2.175f, _startScale + 2.175f), 0.5f);
+                    break;
+            }
+        }
+        private void UpScaleTUTORIAL()
+        {
+            
+            isAttacking = true;
+            switch (_towerVariables._currentRangeUpgradeLevel)
+            {
+                case 0:
+                    _projectile.transform.DOScale(new Vector3(_startScale + 5f,  _startScale +5f, _startScale + 5f), 0.5f);
+                    break;
+                case 1:
+                    _projectile.transform.DOScale(new Vector3(_startScale + 4.25f, _startScale + 4.25f, _startScale + 4.25f), 0.5f);
                     break;
                 case 2:
                     _projectile.transform.DOScale(new Vector3(_startScale + 1.5f, _startScale + 1.5f, _startScale + 1.5f), 0.5f);
@@ -140,7 +171,16 @@ namespace _Scripts
                     StartCoroutine(DamageEnemiesOverTime(component, _towerVariables.bulletDamage, _fireRate));
                 }
                 _enemyInRange = true;
-                UpScale();
+                if (_gameManager.tutorial == true)
+                {
+                    UpScaleTUTORIAL();
+                }
+
+                if (!_gameManager.tutorial)
+                {
+                    UpScale();
+                }
+                
             }
     
             // Handle enemies leaving the range.
@@ -195,6 +235,21 @@ namespace _Scripts
                 _ => _radius
             };
         }
+        private void RadiusScaleWithRangeTUTORIAL()
+        {
+            _radius = _currentLevel switch
+            {
+                0 => 15f,
+                1 => 15f,
+                2 => 10f,
+                3 => 10f,
+                4 => 10f,
+                5 => 10f,
+                _ => _radius
+            };
+        }
+        
+        
         
 
         private void FireRateScaleLevelScale()
