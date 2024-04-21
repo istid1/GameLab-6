@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 
 namespace _Scripts
@@ -15,8 +16,7 @@ namespace _Scripts
         [SerializeField] private RectTransform _sellButton;
         
         [SerializeField] private TowerController _towerController;
-        
-
+       
         private GameObject towerN, damageB, fireRateB, rangeB, xB, sellB;
         
         
@@ -28,12 +28,12 @@ namespace _Scripts
             rangeB = _rangeButton.gameObject;
             xB = _xButton.gameObject;
             sellB = _sellButton.gameObject;
-            UpgradeCanvasDisabled();
+            //UpgradeCanvasDisabled();
         }
 
         private void Update()
         {
-            
+           
         }
 
         public void MoveCanvasActive()

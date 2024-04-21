@@ -59,6 +59,11 @@ namespace _Scripts
         private TowerVariables _towerVariables;
         [SerializeField] private UpgradeCanvasAnimation _upgradeCanvasAnimation;
         
+       
+        [SerializeField] private TMP_Text _currDamage;
+        [SerializeField] private TMP_Text _currRange;
+        [SerializeField] private TMP_Text _currFireRate;
+        
         [SerializeField ] private GameObject _dummyEnemyEnabler;
         private GameObject _currentTransparentTowerInstance;
         private GameObject _instantiatedTransparentTower;
@@ -588,6 +593,14 @@ namespace _Scripts
                     {
                         _currentSelectedTower = hit.transform.gameObject;
                         _currTowerText.text = _currentSelectedTower.ToString();
+
+                        _currDamage.text = "LvL : " + _currentSelectedTower.GetComponent<TowerVariables>()._currentDamageUpgradeLevel;
+                        
+                        _currFireRate.text = "LvL : " + _currentSelectedTower.GetComponent<TowerVariables>()._currentFireRateUpgradeLevel;
+                        
+                        _currRange.text = "LvL : " + _currentSelectedTower.GetComponent<TowerVariables>()._currentRangeUpgradeLevel;
+                        
+                        
                         _upgradeCanvas.SetActive(true);
                         _upgradeCanvasAnimation.MoveCanvasActive();
                     }
@@ -616,6 +629,12 @@ namespace _Scripts
             {
                 var towerVariables = _currentSelectedTower.GetComponent<TowerVariables>();
                 towerVariables.UpgradeDamage();
+                _currDamage.text = "LvL : " + _currentSelectedTower.GetComponent<TowerVariables>()._currentDamageUpgradeLevel;
+                        
+                
+                        
+                
+
             }
         }
         private void UpgradeSelectedTowerRange()
@@ -624,6 +643,7 @@ namespace _Scripts
             {
                 var towerVariables = _currentSelectedTower.GetComponent<TowerVariables>();
                 towerVariables.UpgradeRange();
+                _currRange.text = "LvL : " + _currentSelectedTower.GetComponent<TowerVariables>()._currentRangeUpgradeLevel;
             }
         }
         private void UpgradeSelectedTowerFireRate()
@@ -632,6 +652,7 @@ namespace _Scripts
             {
                 var towerVariables = _currentSelectedTower.GetComponent<TowerVariables>();
                 towerVariables.UpgradeFireRate();
+                _currFireRate.text = "LvL : " + _currentSelectedTower.GetComponent<TowerVariables>()._currentFireRateUpgradeLevel;
             }
         }
 
@@ -714,7 +735,7 @@ namespace _Scripts
                 return;
             }
             
-            var currentTowerType = _currentSelectedTower.GetComponent<TowerTypeing>();
+            var currentTowerType = _currentSelectedTower.GetComponent<TowerTypeing>(); //do we need this???
 
 
             int currentUpgradeLevelDamage =
