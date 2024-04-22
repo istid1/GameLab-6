@@ -510,6 +510,7 @@ MonoBehaviour:
     type: 3}
   bulletDamage: 3
   towerType: 4
+  bulletVector: {x: 0, y: 0, z: 0}
 --- !u!114 &-236367552170528870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -525,7 +526,7 @@ MonoBehaviour:
   damageIsUpgraded: 0
   rangeIsUpgraded: 0
   fireRateIsUpgraded: 0
-  shootRate: 2
+  shootRate: 3
   bulletDamage: 1
   weaponRange: 10
   _currentFireRateUpgradeLevel: 1

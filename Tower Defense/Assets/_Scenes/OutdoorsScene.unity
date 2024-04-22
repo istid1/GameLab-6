@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2694.2502, g: 2824.4026, b: 4102.4927, a: 1}
+  m_IndirectSpecularColor: {r: 2692.0393, g: 2822.9456, b: 4102.7974, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4085,6 +4085,83 @@ PrefabInstance:
       propertyPath: _skipButtonCanvas
       value: 
       objectReference: {fileID: 797078570}
+    - target: {fileID: 8982299823630710255, guid: e99f549732b3daa4e81cad59faa80697,
+        type: 3}
+      propertyPath: adList.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8982299823630710255, guid: e99f549732b3daa4e81cad59faa80697,
+        type: 3}
+      propertyPath: 'adList.Array.data[0]'
+      value: 
+      objectReference: {fileID: 32900000, guid: 3cb9306a1c3f8be43a38a88b4352cb5d,
+        type: 3}
+    - target: {fileID: 8982299823630710255, guid: e99f549732b3daa4e81cad59faa80697,
+        type: 3}
+      propertyPath: 'adList.Array.data[1]'
+      value: 
+      objectReference: {fileID: 32900000, guid: 1cebd8b5459bb1449a9eb5f8563e29b7,
+        type: 3}
+    - target: {fileID: 8982299823630710255, guid: e99f549732b3daa4e81cad59faa80697,
+        type: 3}
+      propertyPath: 'adList.Array.data[2]'
+      value: 
+      objectReference: {fileID: 32900000, guid: bea636aa82afd08469fb3c20e646b968,
+        type: 3}
+    - target: {fileID: 8982299823630710255, guid: e99f549732b3daa4e81cad59faa80697,
+        type: 3}
+      propertyPath: 'adList.Array.data[3]'
+      value: 
+      objectReference: {fileID: 32900000, guid: 7fba7a968dce2454ab7a6555eeb208d6,
+        type: 3}
+    - target: {fileID: 8982299823630710255, guid: e99f549732b3daa4e81cad59faa80697,
+        type: 3}
+      propertyPath: 'adList.Array.data[4]'
+      value: 
+      objectReference: {fileID: 32900000, guid: 9442fa3555f3a9446ab035dbf3dbba5b,
+        type: 3}
+    - target: {fileID: 8982299823630710255, guid: e99f549732b3daa4e81cad59faa80697,
+        type: 3}
+      propertyPath: 'adList.Array.data[5]'
+      value: 
+      objectReference: {fileID: 32900000, guid: 6b757751b8448934eb285d479aad0358,
+        type: 3}
+    - target: {fileID: 8982299823630710255, guid: e99f549732b3daa4e81cad59faa80697,
+        type: 3}
+      propertyPath: 'adList.Array.data[6]'
+      value: 
+      objectReference: {fileID: 32900000, guid: 12ae48c400e46674382c6e0f7fdad95c,
+        type: 3}
+    - target: {fileID: 8982299823630710255, guid: e99f549732b3daa4e81cad59faa80697,
+        type: 3}
+      propertyPath: 'adList.Array.data[7]'
+      value: 
+      objectReference: {fileID: 32900000, guid: fd3e501566dbc9c46a22541cc960ef17,
+        type: 3}
+    - target: {fileID: 8982299823630710255, guid: e99f549732b3daa4e81cad59faa80697,
+        type: 3}
+      propertyPath: 'adList.Array.data[8]'
+      value: 
+      objectReference: {fileID: 32900000, guid: 97f54d2f0e477fa4496872402be44260,
+        type: 3}
+    - target: {fileID: 8982299823630710255, guid: e99f549732b3daa4e81cad59faa80697,
+        type: 3}
+      propertyPath: 'adList.Array.data[9]'
+      value: 
+      objectReference: {fileID: 32900000, guid: 0a69f4c9016b5fc4d9bc7d201e10dca6,
+        type: 3}
+    - target: {fileID: 8982299823630710255, guid: e99f549732b3daa4e81cad59faa80697,
+        type: 3}
+      propertyPath: 'adList.Array.data[10]'
+      value: 
+      objectReference: {fileID: 32900000, guid: 4f462d0670acbd044831901da7642c98,
+        type: 3}
+    - target: {fileID: 8982299823630710255, guid: e99f549732b3daa4e81cad59faa80697,
+        type: 3}
+      propertyPath: 'adList.Array.data[11]'
+      value: 
+      objectReference: {fileID: 32900000, guid: b552569c90698344c975b97972173ec7,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
