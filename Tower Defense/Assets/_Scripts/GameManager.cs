@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
@@ -29,8 +31,10 @@ namespace _Scripts
         [SerializeField] private int _playerHealth;
 
         [SerializeField] private GameObject _gameOverScreen;
-        
+
+        [SerializeField] private TMP_Text _currentRoundAnnouncement;
     
+        
         [Header("EnemyHealth")] 
         public float stoneHealth;
         public float iceHealth;
@@ -122,7 +126,9 @@ namespace _Scripts
                 _hasSpawned = true;
                 currentRound += 1;
                 _ads._hasPlayed = false;
-                Debug.Log("Starting round " + currentRound);
+
+                CurrentRoundAnnouncement();
+               Invoke("DissableRoundText",4f);
                 
                 
                 SpawnEnemiesRoundScale();
@@ -132,6 +138,44 @@ namespace _Scripts
             }
         }
 
+        private void CurrentRoundAnnouncement()
+        {
+            _currentRoundAnnouncement.text = "Wave : " + currentRound;
+
+            Vector3 initialScale = _currentRoundAnnouncement.transform.localScale; //Initial scale to reset it after DoTween scaleUp
+            // Animate the scale to give zoom in and then zoom out effect
+            _currentRoundAnnouncement.transform.DOScale(new Vector3(1.5f, 1.5f, 1.5f), 0.5f) // Increase the scale in 0.5 second
+                .OnComplete(() =>
+                {
+                    _currentRoundAnnouncement.transform.DOScale(initialScale, 1f) // Set the scale back to the original Scale
+                        .OnComplete(() => StartCoroutine(FadeOutText())); // Start Coroutine to fade out the text after returning to initial scale
+                });
+        }
+
+        private void DissableRoundText()
+        {
+            _currentRoundAnnouncement.text = ""; // Set the text to nothing (Just in case)
+            _currentRoundAnnouncement.color = new Color(255, 255, 255, 1f); // Set the color and alpha of the text back to white
+
+        }
+        
+        private IEnumerator FadeOutText()
+        {
+            Color startColor = _currentRoundAnnouncement.color; //Get the start color
+            Color endColor = new Color(startColor.r, startColor.g, startColor.b, 0); // Set the End color and alpha
+            float elapsedTime = 0;
+            float totalFadeTime = 1f;
+            
+            while (elapsedTime < totalFadeTime)
+            {
+                elapsedTime += Time.deltaTime; //Countdown
+                _currentRoundAnnouncement.color = Color.Lerp(startColor, endColor, elapsedTime / totalFadeTime); // make the Color and alpha Lerp over a period of time
+                yield return null;
+            }
+            _currentRoundAnnouncement.color = endColor; // To ensure alpha is set to 0
+        }
+        
+        
         private void SpawnEnemiesRoundScale()
         {
             _moneySystem.currentMoney += 25 * currentRound;
