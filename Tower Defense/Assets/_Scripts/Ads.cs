@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.Video;
 
@@ -23,7 +24,7 @@ namespace _Scripts
         public List<VideoClip> adList;
         private VideoClip randomClip;
 
-        
+        private int _lastRound = -1;
         
         public bool _hasPlayed;
         public float _timeRemaining = 30;
@@ -43,29 +44,29 @@ namespace _Scripts
         }
 
         // Update is called once per frame
-        void Update()
+         private void  Update()
         {
             
-            if (_gameManager.currentRound % 2 == 0)   //Dissable canvases and start playing ads on round 2,4,6,8,etc... (not on round 0)
+            if (_gameManager.currentRound % 2 == 0 && _lastRound != _gameManager.currentRound)
             {
-               
+                if (_gameManager.currentRound > 0)
+                {
+                    _lastRound = _gameManager.currentRound;
                     _skipButtonCanvas.SetActive(true);
                     RandomClipSelector();
                     _videoPlayer.clip = randomClip;
                     _videoPlayer.Play();
-                
+
                     //_hasPlayed = true;
                     Time.timeScale = 0;
                     _canvas1.SetActive(false);
                     _canvas2.SetActive(false);
                     StartCoroutine(StartCountdown());
+                }
                 
-                    
             }
-            
 
-            
-            if (!_videoPlayer.isPlaying && _countDownComplete) // send the player back to the game if the video player is done playing and the skip button wasn't pressed.
+            if (!_videoPlayer.isPlaying && _countDownComplete)
             {
                 ReturnToGame();
             }
@@ -94,6 +95,9 @@ namespace _Scripts
         {
            ReturnToGame();
         }
+        
+        
+        
 
         private void ReturnToGame() //speaks for itself
         {
@@ -103,14 +107,19 @@ namespace _Scripts
             
             _canvas1.SetActive(true);
             _canvas2.SetActive(true);
+            countdownCircle.enabled = true;
+            countdownCircle.fillAmount = totalAdTime;
+            _exitAdButton.SetActive(false);
             _skipButtonCanvas.SetActive(false);
-            
+            _countDownComplete = false;
+            _timeRemaining = 5f;
+
         }
         
        
 
 
-        void RandomClipSelector()
+        private void RandomClipSelector()
         {
 
             int randomIndex = Random.Range(0, adList.Count);
