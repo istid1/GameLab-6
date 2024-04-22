@@ -97,9 +97,8 @@ namespace _Scripts
         private void RotateCamera(Vector3 rotationAngle)
         {
             _playerInput = true;
-            transform.DOLocalRotate(rotationAngle, cycleLength, RotateMode.LocalAxisAdd)
+            transform.DOLocalRotate(rotationAngle, cycleLength, RotateMode.LocalAxisAdd).SetEase(Ease.Flash)
                 .OnComplete(() => _playerInput = false);
-    
         }
     }
 }
