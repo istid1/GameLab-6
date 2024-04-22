@@ -164,7 +164,7 @@ namespace _Scripts
             Color startColor = _currentRoundAnnouncement.color; //Get the start color
             Color endColor = new Color(startColor.r, startColor.g, startColor.b, 0); // Set the End color and alpha
             float elapsedTime = 0;
-            float totalFadeTime = 1f;
+            float totalFadeTime = 0.5f;
             
             while (elapsedTime < totalFadeTime)
             {
