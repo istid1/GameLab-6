@@ -71,11 +71,12 @@ namespace _Scripts
             if (!_videoPlayer.isPlaying && _countDownComplete)
             {
                 FullAdHasBeenWatched = true;
-                ReturnToGame();
+                
             }
             
         }
-        
+
+       
         private IEnumerator StartCountdown() //Countdown and show the player when they can press the skip ad button.
         {
             FullAdHasBeenWatched = false;
@@ -103,7 +104,7 @@ namespace _Scripts
         
         
 
-        private void ReturnToGame() //speaks for itself
+        public void ReturnToGame() //speaks for itself
         {
             
             _videoPlayer.Stop();

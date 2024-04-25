@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Unity.Services.Analytics;
 using Unity.Services.Core;
 using UnityEngine;
@@ -31,22 +32,32 @@ namespace _Scripts
         {
             if (_ads.FullAdHasBeenWatched && !_evenHasBeenRecorded)
             {
+                Debug.Log(_ads.FullAdHasBeenWatched);
                 AnalyticsService.Instance.RecordEvent("AdFullWatch");
+                AnalyticsService.Instance.Flush();
                 _evenHasBeenRecorded = true; //// This doesn't work
+                StartCoroutine(ReturnToGameDelay(1f));
             }
         }
 
+        
+        private IEnumerator ReturnToGameDelay(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            _evenHasBeenRecorded = false;
+            _ads.ReturnToGame();
+        }
+        
         public void AdButtonPress()
         {
-        
-
-            // The ‘levelCompleted’ event will get cached locally
-            //and sent during the next scheduled upload, within 1 minute
-            //AnalyticsService.Instance.CustomData("AdButtonPress");
-            AnalyticsService.Instance.RecordEvent("AdButtonPress");
             
-            // You can call Events.Flush() to send the event immediately
-            AnalyticsService.Instance.Flush();
+            if (!_evenHasBeenRecorded)
+            {
+                AnalyticsService.Instance.RecordEvent("AdButtonPress");
+                AnalyticsService.Instance.Flush(); //send the event to the cloud instantly
+            }
+            
+            
         }
     
     
