@@ -64,7 +64,7 @@ namespace _Scripts
             
             if (_randomDirection)
             {
-                speed = 15;
+                speed = 5;
             }
             else
             {
@@ -73,7 +73,6 @@ namespace _Scripts
 
             if (_target == null)
             {
-                
                 Destroy(gameObject);
                 return;
             }
@@ -95,7 +94,7 @@ namespace _Scripts
 
             transform.position += direction * speed * Time.deltaTime;
         }
-
+        
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Enemy"))
