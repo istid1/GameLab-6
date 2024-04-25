@@ -696,10 +696,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 311afad169169f748bb22a989e5964f2,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2026427896791587562}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 311afad169169f748bb22a989e5964f2,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: -3585210849808423747}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 311afad169169f748bb22a989e5964f2,
         type: 3}
@@ -728,33 +724,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7846816068900412541}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2026427896791587562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6927684606941454636}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adbcec98cfad85c46b43f7140c500dcb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currState: 0
-  weaponRange: 10
-  shootRate: 4
-  _towerVariables: {fileID: -3585210849808423747}
-  canShoot: 0
-  hasAnimation: 0
-  _anim: {fileID: 0}
-  enemyLocList: []
-  enemyParent: {fileID: 0}
-  closestEnemy: {fileID: 0}
-  distanceToClosestEnemy: 0
-  bulletPrefab: {fileID: 2323418215457351779, guid: 07b281ababd82724980c0a8b9d0c7e26,
-    type: 3}
-  bulletDamage: 3
-  towerType: 3
 --- !u!114 &-3585210849808423747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -774,6 +743,8 @@ MonoBehaviour:
   bulletDamage: 1
   weaponRange: 10
   _currentFireRateUpgradeLevel: 1
+  _currentRangeUpgradeLevel: 0
+  _currentDamageUpgradeLevel: 0
   _moneySystem: {fileID: 5063191900335640901, guid: 32a83f5ac556cae41bdf64bece26dffe,
     type: 3}
 --- !u!65 &1244855555115855666
@@ -859,8 +830,12 @@ MonoBehaviour:
   - {fileID: 2933860857678128212}
   - {fileID: 4454099831402446052}
   _lightingVFX: {fileID: 5382048052546651161}
+  _enemies: []
   _LightningLocalPos: {fileID: 1730269047478440827}
   isInRange: 0
+  stoneParent: {fileID: 0}
+  lightningParent: {fileID: 0}
+  enemyParentScript: {fileID: 0}
 --- !u!114 &-8076456154044510823
 MonoBehaviour:
   m_ObjectHideFlags: 0

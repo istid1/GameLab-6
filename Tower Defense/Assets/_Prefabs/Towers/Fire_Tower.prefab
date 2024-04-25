@@ -426,10 +426,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 372b9a5970311d7449b26df8e81acc68,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5742551755403486259}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 372b9a5970311d7449b26df8e81acc68,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: -4078027590017202433}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 372b9a5970311d7449b26df8e81acc68,
         type: 3}
@@ -454,34 +450,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 9142518048041720719}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5742551755403486259
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8224090138231367390}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adbcec98cfad85c46b43f7140c500dcb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currState: 0
-  weaponRange: 10
-  shootRate: 2
-  _towerVariables: {fileID: -4078027590017202433}
-  canShoot: 0
-  hasAnimation: 0
-  _anim: {fileID: 0}
-  enemyLocList: []
-  enemyParent: {fileID: 0}
-  closestEnemy: {fileID: 0}
-  distanceToClosestEnemy: 0
-  bulletPrefab: {fileID: 2323418215457351779, guid: d3fcd146fafc48d4ebab2e8d926c6a89,
-    type: 3}
-  bulletDamage: 2
-  towerType: 2
-  bulletVector: {x: 0, y: 0, z: 0}
 --- !u!114 &-4078027590017202433
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,8 +10,8 @@ namespace _Scripts
         public bool rangeIsUpgraded;
         public bool fireRateIsUpgraded;
 
-        public float shootRate = 2f;
-        public int bulletDamage = 1;
+        public float shootRate = 1.5f;
+        public int bulletDamage = 2;
         public float weaponRange = 10f;
 
         [HideInInspector] public int _currentFireRateUpgradeLevel = 0;

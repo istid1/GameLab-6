@@ -73,6 +73,7 @@ namespace _Scripts
 
             if (_target == null)
             {
+                
                 Destroy(gameObject);
                 return;
             }
@@ -106,7 +107,7 @@ namespace _Scripts
                     
                         _enemyHealth.TakeDamage(_bulletDamage);
                         
-                        StartCoroutine(DestroyAfterDelay(2f));
+                        StartCoroutine(DestroyAfterDelay(0.5f));
                         _hasHappened = true;
                     }
                     if (_enemyHealth.enemyTypeString == secondaryDamageString && !_hasHappened)
@@ -114,7 +115,7 @@ namespace _Scripts
                     
                         _enemyHealth.TakeDamage(_bulletDamage);
                         
-                        StartCoroutine(DestroyAfterDelay(2f));
+                        StartCoroutine(DestroyAfterDelay(0.5f));
                         _hasHappened = true;
                     }
             }

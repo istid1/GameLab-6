@@ -85,4 +85,13 @@ MonoBehaviour:
   _videoPlayer: {fileID: 6449722300738182459}
   _canvas1: {fileID: 0}
   _canvas2: {fileID: 0}
-  _timeRemaining: 30
+  _skipButtonCanvas: {fileID: 0}
+  _analyticsPinger: {fileID: 0}
+  _exitAdButton: {fileID: 0}
+  adList:
+  - {fileID: 32900000, guid: 3cb9306a1c3f8be43a38a88b4352cb5d, type: 3}
+  FullAdHasBeenWatched: 0
+  _hasPlayed: 0
+  _timeRemaining: 5
+  totalAdTime: 5
+  countdownCircle: {fileID: 0}
