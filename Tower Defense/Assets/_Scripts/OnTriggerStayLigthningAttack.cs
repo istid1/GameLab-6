@@ -14,7 +14,7 @@ namespace _Scripts
         private void Update()
         {
             _bulletDamage = _towerVariables.bulletDamage;
-            _shootRate = _towerVariables.shootRate;
+            _shootRate = _towerVariables.shootRate / 3;
         }
 
         private void OnTriggerStay(Collider other)
