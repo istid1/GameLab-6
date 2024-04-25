@@ -32,11 +32,10 @@ namespace _Scripts
         {
             if (_ads.FullAdHasBeenWatched && !_evenHasBeenRecorded)
             {
-                Debug.Log(_ads.FullAdHasBeenWatched);
                 AnalyticsService.Instance.RecordEvent("AdFullWatch");
                 AnalyticsService.Instance.Flush();
-                _evenHasBeenRecorded = true; //// This doesn't work
-                StartCoroutine(ReturnToGameDelay(1f));
+                _evenHasBeenRecorded = true;
+                StartCoroutine(ReturnToGameDelay(1f)); //return to the game with a delay to make sure the analytics got pinged
             }
         }
 
