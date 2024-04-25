@@ -18,6 +18,7 @@ namespace _Scripts
         [SerializeField] private GameObject _canvas2;
         [SerializeField] private GameObject _skipButtonCanvas;
 
+        [SerializeField] private AnalyticsPinger _analyticsPinger;
         [SerializeField] private GameObject _exitAdButton;
 
         //Random ad system
@@ -25,7 +26,8 @@ namespace _Scripts
         private VideoClip randomClip;
 
         private int _lastRound = -1;
-        
+
+        public bool FullAdHasBeenWatched = false;
         public bool _hasPlayed;
         public float _timeRemaining = 30;
         private int _previousRound = -1;
@@ -68,6 +70,7 @@ namespace _Scripts
 
             if (!_videoPlayer.isPlaying && _countDownComplete)
             {
+                FullAdHasBeenWatched = true;
                 ReturnToGame();
             }
             
@@ -75,6 +78,7 @@ namespace _Scripts
         
         private IEnumerator StartCountdown() //Countdown and show the player when they can press the skip ad button.
         {
+            FullAdHasBeenWatched = false;
             while (_timeRemaining > 0)
             {
                 yield return new WaitForSecondsRealtime(1);
@@ -113,6 +117,7 @@ namespace _Scripts
             _skipButtonCanvas.SetActive(false);
             _countDownComplete = false;
             _timeRemaining = 5f;
+            FullAdHasBeenWatched = false;
 
         }
         
