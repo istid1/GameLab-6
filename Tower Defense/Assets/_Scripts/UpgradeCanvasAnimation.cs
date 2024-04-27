@@ -28,6 +28,7 @@ namespace _Scripts
             rangeB = _rangeButton.gameObject;
             xB = _xButton.gameObject;
             sellB = _sellButton.gameObject;
+            MoveCanvasDisabled();
             //UpgradeCanvasDisabled();
         }
 
@@ -40,12 +41,12 @@ namespace _Scripts
         {
             UpgradeCanvasActive();
             
-            _towerName.DOAnchorPos(new Vector2(100, 350), 0.5f);
-            _damageButton.DOAnchorPos(new Vector2(250, 300), 0.5f);
-            _fireRateButton.DOAnchorPos(new Vector2(250, 200), 0.5f);
-            _rangeButton.DOAnchorPos(new Vector2(250, 100), 0.5f);
-            _xButton.DOAnchorPos(new Vector2(300, 500), 0.5f);
-            _sellButton.DOAnchorPos(new Vector2(250, -350), 0.5f);
+            _towerName.DOAnchorPos(new Vector2(0, 350), 0.5f);
+            _damageButton.DOAnchorPos(new Vector2(150, 300), 0.5f);
+            _fireRateButton.DOAnchorPos(new Vector2(150, 200), 0.5f);
+            _rangeButton.DOAnchorPos(new Vector2(150, 100), 0.5f);
+            _xButton.DOAnchorPos(new Vector2(250, 475), 0.5f);
+            _sellButton.DOAnchorPos(new Vector2(150, -350), 0.5f);
 
         }
         public void MoveCanvasDisabled()
