@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Search;
+
 using UnityEngine;
 using UnityEngine.Video;
 
@@ -21,6 +21,8 @@ namespace _Scripts
         [SerializeField] private AnalyticsPinger _analyticsPinger;
         [SerializeField] private GameObject _exitAdButton;
 
+        [SerializeField] private AudioSource _audioSource;
+        
         //Random ad system
         public List<VideoClip> adList;
         private VideoClip randomClip;
@@ -57,6 +59,7 @@ namespace _Scripts
                     _skipButtonCanvas.SetActive(true);
                     RandomClipSelector();
                     _videoPlayer.clip = randomClip;
+                    _audioSource.volume = 0f;
                     _videoPlayer.Play();
 
                     //_hasPlayed = true;
@@ -108,6 +111,7 @@ namespace _Scripts
         {
             
             _videoPlayer.Stop();
+            _audioSource.volume = 0.01f;
             Time.timeScale = 1;
             
             _canvas1.SetActive(true);

@@ -48,10 +48,11 @@ public class EnemyFlySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P)) 
-        {
-            Testing();
-        }
+        
+        // if (Input.GetKeyDown(KeyCode.P)) 
+        // {
+        //     Testing();
+        // }
     }
 
     private void Testing()

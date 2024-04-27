@@ -38,10 +38,12 @@ namespace _Scripts
                 allEnemiesIsSpawned = true;
             }
 
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                SpawnEnemies();
-            }
+            //
+            // if (Input.GetKeyDown(KeyCode.Space))
+            // {
+            //     SpawnEnemies();
+            // }
+            
         }
 
         private void InstantiateEnemy(int enemyIndex)
@@ -49,7 +51,7 @@ namespace _Scripts
             // Bounds checking for index
             if (enemyIndex < 0 || enemyIndex >= enemyPrefab.Length)
             {
-                Debug.LogError("Invalid enemy index!");
+                //Debug.LogError("Invalid enemy index!");
                 return;
             }
         

@@ -47,7 +47,7 @@ public class FireTowerAttack : MonoBehaviour
     {
         _weaponRange = _towerVariables.weaponRange;
         _shootRate = _towerVariables.shootRate /1.5f;
-        _weaponDamage = _towerVariables.bulletDamage;
+        _weaponDamage = _towerVariables.bulletDamage + 5;
 
         if (_gameManager.currentRound != _currentRound)
         {

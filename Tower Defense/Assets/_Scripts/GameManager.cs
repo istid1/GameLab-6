@@ -61,11 +61,11 @@ namespace _Scripts
         {
             if (!tutorial)
             {
-                stoneHealth = 1 + currentRound * 2;
-                iceHealth = 1 + currentRound * 2;
-                fireHealth = 1 + currentRound * 2;
-                lightningHealth = 1 + currentRound * 2;
-                bombHealth = 1 + currentRound * 2;
+                stoneHealth = 1 + currentRound;
+                iceHealth = 1 + currentRound;
+                fireHealth = 1 + currentRound;
+                lightningHealth = 1 + currentRound;
+                bombHealth = 1 + currentRound;
             }
             else
             {
@@ -96,6 +96,11 @@ namespace _Scripts
             FrameCount();
         }
 
+        public void ExitGame()
+        {
+            Application.Quit();
+        }
+        
         public void RestartGame()
         {
             Time.timeScale = 1;
