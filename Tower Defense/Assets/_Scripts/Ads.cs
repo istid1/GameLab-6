@@ -51,7 +51,7 @@ namespace _Scripts
          private void  Update()
         {
             
-            if (_gameManager.currentRound % 2 == 0 && _lastRound != _gameManager.currentRound)
+            if (_gameManager.currentRound % 5 == 0 && _lastRound != _gameManager.currentRound)
             {
                 if (_gameManager.currentRound > 0)
                 {
