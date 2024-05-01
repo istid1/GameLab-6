@@ -665,7 +665,7 @@ GameObject:
   - component: {fileID: 1326297598}
   - component: {fileID: 1326297597}
   m_Layer: 5
-  m_Name: Button
+  m_Name: YES
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -734,7 +734,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1326297598}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2132119933}
+        m_TargetAssemblyTypeName: AllowDataCollection, Assembly-CSharp
+        m_MethodName: AllowDataCollectionButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1326297598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -922,7 +934,7 @@ GameObject:
   - component: {fileID: 1569800178}
   - component: {fileID: 1569800177}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: NO
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -991,7 +1003,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1569800178}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2132119933}
+        m_TargetAssemblyTypeName: AllowDataCollection, Assembly-CSharp
+        m_MethodName: DissallowDataCollectionButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1569800178
 MonoBehaviour:
   m_ObjectHideFlags: 0
