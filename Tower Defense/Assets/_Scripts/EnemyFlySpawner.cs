@@ -70,7 +70,7 @@ public class EnemyFlySpawner : MonoBehaviour
         for(int i=0; i < spawnAmount; i++)
         {
             Vector3 myRndPos = Vector3.zero;
-            int maxAttempts = 100;
+            int maxAttempts = 10;
 
             for (int attempts = 0; attempts < maxAttempts; attempts++)
             {
@@ -80,7 +80,14 @@ public class EnemyFlySpawner : MonoBehaviour
                 {
                     break; // if free space found, break the loop
                 }
+
+                if (attempts >= maxAttempts)
+                {
+                    Debug.Log("Didn't find an open space");
+                    return;
+                }
             }
+            
             // If a valid position couldn't be found after 'maxAttempts' attempts
             // you may choose to exit this method, throw an error or handle it accordingly
 
