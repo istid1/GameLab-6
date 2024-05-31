@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2724.2278, g: 2931.4065, b: 4482.141, a: 1}
+  m_IndirectSpecularColor: {r: 2692.6077, g: 2823.0237, b: 4101.0474, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3492,51 +3492,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 888755929}
   m_CullTransparentMesh: 1
---- !u!1 &898475094
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 898475096}
-  - component: {fileID: 898475095}
-  m_Layer: 0
-  m_Name: Analytics
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &898475095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 898475094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74a5150345d17c24bbb0c86318a4c0dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _ads: {fileID: 658946463}
---- !u!4 &898475096
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 898475094}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &919148839
 GameObject:
   m_ObjectHideFlags: 0
@@ -4676,7 +4631,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _analyticsPinger
       value: 
-      objectReference: {fileID: 898475095}
+      objectReference: {fileID: 0}
     - target: {fileID: 8982299823630710255, guid: e99f549732b3daa4e81cad59faa80697,
         type: 3}
       propertyPath: _skipButtonCanvas
@@ -8452,7 +8407,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 898475095}
+      objectReference: {fileID: 0}
     - target: {fileID: 2918714191379488047, guid: ff266cd10dbd66b40af620dea917c091,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
@@ -15247,5 +15202,4 @@ SceneRoots:
   - {fileID: 6383408975183941050}
   - {fileID: 1944830304}
   - {fileID: 1272434596}
-  - {fileID: 898475096}
   - {fileID: 328131995}
