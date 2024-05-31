@@ -71,6 +71,7 @@ public class EnemyFlySpawner : MonoBehaviour
         {
             Vector3 myRndPos = Vector3.zero;
             int maxAttempts = 10;
+            bool foundPos = false;
 
             for (int attempts = 0; attempts < maxAttempts; attempts++)
             {
@@ -78,18 +79,16 @@ public class EnemyFlySpawner : MonoBehaviour
                 myRndPos = new Vector3(rndX, 5, rndZ);
                 if (Physics.OverlapSphere(myRndPos, enemyRadius, enemyLayer).Length == 0)
                 {
+                    foundPos = true;
                     break; // if free space found, break the loop
                 }
+            }
 
-                if (attempts >= maxAttempts)
-                {
-                    Debug.Log("Didn't find an open space");
-                    return;
-                }
+            if (!foundPos)
+            {
+                return; // If a valid position couldn't be found after 'maxAttempts' attempts, this exits the method
             }
             
-            // If a valid position couldn't be found after 'maxAttempts' attempts
-            // you may choose to exit this method, throw an error or handle it accordingly
 
             targetPos = new Vector3(rndX, 5, -28);
             Vector3 direction = targetPos - myRndPos;
@@ -100,6 +99,7 @@ public class EnemyFlySpawner : MonoBehaviour
             enemyFlyMovement.myWaypoint = targetPos;
             enemyFlyMovement.enemyFlySpawner = this;
         }
+        
 
         var squadLeader = Instantiate(squadLeaderPrefab, leaderSpawnVector, Quaternion.identity);
         squadLeader.GetComponent<SquadLeader>().enemyFlySpawnerScript = this;
