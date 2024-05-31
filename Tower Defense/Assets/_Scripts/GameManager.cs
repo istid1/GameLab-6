@@ -184,25 +184,25 @@ namespace _Scripts
         private void SpawnEnemiesRoundScale()
         {
             _moneySystem.currentMoney += 25 * currentRound;
-            for (int i = 0; i < currentRound; i++) // Spawn a stone enemy every round. Amount = currentRound 
-            {
-                _enemySpawner.SpawnStoneEnemy();
-            }
-            
-            for (int i = 5; i < currentRound; i++) // Spawn Fire Enemy after round 5
-            {
-                _enemySpawner.SpawnFireEnemy();
-            }
-            
-            for (int i = 10; i < currentRound; i++) // Spawn Ice Enemy after round 10
-            {
-                _enemySpawner.SpawnIceEnemy();
-            }
-            
-            for (int i = 15; i < currentRound; i++) // Spawn Bomb Enemy after round 15
-            {
-                _enemySpawner.SpawnBombEnemy();
-            }
+            // for (int i = 0; i < currentRound; i++) // Spawn a stone enemy every round. Amount = currentRound 
+            // {
+            //     _enemySpawner.SpawnStoneEnemy();
+            // }
+            //
+            // for (int i = 5; i < currentRound; i++) // Spawn Fire Enemy after round 5
+            // {
+            //     _enemySpawner.SpawnFireEnemy();
+            // }
+            //
+            // for (int i = 10; i < currentRound; i++) // Spawn Ice Enemy after round 10
+            // {
+            //     _enemySpawner.SpawnIceEnemy();
+            // }
+            //
+            // for (int i = 15; i < currentRound; i++) // Spawn Bomb Enemy after round 15
+            // {
+            //     _enemySpawner.SpawnBombEnemy();
+            // }
             for (int i = 20; i < currentRound; i++) // Spawn Flying Enemy after round 15
             {
                 _enemyFlySpawner.SpawnFlyingEnemy(1 + currentRound - 20);
