@@ -247,7 +247,7 @@ namespace _Scripts
         {
             _transparentTowerIsActive = true;
 
-            // Compute the object position based on the grid
+            // Determine the object position based on the grid
             var gridPos = SnapToGrid(hit.point, GridSize);
 
             // Instantiate the object at the correct position

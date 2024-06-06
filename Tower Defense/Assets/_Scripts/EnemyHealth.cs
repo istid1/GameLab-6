@@ -14,11 +14,9 @@ namespace _Scripts
 
         [HideInInspector] public bool canTakeDamage;
 
-        //public Material stoneEnemyMaterial;
     
         [SerializeField] private Animator _animator;
     
-        //[SerializeField] private GameObject _insideModel;
         private EnemyParent enemyParentScript;
         private EnemyMovement enemyMovement;
         private GameObject stoneParent;

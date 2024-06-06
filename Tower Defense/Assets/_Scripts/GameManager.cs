@@ -11,7 +11,6 @@ namespace _Scripts
     {
         //[HideInInspector]
         public float stoneEnemyHealth;
-        //public Material stoneEnemyMaterial;
 
         [SerializeField] private Ads _ads;
         [SerializeField] private MoneySystem _moneySystem;
@@ -186,7 +185,7 @@ namespace _Scripts
             _moneySystem.currentMoney += 25 * currentRound;
 
 
-            if (currentRound > 25)
+            if (currentRound > 25) //Spawn amount after round 25
             {
                 // Spawn 25 Stone Enemies after round 25
                 for (int i = 0; i < 25; i++)
@@ -215,7 +214,7 @@ namespace _Scripts
             }
             
             
-            else
+            else // Spawn amount before round 25
             {
                 for (int i = 0; i < currentRound; i++) // Spawn a stone enemy every round. Amount = currentRound 
                 {

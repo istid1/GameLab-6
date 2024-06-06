@@ -38,11 +38,7 @@ namespace _Scripts
                 allEnemiesIsSpawned = true;
             }
 
-            //
-            // if (Input.GetKeyDown(KeyCode.Space))
-            // {
-            //     SpawnEnemies();
-            // }
+            
             
         }
 
@@ -56,8 +52,7 @@ namespace _Scripts
             }
         
             GameObject enemyToInstantiate = enemyPrefab[enemyIndex];
-            // Provide a position and rotation for the instantiated enemy
-            //Instantiate(enemyToInstantiate, new Vector3(Random.Range(-10f, 10f), 0f, Random.Range(150f, 350f)), Quaternion.identity);
+            // Sets random position for the instantiated enemy
             GameObject instantiatedEnemy = Instantiate(enemyToInstantiate, new Vector3(Random.Range(-10f, 10f), 0f, Random.Range(150f, 350f)), Quaternion.identity);
             //instantiatedEnemy.transform.parent = transform;
 
