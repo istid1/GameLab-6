@@ -18,7 +18,6 @@ namespace _Scripts
         [SerializeField] private GameObject _canvas2;
         [SerializeField] private GameObject _skipButtonCanvas;
 
-        [SerializeField] private AnalyticsPinger _analyticsPinger;
         [SerializeField] private GameObject _exitAdButton;
 
         [SerializeField] private AudioSource _audioSource;
