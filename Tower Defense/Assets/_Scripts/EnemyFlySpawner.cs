@@ -66,29 +66,40 @@ public class EnemyFlySpawner : MonoBehaviour
     
     public void SpawnFlyingEnemy(int spawnAmount)
     {
+        
         for(int i=0; i < spawnAmount; i++)
         {
-            Vector3 myRndPos;
+            Vector3 myRndPos = Vector3.zero;
+            int maxAttempts = 10;
+            bool foundPos = false;
 
-            do
+            for (int attempts = 0; attempts < maxAttempts; attempts++)
             {
                 RandomPos();
                 myRndPos = new Vector3(rndX, 5, rndZ);
+                if (Physics.OverlapSphere(myRndPos, enemyRadius, enemyLayer).Length == 0)
+                {
+                    foundPos = true;
+                    break; // if free space found, break the loop
+                }
             }
-            while (Physics.OverlapSphere(myRndPos, enemyRadius, enemyLayer).Length > 0);
+
+            if (!foundPos)
+            {
+                return; // If a valid position couldn't be found after 'maxAttempts' attempts, this exits the method
+            }
+            
 
             targetPos = new Vector3(rndX, 5, -28);
             Vector3 direction = targetPos - myRndPos;
             Quaternion rotation = Quaternion.LookRotation(direction);
-
             var instance = Instantiate(flyingEnemyPrefab, myRndPos, rotation);
             instance.transform.parent = lightningParent.transform;
-
-             var enemyFlyMovement = instance.GetComponent<EnemyFlyMovement>();
-             enemyFlyMovement.myWaypoint = targetPos;
-             enemyFlyMovement.enemyFlySpawner = this;
-
+            var enemyFlyMovement = instance.GetComponent<EnemyFlyMovement>();
+            enemyFlyMovement.myWaypoint = targetPos;
+            enemyFlyMovement.enemyFlySpawner = this;
         }
+        
 
         var squadLeader = Instantiate(squadLeaderPrefab, leaderSpawnVector, Quaternion.identity);
         squadLeader.GetComponent<SquadLeader>().enemyFlySpawnerScript = this;
@@ -100,6 +111,6 @@ public class EnemyFlySpawner : MonoBehaviour
     private void RandomPos()
     {
         rndX = Random.Range(-16, 16);
-        rndZ = Random.Range(335, 364);
+        rndZ = Random.Range(330, 430);
     }
 }

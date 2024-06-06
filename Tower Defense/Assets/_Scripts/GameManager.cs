@@ -11,7 +11,6 @@ namespace _Scripts
     {
         //[HideInInspector]
         public float stoneEnemyHealth;
-        //public Material stoneEnemyMaterial;
 
         [SerializeField] private Ads _ads;
         [SerializeField] private MoneySystem _moneySystem;
@@ -184,29 +183,64 @@ namespace _Scripts
         private void SpawnEnemiesRoundScale()
         {
             _moneySystem.currentMoney += 25 * currentRound;
-            for (int i = 0; i < currentRound; i++) // Spawn a stone enemy every round. Amount = currentRound 
+
+
+            if (currentRound > 25) //Spawn amount after round 25
             {
-                _enemySpawner.SpawnStoneEnemy();
+                // Spawn 25 Stone Enemies after round 25
+                for (int i = 0; i < 25; i++)
+                {
+                    _enemySpawner.SpawnStoneEnemy();
+                }
+                // Spawn 20 Ice Enemies after round 25
+                for (int i = 0; i < 20; i++)
+                {
+                    _enemySpawner.SpawnIceEnemy();
+                }
+                
+                // Spawn 15 Fire Enemies after round 25
+                for (int i = 0; i < 15; i++)
+                {
+                    _enemySpawner.SpawnFireEnemy();
+                }
+                
+                // Spawn 10 Bomb Enemies after round 25
+                for (int i = 0; i < 10; i++)
+                {
+                    _enemySpawner.SpawnBombEnemy();
+                }
+                
+                _enemyFlySpawner.SpawnFlyingEnemy(30);
             }
             
-            for (int i = 5; i < currentRound; i++) // Spawn Fire Enemy after round 5
+            
+            else // Spawn amount before round 25
             {
-                _enemySpawner.SpawnFireEnemy();
+                for (int i = 0; i < currentRound; i++) // Spawn a stone enemy every round. Amount = currentRound 
+                {
+                    _enemySpawner.SpawnStoneEnemy();
+                }
+            
+                for (int i = 5; i < currentRound; i++) // Spawn Fire Enemy after round 5
+                {
+                    _enemySpawner.SpawnFireEnemy();
+                }
+            
+                for (int i = 10; i < currentRound; i++) // Spawn Ice Enemy after round 10
+                {
+                    _enemySpawner.SpawnIceEnemy();
+                }
+            
+                for (int i = 15; i < currentRound; i++) // Spawn Bomb Enemy after round 15
+                {
+                    _enemySpawner.SpawnBombEnemy();
+                }
+                for (int i = 20; i < currentRound; i++) // Spawn Flying Enemy after round 20
+                {
+                    _enemyFlySpawner.SpawnFlyingEnemy(1 + currentRound - 20);
+                }
             }
             
-            for (int i = 10; i < currentRound; i++) // Spawn Ice Enemy after round 10
-            {
-                _enemySpawner.SpawnIceEnemy();
-            }
-            
-            for (int i = 15; i < currentRound; i++) // Spawn Bomb Enemy after round 15
-            {
-                _enemySpawner.SpawnBombEnemy();
-            }
-            for (int i = 20; i < currentRound; i++) // Spawn Flying Enemy after round 15
-            {
-                _enemyFlySpawner.SpawnFlyingEnemy(1 + currentRound - 20);
-            }
             
             
         }

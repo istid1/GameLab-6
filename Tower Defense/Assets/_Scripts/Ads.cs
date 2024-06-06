@@ -18,7 +18,6 @@ namespace _Scripts
         [SerializeField] private GameObject _canvas2;
         [SerializeField] private GameObject _skipButtonCanvas;
 
-       // [SerializeField] private AnalyticsPinger _analyticsPinger;
         [SerializeField] private GameObject _exitAdButton;
 
         [SerializeField] private AudioSource _audioSource;
@@ -51,7 +50,7 @@ namespace _Scripts
          private void  Update()
         {
             
-            if (_gameManager.currentRound % 10 == 0 && _lastRound != _gameManager.currentRound)
+            if (_gameManager.currentRound % 2 == 0 && _lastRound != _gameManager.currentRound)
             {
                 if (_gameManager.currentRound > 0)
                 {
