@@ -156,17 +156,17 @@ public class TowerFSM : FSM
             AddTargets();
 
 
-            //Checks which zombie is the closest one, and returns that as the closestZombie
+            //Checks which enemy is the closest one, and returns that as the closestEnemy
             float closestDistance = float.MaxValue;
 
-            foreach (GameObject zombieLoc in enemyLocList)
+            foreach (GameObject enemyLoc in enemyLocList)
             {
-                float distance = Vector3.Distance(transform.position, zombieLoc.transform.position);
+                float distance = Vector3.Distance(transform.position, enemyLoc.transform.position);
 
                 if (distance < closestDistance)
                 {
                     closestDistance = distance;
-                    closestEnemy = zombieLoc;
+                    closestEnemy = enemyLoc;
                 }
             }
             if (closestEnemy != null)

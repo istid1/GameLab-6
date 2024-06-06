@@ -25,27 +25,11 @@ public class BallistaLookAt : MonoBehaviour
             closestEnemy = _towerFsm.closestEnemy;
             LookAtTarget();
             
-            //transform.LookAt(Vector3(closestEnemy.transform.position.x, transform.position.y, closestEnemy.transform.position.z));
-            
-            //Vector3 targetPosition = new Vector3(closestEnemy.transform.position.x, transform.position.y, transform.position.z);
-            //transform.LookAt(targetPosition);
-
-            //transform.LookAt(closestEnemy.transform);
         }
         
 
     }
     
-    
-    // void LookAtTarget()
-    // {
-    //     Vector3 direction = closestEnemy.transform.position - transform.localPosition;
-    //     //direction.y = -180;
-    //     direction.z = 90;
-    //     //direction.x = 0;
-    //     Quaternion rotation = Quaternion.LookRotation(direction);
-    //     transform.rotation = rotation;
-    // }
     
     void LookAtTarget()
     {

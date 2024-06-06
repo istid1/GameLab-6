@@ -42,10 +42,6 @@ public class TutorialManager : MonoBehaviour
    //Images of the king
    //[Header("Images King")] 
    [HideInInspector] public GameObject kingHappy, kingConfused, kingSpooked, kingCry, kingAngry;
-   // public GameObject kingConfused;
-   // public GameObject kingSpooked;
-   // public GameObject kingCry;
-   // public GameObject kingAngry;
    
     private readonly float maxAlpha = 100f / 255f; //Max opacity set to 39.2%
 
